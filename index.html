@@ -1,255 +1,186 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>赛博小羊 CyberSheep | AI 内容分享与聚合服务</title>
-  <meta
-    name="description"
-    content="赛博小羊 CyberSheep 品牌主页，聚合 AI 资讯、工具推荐、使用教程与小羊 AI API 聚合平台入口。"
-  >
+  <title>赛博小羊 CyberSheep | AI 资讯、服务入口与社群导航</title>
+  <meta name="description" content="赛博小羊 CyberSheep 首页，整合品牌介绍、AI 服务入口、社群二维码与内容矩阵，帮助用户快速了解并进入小羊 AI 生态。">
   <link rel="icon" href="logo.jpg" type="image/jpeg">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="page-shell">
     <div class="ambient ambient-cyan" aria-hidden="true"></div>
-    <div class="ambient ambient-magenta" aria-hidden="true"></div>
+    <div class="ambient ambient-rose" aria-hidden="true"></div>
+    <div class="ambient ambient-gold" aria-hidden="true"></div>
 
-    <header class="site-header">
-      <a class="brand-link" href="#top" aria-label="返回顶部">
-        <span class="brand-link__icon">CS</span>
-        <span class="brand-link__text">赛博小羊 CyberSheep</span>
+    <header class="topbar" id="top">
+      <a class="brand" href="#top" aria-label="返回赛博小羊首页顶部">
+        <span class="brand__mark">CS</span>
+        <span class="brand__meta">
+          <strong>赛博小羊 CyberSheep</strong>
+          <span>AI 导航、资讯与服务入口</span>
+        </span>
       </a>
 
-      <nav class="site-nav" aria-label="页面导航">
-        <a href="#about">账号介绍</a>
-        <a href="#service">服务入口</a>
-        <a href="#qrcode">二维码</a>
+      <nav class="topbar__nav" aria-label="页面导航">
+        <a href="#services">服务入口</a>
+        <a href="#community">社群矩阵</a>
       </nav>
+
+      <a class="topbar__cta" href="https://www.sheepai.top/register?aff=5WHg" target="_blank" rel="noreferrer">
+        进入小羊 AI
+      </a>
     </header>
 
-    <main id="top">
-      <section class="hero section" data-reveal>
-        <div class="hero__content">
-          <div class="eyebrow">
-            <span class="eyebrow__dot"></span>
-            AI 内容分享自媒体
+    <main class="dashboard">
+      <aside class="sidebar sidebar--left" id="overview" data-reveal>
+        <section class="panel profile-card">
+          <p class="panel__eyebrow">品牌档案</p>
+          <div class="profile-card__head">
+            <img class="profile-card__logo" src="logo.jpg" alt="赛博小羊 CyberSheep 品牌 Logo">
+            <div>
+              <h2>赛博小羊</h2>
+              <p class="profile-card__alias">CyberSheep</p>
+            </div>
           </div>
 
-          <figure class="hero__logo-shell">
-            <img class="hero__logo" src="logo.jpg" alt="赛博小羊 CyberSheep 品牌 Logo">
-          </figure>
-
-          <h1>赛博小羊 <span>CyberSheep</span></h1>
-          <p class="hero__subtitle">Slogan：让 AI 成为你的超能力</p>
-          <p class="hero__description">
-            这里汇聚 AI 新鲜资讯、精选工具和实战教程，用更轻松的方式帮你跟上智能时代的节奏。
+          <p class="profile-card__slogan">让 AI 成为你的超能力</p>
+          <p class="profile-card__intro">
+            赛博小羊聚焦 AI 资讯、工具推荐、上手教程与服务聚合，把复杂的模型世界整理成更容易理解、更容易开始使用的路径。
           </p>
 
-          <div class="hero__actions">
-            <a
-              class="button button--primary"
-              href="https://www.sheepai.top/register?aff=5WHg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              进入小羊 AI API 聚合平台
-            </a>
-            <a class="button button--ghost" href="#qrcode">扫码关注 / 入群</a>
-          </div>
-
-          <div class="hero__tags" aria-label="内容标签">
+          <div class="tag-list" aria-label="品牌标签">
             <span>AI 资讯</span>
-            <span>工具聚合</span>
-            <span>实战教程</span>
-            <span>效率升级</span>
+            <span>工具导航</span>
+            <span>教程拆解</span>
+            <span>服务聚合</span>
           </div>
-        </div>
+        </section>
 
-        <aside class="hero__panel card-grid">
-          <article class="glass-card glass-card--highlight glass-card--position">
-            <div class="highlight-badges" aria-label="定位标签">
-              <span class="signal-pill">AI 导航员</span>
-              <span class="signal-pill signal-pill--soft">从看懂到用好</span>
+      </aside>
+
+      <section class="workspace" id="services">
+
+        <section class="service-grid" aria-label="服务入口卡片">
+          <article class="panel service-card service-card--featured" data-reveal>
+            <div class="service-card__top">
+              <p class="panel__eyebrow">主推服务</p>
+              <span class="service-card__badge">推荐入口</span>
             </div>
-            <p class="card-label">核心定位</p>
-            <h2>把复杂的 AI 世界，整理成人人都能迅速上手的清晰路径</h2>
-            <p class="highlight-intro">
-              赛博小羊不只做资讯搬运，而是把零散信息、工具选择和服务入口重新编排成一条更短、更实用的学习与使用链路。
-            </p>
-
-            <div class="highlight-flow" aria-label="赛博小羊核心价值链">
-              <div class="highlight-flow__item">
-                <span class="highlight-flow__index">01</span>
-                <div>
-                  <h3>筛出真正值得看的 AI 资讯</h3>
-                  <p>减少信息噪音，优先关注趋势变化、模型能力和高价值工具动态。</p>
-                </div>
-              </div>
-
-              <div class="highlight-flow__item">
-                <span class="highlight-flow__index">02</span>
-                <div>
-                  <h3>帮你更快完成工具上手</h3>
-                  <p>用更轻量的方式讲清工具适合谁、怎么用、值不值得纳入工作流。</p>
-                </div>
-              </div>
-
-              <div class="highlight-flow__item">
-                <span class="highlight-flow__index">03</span>
-                <div>
-                  <h3>把服务入口直接送到你面前</h3>
-                  <p>从教程延伸到 API 聚合平台入口，缩短从理解到实操的最后一段距离。</p>
-                </div>
-              </div>
-            </div>
-
-            <p class="highlight-summary">
-              从“知道发生了什么”到“马上开始用”，让 AI 更快变成你的日常生产力。
-            </p>
-          </article>
-
-          <article class="glass-card">
-            <p class="card-label">内容方向</p>
-            <ul class="feature-list">
-              <li>AI 热点资讯与趋势解读</li>
-              <li>热门工具测评与实用推荐</li>
-              <li>新手到进阶的上手教程</li>
-            </ul>
-          </article>
-        </aside>
-      </section>
-
-      <section id="about" class="section" data-reveal>
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">账号介绍</p>
-          <h2>围绕“资讯、工具、教程”打造一站式 AI 内容矩阵</h2>
-          <p>
-            面向想提升效率、关注前沿技术、寻找可靠工具入口的用户，持续输出清晰、实用、不过度堆术语的内容。
-          </p>
-        </div>
-
-        <div class="about-grid">
-          <article class="glass-card about-card">
-            <p class="card-label">公众号定位</p>
-            <h3>AI 工具资讯与聚合服务入口</h3>
-            <p>
-              为创作者、开发者、职场用户和 AI 爱好者提供一个更省时间的内容入口，减少信息噪音，直达高价值内容。
-            </p>
-          </article>
-
-          <article class="glass-card about-card">
-            <p class="card-label">内容栏目</p>
-            <div class="pill-row">
-              <span class="pill">AI 资讯</span>
-              <span class="pill">AI 工具</span>
-              <span class="pill">AI 教程</span>
-            </div>
-            <p>
-              从每日趋势追踪、模型能力对比，到工具实测和工作流教学，帮助不同阶段的用户持续进阶。
-            </p>
-          </article>
-
-          <article class="glass-card about-card">
-            <p class="card-label">品牌风格</p>
-            <h3>科技感 + 亲和力 + 简洁专业</h3>
-            <p>
-              页面视觉延续“赛博”主题，但信息表达保持清晰轻盈，让第一次接触的人也能快速理解品牌与服务。
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="service" class="section" data-reveal>
-        <div class="service-panel glass-card glass-card--service">
-          <div class="service-panel__content">
-            <p class="card-label">当前主推服务</p>
             <h2>小羊 AI API 聚合平台</h2>
             <p>
-              提供统一入口接入多种 AI 能力，适合开发测试、应用集成和高效探索不同模型的用户快速开始。
+              一个账号、一个 API Key、统一接口规范，即可接入多家主流大模型。适合开发测试、应用集成和快速比较不同模型能力。
             </p>
-            <div class="service-points">
-              <span>多模型接入</span>
-              <span>注册即用</span>
-              <span>高效聚合</span>
-            </div>
-          </div>
-
-          <div class="service-panel__cta">
-            <a
-              class="button button--primary button--wide"
-              href="https://www.sheepai.top/register?aff=5WHg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              立即注册体验
-            </a>
-            <p class="service-note">跳转外部站点：`sheepai.top`</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="qrcode" class="section" data-reveal>
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">扫码互动</p>
-          <h2>公众号与微信交流群二维码</h2>
-          <p>点击卡片即可放大预览。后续如果需要替换图片，保持文件名不变直接覆盖即可。</p>
-        </div>
-
-        <div class="qr-grid">
-          <article class="glass-card qr-card">
-            <button
-              class="qr-trigger"
-              type="button"
-              data-preview-src="official_account_qrcode.jpg"
-              data-preview-title="赛博小羊公众号二维码"
-              aria-label="放大预览公众号二维码"
-            >
-              <span class="qr-frame">
-                <img src="official_account_qrcode.jpg" alt="赛博小羊公众号二维码">
-              </span>
-              <span class="qr-zoom">点击放大</span>
-            </button>
-            <div class="qr-card__meta">
-              <p class="card-label">公众号</p>
-              <h3>关注赛博小羊</h3>
-              <p>获取 AI 资讯、工具推荐与教程更新。</p>
+            <ul class="service-card__points">
+              <li>兼容 OpenAI 标准调用方式</li>
+              <li>支持多模型聚合与统一接入</li>
+              <li>更适合国内用户的注册、充值与访问体验</li>
+            </ul>
+            <div class="service-card__actions">
+              <a class="button button--primary" href="https://www.sheepai.top/register?aff=5WHg" target="_blank"
+                rel="noreferrer">立即注册体验</a>
+              <a class="button button--ghost" href="https://www.sheepai.top" target="_blank" rel="noreferrer">查看平台官网</a>
             </div>
           </article>
 
-          <article class="glass-card qr-card">
-            <button
-              class="qr-trigger"
-              type="button"
-              data-preview-src="group_qrcode.png"
-              data-preview-title="赛博小羊微信交流群二维码"
-              aria-label="放大预览微信交流群二维码"
-            >
-              <span class="qr-frame">
-                <img src="group_qrcode.png" alt="赛博小羊微信交流群二维码">
-              </span>
-              <span class="qr-zoom">点击放大</span>
-            </button>
-            <div class="qr-card__meta">
-              <p class="card-label">微信交流群</p>
-              <h3>加入社群交流</h3>
-              <p>和更多 AI 爱好者一起交流资讯、玩法与实践经验。</p>
+          <article class="panel service-card" data-reveal>
+            <p class="panel__eyebrow">能力优势</p>
+            <h2>模型聚合</h2>
+            <p>整合 OpenAI、Anthropic、Google、Meta、DeepSeek 等主流模型，覆盖文本、代码和多模态场景。</p>
+            <div class="chip-row">
+              <span>OpenAI</span>
+              <span>Claude</span>
+              <span>Gemini</span>
+              <span>DeepSeek</span>
             </div>
           </article>
-        </div>
+
+          <article class="panel service-card" data-reveal>
+            <p class="panel__eyebrow">能力优势</p>
+            <h2>极简接入</h2>
+            <p>已有项目通常只需要替换 `base_url` 和 `api_key`，就可以低成本迁移并快速开始调用。</p>
+            <div class="chip-row">
+              <span>OpenAI 兼容</span>
+              <span>快速迁移</span>
+              <span>开发友好</span>
+            </div>
+          </article>
+
+          <article class="panel service-card" data-reveal>
+            <p class="panel__eyebrow">能力优势</p>
+            <h2>稳定网络</h2>
+            <p>围绕国内访问体验做了更稳定的链路优化，适合对延迟、可用性和连续调用有要求的应用场景。</p>
+            <div class="chip-row">
+              <span>智能路由</span>
+              <span>多节点</span>
+              <span>稳定可用</span>
+            </div>
+          </article>
+
+          <article class="panel service-card" data-reveal>
+            <p class="panel__eyebrow">适合谁用</p>
+            <h2>开发者与团队</h2>
+            <p>适合独立开发者、创业团队和需要快速测试多模型的业务团队，降低接入门槛和维护成本。</p>
+            <div class="chip-row">
+              <span>独立开发者</span>
+              <span>中小团队</span>
+              <span>SaaS 应用</span>
+            </div>
+          </article>
+
+          <article class="panel service-card" data-reveal>
+            <p class="panel__eyebrow">适合谁用</p>
+            <h2>学习与研究</h2>
+            <p>对于高校学生、研究者和 AI 学习者，这里也能提供更轻量、更容易开始的模型接入体验。</p>
+            <div class="chip-row">
+              <span>学习实验</span>
+              <span>学术探索</span>
+              <span>预算友好</span>
+            </div>
+          </article>
+        </section>
       </section>
+
+      <aside class="sidebar sidebar--right" id="community" data-reveal>
+
+        <section class="panel qr-card">
+          <div class="qr-card__meta">
+            <p class="panel__eyebrow">公众号</p>
+            <h2>赛博小羊公众号</h2>
+            <p>获取 AI 资讯、工具推荐与教程更新。</p>
+          </div>
+          <button class="qr-trigger" type="button" data-preview-src="official_account_qrcode.jpg"
+            data-preview-title="赛博小羊公众号二维码" aria-label="放大预览赛博小羊公众号二维码">
+            <span class="qr-frame">
+              <img src="official_account_qrcode.jpg" alt="赛博小羊公众号二维码">
+            </span>
+            <span class="qr-hint">点击放大查看</span>
+          </button>
+        </section>
+
+        <section class="panel qr-card">
+          <div class="qr-card__meta">
+            <p class="panel__eyebrow">交流群</p>
+            <h2>微信交流社群</h2>
+            <p>和更多 AI 爱好者交流资讯、玩法与实战经验。</p>
+          </div>
+          <button class="qr-trigger" type="button" data-preview-src="group_qrcode.png" data-preview-title="赛博小羊微信交流群二维码"
+            aria-label="放大预览赛博小羊微信交流群二维码">
+            <span class="qr-frame">
+              <img src="group_qrcode.png" alt="赛博小羊微信交流群二维码">
+            </span>
+            <span class="qr-hint">点击放大查看</span>
+          </button>
+        </section>
+
+      </aside>
     </main>
 
     <footer class="site-footer">
       <p>© <span id="current-year">2026</span> 赛博小羊 CyberSheep. All rights reserved.</p>
-      <a
-        href="https://github.com/yourname/cybersheep_homepage"
-        target="_blank"
-        rel="noreferrer"
-      >
-        GitHub 仓库链接
-      </a>
     </footer>
   </div>
 
@@ -257,7 +188,7 @@
     <div class="modal__backdrop" data-close-modal></div>
     <div class="modal__panel">
       <button class="modal__close" type="button" aria-label="关闭预览" data-close-modal>×</button>
-      <p class="card-label">二维码预览</p>
+      <p class="panel__eyebrow">二维码预览</p>
       <h2 id="qr-modal-title">二维码</h2>
       <img id="qr-modal-image" src="" alt="">
     </div>
@@ -265,4 +196,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

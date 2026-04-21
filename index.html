@@ -51,6 +51,24 @@
           <p class="profile-card__intro">
             赛博小羊聚焦 AI 资讯、工具推荐、上手教程与服务聚合，把复杂的模型世界整理成更容易理解、更容易开始使用的路径。
           </p>
+          <ul class="profile-list" aria-label="赛博小羊官方联系信息">
+            <li>
+              <span class="profile-list__label">官方邮箱</span>
+              <span class="profile-list__value">cybersheep33@gmail.com</span>
+            </li>
+            <li>
+              <span class="profile-list__label">客服微信</span>
+              <span class="profile-list__value">cybersheep2026</span>
+            </li>
+            <li>
+              <span class="profile-list__label">微信公众号</span>
+              <span class="profile-list__value">赛博小羊CyberSheep</span>
+            </li>
+            <li>
+              <span class="profile-list__label">服务方向</span>
+              <span class="profile-list__value">AI 资讯、教程、工具导航与小羊 AI 聚合服务</span>
+            </li>
+          </ul>
 
           <div class="tag-list" aria-label="品牌标签">
             <span>AI 资讯</span>
@@ -63,84 +81,79 @@
       </aside>
 
       <section class="workspace" id="services">
+        <section class="service-board" data-reveal>
+          <div class="service-board__head">
+            <p class="panel__eyebrow">服务入口</p>
+          </div>
 
-        <section class="service-grid" aria-label="服务入口卡片">
-          <article class="panel service-card service-card--featured" data-reveal>
-            <div class="service-card__top">
-              <p class="panel__eyebrow">主推服务</p>
-              <span class="service-card__badge">推荐入口</span>
-            </div>
-            <h2>小羊 AI API 聚合平台</h2>
-            <p>
-              一个账号、一个 API Key、统一接口规范，即可接入多家主流大模型。适合开发测试、应用集成和快速比较不同模型能力。
-            </p>
-            <ul class="service-card__points">
-              <li>兼容 OpenAI 标准调用方式</li>
-              <li>支持多模型聚合与统一接入</li>
-              <li>更适合国内用户的注册、充值与访问体验</li>
-            </ul>
-            <div class="service-card__actions">
-              <a class="button button--primary" href="https://www.sheepai.top/register?aff=5WHg" target="_blank"
-                rel="noreferrer">立即注册体验</a>
-              <a class="button button--ghost" href="https://www.sheepai.top" target="_blank" rel="noreferrer">查看平台官网</a>
-            </div>
-          </article>
+          <section class="service-grid" aria-label="服务入口卡片">
+            <article class="panel service-card service-card--featured">
+              <div class="service-card__top">
+                <p class="panel__eyebrow">01 · 小羊ai</p>
+                <span class="service-card__badge">api聚合服务</span>
+              </div>
+              <h2>小羊 AI API 聚合平台</h2>
+              <p>
+                一个账号、一个 API Key、统一接口规范，即可接入多家主流大模型。适合开发测试、应用集成和快速比较不同模型能力。
+              </p>
+              <div class="service-card__actions">
+                <a class="button button--primary" href="https://www.sheepai.top/register?aff=5WHg" target="_blank"
+                  rel="noreferrer">进入平台</a>
+              </div>
+            </article>
 
-          <article class="panel service-card" data-reveal>
-            <p class="panel__eyebrow">能力优势</p>
-            <h2>模型聚合</h2>
-            <p>整合 OpenAI、Anthropic、Google、Meta、DeepSeek 等主流模型，覆盖文本、代码和多模态场景。</p>
-            <div class="chip-row">
-              <span>OpenAI</span>
-              <span>Claude</span>
-              <span>Gemini</span>
-              <span>DeepSeek</span>
-            </div>
-          </article>
+            <article class="panel service-card">
+              <div class="service-card__top">
+                <p class="panel__eyebrow">02 · 介绍页</p>
+                <span class="service-card__badge">了解小羊 AI</span>
+              </div>
+              <h2>小羊 AI 介绍页</h2>
+              <p>快速了解小羊 AI 的平台定位、核心能力、适用人群和接入流程，适合作为首次访问用户的服务说明入口。</p>
+              <div class="service-card__actions">
+                <a class="button button--ghost" href="https://sheepai.apifox.cn/doc-8595079" target="_blank"
+                  rel="noreferrer">查看介绍页</a>
+              </div>
+            </article>
 
-          <article class="panel service-card" data-reveal>
-            <p class="panel__eyebrow">能力优势</p>
-            <h2>极简接入</h2>
-            <p>已有项目通常只需要替换 `base_url` 和 `api_key`，就可以低成本迁移并快速开始调用。</p>
-            <div class="chip-row">
-              <span>OpenAI 兼容</span>
-              <span>快速迁移</span>
-              <span>开发友好</span>
-            </div>
-          </article>
+            <article class="panel service-card">
+              <div class="service-card__top">
+                <p class="panel__eyebrow">03 · Codex CLI</p>
+                <span class="service-card__badge">Codex</span>
+              </div>
+              <h2>Codex 配置教程</h2>
+              <p>面向 Codex 使用者的配置指南，帮助你把小羊 AI 接入到开发辅助工作流中，更快完成模型调用配置。</p>
+              <div class="service-card__actions">
+                <a class="button button--ghost" href="https://sheepai.apifox.cn/doc-8547138" target="_blank"
+                  rel="noreferrer">查看教程</a>
+              </div>
+            </article>
 
-          <article class="panel service-card" data-reveal>
-            <p class="panel__eyebrow">能力优势</p>
-            <h2>稳定网络</h2>
-            <p>围绕国内访问体验做了更稳定的链路优化，适合对延迟、可用性和连续调用有要求的应用场景。</p>
-            <div class="chip-row">
-              <span>智能路由</span>
-              <span>多节点</span>
-              <span>稳定可用</span>
-            </div>
-          </article>
+            <article class="panel service-card">
+              <div class="service-card__top">
+                <p class="panel__eyebrow">04 · Claude Code</p>
+                <span class="service-card__badge">Claude Code</span>
+              </div>
+              <h2>Claude Code 配置教程</h2>
+              <p>面向 Claude Code 的接入配置说明，适合需要在本地开发环境中使用小羊 AI 模型服务的用户。</p>
+              <div class="service-card__actions">
+                <a class="button button--ghost" href="https://sheepai.apifox.cn/doc-8547140" target="_blank"
+                  rel="noreferrer">查看教程</a>
+              </div>
+            </article>
 
-          <article class="panel service-card" data-reveal>
-            <p class="panel__eyebrow">适合谁用</p>
-            <h2>开发者与团队</h2>
-            <p>适合独立开发者、创业团队和需要快速测试多模型的业务团队，降低接入门槛和维护成本。</p>
-            <div class="chip-row">
-              <span>独立开发者</span>
-              <span>中小团队</span>
-              <span>SaaS 应用</span>
-            </div>
-          </article>
-
-          <article class="panel service-card" data-reveal>
-            <p class="panel__eyebrow">适合谁用</p>
-            <h2>学习与研究</h2>
-            <p>对于高校学生、研究者和 AI 学习者，这里也能提供更轻量、更容易开始的模型接入体验。</p>
-            <div class="chip-row">
-              <span>学习实验</span>
-              <span>学术探索</span>
-              <span>预算友好</span>
-            </div>
-          </article>
+            <article class="panel service-card">
+              <div class="service-card__top">
+                <p class="panel__eyebrow">05 · 终端美化</p>
+                <span class="service-card__badge">终端美化</span>
+              </div>
+              <h2>终端美化教程</h2>
+              <p>面向终端工作者的极致美学与效率神器：如何使用Nerd Font + Starship + Zellij提升开发体验。</p>
+              <div class="service-card__actions">
+                <a class="button button--ghost" href="https://sheepai.apifox.cn/doc-8566142" target="_blank"
+                  rel="noreferrer">查看教程</a>
+              </div>
+            </article>
+          </section>
         </section>
       </section>
 

@@ -344,6 +344,37 @@ a {
   margin-top: 14px;
 }
 
+.profile-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-list li {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.profile-list__label {
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.profile-list__value {
+  color: #e6f2ff;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
 .tag-list,
 .chip-row {
   display: flex;
@@ -429,6 +460,54 @@ a {
   gap: 18px;
 }
 
+.service-board {
+  position: relative;
+  padding: 22px;
+  border-radius: calc(var(--radius-xl) + 4px);
+  background:
+    radial-gradient(circle at top left, rgba(115, 233, 255, 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgba(255, 214, 102, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 14%),
+    rgba(6, 16, 30, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+}
+
+.service-board::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(115, 233, 255, 0.14), rgba(255, 214, 102, 0.12)) border-box;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.service-board__head {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 18px;
+}
+
+.service-board__head h2 {
+  margin: 0;
+  line-height: 1.14;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+.service-board__head p:last-child {
+  margin: 12px 0 0;
+  max-width: 58ch;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .hero-panel {
   display: grid;
   gap: 18px;
@@ -474,6 +553,8 @@ a {
 }
 
 .service-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 18px;
 }
@@ -481,6 +562,7 @@ a {
 .service-card {
   display: grid;
   gap: 14px;
+  align-content: start;
 }
 
 .service-card--featured {
@@ -734,10 +816,6 @@ a {
   .hero-panel__stats,
   .service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .service-card--featured {
-    grid-column: span 2;
   }
 }
 

@@ -1,48 +1,28 @@
 /* ============================================================
-   CyberSheep 赛博小羊 — Dashboard Interactions
+   CyberSheep — Interactions
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',()=>{
 
-  /* ==========================================================
-     Email Copy-to-Clipboard
-     ========================================================== */
-  const emailLink = document.getElementById('emailLink');
-  if (emailLink) {
-    emailLink.addEventListener('click', (e) => {
+  /* Email copy */
+  const el=document.getElementById('emailLink');
+  if(el){
+    el.addEventListener('click',e=>{
       e.preventDefault();
-      const email = 'cybersheep33@gmail.com';
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(email).then(() => {
-          emailLink.style.color = 'var(--cyan)';
-          emailLink.textContent = '✅ 已复制!';
-          setTimeout(() => {
-            emailLink.style.color = '';
-            emailLink.textContent = '✉️ cybersheep33@gmail.com';
-          emailLink.style.whiteSpace = 'nowrap';
-          }, 2000);
-        }).catch(() => {
-          // fallback — still open mailto
-          window.location.href = 'mailto:' + email;
-        });
-      } else {
-        window.location.href = 'mailto:' + email;
-      }
+      const email='cybersheep33@gmail.com';
+      navigator.clipboard?.writeText(email).then(()=>{
+        el.textContent='✅ 已复制!';
+        setTimeout(()=>{el.textContent=email},2000);
+      }).catch(()=>{window.location.href='mailto:'+email});
     });
   }
 
-  /* ==========================================================
-     Gentle card entrance animation on load
-     ========================================================== */
-  const cards = document.querySelectorAll('.info-card, .model-chip');
-  cards.forEach((card, i) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(12px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    setTimeout(() => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    }, 80 * (i + 1));
+  /* Entrance — staggered panels */
+  document.querySelectorAll('.panel,.models-bar,.brand-card,.quick-btn').forEach((el,i)=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(8px)';
+    el.style.transition='opacity .5s ease,transform .5s ease';
+    setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)'},70*(i+1));
   });
 
 });

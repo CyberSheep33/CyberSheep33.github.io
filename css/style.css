@@ -107,8 +107,8 @@ img{max-width:100%;display:block}
    Cards Grid
    ============================================================ */
 .cards-grid{
-  flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;min-height:0;
-  align-items:start;align-content:center;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  align-items:start;
 }
 
 /* Base Card */
@@ -279,6 +279,25 @@ img{max-width:100%;display:block}
 }
 
 /* ============================================================
+   Hero Tagline
+   ============================================================ */
+.hero-tagline{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;pointer-events:none;user-select:none;
+}
+.hero-tagline-emoji{
+  font-size:2.2rem;line-height:1;opacity:0.7;
+}
+.hero-tagline-text{
+  font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;
+  background:linear-gradient(135deg,var(--emerald),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-tagline-sub{
+  font-size:0.82rem;color:var(--text-dim);font-weight:400;
+}
+
+/* ============================================================
    Responsive — Tablet (≤1023px): 2×2 grid
    ============================================================ */
 @media(max-width:1023px){
@@ -286,6 +305,8 @@ img{max-width:100%;display:block}
   .dashboard{padding:12px 14px;gap:10px}
   .cards-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .header-tagline{display:none}
+  .hero-tagline-emoji{font-size:1.8rem}
+  .hero-tagline-text{font-size:1.2rem}
 }
 
 /* ============================================================
@@ -298,6 +319,10 @@ img{max-width:100%;display:block}
   .cards-grid{grid-template-columns:1fr;gap:8px}
   .header{justify-content:center}
   .header-tagline{display:none}
+  .hero-tagline{flex:none;padding:16px 0}
+  .hero-tagline-emoji{font-size:1.5rem}
+  .hero-tagline-text{font-size:1rem}
+  .hero-tagline-sub{font-size:0.72rem}
   .bg-orb--emerald,.bg-orb--sky{opacity:0.12}
   .community-body{flex-direction:column;align-items:center}
   .community-qr-block img{width:64px;height:64px}

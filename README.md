@@ -1,22 +1,33 @@
-# CyberSheep 赛博小羊 🐑
+# CyberSheep 赛博小羊 — 品牌首页
 
-**Your Gateway to AI — Models, Tools, and Knowledge.**
+赛博小羊品牌入口页，展示旗下所有产品与服务。
 
----
+**设计：** 浅色玻璃态 (Light Glass-Morphism)，与 [sheepai-tools](https://sheepaitools.github.io) 统一品牌风格。
 
-## 关于 | About
+## 项目结构
 
-CyberSheep 赛博小羊是一个 AI 服务品牌，运营以下平台：
+```
+index.html          — 主页面（4 张模块卡片）
+css/style.css       — 样式（CSS 自定义属性驱动）
+js/main.js           — 交互（邮箱复制）
+assets/              — 图片素材（Logo、二维码）
+```
 
-- **[SheepAI](https://www.sheepai.top)** — AI API 聚合中转平台，统一接口调用 Claude、GPT、Gemini、DeepSeek 等主流大语言模型
-- **[SheepAITools](https://sheepaitools.github.io)** — 在线 AI 工具集合平台，凭 SheepAI 账户登录使用
-- **[CyberSheep 博客](https://cybersheep.notion.site/CyberSheep-393bb7144bb6805ba663c8f4b858b685)** — AI 使用经验与智能体教程分享
+## 技术
 
-## 联系 | Contact
+纯静态 HTML + CSS + JS，无构建工具，开箱即用。
 
-- 📧 邮箱：cybersheep33@gmail.com
-- 🐧 QQ 群：扫码加入（见主页社群板块）
+## 部署
 
-## 技术栈 | Tech
+本仓库通过 GitHub Pages 部署到 `cybersheep33.github.io`。
+推送 `main` 分支即可自动更新。
 
-纯静态 HTML/CSS/JS，部署于 GitHub Pages。
+## 产品链接
+
+- **SheepAI API 平台：** [www.sheepai.top](https://www.sheepai.top)
+- **SheepAI Tools 工具平台：** [sheepaitools.github.io](https://sheepaitools.github.io)
+- **博客：** [CyberSheep Notion](https://cybersheep.notion.site/CyberSheep-393bb7144bb6805ba663c8f4b858b685)
+
+## 联系
+
+📧 cybersheep33@gmail.com

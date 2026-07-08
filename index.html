@@ -6,10 +6,10 @@
   <meta name="description" content="CyberSheep 赛博小羊 — AI API 聚合服务平台 | 在线 AI 工具 | 智能体教程 | 模型调用中转站">
   <meta name="keywords" content="CyberSheep,赛博小羊,AI API,模型中转,AI工具,Claude Code,智能体教程">
   <meta name="author" content="CyberSheep">
-  <meta name="theme-color" content="#f8fafc">
+  <meta name="theme-color" content="#f4f1ea">
 
   <meta property="og:title" content="CyberSheep 赛博小羊 — AI API 聚合服务平台">
-  <meta property="og:description" content="多模型聚合中转 | 在线 AI 工具 | AI 使用经验与智能体教程">
+  <meta property="og:description" content="模型调用中转、AI 工具实践、智能体教程与社群入口。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CyberSheep">
 
@@ -20,120 +20,106 @@
 </head>
 <body>
 
-  <div class="dashboard">
-
-    <!-- Header -->
-    <header class="header">
-      <div class="header-logo">
-        <span class="logo-icon">🐑</span>
-        <span class="logo-en">CyberSheep</span>
-        <span class="logo-divider">|</span>
-        <span class="logo-cn">赛博小羊</span>
-      </div>
-      <p class="header-tagline">Your Gateway to AI</p>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand-mark" href="/" aria-label="CyberSheep 首页">
+        <img src="assets/cybersheep.png" alt="" width="38" height="38">
+        <span>
+          <strong>CyberSheep</strong>
+          <em>赛博小羊</em>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主要入口">
+        <a href="https://www.sheepai.top" target="_blank" rel="noopener">API 平台</a>
+        <a href="https://sheepaitools.github.io" target="_blank" rel="noopener">工具箱</a>
+        <a href="https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM" target="_blank" rel="noopener">博客</a>
+      </nav>
     </header>
 
-    <!-- 4-Card Grid -->
-    <div class="cards-grid">
-
-      <!-- Card 1: API Platform -->
-      <a href="https://www.sheepai.top" target="_blank" rel="noopener" class="card card--link card--api">
-        <div class="card-header">
-          <img src="assets/cybersheep.png" alt="" class="card-icon-img" width="22" height="22">
-          <h2 class="card-title">SheepAI API 聚合平台</h2>
-          <span class="card-badge card-badge--emerald">API 中转</span>
-        </div>
-        <p class="card-subtitle">一个 API 令牌调用全球大模型</p>
-        <p class="card-desc">兼容 OpenAI SDK 格式，3 行代码即可集成。按量计费，多区域节点部署，99.9% 可用性保障。</p>
-        <div class="model-brands">
-          <span class="model-brand model-brand--claude">Claude</span>
-          <span class="model-brand model-brand--gpt">GPT</span>
-          <span class="model-brand model-brand--gemini">Gemini</span>
-          <span class="model-brand model-brand--deepseek">DeepSeek</span>
-          <span class="model-brand model-brand--qwen">Qwen</span>
-        </div>
-        <span class="card-action card-action--emerald">⚡ 访问 sheepai.top →</span>
-      </a>
-
-      <!-- Card 2: Tools Platform -->
-      <a href="https://sheepaitools.github.io" target="_blank" rel="noopener" class="card card--link card--tools">
-        <div class="card-header">
-          <span class="card-icon-emoji">🛠️</span>
-          <h2 class="card-title">SheepAI Tools 工具平台</h2>
-          <span class="card-badge card-badge--sky">在线工具</span>
-        </div>
-        <p class="card-subtitle">汇集多种实用在线 AI 工具</p>
-        <p class="card-desc">凭 SheepAI 注册账户一键登录，即可使用多模型对话对比、AI 图像生成、文本翻译/润色/摘要等功能。</p>
-        <div class="card-tags">
-          <span class="card-tag card-tag--sky">💬 多模型对话对比</span>
-          <span class="card-tag card-tag--sky">🖼️ AI 图像生成</span>
-          <span class="card-tag card-tag--sky">📝 文本翻译/润色/摘要</span>
-          <span class="card-tag card-tag--sky">🆔 账户一键登录</span>
-        </div>
-        <span class="card-action card-action--sky">🛠️ 访问工具平台 →</span>
-      </a>
-
-      <!-- Card 3: Blog -->
-      <a href="https://cybersheep.notion.site/CyberSheep-393bb7144bb6805ba663c8f4b858b685" target="_blank" rel="noopener" class="card card--link card--blog">
-        <div class="card-header">
-          <span class="card-icon-emoji">📝</span>
-          <h2 class="card-title">CyberSheep 博客</h2>
-          <span class="card-badge card-badge--violet">内容</span>
-        </div>
-        <p class="card-subtitle">分享 AI 使用经验与智能体开发教程</p>
-        <p class="card-desc">涵盖 Claude Code 辅助编程全流程、Codex 智能体搭建、AI 工具链实战等内容。从入门指南到高级技巧，助你成为 AI 时代的高效玩家。</p>
-        <div class="card-tags">
-          <span class="card-tag card-tag--violet">📖 从零上手 AI 工具</span>
-          <span class="card-tag card-tag--violet">🛠️ Claude Code 编程实战</span>
-          <span class="card-tag card-tag--violet">🤖 智能体 Agent 开发</span>
-          <span class="card-tag card-tag--violet">💡 踩坑经验与实践</span>
-        </div>
-        <span class="card-action card-action--violet">📖 阅读博客 →</span>
-      </a>
-
-      <!-- Card 4: Community (not a link wrapper) -->
-      <div class="card card--community">
-        <div class="card-header">
-          <span class="card-icon-emoji">💬</span>
-          <h2 class="card-title">社群与联系</h2>
-          <span class="card-badge card-badge--amber">社群</span>
-        </div>
-        <div class="community-body">
-          <div class="community-qr-block">
-            <img src="assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="72" height="72" loading="lazy">
-            <span class="community-qr-title">🐧 官方 QQ 群</span>
-            <span class="community-qr-hint">扫码加入</span>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">CyberSheep</h1>
+          <p class="hero-cn">赛博小羊</p>
+          <p class="hero-lede">把模型调用、AI 工具和真实使用经验放在同一个入口。少一点花架子，多一点能直接开工的东西。</p>
+          <div class="hero-actions" aria-label="核心入口">
+            <a class="button button--primary" href="https://www.sheepai.top" target="_blank" rel="noopener">进入 API 平台</a>
+            <a class="button button--secondary" href="https://sheepaitools.github.io" target="_blank" rel="noopener">打开工具箱</a>
+            <a class="button button--text" href="https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM" target="_blank" rel="noopener">查看博客</a>
           </div>
-          <div class="community-info">
-            <p class="community-desc">加入赛博小羊社群，与其他用户交流 AI 使用心得、获取最新模型上架资讯、反馈问题建议。</p>
-            <div class="community-email-block">
-              <span class="community-email" id="emailLink" title="点击复制邮箱地址">cybersheep33@gmail.com</span>
-              <p class="community-email-hint">📧 商务 / 反馈 / 技术支持 · 点击复制</p>
+        </div>
+
+        <div class="hero-visual" aria-label="CyberSheep 品牌形象">
+          <div class="sheep-stage">
+            <img src="assets/cybersheep.png" alt="CyberSheep 赛博小羊品牌形象" width="460" height="460">
+            <div class="signal-card signal-card--top">
+              <span>OpenAI SDK compatible</span>
+              <strong>3 lines to start</strong>
+            </div>
+            <div class="signal-card signal-card--bottom">
+              <span>Models online</span>
+              <strong>Claude · GPT · Gemini · Qwen</strong>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-    </div><!-- /.cards-grid -->
+      <section class="entry-section" aria-labelledby="entry-title">
+        <div class="section-heading">
+          <h2 id="entry-title">从这里进入赛博小羊</h2>
+        </div>
 
-    <!-- Hero Tagline -->
-    <div class="hero-tagline" aria-hidden="true">
-      <span class="hero-tagline-emoji">🐑</span>
-      <span class="hero-tagline-text">Your Gateway to AI</span>
-      <span class="hero-tagline-sub">从模型调用到工具实践，一站式 AI 服务平台</span>
-    </div>
+        <div class="entry-grid">
+          <a href="https://www.sheepai.top" target="_blank" rel="noopener" class="entry-card entry-card--api">
+            <span class="entry-kicker">模型接入</span>
+            <h3>SheepAI API 聚合平台</h3>
+            <p>一个 API 令牌调用全球大模型，兼容 OpenAI SDK，适合产品接入、脚本自动化和智能体开发。</p>
+            <div class="model-line" aria-label="支持模型">
+              <span>Claude</span>
+              <span>GPT</span>
+              <span>Gemini</span>
+              <span>DeepSeek</span>
+              <span>Qwen</span>
+            </div>
+            <span class="entry-link">访问 sheepai.top</span>
+          </a>
 
-    <!-- Footer -->
-    <footer class="footer">
-      © 2026 CyberSheep 赛博小羊
+          <a href="https://sheepaitools.github.io" target="_blank" rel="noopener" class="entry-card entry-card--tools">
+            <span class="entry-kicker">在线工具</span>
+            <h3>SheepAI Tools 工具平台</h3>
+            <p>用 SheepAI 账户登录，多模型对话对比、图像生成、翻译、润色、摘要等常用工作流集中处理。</p>
+            <span class="entry-link">打开在线工具</span>
+          </a>
+
+          <a href="https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM" target="_blank" rel="noopener" class="entry-card entry-card--blog">
+            <span class="entry-kicker">实践笔记</span>
+            <h3>CyberSheep 博客</h3>
+            <p>记录 Claude Code、Codex、智能体搭建和 AI 工具链实战，把踩坑过程整理成能复用的方法。</p>
+            <span class="entry-link">阅读赛博小羊博客</span>
+          </a>
+
+          <div class="entry-card entry-card--community">
+            <span class="entry-kicker">社群支持</span>
+            <h3>社群与联系</h3>
+            <div class="community-panel">
+              <img src="assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy">
+              <div>
+                <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+                <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <span>Your gateway to useful AI.</span>
     </footer>
+  </div>
 
-  </div><!-- /.dashboard -->
-
-  <!-- Background effects -->
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-orb bg-orb--emerald" aria-hidden="true"></div>
-  <div class="bg-orb bg-orb--sky" aria-hidden="true"></div>
+  <div class="paper-grain" aria-hidden="true"></div>
 
   <!-- Toast -->
   <div class="toast" id="toast" aria-live="polite"></div>

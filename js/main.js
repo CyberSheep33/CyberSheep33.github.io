@@ -25,7 +25,7 @@
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(email).then(function () {
-        showToast('邮箱已复制 ✅')
+        showToast('邮箱已复制')
       }).catch(function () {
         fallbackCopy(email)
       })
@@ -45,7 +45,7 @@
     ta.select()
     try {
       var ok = document.execCommand('copy')
-      showToast(ok ? '邮箱已复制 ✅' : '复制失败，请手动复制')
+      showToast(ok ? '邮箱已复制' : '复制失败，请手动复制')
     } catch (e) {
       showToast('复制失败，请手动复制')
     }

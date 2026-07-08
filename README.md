@@ -2,7 +2,7 @@
 
 赛博小羊品牌入口页，展示旗下所有产品与服务。
 
-**设计：** 浅色玻璃态 (Light Glass-Morphism)，与 [sheepai-tools](https://sheepaitools.github.io) 统一品牌风格。
+**设计：** CyberSheep 品牌入口页，突出赛博小羊形象、API 平台、在线工具、博客与社群。
 
 ## 项目结构
 
@@ -26,7 +26,7 @@ assets/              — 图片素材（Logo、二维码）
 
 - **SheepAI API 平台：** [www.sheepai.top](https://www.sheepai.top)
 - **SheepAI Tools 工具平台：** [sheepaitools.github.io](https://sheepaitools.github.io)
-- **博客：** [CyberSheep Notion](https://cybersheep.notion.site/CyberSheep-393bb7144bb6805ba663c8f4b858b685)
+- **博客：** [赛博小羊博客](https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM)
 
 ## 联系
 

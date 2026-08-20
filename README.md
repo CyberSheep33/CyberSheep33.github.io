@@ -8,6 +8,7 @@
 
 ```
 index.html          — 主页面（Hero + 6 个内容区块）
+announcements/       — 公告独立页（每条公告一个 HTML）
 css/style.css       — 样式（CSS 变量驱动，浅/深双主题）
 js/main.js          — 交互（主题切换、仓库卡片渲染、邮箱复制）
 assets/              — 图片素材（Logo、QQ 群二维码）
@@ -25,7 +26,7 @@ docs/superpowers/    — 设计文档与实现计划（spec + plan）
 
 ## 维护指南
 
-- **公告**：改 `index.html` 中 `.announce-list`，复制一条 `.announce-item` 即可新增
+- **公告**：每条公告是 `announcements/` 下的一个独立 HTML 页（如 `announcements/sheep-ai-plus-upgrade.html`，可单独分享 `cybersheep33.github.io/announcements/xxx.html`）。新增步骤：① 复制 `announcements/` 中任意页面，改内容与文件名；② 在 `index.html` 的 `.announce-list` 复制一条 `.announce-item`，把链接指向新页面
 - **小项目仓库**：改 `js/main.js` 中的 `REPOS` 数组，新增 / 删除一条对象即可
 - **模型跑马灯**：改 `index.html` 中 `.marquee-set` 内的 `logo-pill` 列表
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="sheepai-creator 跨平台 AI 图像 / 视频创作桌面应用上线，源码开源在 SheepAI-Lab。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="sheepai-creator 桌面应用上线 — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="跨平台 AI 图像 / 视频创作桌面应用，源码开源在 SheepAI-Lab。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>sheepai-creator 桌面应用上线 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../index.html#api">API 平台</a>
+      <a href="../index.html#tools">工具箱</a>
+      <a href="../index.html#blog">博客</a>
+      <a href="../index.html#announcements">公告</a>
+      <a href="../index.html#lab">SheepAI-Lab</a>
+      <a href="../index.html#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <article class="section announce-page">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="../index.html#announcements">← 返回公告</a>
+        <span class="kicker">通知公告</span>
+        <h1 class="announce-title">sheepai-creator 桌面应用上线</h1>
+        <time class="announce-date" datetime="2026-07-24">2026-07-24</time>
+        <div class="announce-content">
+          <p>赛博小羊又一款开源作品 —— <strong>sheepai-creator</strong> 桌面应用正式上线。</p>
+          <p>sheepai-creator 是一款跨平台的 Electron 桌面应用，通过可配置的 AI API 服务创建与编辑图像、视频，适合内容创作者把生成式 AI 能力直接放进日常工具链。</p>
+          <ul>
+            <li><strong>跨平台</strong> —— Windows / macOS / Linux；</li>
+            <li><strong>可配置 API</strong> —— 接入自有的 AI API 服务，灵活组合图像与视频模型；</li>
+            <li><strong>开源</strong> —— 源码托管在 SheepAI-Lab 组织。</li>
+          </ul>
+          <p>代码已开源，欢迎 Star、反馈与贡献：<a href="https://github.com/SheepAI-Lab/sheepai-creator" target="_blank" rel="noopener">github.com/SheepAI-Lab/sheepai-creator</a></p>
+          <p class="announce-cta"><a class="btn btn-primary" href="https://github.com/SheepAI-Lab/sheepai-creator" target="_blank" rel="noopener">查看源码</a></p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="community-panel">
+      <img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy">
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

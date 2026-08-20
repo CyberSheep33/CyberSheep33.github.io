@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sheep AI 正在逐步迁移至 Sheep AI Plus：账号基础数据自动迁移、真实 USD 计价、旧站余额继续使用。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="Sheep AI → Sheep AI Plus 迁移通知 — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="账号基础数据自动迁移，旧站余额继续使用，新站统一采用真实 USD 计价。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>Sheep AI → Sheep AI Plus 迁移通知 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css?v=20260820-migration">
+
+  <style>
+    .migration-notice {
+      --mn-surface: var(--panel-strong);
+      --mn-surface-soft: var(--tag-bg);
+      --mn-border: var(--border);
+      --mn-border-strong: var(--border-strong);
+      --mn-text: var(--fg);
+      --mn-muted: var(--muted);
+      --mn-soft: var(--soft);
+      --mn-primary: var(--primary);
+      --mn-primary-2: var(--primary-2);
+      color: var(--mn-text);
+    }
+
+    .migration-notice .migration-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--mn-border);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--mn-primary) 18%, transparent), transparent 34%),
+        radial-gradient(circle at 10% 90%, color-mix(in srgb, var(--primary-3) 11%, transparent), transparent 34%),
+        var(--mn-surface);
+      box-shadow: var(--shadow);
+    }
+
+    .migration-notice .migration-hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -90px;
+      top: -120px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--mn-primary) 18%, transparent);
+      filter: blur(48px);
+      pointer-events: none;
+    }
+
+    .migration-notice .migration-kicker {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid var(--mn-border);
+      border-radius: var(--radius-pill);
+      background: var(--mn-surface-soft);
+      color: var(--mn-primary);
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
+    .migration-notice .migration-hero h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 16px 0 10px;
+      color: var(--mn-text);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.7px;
+    }
+
+    .migration-notice .migration-hero .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      color: var(--mn-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .migration-notice .route-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      padding: 14px;
+      border: 1px solid var(--mn-border);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--mn-surface) 82%, transparent);
+    }
+
+    .migration-notice .route-site {
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--mn-surface-soft);
+    }
+
+    .migration-notice .route-site small {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--mn-soft);
+      font-size: 0.68rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .migration-notice .route-site strong {
+      display: block;
+      color: var(--mn-text);
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .migration-notice .route-arrow {
+      color: var(--mn-primary);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .migration-notice .intro-note {
+      margin: 18px 0 0;
+      padding: 13px 15px;
+      border: 1px solid var(--mn-border);
+      border-radius: 13px;
+      background: var(--mn-surface-soft);
+      color: var(--mn-muted);
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+
+    .migration-notice .intro-note strong {
+      color: var(--mn-text);
+    }
+
+    .migration-notice .change-section {
+      margin-top: 26px;
+    }
+
+    .migration-notice .change-section > h2,
+    .migration-notice .support-card h2,
+    .migration-notice .closing-card h2 {
+      margin: 0 0 14px;
+      color: var(--mn-text);
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
+
+    .migration-notice .change-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .migration-notice .change-card {
+      position: relative;
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--mn-border);
+      border-radius: 17px;
+      background: var(--mn-surface);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .migration-notice .change-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+
+    .migration-notice .change-num {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 1px solid var(--mn-border);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--mn-primary) 11%, var(--mn-surface));
+      color: var(--mn-primary);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 900;
+    }
+
+    .migration-notice .change-card h3 {
+      margin: 0;
+      color: var(--mn-text);
+      font-size: 1rem;
+    }
+
+    .migration-notice .change-card p {
+      margin: 0;
+      color: var(--mn-muted);
+      font-size: 0.84rem;
+      line-height: 1.78;
+    }
+
+    .migration-notice .price-switch {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 9px;
+      align-items: stretch;
+      margin-top: 13px;
+    }
+
+    .migration-notice .price-box {
+      padding: 10px 11px;
+      border: 1px solid var(--mn-border);
+      border-radius: 11px;
+      background: var(--mn-surface-soft);
+    }
+
+    .migration-notice .price-box small {
+      display: block;
+      color: var(--mn-soft);
+      font-size: 0.65rem;
+      margin-bottom: 2px;
+    }
+
+    .migration-notice .price-box strong {
+      color: var(--mn-primary);
+      font-size: 0.88rem;
+    }
+
+    .migration-notice .price-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--mn-primary);
+      font-weight: 900;
+    }
+
+    .migration-notice .balance-alert {
+      margin-top: 13px;
+      padding: 11px 12px;
+      border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--mn-border));
+      border-radius: 11px;
+      background: color-mix(in srgb, #f59e0b 8%, var(--mn-surface));
+      color: color-mix(in srgb, #b7791f 72%, var(--mn-text));
+      font-size: 0.77rem;
+      line-height: 1.65;
+    }
+
+    html[data-theme="dark"] .migration-notice .balance-alert {
+      color: #f1d28f;
+    }
+
+    .migration-notice .action-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      margin-top: 26px;
+      padding: 20px;
+      border: 1px solid var(--mn-border-strong);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--mn-primary) 10%, var(--mn-surface)),
+          color-mix(in srgb, var(--primary-3) 6%, var(--mn-surface)));
+    }
+
+    .migration-notice .action-panel strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--mn-text);
+      font-size: 1rem;
+    }
+
+    .migration-notice .action-panel p {
+      margin: 0;
+      color: var(--mn-muted);
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+
+    .migration-notice .action-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .migration-notice .support-card,
+    .migration-notice .closing-card {
+      margin-top: 16px;
+      padding: 19px;
+      border: 1px solid var(--mn-border);
+      border-radius: 17px;
+      background: var(--mn-surface);
+    }
+
+    .migration-notice .support-card p,
+    .migration-notice .closing-card p {
+      margin: 0;
+      color: var(--mn-muted);
+      font-size: 0.85rem;
+      line-height: 1.78;
+    }
+
+    .migration-notice .closing-card {
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--mn-primary) 13%, transparent), transparent 58%),
+        var(--mn-surface);
+    }
+
+    .migration-notice .closing-card h2 {
+      color: var(--mn-primary);
+    }
+
+    @media (max-width: 760px) {
+      .migration-notice .change-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .migration-notice .action-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .migration-notice .action-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .migration-notice .migration-hero {
+        padding: 20px 16px;
+        border-radius: 20px;
+      }
+
+      .migration-notice .route-card,
+      .migration-notice .price-switch {
+        grid-template-columns: 1fr;
+      }
+
+      .migration-notice .route-arrow,
+      .migration-notice .price-arrow {
+        transform: rotate(90deg);
+      }
+
+      .migration-notice .action-links .btn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../index.html#api">API 平台</a>
+      <a href="../index.html#tools">工具箱</a>
+      <a href="../index.html#blog">博客</a>
+      <a href="../index.html#announcements">公告</a>
+      <a href="../index.html#lab">SheepAI-Lab</a>
+      <a href="../index.html#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <article class="section announce-page migration-notice">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="../index.html#announcements">← 返回公告</a>
+
+        <div class="migration-hero">
+          <span class="migration-kicker">📢 重要迁移通知 · Sheep AI → Sheep AI Plus</span>
+          <h1>小羊 AI 焕新升级 ✨</h1>
+          <p class="lead">
+            旧站 <strong>Sheep AI</strong> 正在逐步迁移至新站 <strong>Sheep AI Plus</strong>。
+            用户账号基础数据将自动迁移，老用户无需在新站重新注册。
+          </p>
+
+          <div class="route-card">
+            <div class="route-site">
+              <small>旧站 · Sheep AI</small>
+              <strong>https://www.sheepai.top</strong>
+            </div>
+            <div class="route-arrow">→</div>
+            <div class="route-site">
+              <small>新站 · Sheep AI Plus</small>
+              <strong>https://sheepaiplus.top</strong>
+            </div>
+          </div>
+
+          <div class="intro-note">
+            <strong>老用户无需重新注册：</strong>
+            迁移完成后，可直接使用 Sheep AI 原有的登录方式登录 Sheep AI Plus。
+          </div>
+        </div>
+
+        <section class="change-section">
+          <h2>本次主要变化 ✨</h2>
+
+          <div class="change-grid">
+            <div class="change-card">
+              <div class="change-head">
+                <span class="change-num">01</span>
+                <h3>计价单位调整</h3>
+              </div>
+              <p>
+                新站统一使用真实 USD 计价。旧站 ¥69 充值 100 额度的方式，
+                改为按照真实汇率约 ¥6.7 充值 $1。与此同时，分组倍率和模型价格将同步大幅降低，
+                实际人民币调用成本会保持与旧站相同，部分线路还会更划算。
+              </p>
+              <div class="price-switch">
+                <div class="price-box">
+                  <small>Sheep AI</small>
+                  <strong>¥69 → 100 额度</strong>
+                </div>
+                <div class="price-arrow">→</div>
+                <div class="price-box">
+                  <small>Sheep AI Plus</small>
+                  <strong>约 ¥6.7 → $1</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="change-card">
+              <div class="change-head">
+                <span class="change-num">02</span>
+                <h3>账户信息迁移</h3>
+              </div>
+              <p>
+                原 Sheep AI 平台所有账户的用户账号名、账号 ID、密码、邮箱将统一迁移至新站。
+                迁移完成后，可使用原账号信息直接登录 Sheep AI Plus，无需重新注册。
+              </p>
+            </div>
+
+            <div class="change-card">
+              <div class="change-head">
+                <span class="change-num">03</span>
+                <h3>余额重要说明</h3>
+              </div>
+              <p>
+                旧站现有数据与余额不受影响，依然可以正常使用，但充值通道将关闭。
+                待旧站余额用完后，请切换至新站点继续使用。
+              </p>
+              <div class="balance-alert">
+                旧站余额继续留在 Sheep AI 使用，请先正常消耗完毕后再切换至新站充值。
+              </div>
+            </div>
+
+            <div class="change-card">
+              <div class="change-head">
+                <span class="change-num">04</span>
+                <h3>模型分组调整</h3>
+              </div>
+              <p>
+                部分模型的分组名称及展示方式会有所变化，具体模型价格和倍率请以新站页面实际显示为准。
+                新站模型广场显示的 $/1M Tokens 就是最终计费价格，不需要再考虑倍率转换。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div class="action-panel">
+          <div>
+            <strong>准备好开始使用 Sheep AI Plus 了吗？</strong>
+            <p>建议先查看教程与计费对照，再按新站模型和分组配置 API Key。</p>
+          </div>
+          <div class="action-links">
+            <a class="btn btn-primary" href="https://sheepaiplus.top" target="_blank" rel="noopener">前往 Sheep AI Plus</a>
+            <a class="btn btn-secondary" href="https://docs.sheepaiplus.top/" target="_blank" rel="noopener">教程 / API 文档</a>
+            <a class="btn btn-ghost" href="billing-comparison.html">查看计费对照</a>
+          </div>
+        </div>
+
+        <div class="support-card">
+          <h2>遇到问题？</h2>
+          <p>
+            如果您在登录或使用过程中遇到任何问题，请随时联系我们，我们将第一时间为您解答。
+            也欢迎通过页面底部的官方 QQ 群与我们交流反馈。
+          </p>
+        </div>
+
+        <div class="closing-card">
+          <h2>🐑 高性价比的方向不会改变</h2>
+          <p>
+            Sheep AI 一直主打高性价比，Sheep AI Plus 也会继续保持这个方向。
+            感谢您一直以来的支持与信任！欢迎继续使用 Sheep AI Plus！
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="community-panel">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

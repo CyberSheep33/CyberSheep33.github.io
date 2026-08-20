@@ -56,14 +56,15 @@
     </article>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="site-footer">
     <div class="community-panel">
-      <img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
       <div>
         <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
         <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
       </div>
     </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
     <div class="footer-bottom">
       <span>© 2026 CyberSheep 赛博小羊</span>
       <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>

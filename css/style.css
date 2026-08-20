@@ -802,6 +802,23 @@ html[data-theme="dark"] .section-card {
 }
 
 /* ============================================================
+   Embedded content wrapper (announcements with custom HTML)
+   Keeps the embedded page on a light card in both themes.
+   Content-specific styles live in each page's own <style>,
+   scoped under `.announce-embed`.
+   ============================================================ */
+
+.announce-embed {
+  background: linear-gradient(180deg, #f8fcfa 0%, #ffffff 45%, #f3faf7 100%);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  color: #17221e;
+  line-height: 1.65;
+}
+
+/* ============================================================
    Repo grid (JS-rendered)
    ============================================================ */
 

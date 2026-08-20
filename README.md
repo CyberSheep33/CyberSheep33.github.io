@@ -27,6 +27,7 @@ docs/superpowers/    — 设计文档与实现计划（spec + plan）
 ## 维护指南
 
 - **公告**：每条公告是 `announcements/` 下的一个独立 HTML 页（如 `announcements/sheep-ai-plus-upgrade.html`，可单独分享 `cybersheep33.github.io/announcements/xxx.html`）。新增步骤：① 复制 `announcements/` 中任意页面，改内容与文件名；② 在 `index.html` 的 `.announce-list` 复制一条 `.announce-item`，把链接指向新页面
+- **嵌入型公告**：风格独立的自定义 HTML（自带样式/脚本）可作为公告直接插入壳页。复制 `announcements/_template-embed.html` 使用：内容粘贴到 `.announce-embed` 内，样式选择器加 `.announce-embed` 前缀做隔离。参考示例：`announcements/billing-comparison.html`。注意 `_template-embed.html` 以 `_` 开头，不会被 GitHub Pages（Jekyll）发布
 - **小项目仓库**：改 `js/main.js` 中的 `REPOS` 数组，新增 / 删除一条对象即可
 - **模型跑马灯**：改 `index.html` 中 `.marquee-set` 内的 `logo-pill` 列表
 

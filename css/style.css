@@ -803,19 +803,25 @@ html[data-theme="dark"] .section-card {
 
 /* ============================================================
    Embedded content wrapper (announcements with custom HTML)
-   Keeps the embedded page on a light card in both themes.
-   Content-specific styles live in each page's own <style>,
-   scoped under `.announce-embed`.
+   Uses the same light/dark theme variables as the brand site.
+   Content-specific styles remain scoped under `.announce-embed`.
    ============================================================ */
 
 .announce-embed {
-  background: linear-gradient(180deg, #f8fcfa 0%, #ffffff 45%, #f3faf7 100%);
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 22px;
   box-shadow: var(--shadow);
   overflow: hidden;
-  color: #17221e;
+  color: var(--fg);
   line-height: 1.65;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background-color 240ms ease, border-color 240ms ease, color 240ms ease, box-shadow 240ms ease;
+}
+
+html[data-theme="dark"] .announce-embed {
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* ============================================================

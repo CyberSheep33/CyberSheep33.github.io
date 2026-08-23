@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="使用 FLClash + 机场实现网络加速：原理、推荐机场、订阅导入与节点选择的完整教程。">
+  <meta name="keywords" content="FLClash,机场,订阅,网络加速,梯子,CyberSheep,黑鹰云,星辰加速">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="网络加速教程（FLClash + 机场）— CyberSheep 赛博小羊">
+  <meta property="og:description" content="下载 CC Switch、Claude Desktop 等需要稳定网络？用 FLClash + 机场几步搞定。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>网络加速教程（FLClash + 机场）— CyberSheep 赛博小羊</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/guide.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../#api">API 平台</a>
+      <a href="../#tools">工具箱</a>
+      <a href="../#blog">博客</a>
+      <a href="../guide/index.html" aria-current="page">快速开始</a>
+      <a href="../announcements/index.html">公告</a>
+      <a href="../#lab">SheepAI-Lab</a>
+      <a href="../#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <div class="section guide-hero">
+      <a class="guide-back" href="index.html">← 返回快速开始</a>
+      <span class="kicker">Guide · 网络</span>
+      <h1>网络加速教程</h1>
+      <p class="guide-sub">下载 CC Switch、Claude Desktop 等软件时可能需要稳定访问海外网络。本教程用 FLClash + 机场，几步就能完成加速。</p>
+    </div>
+
+    <div class="section">
+      <!-- Step 1 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">1</span>
+          <h2>先了解：为什么要加速</h2>
+        </div>
+        <p class="guide-para">部分软件的下载页（例如 CC Switch、FLClash 的 GitHub Release 页面，以及 Claude 官方下载页）在国内访问不稳定，可能导致网页加载失败或下载中断。开启网络加速后，这些请求会通过更稳定的线路完成。</p>
+        <div class="guide-note">
+          <strong>两个概念：</strong>
+          机场服务商（如黑鹰云、星辰加速）提供分布在各地的网络节点，相当于「帮你出国访问的中转站」；
+          FLClash 是加速工具（客户端），负责把你的网络请求接入机场的节点。FLClash 本身不提供节点，需要搭配机场的订阅地址一起使用。
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">2</span>
+          <h2>注册机场并获取订阅</h2>
+        </div>
+        <p class="guide-para">选一个机场注册账号并购买套餐即可。下面是本站也在使用的两家机场：</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-primary" href="https://my.heiying.org/" target="_blank" rel="noopener">黑鹰云</a>
+          <a class="btn btn-secondary" href="https://starlinkboost.com/" target="_blank" rel="noopener">星辰加速</a>
+        </div>
+        <p class="guide-para">注册并购买套餐后，在机场仪表盘按下面步骤拿到「订阅地址」：</p>
+        <ol class="guide-ol">
+          <li>登录机场仪表盘；</li>
+          <li>点击「一键订阅」；</li>
+          <li>点击「复制订阅地址」，复制得到一串 <code>https://...</code> 的订阅 URL。</li>
+        </ol>
+        <p class="guide-note">订阅地址相当于机场节点的「钥匙」，只复制到自己的 FLClash 里使用即可。</p>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">3</span>
+          <h2>安装 FLClash</h2>
+        </div>
+        <p class="guide-para">FLClash 是一款免费开源的加速客户端，支持 Windows / macOS / Linux。到官方 GitHub Release 页面下载对应平台的安装包。</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-primary" href="https://github.com/chen08209/FlClash/releases" target="_blank" rel="noopener">下载 FLClash</a>
+        </div>
+        <p class="guide-note">如果当前访问 GitHub 也不稳定，可以先借助手机热点或已有加速工具完成下载，或到官方 QQ 群咨询获取方式。</p>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">4</span>
+          <h2>导入订阅配置</h2>
+        </div>
+        <p class="guide-para">打开 FLClash，把刚才复制的订阅地址导入：</p>
+        <ol class="guide-ol">
+          <li>进入「配置」页面；</li>
+          <li>点击「＋」并选择「从 URL 获取配置」；</li>
+          <li>粘贴机场的订阅地址，保存。</li>
+        </ol>
+        <div class="guide-note">导入后 FLClash 会自动下载机场的节点列表，通常几秒内完成。</div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">5</span>
+          <h2>选择节点并启动加速</h2>
+        </div>
+        <ol class="guide-ol">
+          <li>进入「代理」页面，选择一个可用节点（延迟低的优先）；</li>
+          <li>进入「仪表盘」页面，点击右下角的三角形按钮启动加速；</li>
+          <li>按钮变为运行状态即表示加速已开启。</li>
+        </ol>
+        <div class="guide-note guide-note--warn"><strong>提示：</strong>如果开启后反而无法上网，说明当前节点不可用，回到「代理」页面换个节点试试。</div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">6</span>
+          <h2>回到教程继续</h2>
+        </div>
+        <p class="guide-para">加速开启后，就可以正常下载 CC Switch、Claude Desktop 等软件了。回到对应的快速开始教程继续配置：</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-primary" href="codex-cli.html">Codex CLI 教程 →</a>
+          <a class="btn btn-secondary" href="claude-code.html">Claude Code 教程 →</a>
+          <a class="btn btn-secondary" href="../tools/ccswitch.html">CC Switch 工具 →</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="community-panel">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/guide.js"></script>
+</body>
+</html>

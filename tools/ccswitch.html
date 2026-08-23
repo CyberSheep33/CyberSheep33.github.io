@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CC Switch 一键配置生成工具：选择预设、填入 API Key、生成导入链接，适用于 Codex、Claude Code 等 AI Coding 工具。">
+  <meta name="keywords" content="CC Switch,CyberSheep,Sheep AI Plus,Codex,Claude Code,配置生成">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="CC Switch 一键配置 — CyberSheep 赛博小羊">
+  <meta property="og:description" content="CyberSheep 提供的通用 CC Switch 配置生成工具。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>CC Switch 一键配置 — CyberSheep 赛博小羊</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../#api">API 平台</a>
+      <a href="../#tools">工具箱</a>
+      <a href="../#blog">博客</a>
+      <a href="../guide/index.html">快速开始</a>
+      <a href="../announcements/index.html">公告</a>
+      <a href="../#lab">SheepAI-Lab</a>
+      <a href="../#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <div class="section tool-hero">
+      <a class="tool-back" href="../guide/index.html">← 返回快速开始</a>
+      <span class="kicker">Tools · CC Switch</span>
+      <h1>CC Switch 一键配置</h1>
+      <p class="tool-sub">选择预设、填入 API Key，一键生成导入链接。适合熟悉配置的用户，预设参数均可手动调整。</p>
+    </div>
+
+    <div class="section">
+      <div class="tool-card">
+        <div class="tool-field">
+          <label class="tool-label" for="toolPreset">配置预设</label>
+          <select class="tool-select" id="toolPreset" aria-describedby="toolPresetHint"></select>
+          <p class="tool-note" id="toolPresetHint">选择要配置的 AI Coding 工具，表单会自动填入对应参数。</p>
+        </div>
+
+        <dl class="tool-meta">
+          <dt>服务商</dt>
+          <dd id="toolProvider">Sheep AI Plus</dd>
+        </dl>
+
+        <div class="tool-field">
+          <label class="tool-label" for="toolKey">API Key</label>
+          <div class="tool-input-wrap">
+            <input class="tool-input tool-input--mono" id="toolKey" type="password" inputmode="text"
+              placeholder="sk-••••••••••••••••" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <button class="tool-eye" id="toolEye" type="button" aria-label="显示 / 隐藏 API Key" title="显示 / 隐藏">👁</button>
+          </div>
+        </div>
+
+        <div class="tool-field">
+          <label class="tool-label" for="toolEndpoint">Base URL</label>
+          <input class="tool-input tool-input--mono" id="toolEndpoint" type="text" spellcheck="false">
+        </div>
+
+        <div class="tool-field">
+          <label class="tool-label" for="toolHomepage">Homepage <small>（高级）</small></label>
+          <input class="tool-input tool-input--mono" id="toolHomepage" type="text" spellcheck="false">
+        </div>
+
+        <div class="tool-advanced" id="toolAdvanced" data-open="false">
+          <button class="tool-advanced-toggle" id="toolAdvancedToggle" type="button" aria-expanded="false">
+            <span>高级配置</span>
+            <span class="tool-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="tool-advanced-body">
+            <div class="tool-field">
+              <label class="tool-label" for="toolModel">默认模型 <small>（不填则用 CC Switch 内置默认）</small></label>
+              <input class="tool-input tool-input--mono" id="toolModel" type="text" spellcheck="false" placeholder="gpt-5.6-luna">
+            </div>
+            <label class="tool-check">
+              <input type="checkbox" id="toolEnabled" checked>
+              导入后立即启用该供应商
+            </label>
+          </div>
+        </div>
+
+        <div class="tool-preview">
+          <span class="tool-preview-label">Deep Link 预览（API Key 已打码）</span>
+          <pre id="toolPreview" aria-live="polite">ccswitch://v1/import?...</pre>
+        </div>
+
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="toolImport" type="button">一键导入 CC Switch</button>
+          <button class="btn btn-secondary" id="toolCopy" type="button">复制配置链接</button>
+        </div>
+
+        <p class="tool-note">🔒 API Key 仅在当前浏览器中用于生成配置，不会上传或保存；复制出的链接包含 API Key，请勿公开分享。</p>
+        <p class="tool-status" id="toolStatus" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="community-panel">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/ccswitch-presets.js"></script>
+  <script src="../js/ccswitch-core.js"></script>
+  <script>
+  (function () {
+    'use strict'
+
+    var presetEl = document.getElementById('toolPreset')
+    var providerEl = document.getElementById('toolProvider')
+    var keyEl = document.getElementById('toolKey')
+    var eyeEl = document.getElementById('toolEye')
+    var endpointEl = document.getElementById('toolEndpoint')
+    var homepageEl = document.getElementById('toolHomepage')
+    var modelEl = document.getElementById('toolModel')
+    var enabledEl = document.getElementById('toolEnabled')
+    var advancedEl = document.getElementById('toolAdvanced')
+    var advancedToggle = document.getElementById('toolAdvancedToggle')
+    var previewEl = document.getElementById('toolPreview')
+    var importBtn = document.getElementById('toolImport')
+    var copyBtn = document.getElementById('toolCopy')
+    var statusEl = document.getElementById('toolStatus')
+    var toastEl = document.getElementById('toast')
+
+    function setStatus(msg, type) {
+      statusEl.textContent = msg
+      statusEl.className = 'tool-status' + (type ? ' tool-status--' + type : '')
+    }
+
+    function toast(msg) {
+      if (!toastEl) return
+      toastEl.textContent = msg
+      toastEl.classList.add('toast--show')
+      clearTimeout(toast._t)
+      toast._t = setTimeout(function () { toastEl.classList.remove('toast--show') }, 1800)
+    }
+
+    // 填充预设下拉
+    var presets = window.CCSWITCH.allPresets()
+    presets.forEach(function (p) {
+      var opt = document.createElement('option')
+      opt.value = p.id
+      opt.textContent = p.title
+      presetEl.appendChild(opt)
+    })
+
+    function currentPreset() {
+      return window.CCSWITCH.getPreset(presetEl.value)
+    }
+
+    function applyPreset(id) {
+      var p = window.CCSWITCH.getPreset(id)
+      if (!p) return
+      presetEl.value = id
+      providerEl.textContent = p.providerName
+      endpointEl.value = p.endpoint
+      homepageEl.value = p.homepage || ''
+      modelEl.value = p.model || ''
+      enabledEl.checked = p.enabled !== false
+      updatePreview()
+    }
+
+    function updatePreview() {
+      var p = currentPreset()
+      if (!p) return
+      var params = new URLSearchParams()
+      params.append('resource', 'provider')
+      params.append('app', p.app)
+      params.append('name', p.name || 'sheepaiplus')
+      if (endpointEl.value) params.append('endpoint', endpointEl.value)
+      if (keyEl.value) params.append('apiKey', 'sk-****') // 预览打码
+      if (homepageEl.value) params.append('homepage', homepageEl.value)
+      if (modelEl.value) params.append('model', modelEl.value)
+      params.append('enabled', enabledEl.checked ? 'true' : 'false')
+      previewEl.textContent = 'ccswitch://v1/import?' + params.toString()
+    }
+
+    function buildLink() {
+      var p = currentPreset()
+      if (!p) return null
+      var check = window.CCSWITCH.validateApiKey(keyEl.value)
+      if (!check.ok) {
+        if (check.reason === 'empty') {
+          setStatus('请先填入你的 Sheep AI Plus API Key。', 'error')
+        } else {
+          setStatus('API Key 格式看起来不对，请检查后重试。', 'error')
+        }
+        keyEl.focus()
+        return null
+      }
+      // 用表单当前值覆盖 preset，生成实际链接
+      var override = {
+        app: p.app,
+        name: p.name,
+        endpoint: endpointEl.value.trim(),
+        homepage: homepageEl.value.trim() || p.homepage,
+        model: modelEl.value.trim(),
+        enabled: enabledEl.checked
+      }
+      return window.CCSWITCH.buildProviderDeepLink(override, check.value)
+    }
+
+    // 事件
+    presetEl.addEventListener('change', function () {
+      applyPreset(presetEl.value)
+      setStatus('', '')
+    })
+
+    eyeEl.addEventListener('click', function () {
+      var show = keyEl.type === 'password'
+      keyEl.type = show ? 'text' : 'password'
+      eyeEl.textContent = show ? '🙈' : '👁'
+      eyeEl.setAttribute('aria-label', show ? '隐藏 API Key' : '显示 API Key')
+      keyEl.focus()
+    })
+
+    advancedToggle.addEventListener('click', function () {
+      var open = advancedEl.getAttribute('data-open') === 'true'
+      advancedEl.setAttribute('data-open', open ? 'false' : 'true')
+      advancedToggle.setAttribute('aria-expanded', open ? 'false' : 'true')
+    })
+
+    ;[keyEl, endpointEl, homepageEl, modelEl, enabledEl].forEach(function (el) {
+      el.addEventListener('input', function () {
+        updatePreview()
+        if (statusEl.className !== 'tool-status') statusEl.className = 'tool-status'
+      })
+    })
+    enabledEl.addEventListener('change', updatePreview)
+
+    importBtn.addEventListener('click', function () {
+      var link = buildLink()
+      if (!link) return
+      window.CCSWITCH.openDeepLink(link)
+      setStatus('已唤起 CC Switch，请在弹窗中确认导入。', 'ok')
+    })
+
+    copyBtn.addEventListener('click', function () {
+      var link = buildLink()
+      if (!link) return
+      window.CCSWITCH.copyDeepLink(link, function () {
+        setStatus('配置链接已复制，注意其中包含 API Key，请勿公开分享。', 'ok')
+        toast('配置链接已复制')
+      }, function () {
+        setStatus('复制失败，请手动复制。', 'error')
+      })
+    })
+
+    // URL ?preset= 支持
+    var match = /[?&]preset=([^&]+)/.exec(location.search)
+    var initialId = match ? decodeURIComponent(match[1]) : (presets[0] ? presets[0].id : '')
+    if (initialId && window.CCSWITCH.getPreset(initialId)) {
+      applyPreset(initialId)
+    } else {
+      applyPreset(initialId || 'codex-cli')
+    }
+  })()
+  </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sheep AI Plus 分组机制说明：智能路由默认自动选组，手动选择合适分组可以便宜很多。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="Sheep AI Plus 分组机制说明：选对分组，价格差好几倍 — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="创建令牌时默认智能路由自动选组，手动选择合适分组可以便宜很多。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>Sheep AI Plus 分组机制说明：选对分组，价格差好几倍 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .group-guide {
+      --gg-surface: var(--panel-strong);
+      --gg-surface-soft: var(--tag-bg);
+      --gg-border: var(--border);
+      --gg-border-strong: var(--border-strong);
+      --gg-text: var(--fg);
+      --gg-muted: var(--muted);
+      --gg-soft: var(--soft);
+      --gg-primary: var(--primary);
+      --gg-primary-2: var(--primary-2);
+      color: var(--gg-text);
+    }
+
+    .group-guide .gg-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--gg-border-strong);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--gg-primary) 18%, transparent), transparent 38%),
+        radial-gradient(circle at 8% 92%, color-mix(in srgb, var(--primary-3) 12%, transparent), transparent 40%),
+        var(--gg-surface);
+      box-shadow: var(--shadow);
+    }
+
+    .group-guide .gg-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid var(--gg-border);
+      border-radius: var(--radius-pill);
+      background: var(--gg-surface-soft);
+      color: var(--gg-primary);
+      font-size: 0.76rem;
+      font-weight: 850;
+    }
+
+    .group-guide .gg-hero h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(1.8rem, 4.6vw, 2.9rem);
+      line-height: 1.16;
+      letter-spacing: -0.6px;
+    }
+
+    .group-guide .gg-hero .lead {
+      margin: 0;
+      color: var(--gg-muted);
+      font-size: 0.96rem;
+      line-height: 1.8;
+    }
+
+    .group-guide .gg-note {
+      margin: 16px 0;
+      padding: 13px 15px;
+      border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--gg-border));
+      border-radius: 13px;
+      background: color-mix(in srgb, #f59e0b 8%, var(--gg-surface-soft));
+      color: color-mix(in srgb, #b7791f 72%, var(--gg-text));
+      font-size: 0.86rem;
+      line-height: 1.75;
+    }
+
+    html[data-theme="dark"] .group-guide .gg-note {
+      color: #f1d28f;
+    }
+
+    .group-guide h2 {
+      margin: 26px 0 12px;
+      font-size: 1.3rem;
+      line-height: 1.35;
+    }
+
+    .group-guide .gg-compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 14px 0 6px;
+    }
+
+    .group-guide .gg-card {
+      padding: 18px;
+      border: 1px solid var(--gg-border);
+      border-radius: 16px;
+      background: var(--gg-surface);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .group-guide .gg-card b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+    }
+
+    .group-guide .gg-card span {
+      display: block;
+      color: var(--gg-muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    .group-guide .gg-card .gg-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border: 1px solid var(--gg-border);
+      border-radius: var(--radius-pill);
+      background: var(--gg-surface-soft);
+      color: var(--gg-primary);
+      font-size: 0.74rem;
+      font-weight: 850;
+    }
+
+    .group-guide p,
+    .group-guide li {
+      color: var(--gg-muted);
+      font-size: 0.96rem;
+      line-height: 1.85;
+    }
+
+    .group-guide li strong {
+      color: var(--gg-text);
+    }
+
+    .group-guide .gg-cta {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .group-guide .gg-compare {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../index.html#api">API 平台</a>
+      <a href="../index.html#tools">工具箱</a>
+      <a href="../index.html#blog">博客</a>
+      <a href="../guide/index.html">快速开始</a>
+      <a href="../announcements/index.html">公告</a>
+      <a href="../index.html#lab">SheepAI-Lab</a>
+      <a href="../index.html#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <article class="section announce-page group-guide">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
+
+        <div class="gg-hero">
+          <span class="gg-kicker">💡 使用技巧 · Sheep AI Plus</span>
+          <h1>选对分组，价格差好几倍</h1>
+          <p class="lead">创建 API 令牌时，Sheep AI Plus 默认使用「智能路由」自动选择分组，优先保证稳定与可用；但如果你手动选择合适的分组，同样的模型价格可以便宜很多。</p>
+        </div>
+
+        <div class="gg-note"><strong>核心结论：</strong>Sheep AI Plus 主打高性价比。智能路由偏向「高稳定」的定价，面向追求稳定性的用户；大多数普通使用场景，手动选择低倍率分组会划算得多。</div>
+
+        <h2>什么是「分组」？</h2>
+        <p>Sheep AI Plus 的模型按照「分组」计费，不同分组对应不同的倍率。分组倍率越低，同样的模型调用越便宜。同一个模型可能存在多个分组，价格差异可达数倍。</p>
+
+        <h2>智能路由 vs 手动选择</h2>
+        <div class="gg-compare">
+          <div class="gg-card">
+            <b>智能路由（默认）</b>
+            <span>自动选择分组，优先保证稳定与可用，适合对稳定性要求高、对价格不敏感的用户。</span>
+            <span class="gg-tag">省心 · 偏贵</span>
+          </div>
+          <div class="gg-card">
+            <b>手动选择分组</b>
+            <span>创建令牌时手动指定分组，可以选择低倍率的特价分组，价格便宜很多。</span>
+            <span class="gg-tag">性价比 · 需按场景选</span>
+          </div>
+        </div>
+
+        <h2>如何创建令牌并选择分组</h2>
+        <ol class="gg-steps" style="padding-left:1.3em; margin:6px 0 0;">
+          <li>登录 <strong>Sheep AI Plus</strong>；</li>
+          <li>进入「API 令牌」页面；</li>
+          <li>点击「添加令牌」，输入令牌名称；</li>
+          <li>在分组处选择：默认「智能路由」自动选择；也可手动选择具体分组；</li>
+          <li>创建后复制生成的密钥（<code>sk-</code> 开头）。</li>
+        </ol>
+
+        <h2>怎么选最划算？</h2>
+        <ul style="padding-left:1.3em; margin:6px 0 0;">
+          <li><strong>追求性价比、可容忍偶发波动：</strong>选特价 / 低倍率分组，价格便宜很多；</li>
+          <li><strong>生产环境、重要任务：</strong>选稳定分组（智能路由偏向此类），贵一点但更稳；</li>
+          <li><strong>Codex CLI / Claude Code 等工具：</strong>优先选择对应的专属分组，通常兼顾价格与可用性；</li>
+          <li><strong>不确定时：</strong>先选低倍率分组试用，体验稳定后再固定下来。</li>
+        </ul>
+
+        <div class="gg-note">具体每个模型有哪些分组、各自倍率是多少，以 Sheep AI Plus 模型页面显示的最终 $/1M Tokens 价格为准。不同线路可能随时调整，选择前可以对比一下。</div>
+
+        <div class="gg-cta">
+          <a class="btn btn-primary" href="https://sheepaiplus.top" target="_blank" rel="noopener">前往 Sheep AI Plus →</a>
+          <a class="btn btn-secondary" href="billing-comparison.html">查看计费对照</a>
+          <a class="btn btn-ghost" href="../guide/index.html">快速开始教程</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="community-panel">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

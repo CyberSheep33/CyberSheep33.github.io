@@ -28,7 +28,8 @@
       <a href="#api">API 平台</a>
       <a href="#tools">工具箱</a>
       <a href="#blog">博客</a>
-      <a href="#announcements">公告</a>
+      <a href="guide/index.html">快速开始</a>
+      <a href="announcements/index.html">公告</a>
       <a href="#lab">SheepAI-Lab</a>
       <a href="#projects">项目</a>
     </nav>
@@ -145,52 +146,70 @@
       </div>
     </section>
 
-    <!-- 04 公告 -->
-    <section class="section" id="announcements" aria-labelledby="announcements-title">
+    <!-- 04 快速开始 -->
+    <section class="section" id="quickstart" aria-labelledby="quickstart-title">
       <header class="section-head">
-        <span class="kicker">04 · 公告</span>
-        <h2 id="announcements-title">通知公告</h2>
+        <span class="kicker">04 · 快速开始</span>
+        <h2 id="quickstart-title">快速开始</h2>
       </header>
       <div class="section-card">
-        <ul class="announce-list">
-          <li>
-            <a class="announce-item" href="announcements/billing-comparison.html">
-              <time datetime="2026-08-20">2026-08-20</time>
-              <p>
-                <strong>Sheep AI → Sheep AI Plus 计费对照</strong>
-                <span class="announce-excerpt">新旧分组、倍率与人民币费率对照，一目了然看变化，支持搜索筛选。</span>
-                <span class="announce-more">阅读全文</span>
-              </p>
-            </a>
-          </li>
-          <li>
-            <a class="announce-item" href="announcements/sheep-ai-plus-migration.html">
-              <time datetime="2026-08-20">2026-08-20</time>
-              <p>
-                <strong>Sheep AI → Sheep AI Plus 迁移通知</strong>
-                <span class="announce-excerpt">账号基础数据自动迁移、旧站余额继续使用，新站统一采用真实 USD 计价。</span>
-                <span class="announce-more">阅读全文</span>
-              </p>
-            </a>
-          </li>
-          <li>
-            <a class="announce-item" href="announcements/creator-desktop-launch.html">
-              <time datetime="2026-07-24">2026-07-24</time>
-              <p>
-                <strong>sheepai-creator 桌面应用上线</strong>
-                <span class="announce-excerpt">跨平台 AI 图像 / 视频创作客户端，源码已开源在 SheepAI-Lab。</span>
-                <span class="announce-more">阅读全文</span>
-              </p>
-            </a>
-          </li>
-        </ul>
+        <p class="card-desc">第一次使用 AI Coding 工具？从安装到接入 Sheep AI Plus，一步一步完成配置。</p>
+        <div class="quickstart-grid" role="list">
+          <a class="quickstart-card" href="guide/codex-cli.html" role="listitem">
+            <span class="quickstart-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
+            </span>
+            <span class="quickstart-name">Codex CLI</span>
+            <span class="quickstart-desc">终端中的 OpenAI 编程工具</span>
+          </a>
+          <a class="quickstart-card" href="guide/claude-code.html" role="listitem">
+            <span class="quickstart-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
+            </span>
+            <span class="quickstart-name">Claude Code</span>
+            <span class="quickstart-desc">终端中的 Claude 编程工具</span>
+          </a>
+          <a class="quickstart-card" href="tools/ccswitch.html" role="listitem">
+            <span class="quickstart-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </span>
+            <span class="quickstart-name">CC Switch</span>
+            <span class="quickstart-desc">配置生成工具</span>
+          </a>
+          <a class="quickstart-card" href="guide/index.html" role="listitem">
+            <span class="quickstart-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+            </span>
+            <span class="quickstart-name">更多教程</span>
+            <span class="quickstart-desc">Codex · Claude · 桌面客户端</span>
+          </a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="guide/index.html">进入快速开始 →</a>
+        </div>
       </div>
     </section>
 
-    <!-- 05 SheepAI-Lab -->
+    <!-- 05 公告 -->
+    <section class="section" id="announcements" aria-labelledby="announcements-title">
+      <header class="section-head">
+        <span class="kicker">05 · 公告</span>
+        <h2 id="announcements-title">通知公告</h2>
+      </header>
+      <div class="section-card">
+        <ul class="announce-list" id="announceList" data-max="3">
+          <!-- 由 js/announcements.js 渲染最新 3 条 -->
+        </ul>
+        <div class="card-actions">
+          <a class="btn btn-secondary" href="announcements/index.html">查看全部公告 →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 SheepAI-Lab -->
     <section class="section" id="lab" aria-labelledby="lab-title">
       <header class="section-head">
-        <span class="kicker">05 · SheepAI-Lab</span>
+        <span class="kicker">06 · SheepAI-Lab</span>
         <h2 id="lab-title">开源组织</h2>
       </header>
       <div class="section-card">
@@ -203,10 +222,10 @@
       </div>
     </section>
 
-    <!-- 06 小项目 -->
+    <!-- 07 小项目 -->
     <section class="section" id="projects" aria-labelledby="projects-title">
       <header class="section-head">
-        <span class="kicker">06 · 赛博小羊小项目</span>
+        <span class="kicker">07 · 赛博小羊小项目</span>
         <h2 id="projects-title">更多作品</h2>
       </header>
       <div class="repo-grid" id="repoGrid">
@@ -233,5 +252,6 @@
   <div class="toast" id="toast" aria-live="polite"></div>
 
   <script src="js/main.js"></script>
+  <script src="js/announcements.js"></script>
 </body>
 </html>

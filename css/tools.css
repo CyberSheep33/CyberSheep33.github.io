@@ -1,0 +1,329 @@
+/* ============================================================
+   CyberSheep — CC Switch 配置工具专用样式
+   复用 css/style.css 的 CSS 变量与按钮体系。
+   ============================================================ */
+
+.tool-hero {
+  padding: 56px 0 12px;
+}
+
+.tool-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  text-wrap: balance;
+}
+
+.tool-hero .tool-sub {
+  max-width: 42rem;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.tool-back {
+  display: inline-block;
+  margin-bottom: 22px;
+  color: var(--soft);
+  font-weight: 700;
+  transition: color 180ms ease;
+}
+
+.tool-back:hover {
+  color: var(--primary);
+}
+
+.tool-card {
+  max-width: 760px;
+  padding: 30px 32px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+html[data-theme="dark"] .tool-card {
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.tool-field {
+  margin-top: 18px;
+}
+
+.tool-field:first-child {
+  margin-top: 0;
+}
+
+.tool-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--fg);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.tool-label small {
+  color: var(--soft);
+  font-weight: 650;
+}
+
+.tool-select,
+.tool-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--tag-bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.94rem;
+  outline: none;
+  color-scheme: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.tool-select {
+  cursor: pointer;
+}
+
+.tool-input::placeholder {
+  color: var(--soft);
+  opacity: 0.9;
+}
+
+.tool-select:focus,
+.tool-input:focus {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.tool-input--mono {
+  font-family: var(--font-mono);
+}
+
+.tool-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tool-input-wrap .tool-input {
+  padding-right: 52px;
+}
+
+.tool-eye {
+  position: absolute;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--soft);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.tool-eye:hover {
+  color: var(--primary);
+  background: rgba(15, 118, 110, 0.08);
+}
+
+.tool-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tool-meta {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--tag-bg);
+}
+
+.tool-meta dt {
+  color: var(--soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.tool-meta dd {
+  margin: 0;
+  color: var(--fg);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.tool-advanced {
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--tag-bg);
+  overflow: hidden;
+}
+
+.tool-advanced-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tool-advanced-toggle .tool-chevron {
+  transition: transform 200ms ease;
+}
+
+.tool-advanced[data-open="true"] .tool-chevron {
+  transform: rotate(180deg);
+}
+
+.tool-advanced-body {
+  display: none;
+  padding: 4px 16px 18px;
+}
+
+.tool-advanced[data-open="true"] .tool-advanced-body {
+  display: block;
+}
+
+.tool-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tool-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.tool-preview {
+  margin-top: 18px;
+}
+
+.tool-preview-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--soft);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.tool-preview pre {
+  margin: 0;
+  padding: 13px 15px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #10231d;
+  color: #e7f8f0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+html[data-theme="dark"] .tool-preview pre {
+  background: #061915;
+  color: #dff8ef;
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.tool-actions .btn {
+  flex: 1 1 180px;
+}
+
+.tool-note {
+  margin: 18px 0 0;
+  color: var(--soft);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.tool-status {
+  min-height: 1.2em;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.tool-status--ok {
+  color: var(--primary-2);
+}
+
+.tool-status--error {
+  color: #dc6b4a;
+}
+
+html[data-theme="dark"] .tool-status--error {
+  color: #f2927a;
+}
+
+@media (max-width: 640px) {
+  .tool-hero {
+    padding-top: 36px;
+  }
+
+  .tool-card {
+    padding: 24px 18px;
+  }
+
+  .tool-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-meta {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .tool-actions {
+    flex-direction: column;
+  }
+
+  .tool-actions .btn {
+    width: 100%;
+    margin-inline: 0;
+  }
+}

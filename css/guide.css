@@ -502,6 +502,66 @@ html[data-theme="dark"] .code-block pre {
   flex: 1 1 auto;
 }
 
+/* 暂不支持一键导入时的手动配置说明 */
+.ccw-manual {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, #f59e0b 34%, var(--border));
+  border-radius: 14px;
+  background: color-mix(in srgb, #f59e0b 7%, var(--tag-bg));
+}
+
+.ccw-manual > strong {
+  display: block;
+  color: var(--fg);
+  font-size: 0.98rem;
+  font-weight: 850;
+}
+
+.ccw-manual > p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.ccw-manual ol {
+  margin: 8px 0 0;
+  padding-left: 1.3em;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.ccw-manual li {
+  margin-bottom: 4px;
+}
+
+.ccw-manual li::marker {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.ccw-manual code {
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--tag-bg);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.ccw-manual-note {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--divider);
+  color: var(--soft);
+  font-size: 0.8rem !important;
+}
+
 .ccw-note {
   margin: 16px 0 0;
   color: var(--soft);

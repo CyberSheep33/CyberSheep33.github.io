@@ -168,7 +168,7 @@
     presets.forEach(function (p) {
       var opt = document.createElement('option')
       opt.value = p.id
-      opt.textContent = p.title
+      opt.textContent = p.title + (p.deeplinkSupported === false ? '（暂不支持一键导入）' : '')
       presetEl.appendChild(opt)
     })
 
@@ -185,6 +185,14 @@
       homepageEl.value = p.homepage || ''
       modelEl.value = p.model || ''
       enabledEl.checked = p.enabled !== false
+      var supported = p.deeplinkSupported !== false
+      importBtn.disabled = !supported
+      copyBtn.disabled = !supported
+      if (!supported) {
+        setStatus('CC Switch 深度链接协议暂不支持「' + p.title + '」一键导入，请在 CC Switch 中手动新建配置。', 'warn')
+      } else {
+        setStatus('', '')
+      }
       updatePreview()
     }
 
@@ -231,7 +239,6 @@
     // 事件
     presetEl.addEventListener('change', function () {
       applyPreset(presetEl.value)
-      setStatus('', '')
     })
 
     eyeEl.addEventListener('click', function () {
@@ -257,6 +264,7 @@
     enabledEl.addEventListener('change', updatePreview)
 
     importBtn.addEventListener('click', function () {
+      if (importBtn.disabled) return
       var link = buildLink()
       if (!link) return
       window.CCSWITCH.openDeepLink(link)
@@ -264,6 +272,7 @@
     })
 
     copyBtn.addEventListener('click', function () {
+      if (copyBtn.disabled) return
       var link = buildLink()
       if (!link) return
       window.CCSWITCH.copyDeepLink(link, function () {

@@ -6,8 +6,11 @@
    然后依次加载：
      ccswitch-presets.js → ccswitch-core.js → ccswitch-widget.js
 
-   组件会自动生成 API Key 输入框、显示/隐藏按钮、Preset 信息、
-   一键导入按钮与安全提示，并调用 ccswitch-core.js 的统一逻辑。
+   组件会自动生成 API Key 输入框、显示/隐藏按钮、Preset 信息与安全提示。
+   - 支持 Deep Link 的 preset（deeplinkSupported !== false）：
+     提供「一键导入 CC Switch」与「复制配置链接」。
+   - 暂不支持 Deep Link 的 preset（deeplinkSupported === false，如 Claude Desktop）：
+     改为展示在 CC Switch 中手动新建配置的步骤，并预留一键导入入口（待 CC Switch 支持后开放）。
    ============================================================ */
 (function () {
   'use strict'
@@ -40,49 +43,86 @@
 
     var uid = 'ccw-' + index + '-' + Math.random().toString(36).slice(2, 7)
     var esc = window.CCSWITCH.escapeHtml
+    var deeplinkSupported = preset.deeplinkSupported !== false
 
-    host.innerHTML =
-      '<div class="ccw-header">' +
-        '<span class="ccw-kicker">一键配置</span>' +
-        '<h3>接入 ' + esc(preset.providerName) + '</h3>' +
-        '<p>将刚刚创建的 API Key 粘贴到下方。</p>' +
+    var body = ''
+    body += '<div class="ccw-header">' +
+      '<span class="ccw-kicker">' + (deeplinkSupported ? '一键配置' : '手动配置') + '</span>' +
+      '<h3>接入 ' + esc(preset.providerName) + '</h3>' +
+      '<p>' + (deeplinkSupported
+        ? '将刚刚创建的 API Key 粘贴到下方。'
+        : 'CC Switch 暂不支持 ' + esc(preset.title) + ' 的一键导入，请按下面步骤手动配置。') +
+      '</p>' +
+    '</div>'
+
+    body += '<div class="ccw-field">' +
+      '<label for="' + uid + '-key">API Key</label>' +
+      '<div class="ccw-input-wrap">' +
+        '<input class="ccw-input" id="' + uid + '-key" type="password" inputmode="text" ' +
+          'placeholder="sk-••••••••••••••••" autocomplete="off" autocapitalize="off" spellcheck="false">' +
+        '<button class="ccw-eye" type="button" aria-label="显示 / 隐藏 API Key" title="显示 / 隐藏">👁</button>' +
       '</div>' +
-      '<div class="ccw-field">' +
-        '<label for="' + uid + '-key">API Key</label>' +
-        '<div class="ccw-input-wrap">' +
-          '<input class="ccw-input" id="' + uid + '-key" type="password" inputmode="text" ' +
-            'placeholder="sk-••••••••••••••••" autocomplete="off" autocapitalize="off" spellcheck="false">' +
-          '<button class="ccw-eye" type="button" aria-label="显示 / 隐藏 API Key" title="显示 / 隐藏">👁</button>' +
-        '</div>' +
-      '</div>' +
-      '<dl class="ccw-info">' +
-        '<div class="ccw-info-row"><dt>服务商</dt><dd>' + esc(preset.providerName) + '</dd></div>' +
-        '<div class="ccw-info-row"><dt>适用于</dt><dd>' + esc(preset.title) + '</dd></div>' +
-        '<div class="ccw-info-row"><dt>接口地址</dt><dd><code>' + esc(preset.endpoint) + '</code></dd></div>' +
-      '</dl>' +
-      '<div class="ccw-actions">' +
+    '</div>'
+
+    body += '<dl class="ccw-info">' +
+      '<div class="ccw-info-row"><dt>服务商</dt><dd>' + esc(preset.providerName) + '</dd></div>' +
+      '<div class="ccw-info-row"><dt>适用于</dt><dd>' + esc(preset.title) + '</dd></div>' +
+      '<div class="ccw-info-row"><dt>接口地址</dt><dd><code>' + esc(preset.endpoint) + '</code></dd></div>' +
+    '</dl>'
+
+    if (deeplinkSupported) {
+      body += '<div class="ccw-actions">' +
         '<button class="btn btn-primary ccw-import" type="button">一键导入 CC Switch</button>' +
         '<button class="btn btn-secondary ccw-copy" type="button">复制配置链接</button>' +
-      '</div>' +
-      '<p class="ccw-note">🔒 API Key 仅在当前浏览器中用于生成配置，不会上传或保存。</p>' +
-      '<p class="ccw-status" role="status" aria-live="polite"></p>'
+      '</div>'
+    } else {
+      body += '<div class="ccw-manual">' +
+        '<strong>暂不支持一键导入</strong>' +
+        '<p>请在 CC Switch 中手动新建一个配置：</p>' +
+        '<ol>' +
+          '<li>打开 CC Switch，切换到「' + esc(preset.title) + '」面板；</li>' +
+          '<li>点击右上角「＋」新建供应商；</li>' +
+          '<li>名称填 <code>' + esc(preset.providerName) + '</code>，接口地址填 <code>' + esc(preset.endpoint) + '</code>，' +
+            'API Key 粘贴下方密钥；</li>' +
+          '<li>保存并点击「启用」，然后完全退出并重新打开 ' + esc(preset.title) + '。</li>' +
+        '</ol>' +
+        '<p class="ccw-manual-note">一键导入功能将在 CC Switch 支持 ' + esc(preset.app) + ' 的深度链接后自动开放。</p>' +
+      '</div>'
+    }
+
+    body += '<p class="ccw-note">🔒 API Key 仅在当前浏览器中使用，不会上传或保存。</p>'
+    body += '<p class="ccw-status" role="status" aria-live="polite"></p>'
+
+    host.innerHTML = body
 
     var input = host.querySelector('input')
     var eye = host.querySelector('.ccw-eye')
+
+    if (input) {
+      input.addEventListener('input', function () {
+        var st = host.querySelector('.ccw-status')
+        if (st && st.className !== 'ccw-status') st.className = 'ccw-status'
+      })
+    }
+
+    if (eye) {
+      eye.addEventListener('click', function () {
+        var show = input.type === 'password'
+        input.type = show ? 'text' : 'password'
+        eye.textContent = show ? '🙈' : '👁'
+        eye.setAttribute('aria-label', show ? '隐藏 API Key' : '显示 API Key')
+        input.focus()
+      })
+    }
+
+    if (!deeplinkSupported) return
+
     var importBtn = host.querySelector('.ccw-import')
     var copyBtn = host.querySelector('.ccw-copy')
 
     function currentKey() {
       return (input.value || '').trim()
     }
-
-    eye.addEventListener('click', function () {
-      var show = input.type === 'password'
-      input.type = show ? 'text' : 'password'
-      eye.textContent = show ? '🙈' : '👁'
-      eye.setAttribute('aria-label', show ? '隐藏 API Key' : '显示 API Key')
-      input.focus()
-    })
 
     function buildLink() {
       var check = window.CCSWITCH.validateApiKey(currentKey())
@@ -113,12 +153,6 @@
       }, function () {
         showStatus(host, '复制失败，请长按链接手动复制。', 'error')
       })
-    })
-
-    // 输入时清除状态提示
-    input.addEventListener('input', function () {
-      var st = host.querySelector('.ccw-status')
-      if (st && st.className !== 'ccw-status') st.className = 'ccw-status'
     })
   }
 

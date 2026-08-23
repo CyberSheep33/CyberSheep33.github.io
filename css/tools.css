@@ -273,6 +273,13 @@ html[data-theme="dark"] .tool-preview pre {
   flex: 1 1 180px;
 }
 
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 .tool-note {
   margin: 18px 0 0;
   color: var(--soft);
@@ -298,6 +305,14 @@ html[data-theme="dark"] .tool-preview pre {
 
 html[data-theme="dark"] .tool-status--error {
   color: #f2927a;
+}
+
+.tool-status--warn {
+  color: #b7791f;
+}
+
+html[data-theme="dark"] .tool-status--warn {
+  color: #f1d28f;
 }
 
 @media (max-width: 640px) {

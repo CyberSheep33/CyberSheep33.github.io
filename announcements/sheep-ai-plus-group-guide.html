@@ -131,6 +131,36 @@
       font-weight: 850;
     }
 
+    .group-guide .gg-modes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 14px 0 6px;
+    }
+
+    .group-guide .gg-mode {
+      padding: 16px;
+      border: 1px solid var(--gg-border);
+      border-radius: 15px;
+      background: var(--gg-surface);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .group-guide .gg-mode b {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--gg-primary);
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .group-guide .gg-mode span {
+      display: block;
+      color: var(--gg-muted);
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+
     .group-guide p,
     .group-guide li {
       color: var(--gg-muted);
@@ -183,10 +213,10 @@
         <div class="gg-hero">
           <span class="gg-kicker">💡 使用技巧 · Sheep AI Plus</span>
           <h1>选对分组，价格差好几倍</h1>
-          <p class="lead">创建 API 令牌时，Sheep AI Plus 默认使用「智能路由」自动选择分组，优先保证稳定与可用；但如果你手动选择合适的分组，同样的模型价格可以便宜很多。</p>
+          <p class="lead">创建 API 令牌时，Sheep AI Plus 支持「智能路由」和「手动分组」两种模式。默认的智能路由偏向稳定与可用；如果你手动选择合适的分组，同样的模型价格可以便宜很多。</p>
         </div>
 
-        <div class="gg-note"><strong>核心结论：</strong>Sheep AI Plus 主打高性价比。智能路由偏向「高稳定」的定价，面向追求稳定性的用户；大多数普通使用场景，手动选择低倍率分组会划算得多。</div>
+        <div class="gg-note"><strong>核心结论：</strong>Sheep AI Plus 主打高性价比。智能路由面向「省心 + 稳定」，部分追求极致预算的用户更适合关闭智能路由、手动选择特价分组。</div>
 
         <h2>什么是「分组」？</h2>
         <p>Sheep AI Plus 的模型按照「分组」计费，不同分组对应不同的倍率。分组倍率越低，同样的模型调用越便宜。同一个模型可能存在多个分组，价格差异可达数倍。</p>
@@ -195,38 +225,65 @@
         <div class="gg-compare">
           <div class="gg-card">
             <b>智能路由（默认）</b>
-            <span>自动选择分组，优先保证稳定与可用，适合对稳定性要求高、对价格不敏感的用户。</span>
-            <span class="gg-tag">省心 · 偏贵</span>
+            <span>自动在可用渠道中择优分配，省心、稳定。可进一步选择四种智能策略。</span>
+            <span class="gg-tag">省心 · 稳定</span>
           </div>
           <div class="gg-card">
             <b>手动选择分组</b>
-            <span>创建令牌时手动指定分组，可以选择低倍率的特价分组，价格便宜很多。</span>
+            <span>创建令牌时手动指定分组，可以直接选择低倍率的特价分组，价格便宜很多。</span>
             <span class="gg-tag">性价比 · 需按场景选</span>
           </div>
         </div>
 
+        <h2>智能路由的四种策略</h2>
+        <p>开启智能路由后，可以根据自己的需求选择以下策略：</p>
+        <div class="gg-modes">
+          <div class="gg-mode">
+            <b>智能自动</b>
+            <span>综合价格、速度、成功率自动选择最合适的渠道。</span>
+          </div>
+          <div class="gg-mode">
+            <b>价格优先</b>
+            <span>优先选择成本更低的渠道。</span>
+          </div>
+          <div class="gg-mode">
+            <b>速度优先</b>
+            <span>优先选择响应更快的渠道。</span>
+          </div>
+          <div class="gg-mode">
+            <b>成功率优先</b>
+            <span>优先选择近期更稳定的渠道。</span>
+          </div>
+        </div>
+
+        <h2>注意：特价分组不在智能路由范围内</h2>
+        <p>一些特价分组并不在智能路由的可选范围内。例如 <strong>Codex-Gpt-2</strong> 超低价分组，提供特价 GPT 模型调用，价格极低，但高峰时期负载较高，可能出现偶尔重连的情况。这类分组追求极致性价比，因此不参与智能路由的自动分配。</p>
+        <div class="gg-note"><strong>重要：</strong>开启智能路由后，即使选择「价格优先」策略，也<strong>不会</strong>调用到特价分组。如果你追求极致预算，请关闭智能路由、改为手动分组，直接选择 <code>Codex-Gpt-2</code> 等特价分组——这样 API Key 就只会向你所选的特价分组发起模型调用，实际消耗与预期一致。</div>
+
         <h2>如何创建令牌并选择分组</h2>
-        <ol class="gg-steps" style="padding-left:1.3em; margin:6px 0 0;">
+        <ol style="padding-left:1.3em; margin:6px 0 0;">
           <li>登录 <strong>Sheep AI Plus</strong>；</li>
           <li>进入「API 令牌」页面；</li>
           <li>点击「添加令牌」，输入令牌名称；</li>
-          <li>在分组处选择：默认「智能路由」自动选择；也可手动选择具体分组；</li>
+          <li>分组模式：默认「智能路由」，可进一步选择四种策略；也可关闭智能路由、手动选择具体分组；</li>
           <li>创建后复制生成的密钥（<code>sk-</code> 开头）。</li>
         </ol>
 
         <h2>怎么选最划算？</h2>
         <ul style="padding-left:1.3em; margin:6px 0 0;">
-          <li><strong>追求性价比、可容忍偶发波动：</strong>选特价 / 低倍率分组，价格便宜很多；</li>
-          <li><strong>生产环境、重要任务：</strong>选稳定分组（智能路由偏向此类），贵一点但更稳；</li>
-          <li><strong>Codex CLI / Claude Code 等工具：</strong>优先选择对应的专属分组，通常兼顾价格与可用性；</li>
-          <li><strong>不确定时：</strong>先选低倍率分组试用，体验稳定后再固定下来。</li>
+          <li><strong>追求极致预算、可容忍偶发波动：</strong>关闭智能路由，手动选特价分组（如 Codex-Gpt-2），价格最便宜；</li>
+          <li><strong>省心又划算：</strong>开启智能路由 + 选择「价格优先」，在可用渠道里尽量降低成本；</li>
+          <li><strong>生产环境、重要任务：</strong>选择「成功率优先」，贵一点但更稳；</li>
+          <li><strong>对响应速度敏感：</strong>选择「速度优先」；</li>
+          <li><strong>不确定时：</strong>先用「智能自动」，再根据实际体验手动微调。</li>
         </ul>
 
         <div class="gg-note">具体每个模型有哪些分组、各自倍率是多少，以 Sheep AI Plus 模型页面显示的最终 $/1M Tokens 价格为准。不同线路可能随时调整，选择前可以对比一下。</div>
 
         <div class="gg-cta">
-          <a class="btn btn-primary" href="https://sheepaiplus.top" target="_blank" rel="noopener">前往 Sheep AI Plus →</a>
+          <a class="btn btn-primary" href="https://sheepaiplus.top/register?aff=Q6eo" target="_blank" rel="noopener">前往 Sheep AI Plus →</a>
           <a class="btn btn-secondary" href="billing-comparison.html">查看计费对照</a>
+          <a class="btn btn-secondary" href="https://sheepaiplus.top/pricing" target="_blank" rel="noopener">模型广场与价格</a>
           <a class="btn btn-ghost" href="../guide/index.html">快速开始教程</a>
         </div>
       </div>

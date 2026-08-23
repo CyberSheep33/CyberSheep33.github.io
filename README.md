@@ -75,17 +75,21 @@ docs/superpowers/         — 设计文档与实现计划（spec + plan）
 'preset-id': {
   id: 'preset-id',
   title: '显示名称',
-  app: 'claude',            // CC Switch app 类型：claude / codex / gemini / opencode / openclaw
+  app: 'claude',            // CC Switch app 类型：claude / claude-desktop / codex / gemini / opencode / openclaw
+                            // 注意：Claude Desktop 用 'claude-desktop'，与 Claude Code ('claude') 是两个独立应用
   name: 'sheepaiplus',      // 导入到 CC Switch 的供应商名称
   providerName: 'Sheep AI Plus',
   endpoint: 'https://...',  // 供应商 API 端点
   homepage: 'https://...',
   model: 'gpt-5.6-luna',    // 默认模型（可选，不填则用 CC Switch 内置默认）
+  deeplinkSupported: true,  // 是否支持 CC Switch 深度链接一键导入；false 时页面改为展示手动配置步骤
   enabled: true,
   tag: '类型标签',
   desc: '一句话介绍'
 }
 ```
+
+> **关于 `deeplinkSupported`**：CC Switch V1 深度链接协议的 `app` 参数目前官方只列出 `claude / codex / gemini / opencode / openclaw`。虽然软件内部也能配置 Claude Desktop、Hermes、Pi 等，但深度链接一键导入未必支持。因此 Claude Desktop（`app=claude-desktop`）暂置 `deeplinkSupported: false`，教程页会自动展示「在 CC Switch 中手动新建配置」的步骤；等 CC Switch 支持后把该字段改成 `true` 即可开放一键导入，无需改页面代码。
 
 > 常见问题：想改某个工具的默认模型（例如 Codex 默认用 `gpt-5.6-luna`）？直接改 `js/ccswitch-presets.js` 里对应 preset 的 `model` 字段即可，无需改任何页面代码。工具页也可以直接在「高级配置 → 默认模型」里临时覆盖。
 

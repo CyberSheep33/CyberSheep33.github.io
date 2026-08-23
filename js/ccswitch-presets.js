@@ -7,7 +7,8 @@
 
    维护方式：新增 preset 只需在 CCSWITCH_PRESETS 里加一条对象。
    - id        : 唯一标识，用于 ?preset= 与 widget 的 data-preset
-   - app       : CC Switch 的 app 类型（claude / codex / gemini / opencode / openclaw）
+   - app       : CC Switch 的 app 类型（见下方枚举，Claude Desktop 与 Claude Code 是独立类型）
+                 claude / claude-desktop / codex / gemini / grokbuild / opencode / openclaw / hermes / pi
    - name      : 导入到 CC Switch 时的供应商名称（deep link 的 name 参数）
    - providerName : 页面展示用的供应商名称
    - endpoint  : 供应商 API 端点（deep link 会自动 URL 编码）
@@ -65,11 +66,15 @@
     'claude-desktop': {
       id: 'claude-desktop',
       title: 'Claude Desktop',
-      app: 'claude',
+      app: 'claude-desktop',
       name: 'sheepaiplus',
       providerName: 'Sheep AI Plus',
       endpoint: 'https://sheepaiplus.top',
       homepage: 'https://sheepaiplus.top',
+      // CC Switch V1 深度链接协议暂未支持 app=claude-desktop 一键导入（官方文档 app 仅列出
+      // claude/codex/gemini/opencode/openclaw）。因此该 preset 先置 deeplinkSupported=false，
+      // 页面展示手动配置步骤；等 CC Switch 支持后再改成 true 即可开放一键导入。
+      deeplinkSupported: false,
       enabled: true,
       tag: 'Anthropic · 桌面客户端',
       desc: '使用 Claude 桌面客户端。'

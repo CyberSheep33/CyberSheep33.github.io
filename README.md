@@ -17,6 +17,8 @@ guide/
   codex-desktop.html      — Codex Desktop 配置教程
   claude-code.html        — Claude Code 配置教程
   claude-desktop.html     — Claude Desktop 配置教程
+  claude-code-deepseek.html — 在 Claude Code 中使用 DeepSeek（本地路由）
+  codex-deepseek.html     — 在 Codex 中使用 DeepSeek（本地路由）
   network-tools.html      — 网络加速教程（FLClash + 机场）
 tools/
   ccswitch.html           — 通用 CC Switch 配置生成工具

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="在 Claude Code 中使用 DeepSeek：通过 Sheep AI Plus 调用，OpenAI Chat Completions 上游格式 + CC Switch 本地路由配置教程。">
+  <meta name="keywords" content="Claude Code,DeepSeek,Sheep AI Plus,CC Switch,本地路由,AI编程">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="在 Claude Code 中使用 DeepSeek — CyberSheep 赛博小羊">
+  <meta property="og:description" content="通过 Sheep AI Plus 在 Claude Code 中使用 DeepSeek：上游格式 OpenAI Chat Completions + CC Switch 本地路由。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>在 Claude Code 中使用 DeepSeek — CyberSheep 赛博小羊</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/guide.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
+      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
+      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
+    </a>
+    <nav class="site-nav" aria-label="主要入口">
+      <a href="../#api">API 平台</a>
+      <a href="../#tools">工具箱</a>
+      <a href="../#blog">博客</a>
+      <a href="../guide/index.html" aria-current="page">快速开始</a>
+      <a href="../announcements/index.html">公告</a>
+      <a href="../#lab">SheepAI-Lab</a>
+      <a href="../#projects">项目</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
+  </header>
+
+  <main>
+    <div class="section guide-hero">
+      <a class="guide-back" href="index.html">← 返回快速开始</a>
+      <span class="kicker">Guide · Claude × DeepSeek</span>
+      <h1>在 Claude Code 中使用 DeepSeek</h1>
+      <p class="guide-sub">通过 Sheep AI Plus 调用 DeepSeek 模型，在 Claude Code 终端里使用。DeepSeek 上游是 OpenAI Chat Completions 格式，需要借助 CC Switch 本地路由做格式转换。</p>
+    </div>
+
+    <div class="section">
+      <!-- Step 1 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">1</span>
+          <h2>安装 Node.js 与 Git</h2>
+        </div>
+        <p class="guide-para">Claude Code 通过 npm 安装，需要先准备好 <strong>Node.js</strong> 与 <strong>Git</strong> 环境。如果还没安装，参考 <a href="claude-code.html">Claude Code 教程</a> 的 Step 1 完成即可。</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-secondary" href="claude-code.html">查看环境准备步骤 →</a>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">2</span>
+          <h2>安装 Claude Code</h2>
+        </div>
+        <p class="guide-para">Claude Code 是 Anthropic 官方推出的终端 AI 编程工具。推荐使用官方安装脚本或 npm 安装。</p>
+        <div class="code-block">
+          <button class="copy-btn" type="button" aria-label="复制安装命令">复制</button>
+          <pre>npm install -g @anthropic-ai/claude-code</pre>
+        </div>
+        <p class="guide-para">macOS / Linux 也可以使用官方一键安装脚本：</p>
+        <div class="code-block">
+          <button class="copy-btn" type="button" aria-label="复制安装命令">复制</button>
+          <pre>curl -fsSL https://claude.ai/install.sh | bash</pre>
+        </div>
+        <p class="guide-para">安装完成后确认版本：</p>
+        <div class="code-block">
+          <button class="copy-btn" type="button" aria-label="复制验证命令">复制</button>
+          <pre>claude --version</pre>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">3</span>
+          <h2>安装 CC Switch</h2>
+        </div>
+        <p class="guide-para">CC Switch 用于管理 AI Coding 工具的 API 配置。DeepSeek 与 Claude Code 协议不同，需要 CC Switch 的本地路由进行转换，所以必须先装好 CC Switch。</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-primary" href="https://ccswitch.io/zh/" target="_blank" rel="noopener">下载 CC Switch</a>
+        </div>
+        <p class="guide-note guide-note--warn"><strong>注意：</strong>CC Switch 的下载链接会跳转到 GitHub，国内网络可能不稳定，建议先开启加速再下载。还没有加速方案？看 <a href="network-tools.html">网络加速教程（FLClash + 机场）</a>。</p>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">4</span>
+          <h2>注册 Sheep AI Plus 并创建 API Key</h2>
+        </div>
+        <ol class="guide-ol">
+          <li>登录 / 注册 Sheep AI Plus；</li>
+          <li>进入「API 令牌」页面；</li>
+          <li>点击「添加令牌」，输入令牌名称即可创建；</li>
+          <li>复制生成的密钥（通常以 <code>sk-</code> 开头）。</li>
+        </ol>
+        <div class="guide-highlight">
+          <strong>💡 建议选择 DeepSeek 分组</strong>
+          <p>DeepSeek 模型在 Sheep AI Plus 有对应的分组与特价线路。创建令牌时手动选择 DeepSeek 分组，或参考分组指南选择最划算的组合，避免被智能路由分配到偏贵的线路。</p>
+          <div class="guide-highlight-actions">
+            <a class="btn btn-primary" href="../announcements/sheep-ai-plus-group-guide.html">查看分组选择指南 →</a>
+            <a class="btn btn-secondary" href="https://sheepaiplus.top/pricing" target="_blank" rel="noopener">查看模型价格 →</a>
+          </div>
+        </div>
+        <div class="guide-step-actions">
+          <a class="btn btn-primary" href="https://sheepaiplus.top/register?aff=Q6eo" target="_blank" rel="noopener">前往 Sheep AI Plus →</a>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">5</span>
+          <h2>在 CC Switch 中添加 DeepSeek 供应商</h2>
+        </div>
+        <p class="guide-para">打开 CC Switch，切换到「Claude Code」面板，新建一个供应商并填写：</p>
+        <ol class="guide-ol">
+          <li>点击右上角「＋」新建供应商；</li>
+          <li>名称：<code>DeepSeek</code>；</li>
+          <li>接口地址：<code>https://sheepaiplus.top/v1</code>；</li>
+          <li>API Key：粘贴刚才创建的密钥；</li>
+          <li><strong>上游格式：OpenAI Chat Completions</strong>（DeepSeek 使用 OpenAI 兼容协议，必须选这个）；</li>
+          <li>默认模型：<code>deepseek-v4-flash</code>（快速、性价比高，日常首选）；需要更强推理时填 <code>deepseek-v4-pro</code>；</li>
+          <li>保存并点击「启用」。</li>
+        </ol>
+        <p class="guide-note guide-note--warn"><strong>为什么选 OpenAI Chat Completions？</strong>DeepSeek 的上游接口是 OpenAI Chat Completions 格式，而 Claude Code 需要 Anthropic Messages 格式。CC Switch 的本地路由会在中间做格式转换，所以供应商这里必须按上游真实格式填写。</p>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">6</span>
+          <h2>开启本地路由</h2>
+        </div>
+        <p class="guide-para">格式转换依赖 CC Switch 的本地路由，需要手动开启：</p>
+        <ol class="guide-ol">
+          <li>点击 CC Switch <strong>左上角的齿轮</strong>进入设置；</li>
+          <li>进入「<strong>路由</strong>」页面；</li>
+          <li>在「<strong>本地路由</strong>」中打开<strong>路由总开关</strong>；</li>
+          <li>然后打开「<strong>Claude</strong>」路由开关（Claude Code 的请求会走本地网关做转换）。</li>
+        </ol>
+        <div class="guide-highlight">
+          <strong>⚠️ 别忘了这一步</strong>
+          <p>不开启路由的话，Claude Code 会直接把 DeepSeek 的请求当 Anthropic 协议发出去，导致无法调用。开启总开关 + Claude 路由开关后即可正常使用。</p>
+        </div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="guide-step">
+        <div class="guide-step-head">
+          <span class="guide-step-num" aria-hidden="true">7</span>
+          <h2>启动并验证</h2>
+        </div>
+        <p class="guide-para">配置完成后，在项目目录里启动 Claude Code，发送一个简单问题确认可以正常调用：</p>
+        <div class="code-block">
+          <button class="copy-btn" type="button" aria-label="复制启动命令">复制</button>
+          <pre>claude</pre>
+        </div>
+        <p class="guide-para">在对话中输入类似：</p>
+        <div class="code-block">
+          <button class="copy-btn" type="button" aria-label="复制测试内容">复制</button>
+          <pre>请介绍一下你自己，并确认你现在通过 DeepSeek 在 Sheep AI Plus 上工作。</pre>
+        </div>
+        <p class="guide-para">能正常返回结果，说明 DeepSeek 配置已生效 🐑。</p>
+        <div class="guide-step-actions">
+          <a class="btn btn-secondary" href="claude-code.html">Claude Code 完整教程</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="community-panel">
+      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
+      <div>
+        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
+        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
+      </div>
+    </div>
+    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
+    <div class="footer-bottom">
+      <span>© 2026 CyberSheep 赛博小羊</span>
+      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/guide.js"></script>
+</body>
+</html>

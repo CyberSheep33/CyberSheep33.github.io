@@ -910,6 +910,105 @@ html[data-theme="dark"] .quickstart-card {
 }
 
 /* ============================================================
+   Announcement pager (prev / next between announcement pages)
+   Rendered by js/announcements.js into #announceNav.
+   ============================================================ */
+
+.announce-nav {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--divider);
+}
+
+.announce-nav-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--soft);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.announce-nav-head a {
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.announce-nav-head a:hover {
+  text-decoration: underline;
+}
+
+.announce-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.announce-pager-item {
+  display: block;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.announce-pager-item:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+
+.announce-pager-item.is-next {
+  text-align: right;
+}
+
+.announce-pager-item small {
+  display: block;
+  color: var(--soft);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.announce-pager-item span {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.announce-pager-item:hover span {
+  color: var(--primary);
+}
+
+.announce-pager-item.is-empty {
+  visibility: hidden;
+}
+
+@media (max-width: 480px) {
+  .announce-pager {
+    grid-template-columns: 1fr;
+  }
+  .announce-pager-item.is-next {
+    text-align: left;
+  }
+}
+
+/* ============================================================
    Embedded content wrapper (announcements with custom HTML)
    Uses the same light/dark theme variables as the brand site.
    Content-specific styles remain scoped under `.announce-embed`.

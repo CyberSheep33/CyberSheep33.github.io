@@ -59,13 +59,34 @@
     .group-intro td { padding: 10px 12px; border-bottom: 1px solid var(--divider); vertical-align: top; }
     .group-intro tbody tr:last-child td { border-bottom: 0; }
     .group-intro tr:hover td { background: color-mix(in srgb, var(--gi-primary) 4%, transparent); }
-    .group-intro .gi-cat { display:inline-flex; padding: 4px 9px; border:1px solid var(--gi-border); border-radius: var(--radius-pill); background: var(--gi-surface-soft); color: var(--gi-primary); font-size: .72rem; font-weight: 850; white-space: nowrap; }
+    .group-intro .gi-cat { --cat: var(--gi-primary); display:inline-flex; padding: 4px 9px; border:1px solid color-mix(in srgb, var(--cat) 38%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--cat) 12%, transparent); color: var(--cat); font-size: .72rem; font-weight: 850; white-space: nowrap; }
+    .group-intro .gi-cat--claude      { --cat: #D97757; }
+    .group-intro .gi-cat--gpt         { --cat: #10A37F; }
+    .group-intro .gi-cat--gptimage    { --cat: #21B573; }
+    .group-intro .gi-cat--gemini      { --cat: #7C6FE0; }
+    .group-intro .gi-cat--grok        { --cat: #7B8499; }
+    .group-intro .gi-cat--mj          { --cat: #A08064; }
+    .group-intro .gi-cat--suno        { --cat: #E8A33D; }
+    .group-intro .gi-cat--kling       { --cat: #FF5A2E; }
+    .group-intro .gi-cat--vidu        { --cat: #4E7CFE; }
+    .group-intro .gi-cat--hailuo      { --cat: #2E9BD6; }
+    .group-intro .gi-cat--pix         { --cat: #DB5A9D; }
+    .group-intro .gi-cat--doubao      { --cat: #1F8AEE; }
+    .group-intro .gi-cat--alibaba     { --cat: #E5622E; }
+    .group-intro .gi-cat--self        { --cat: #8A97A6; }
+    .group-intro .gi-cat--kimi        { --cat: #7C5CE0; }
+    .group-intro .gi-cat--xiaomi      { --cat: #FF9142; }
+    .group-intro .gi-cat--wenxin      { --cat: #5665F2; }
+    .group-intro .gi-cat--siliconflow { --cat: #2EC4B6; }
+    .group-intro .gi-cat--spark       { --cat: #2E6FD0; }
+    .group-intro .gi-cat--seedance    { --cat: #2B7DF0; }
     .group-intro .gi-name { font-family: var(--font-mono); font-weight: 800; white-space: nowrap; }
     .group-intro .gi-ratio { font-family: var(--font-mono); color: var(--gi-primary); font-weight: 750; white-space: nowrap; }
     .group-intro .gi-desc { color: var(--gi-muted); }
 
     .group-intro .gi-count { margin: 12px 2px; color: var(--gi-soft); font-size: .78rem; }
     .group-intro .gi-note { margin-top: 16px; padding: 12px 14px; border: 1px solid var(--gi-border); border-radius: 12px; background: var(--gi-surface-soft); color: var(--gi-soft); font-size: .78rem; line-height: 1.7; }
+    .group-intro .gi-cta { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
 
     @media (max-width: 640px) {
       .group-intro .gi-hero { padding: 20px 16px; border-radius: 20px; }
@@ -105,6 +126,13 @@
           分组倍率仅代表相对成本，实际扣费以 Sheep AI Plus 模型页与消费记录为准。
           想了解怎么选分组更划算？看 <a href="sheep-ai-plus-group-guide.html">分组选择指南</a>；想按模型查各分组价格？去 <a href="../models/index.html">模型广场</a>。
         </div>
+
+        <div class="gi-cta">
+          <a class="btn btn-secondary" href="billing-comparison.html">查看计费对照</a>
+          <a class="btn btn-secondary" href="sheep-ai-plus-migration.html">迁移通知</a>
+        </div>
+
+        <nav class="announce-nav" id="announceNav" aria-label="公告导航"></nav>
       </div>
     </article>
   </main>
@@ -113,6 +141,7 @@
 
   <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/announcements.js"></script>
   <script>
   (function () {
     'use strict'
@@ -122,6 +151,29 @@
     var search = document.getElementById('giSearch')
     var count = document.getElementById('giCount')
     var currentCat = '全部'
+
+    var CAT_CLASS = {
+      'Claude': 'claude',
+      'GPT / Codex': 'gpt',
+      'Gemini': 'gemini',
+      'Grok': 'grok',
+      'Midjourney': 'mj',
+      'Suno': 'suno',
+      'Kling 视频': 'kling',
+      'Vidu 视频': 'vidu',
+      '海螺视频': 'hailuo',
+      'Pix 图像': 'pix',
+      '豆包': 'doubao',
+      '阿里模型': 'alibaba',
+      '自部署模型': 'self',
+      'Kimi': 'kimi',
+      '小米模型': 'xiaomi',
+      '文心': 'wenxin',
+      'SiliconFlow': 'siliconflow',
+      '讯飞星火': 'spark',
+      'GPT Image': 'gptimage',
+      'Seedance 视频': 'seedance'
+    }
 
     var cats = ['全部'].concat(Array.from(new Set(GROUPS.map(function (g) { return g.cat }))).sort())
     chipsWrap.innerHTML = cats.map(function (c) {
@@ -147,7 +199,7 @@
       count.textContent = '共 ' + list.length + ' 个分组'
       tbody.innerHTML = list.map(function (g) {
         return '<tr>' +
-          '<td><span class="gi-cat">' + g.cat + '</span></td>' +
+          '<td><span class="gi-cat gi-cat--' + (CAT_CLASS[g.cat] || 'default') + '">' + g.cat + '</span></td>' +
           '<td class="gi-name">' + g.name + '</td>' +
           '<td class="gi-ratio">' + g.ratio + '</td>' +
           '<td class="gi-desc">' + g.desc + '</td>' +

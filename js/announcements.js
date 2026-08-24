@@ -74,9 +74,60 @@
     }).join('')
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAnnouncements)
-  } else {
+  /* ============================================================
+     公告详情页翻页导航
+     在每个公告详情页的 #announceNav 占位处渲染「上一篇 / 下一篇」，
+     顺序跟随 ANNOUNCEMENTS 数组（最新在前）：数组前一项即「上一篇」，
+     后一项即「下一篇」。新增公告时无需改导航逻辑。
+     ============================================================ */
+  function renderAnnouncementNav() {
+    var el = document.getElementById('announceNav')
+    if (!el) return
+
+    var m = location.pathname.match(/\/([^/]+)\.html$/)
+    var slug = m ? m[1] : ''
+    var idx = -1
+    for (var i = 0; i < ANNOUNCEMENTS.length; i++) {
+      if (ANNOUNCEMENTS[i].slug === slug) { idx = i; break }
+    }
+    if (idx < 0) return
+
+    var prev = idx > 0 ? ANNOUNCEMENTS[idx - 1] : null
+    var next = idx < ANNOUNCEMENTS.length - 1 ? ANNOUNCEMENTS[idx + 1] : null
+
+    var html =
+      '<div class="announce-nav-head">' +
+        '<span>公告导航</span>' +
+        '<a href="index.html">返回公告中心</a>' +
+      '</div>' +
+      '<div class="announce-pager">'
+
+    if (prev) {
+      html += '<a class="announce-pager-item" href="' + prev.slug + '.html">' +
+                '<small>← 上一篇</small><span>' + prev.title + '</span></a>'
+    } else {
+      html += '<span class="announce-pager-item is-empty"></span>'
+    }
+
+    if (next) {
+      html += '<a class="announce-pager-item is-next" href="' + next.slug + '.html">' +
+                '<small>下一篇 →</small><span>' + next.title + '</span></a>'
+    } else {
+      html += '<span class="announce-pager-item is-empty"></span>'
+    }
+
+    html += '</div>'
+    el.innerHTML = html
+  }
+
+  function init() {
     renderAnnouncements()
+    renderAnnouncementNav()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init)
+  } else {
+    init()
   }
 })()

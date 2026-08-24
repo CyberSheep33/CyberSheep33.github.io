@@ -36,21 +36,32 @@
         <aside class="models-sidebar" id="modelsSidebar" aria-label="模型筛选">
           <button class="models-sidebar-close" id="sidebarClose" type="button" aria-label="关闭筛选">×</button>
 
-          <div class="sidebar-section">
-            <h4 class="sidebar-title">类型</h4>
-            <div class="sidebar-list sidebar-list--type" id="sidebarType"></div>
-          </div>
+          <div class="sidebar-accordion" id="sidebarAccordion">
+            <button class="sidebar-acc-head" type="button" data-acc="brand" aria-expanded="false">
+              <span>按模型品牌筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="sidebar-acc-body" id="acc-brand"></div>
 
-          <div class="sidebar-section">
-            <h4 class="sidebar-title">分组</h4>
-            <input class="sidebar-search" id="sidebarGroupSearch" type="search" placeholder="搜索分组…" aria-label="搜索分组">
-            <div class="sidebar-list sidebar-list--scroll" id="sidebarGroup"></div>
-          </div>
+            <button class="sidebar-acc-head" type="button" data-acc="group" aria-expanded="false">
+              <span>按令牌分组筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="sidebar-acc-body" id="acc-group">
+              <input class="sidebar-search" id="sidebarGroupSearch" type="search" placeholder="搜索分组…" aria-label="搜索分组">
+              <div class="sidebar-list sidebar-list--scroll" id="sidebarGroup"></div>
+            </div>
 
-          <div class="sidebar-section">
-            <h4 class="sidebar-title">标签</h4>
-            <input class="sidebar-search" id="sidebarTagSearch" type="search" placeholder="搜索标签…" aria-label="搜索标签">
-            <div class="sidebar-list sidebar-list--scroll" id="sidebarTag"></div>
+            <button class="sidebar-acc-head" type="button" data-acc="type" aria-expanded="false">
+              <span>按模型类型筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="sidebar-acc-body" id="acc-type"></div>
+
+            <button class="sidebar-acc-head" type="button" data-acc="tag" aria-expanded="false">
+              <span>按功能标签筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="sidebar-acc-body" id="acc-tag">
+              <input class="sidebar-search" id="sidebarTagSearch" type="search" placeholder="搜索标签…" aria-label="搜索标签">
+              <div class="sidebar-list sidebar-list--scroll" id="sidebarTag"></div>
+            </div>
           </div>
 
           <button class="btn btn-ghost sidebar-clear" id="sidebarClear" type="button">清除全部筛选</button>

@@ -76,20 +76,57 @@
   display: none;
 }
 
-.sidebar-section {
+/* 折叠筛选区 */
+.sidebar-accordion {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-width: 0;
 }
 
-.sidebar-title {
-  margin: 0;
+.sidebar-acc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--tag-bg);
+  color: var(--fg);
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.sidebar-acc-head:hover {
+  border-color: var(--border-strong);
+}
+
+.sidebar-acc-head.open {
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--primary) 8%, var(--tag-bg));
+}
+
+.sidebar-acc-head .acc-caret {
   color: var(--soft);
-  font-size: 0.72rem;
-  font-weight: 850;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
+  transition: transform 200ms ease;
+}
+
+.sidebar-acc-head.open .acc-caret {
+  transform: rotate(180deg);
+}
+
+.sidebar-acc-body {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 2px;
+}
+
+.sidebar-acc-body.open {
+  display: flex;
 }
 
 .sidebar-search {
@@ -126,6 +163,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.sidebar-list--brand {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.sidebar-list--brand .sidebar-option {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .sidebar-list--scroll {

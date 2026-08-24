@@ -205,7 +205,9 @@ supported_endpoint_types, quota_type, model_price, usage_count, available, icon,
 
 - 价格仅为估算（按上述公式），页面已注明「以平台实际扣费为准」；
 - 快照文件约 280KB，字段已精简；
-- 分组名不在 `group_ratio` 中（如测试/特供）时，页面显示「价格未收录」；
+- **可用分组白名单**：`js/models.js` 顶部的 `AVAILABLE_GROUPS`（来自「Sheep AI 与 Sheep AI Plus 分组对照」CSV）。
+  分组筛选与详情页计价只展示白名单内的分组，自动剔除 API 里的内部测试 / 特供 / 专线等不开放分组。
+  若上游新增开放分组，需同步把分组名加进 `AVAILABLE_GROUPS`；
 - 本地调试请直接双击打开 `models/index.html`，需保证 `models-data.js` 在 `models.js` 之前引入。
 
 ---

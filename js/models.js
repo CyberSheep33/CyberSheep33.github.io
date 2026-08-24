@@ -2,7 +2,10 @@
    CyberSheep — 模型广场（models/）渲染逻辑
    ============================================================
    - 纯静态：数据来自 assets/models-data.js（<script> 注入 window.MODELS_DATA）
-   - 布局：左侧筛选侧边栏（类型/分组/标签）+ 中间卡片 + 点击卡片右侧详情侧页
+   - 布局：左侧折叠筛选侧边栏（品牌/分组/类型/标签）+ 中间卡片 + 右侧详情侧页
+   - 可用分组白名单 AVAILABLE_GROUPS：来自「Sheep AI 与 Sheep AI Plus 分组对照」
+     CSV 中的有效分组，剔除 API 里内部测试/特供等不开放分组；
+     分组筛选与详情页计价只展示白名单内的分组。
    - 价格公式（已按真实计费日志校验）：
        基础输入 $/1M = model_ratio × 2
        补全 = 输入 × completion_ratio；缓存命中 = 输入 × cache_ratio
@@ -15,6 +18,35 @@
   var BASE_MULT = 2
   var GROUP_FACTOR = 1.4
 
+  /* 可用分组白名单（映射到 API 实际分组名） */
+  var AVAILABLE_GROUPS = [
+    'AWS-Bedrock-1', 'AWS-Claude-1', 'AWS-Claude-2', 'AWS-Claude-3', 'AWS-Platfrom-1',
+    'Aistudio-Gemini-1', 'Aistudio-Gemini-2', 'Aistudio-Gemini-3', 'Aistudio-Gemini-4',
+    'Alibaba-1', 'Alibaba-2', 'Alibaba-3', 'Anthropic-Claude-1', 'Anti-Gemini-1',
+    'Azure-Claude-1', 'Azure-Gpt-1', 'Azure-Gpt-2', 'Azure-Gpt-3', 'Azure-Gpt-4', 'Azure-Gpt-5',
+    'Azure-Grok-1', 'Azure-Grok-2',
+    'Claude-Code-1', 'Claude-Code-2', 'Cli-Gemini-1', 'Cli-Grok-1', 'Cli-Grok-2',
+    'Codex-Gpt-1', 'Codex-Gpt-2', 'Codex-Gpt-3',
+    'Doubao-1', 'Doubao-2', 'Doubao-3',
+    'Gpt-Image-1', 'Gpt-Image-2',
+    'Hailuo-1', 'Hailuo-2', 'Hailuo-3',
+    'Kimi-1', 'Kimi-2', 'Kiro-Claude-1', 'Kling-1', 'Kling-2',
+    'MJ-1', 'MJ-2',
+    'Openai-Gpt-1', 'Openai-Gpt-2', 'Pix-1',
+    'Reverse-Gemini-1', 'Reverse-Gemini-2',
+    'Seedance-1',
+    'Self-Deployed-1', 'Self-Deployed-2', 'Self-Deployed-3', 'Self-Deployed-4',
+    'SiliconFlow-1', 'Spark-1', 'Spark-2', 'Spark-3', 'Suno-1', 'Suno-2',
+    'Vertex-Claude-1', 'Vertex-Gemini-1', 'Vertex-Gemini-2', 'Vertex-Gemini-3',
+    'Vidu-1', 'Vidu-2',
+    'Wenxin-1', 'Wenxin-2', 'Wenxin-3',
+    'Xai-Grok-1', 'Xiaomi-1', 'Xiaomi-2', 'deepseek-1'
+  ]
+
+  function isAvailableGroup(g) {
+    return AVAILABLE_GROUPS.indexOf(g) >= 0
+  }
+
   var state = {
     data: [],
     groupRatio: {},
@@ -22,7 +54,7 @@
     vendors: [],
     supportedEndpoint: {},
     fetchedAt: '',
-    filter: { q: '', type: '', group: '', tag: '' },
+    filter: { q: '', brand: '', group: '', type: '', tag: '' },
     sort: 'default'
   }
 
@@ -58,6 +90,49 @@
     state.supportedEndpoint = j.supported_endpoint || {}
     state.fetchedAt = j.fetched_at || ''
     return Promise.resolve()
+  }
+
+  /* ---------- 厂商 ---------- */
+  function vendorById(id) {
+    for (var i = 0; i < state.vendors.length; i++) {
+      if (state.vendors[i].id === id) return state.vendors[i]
+    }
+    return null
+  }
+
+  var VENDOR_RULES = [
+    [/^(gpt|o[0-9]|openai|chatgpt)/i, 'OpenAI'],
+    [/^claude/i, 'Anthropic'],
+    [/^gemini|^palm/i, 'Google'],
+    [/^grok/i, 'xAI'],
+    [/^deepseek/i, 'DeepSeek'],
+    [/^qwen/i, 'Qwen'],
+    [/^kimi/i, 'Moonshot'],
+    [/^doubao/i, 'Doubao'],
+    [/^(glm|zhipu)/i, 'Zhipu'],
+    [/^minimax/i, 'MiniMax'],
+    [/^mistral/i, 'Mistral'],
+    [/^llama/i, 'Meta']
+  ]
+
+  function vendorNameOf(m) {
+    var v = vendorById(m.vendor_id)
+    if (v && v.name) return v.name
+    var name = m.model_name || ''
+    for (var i = 0; i < VENDOR_RULES.length; i++) {
+      if (VENDOR_RULES[i][0].test(name)) return VENDOR_RULES[i][1]
+    }
+    return (name.split(/[-\s_.]/)[0] || '其他').charAt(0).toUpperCase() + (name.split(/[-\s_.]/)[0] || '').slice(1) || '其他'
+  }
+
+  function vendorHtml(m) {
+    var v = vendorById(m.vendor_id)
+    if (v && v.icon) {
+      var file = v.icon.replace(/\./g, '-').toLowerCase()
+      return '<span class="model-vendor"><img class="model-vendor-img" alt="' + esc(v.name) + '" loading="lazy" src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/' + file + '.svg"></span>'
+    }
+    var name = vendorNameOf(m)
+    return '<span class="model-vendor"><span class="model-vendor-letter" aria-hidden="true">' + esc(name.charAt(0).toUpperCase() || 'A') + '</span></span>'
   }
 
   /* ---------- 价格计算 ---------- */
@@ -107,24 +182,8 @@
     return { cls: 'high', label: '高价' }
   }
 
-  /* ---------- 厂商 ---------- */
-  function vendorOf(m) {
-    var vid = m.vendor_id
-    for (var i = 0; i < state.vendors.length; i++) {
-      if (state.vendors[i].id === vid) return state.vendors[i]
-    }
-    return null
-  }
-
-  function vendorHtml(m) {
-    var v = vendorOf(m)
-    if (v && v.icon) {
-      var file = v.icon.replace(/\./g, '-').toLowerCase()
-      return '<span class="model-vendor"><img class="model-vendor-img" alt="' + esc(v.name) + '" loading="lazy" src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/' + file + '.svg"></span>'
-    }
-    var name = v ? v.name : (m.model_name || '')
-    var letter = (name.charAt(0) || 'A').toUpperCase()
-    return '<span class="model-vendor"><span class="model-vendor-letter" aria-hidden="true">' + esc(letter) + '</span></span>'
+  function availableGroupsOf(m) {
+    return (m.enable_groups || []).filter(isAvailableGroup)
   }
 
   /* ---------- 过滤 ---------- */
@@ -136,8 +195,9 @@
     var q = state.filter.q.toLowerCase()
     var f = state.filter
     return state.data.filter(function (m) {
+      if (f.brand && String(m.vendor_id) !== f.brand) return false
       if (f.type && typeLabel(m.model_type) !== f.type) return false
-      if (f.group && (m.enable_groups || []).indexOf(f.group) < 0) return false
+      if (f.group && availableGroupsOf(m).indexOf(f.group) < 0) return false
       if (f.tag && tagsOf(m).indexOf(f.tag) < 0) return false
       if (q) {
         return (m.model_name || '').toLowerCase().indexOf(q) >= 0 ||
@@ -178,7 +238,7 @@
   function modelCard(m) {
     var base = basePrices(m)
     var level = priceLevel(base)
-    var groups = Array.isArray(m.enable_groups) ? m.enable_groups : []
+    var groups = availableGroupsOf(m)
     var best = cheapestGroup(base, groups)
 
     var priceHtml
@@ -239,6 +299,7 @@
     var wrap = document.getElementById('activeFilters')
     if (!wrap) return
     var chips = []
+    if (state.filter.brand) chips.push({ k: 'brand', label: '品牌：' + vendorNameById(state.filter.brand) })
     if (state.filter.type) chips.push({ k: 'type', label: '类型：' + state.filter.type })
     if (state.filter.group) chips.push({ k: 'group', label: '分组：' + state.filter.group })
     if (state.filter.tag) chips.push({ k: 'tag', label: '标签：' + state.filter.tag })
@@ -254,14 +315,26 @@
     })
   }
 
-  /* ---------- 侧边栏 ---------- */
+  function vendorNameById(id) {
+    var v = vendorById(Number(id))
+    return v ? v.name : id
+  }
+
+  /* ---------- 侧边栏（四类折叠） ---------- */
   function collectOptions() {
-    var types = {}, groups = {}, tags = {}
+    var brands = {}, types = {}, groups = {}, tags = {}
     state.data.forEach(function (m) {
+      var vid = String(m.vendor_id == null ? '0' : m.vendor_id)
+      brands[vid] = (brands[vid] || 0) + 1
       var t = typeLabel(m.model_type)
       types[t] = (types[t] || 0) + 1
-      ;(m.enable_groups || []).forEach(function (g) { groups[g] = (groups[g] || 0) + 1 })
+      availableGroupsOf(m).forEach(function (g) { groups[g] = (groups[g] || 0) + 1 })
       tagsOf(m).forEach(function (t2) { tags[t2] = (tags[t2] || 0) + 1 })
+    })
+
+    var brandArr = Object.keys(brands).sort(function (a, b) {
+      var na = vendorNameById(a), nb = vendorNameById(b)
+      return na.localeCompare(nb)
     })
     var typeArr = Object.keys(types).sort()
     var groupArr = Object.keys(groups).sort(function (a, b) {
@@ -270,22 +343,29 @@
     var tagArr = Object.keys(tags).sort(function (a, b) {
       return (tags[b] - tags[a]) || a.localeCompare(b)
     })
-    return { types: typeArr, groups: groupArr, tags: tagArr, typeCount: types, groupCount: groups, tagCount: tags }
+    return { brands: brandArr, types: typeArr, groups: groupArr, tags: tagArr,
+      brandCount: brands, typeCount: types, groupCount: groups, tagCount: tags }
   }
 
-  function optionHtml(list, field, countMap) {
+  function optionHtml(list, field, countMap, labelFn) {
     var sel = state.filter[field]
     return list.map(function (name) {
+      var label = labelFn ? labelFn(name) : name
       return '<button class="sidebar-option' + (name === sel ? ' active' : '') + '" type="button" data-' + field + '="' + esc(name) + '">' +
-        esc(name) + ' <span class="sidebar-count">' + countMap[name] + '</span></button>'
+        esc(label) + ' <span class="sidebar-count">' + countMap[name] + '</span></button>'
     }).join('') || '<span class="models-state" style="padding:12px 0">无</span>'
   }
 
   function buildSidebar() {
     var opts = collectOptions()
 
-    var typeEl = document.getElementById('sidebarType')
-    if (typeEl) typeEl.innerHTML = optionHtml(opts.types, 'type', opts.typeCount)
+    var brandEl = document.getElementById('acc-brand')
+    if (brandEl) brandEl.innerHTML = '<div class="sidebar-list sidebar-list--brand">' +
+      optionHtml(opts.brands, 'brand', opts.brandCount, function (id) { return vendorNameById(id) }) + '</div>'
+
+    var typeEl = document.getElementById('acc-type')
+    if (typeEl) typeEl.innerHTML = '<div class="sidebar-list sidebar-list--type">' +
+      optionHtml(opts.types, 'type', opts.typeCount) + '</div>'
 
     var groupQ = (document.getElementById('sidebarGroupSearch').value || '').trim().toLowerCase()
     var groupEl = document.getElementById('sidebarGroup')
@@ -302,6 +382,19 @@
     }
   }
 
+  function bindAccordion() {
+    var acc = document.getElementById('sidebarAccordion')
+    if (!acc) return
+    acc.addEventListener('click', function (e) {
+      var head = e.target.closest('.sidebar-acc-head')
+      if (!head) return
+      var body = document.getElementById('acc-' + head.getAttribute('data-acc'))
+      var open = body.classList.toggle('open')
+      head.classList.toggle('open', open)
+      head.setAttribute('aria-expanded', open ? 'true' : 'false')
+    })
+  }
+
   function bindSidebar() {
     function bindList(id, field) {
       var el = document.getElementById(id)
@@ -315,7 +408,8 @@
         render()
       })
     }
-    bindList('sidebarType', 'type')
+    bindList('acc-brand', 'brand')
+    bindList('acc-type', 'type')
     bindList('sidebarGroup', 'group')
     bindList('sidebarTag', 'tag')
 
@@ -326,7 +420,7 @@
 
     var clear = document.getElementById('sidebarClear')
     if (clear) clear.addEventListener('click', function () {
-      state.filter = { q: state.filter.q, type: '', group: '', tag: '' }
+      state.filter = { q: state.filter.q, brand: '', type: '', group: '', tag: '' }
       if (gs) gs.value = ''
       if (ts) ts.value = ''
       buildSidebar()
@@ -355,10 +449,9 @@
 
   function groupTable(m) {
     var base = basePrices(m)
-    var groups = Array.isArray(m.enable_groups) ? m.enable_groups : []
-    if (!groups.length) return '<div class="models-state" style="padding:16px">暂无分组信息</div>'
+    var groups = availableGroupsOf(m)
+    if (!groups.length) return '<div class="models-state" style="padding:16px">暂无可公开分组</div>'
 
-    // 根据模型自身属性决定展示哪些列（没有对应倍率就不显示该列）
     var cols = []
     if (base.kind === 'token') {
       cols.push({ key: 'input', label: '输入' })
@@ -381,16 +474,13 @@
     var rows = withPrice.map(function (item, idx) {
       var best = idx === 0 ? ' is-best' : ''
       var tds = '<td>' + esc(item.group) + '</td>'
-      cols.forEach(function (c) {
-        tds += '<td>' + fmtPrice(item.p[c.key]) + '</td>'
-      })
+      cols.forEach(function (c) { tds += '<td>' + fmtPrice(item.p[c.key]) + '</td>' })
       return '<tr class="' + best + '">' + tds + '</tr>'
     }).join('')
 
     var head = '<th>分组</th>' + cols.map(function (c) { return '<th>' + c.label + '</th>' }).join('')
-
     var extra = noPrice.length
-      ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个分组（测试/特供等）价格未收录。</p>'
+      ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个非公开分组已隐藏。</p>'
       : ''
 
     return '<div class="drawer-table-wrap"><table class="drawer-table"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div>' + extra
@@ -437,7 +527,6 @@
     renderDrawer(m)
     var drawer = document.getElementById('modelDrawer')
     drawer.hidden = false
-    // 触发过渡
     requestAnimationFrame(function () { drawer.classList.add('open') })
     document.body.style.overflow = 'hidden'
   }
@@ -491,6 +580,7 @@
     if (!grid) return
     grid.innerHTML = '<div class="models-state"><strong>正在加载模型数据…</strong></div>'
     bindToolbar()
+    bindAccordion()
     bindSidebar()
     bindDrawer()
     loadData().then(function () {

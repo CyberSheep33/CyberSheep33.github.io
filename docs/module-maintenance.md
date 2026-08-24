@@ -152,48 +152,50 @@ models/
   index.html             # 模型广场（搜索 / 筛选 / 排序 / 各分组价格）
 css/models.css           # 模型广场私有样式
 js/models.js             # 渲染逻辑（搜索、筛选、价格计算、分组展开）
-assets/models.json       # 模型数据快照（含 data + group_ratio + usable_group + vendors）
+assets/models-data.js    # 模型数据快照（script 注入为 window.MODELS_DATA）
 ```
 
 ### 数据来源与更新
 
-模型广场为**纯静态**：只读取本地快照 `assets/models.json`（不实时请求上游，因为
-`https://sheepaiplus.top/api/pricing` 没有 CORS 头、无法在浏览器直接调用）。
+模型广场为**纯静态**：数据来自 `assets/models-data.js`（通过 `<script>` 注入），
+**不实时请求上游**（`/api/pricing` 无 CORS 头，且本地 file:// 下 fetch 本地文件会被拦截，
+所以用 script 注入而不是 fetch）。
 
-**更新数据 = 替换 `assets/models.json`**。完整步骤见 [`docs/models-update-guide.md`](models-update-guide.md)。
+**更新数据 = 重新生成 `assets/models-data.js`**。完整步骤见 [`docs/models-update-guide.md`](models-update-guide.md)。
 
 快照结构（由上游 `/api/pricing` 精简而来）：
 
-```jsonc
-{
+```js
+window.MODELS_DATA = {
   "data": [ /* 模型数组 */ ],
   "group_ratio": { "AWS-Bedrock-1": 0.44118, ... },   // 分组倍率
   "usable_group": { "AWS-Bedrock-1": "AWS Bedrock Resources" }, // 分组描述
   "vendors": [ { "id": 55, "name": "Anthropic", "icon": "Claude.Color" } ],
   "fetched_at": "2026-08-24"
-}
+};
 ```
 
 模型对象保留字段：`model_name, description, tags, model_type, model_ratio, completion_ratio,
 cache_ratio, cache_creation_5m_ratio, cache_creation_1h_ratio, enable_groups,
 supported_endpoint_types, quota_type, model_price, usage_count, available, icon, type, vendor_id`。
 
-### 价格计算（已按平台校验）
+### 价格计算（已按真实计费日志校验）
 
-基础价（$/1M tokens，倍率 1 对应的基准 = **0.2470588**）：
+基础价（$/1M tokens）：
 
-- 输入 = `model_ratio × 0.2470588`
+- 基础输入 = `model_ratio × 2`
 - 补全 = 输入 × `completion_ratio`
 - 缓存命中 = 输入 × `cache_ratio`
 - 5m 缓存创建 = 输入 × `cache_creation_5m_ratio`
 - 1h 缓存创建 = 输入 × `cache_creation_1h_ratio`
 
-**某分组下最终价 = 基础价 × (group_ratio[分组] / 0.0882353)**。
+**某分组下最终价 = 基础价 × (group_ratio[分组] × 1.4)**。
 
-校验样例（claude-opus-5，model_ratio=2.5，AWS-Bedrock-1 group_ratio=0.44118）：
-- 基础输入 = 2.5 × 0.2470588 = **0.6177** ✓
-- 分组输入 = 0.6177 × (0.44118/0.0882353) = 0.6177 × 5 = **3.0880** ✓
-- 补全 15.4410 / 缓存 0.3088 / 5m建 3.8600 / 1h建 6.1770 均与平台一致 ✓
+校验锚点：
+
+- gpt-5.6-sol（model_ratio=2.5）：基础输入 $5；Codex-Gpt-2（group_ratio 0.05883）分组倍率
+  0.05883×1.4=0.08236，与真实计费日志一致 ✓
+- claude-opus-5 在 AWS-Bedrock-1（group_ratio 0.44118）：输入 = 5 × 0.44118 × 1.4 = 3.088 ✓
 
 > 分组倍率 `group_ratio` 直接来自上游数据，更新快照时一并更新，无需单独维护。
 > 非 Token 模型（quota_type ≠ 0）直接展示 `model_price`（如按张/按秒计费）。
@@ -201,8 +203,9 @@ supported_endpoint_types, quota_type, model_price, usage_count, available, icon,
 ### 注意事项
 
 - 价格仅为估算（按上述公式），页面已注明「以平台实际扣费为准」；
-- 快照字段保持精简，避免仓库体积过大（当前约 280KB）；
-- 分组名不在 `group_ratio` 中（如测试/特供）时，页面显示「价格未收录」。
+- 快照文件约 280KB，字段已精简；
+- 分组名不在 `group_ratio` 中（如测试/特供）时，页面显示「价格未收录」；
+- 本地调试请直接双击打开 `models/index.html`，需保证 `models-data.js` 在 `models.js` 之前引入。
 
 ---
 

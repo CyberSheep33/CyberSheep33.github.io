@@ -1,23 +1,25 @@
 /* ============================================================
    CyberSheep — 模型广场（models/）渲染逻辑
    ============================================================
-   - 纯静态：数据只来自本地快照 ../assets/models.json（含
-     data / group_ratio / usable_group / vendors），由人工定期更新。
-   - 价格公式（已按 Sheep AI Plus 模型广场校验）：
-       基础输入 $/1M = model_ratio × 0.2470588
+   - 纯静态：数据来自 assets/models-data.js（<script> 注入为
+     window.MODELS_DATA，含 data / group_ratio / usable_group / vendors），
+     由人工定期更新。用 script 注入而不是 fetch，保证本地 file:// 也能打开。
+   - 价格公式（已按 Sheep AI Plus 真实计费日志校验）：
+       基础输入 $/1M = model_ratio × 2
        补全        = 基础输入 × completion_ratio
        缓存命中    = 基础输入 × cache_ratio
        5m 缓存创建 = 基础输入 × cache_creation_5m_ratio
        1h 缓存创建 = 基础输入 × cache_creation_1h_ratio
-       某分组最终价 = 基础价 × (group_ratio[分组] / 0.0882353)
+       某分组最终价 = 基础价 × (group_ratio[分组] × 1.4)
+     校验：gpt-5.6-sol(model_ratio=2.5) 基础 $5；Codex-Gpt-2(group_ratio=0.05883)
+     分组倍率 0.05883×1.4=0.08236 ✓；claude-opus-5 在 AWS-Bedrock-1
+     (0.44118×1.4=0.6176) 输入 5×0.6176=3.088 ✓
    ============================================================ */
 (function () {
   'use strict'
 
-  var SNAPSHOT_URL = '../assets/models.json'
-
-  var BASE_PRICE = 0.247058823   // model_ratio = 1 时的输入 $/1M
-  var BASE_GROUP = 0.0882353     // 基础价对应的 group_ratio 值
+  var BASE_MULT = 2      // 基础输入价 = model_ratio × 2
+  var GROUP_FACTOR = 1.4 // 分组倍率 = group_ratio × 1.4
 
   var state = {
     data: [],
@@ -31,31 +33,31 @@
 
   var TYPE_LABEL = { chat: '对话', image: '图像', video: '视频', audio: '音频', vector: '向量' }
 
-  /* ---------- 数据加载（纯静态快照） ---------- */
+  /* ---------- 数据加载（script 注入的 window.MODELS_DATA） ---------- */
   function loadData() {
-    return fetch(SNAPSHOT_URL).then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status)
-      return r.json()
-    }).then(function (j) {
-      state.data = j.data || []
-      state.groupRatio = j.group_ratio || {}
-      state.usableGroup = j.usable_group || {}
-      state.vendors = j.vendors || []
-      state.fetchedAt = j.fetched_at || ''
-    })
+    if (!window.MODELS_DATA) {
+      return Promise.reject(new Error('MODELS_DATA 未加载（请确认已引入 assets/models-data.js）'))
+    }
+    var j = window.MODELS_DATA
+    state.data = j.data || []
+    state.groupRatio = j.group_ratio || {}
+    state.usableGroup = j.usable_group || {}
+    state.vendors = j.vendors || []
+    state.fetchedAt = j.fetched_at || ''
+    return Promise.resolve()
   }
 
   /* ---------- 价格计算 ---------- */
   function groupMult(group) {
     var r = state.groupRatio[group]
     if (r == null) return null
-    return r / BASE_GROUP
+    return r * GROUP_FACTOR
   }
 
   function basePrices(m) {
     var ratio = Number(m.model_ratio) || 0
     if (String(m.quota_type) === '0' && ratio) {
-      var input = ratio * BASE_PRICE
+      var input = ratio * BASE_MULT
       return {
         kind: 'token',
         input: input,

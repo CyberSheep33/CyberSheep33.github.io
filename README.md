@@ -10,7 +10,7 @@
 index.html                — 主页面（Hero + 7 个内容区块）
 models/
   index.html              — 模型广场（搜索模型、查看各分组最终价格）
-  data: assets/models.json（含模型 + 分组倍率 group_ratio + 厂商）
+  data: assets/models-data.js（script 注入，含模型 + 分组倍率 + 厂商）
 announcements/
   index.html              — 公告中心（自动渲染全部公告）
   *.html                  — 每条公告一个独立详情页
@@ -38,8 +38,8 @@ js/
   ccswitch-presets.js     — CC Switch 配置预设（数据）
   ccswitch-core.js        — CC Switch Deep Link 生成核心（唯一一份逻辑）
   ccswitch-widget.js      — CC Switch 配置组件（Guide 页内嵌）
-  models.js               — 模型广场渲染逻辑（价格 = model_ratio × 分组倍率）
-assets/                   — 图片素材（Logo、QQ 群二维码、模型数据快照 models.json）
+  models.js               — 模型广场渲染逻辑（价格 = model_ratio×2 × 分组倍率×1.4）
+assets/                   — 图片素材（Logo、QQ 群二维码、模型数据快照 models-data.js）
 docs/
   homepage-guide.md       — 主页维护与更新规范
   module-guide.md         — 新增模块开发规范

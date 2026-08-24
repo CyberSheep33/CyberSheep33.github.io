@@ -66,6 +66,8 @@ site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `g
 1. 在仓库根目录新建对应文件夹（如未来 `download/`、`about/`，模型广场暂不规划）；
 2. 在 `js/site.js` 的 `NAV` 里登记一个导航项（独立首页用页面链接，首页区块用锚点 `#xxx`）。
 
+详细的模块开发与维护规范见 [`docs/module-guide.md`](docs/module-guide.md)。
+
 ## 技术
 
 纯静态 HTML + CSS + JS，无构建工具，无框架依赖，开箱即用，GitHub Pages 即可部署。

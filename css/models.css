@@ -123,6 +123,23 @@
   scrollbar-color: var(--border-strong) transparent;
 }
 
+/* 筛选面板顶部：当前已选条件 */
+.filter-active {
+  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.filter-active.has-chips {
+  display: flex;
+}
+
+.filter-active .af-chip {
+  font-size: 0.74rem;
+}
+
 .filter-panel-foot {
   padding: 14px 18px;
   border-top: 1px solid var(--divider);
@@ -399,17 +416,32 @@
 }
 
 .models-sort {
+  appearance: none;
+  -webkit-appearance: none;
   min-height: 38px;
-  padding: 0 12px;
+  padding: 0 34px 0 14px;
   border: 1px solid var(--border);
   border-radius: 11px;
-  background: var(--tag-bg);
+  background-color: var(--tag-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237b8f8b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
   color: var(--fg);
   font: inherit;
   font-size: 0.86rem;
   outline: none;
   color-scheme: inherit;
   cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.models-sort:hover {
+  border-color: var(--border-strong);
+}
+
+.models-sort:focus {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
 .models-count {

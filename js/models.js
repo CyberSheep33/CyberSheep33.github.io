@@ -348,23 +348,33 @@
   }
 
   function renderActiveFilters() {
-    var wrap = document.getElementById('activeFilters')
-    if (!wrap) return
     var chips = []
     if (state.filter.brand) chips.push({ k: 'brand', label: '品牌：' + vendorNameById(state.filter.brand) })
     if (state.filter.type) chips.push({ k: 'type', label: '类型：' + state.filter.type })
     if (state.filter.group) chips.push({ k: 'group', label: '分组：' + state.filter.group })
     if (state.filter.tag) chips.push({ k: 'tag', label: '标签：' + state.filter.tag })
-    wrap.innerHTML = chips.map(function (c) {
-      return '<span class="af-chip">' + esc(c.label) + '<button type="button" data-clear="' + c.k + '" aria-label="移除该筛选">×</button></span>'
-    }).join('')
-    Array.prototype.forEach.call(wrap.querySelectorAll('[data-clear]'), function (btn) {
-      btn.addEventListener('click', function () {
-        state.filter[btn.dataset.clear] = ''
-        buildSidebar()
-        render()
+
+    function fill(el) {
+      if (!el) return
+      if (!chips.length) {
+        el.innerHTML = ''
+        el.classList.remove('has-chips')
+        return
+      }
+      el.innerHTML = chips.map(function (c) {
+        return '<span class="af-chip">' + esc(c.label) + '<button type="button" data-clear="' + c.k + '" aria-label="移除该筛选">×</button></span>'
+      }).join('')
+      el.classList.add('has-chips')
+      Array.prototype.forEach.call(el.querySelectorAll('[data-clear]'), function (btn) {
+        btn.addEventListener('click', function () {
+          state.filter[btn.dataset.clear] = ''
+          buildSidebar()
+          render()
+        })
       })
-    })
+    }
+    fill(document.getElementById('activeFilters'))
+    fill(document.getElementById('filterActive'))
   }
 
   function vendorNameById(id) {

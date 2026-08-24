@@ -103,6 +103,7 @@
   }
 
   var TYPE_LABEL = { chat: '对话', image: '图像', video: '视频', audio: '音频', vector: '向量' }
+  var SORT_LABELS = { default: '默认排序', 'price-asc': '价格从低到高', 'price-desc': '价格从高到低' }
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -348,6 +349,12 @@
     var lsw = document.getElementById('layoutSwitch')
     if (lsw) Array.prototype.forEach.call(lsw.querySelectorAll('[data-layout]'), function (b) {
       b.classList.toggle('active', b.dataset.layout === state.layout)
+    })
+    var sortLabel = document.getElementById('sortLabel')
+    if (sortLabel) sortLabel.textContent = SORT_LABELS[state.sort] || state.sort
+    var sortMenu = document.getElementById('sortMenu')
+    if (sortMenu) Array.prototype.forEach.call(sortMenu.querySelectorAll('[data-sort]'), function (b) {
+      b.classList.toggle('active', b.getAttribute('data-sort') === state.sort)
     })
 
     if (sourceEl) sourceEl.textContent = state.fetchedAt ? '更新于 ' + state.fetchedAt : '静态快照'
@@ -813,11 +820,42 @@
       state.filter.q = search.value.trim()
       render()
     })
-    var sort = document.getElementById('modelSort')
-    if (sort) sort.addEventListener('change', function () {
-      state.sort = sort.value
-      render()
-    })
+
+    /* 自绘排序下拉 */
+    var sortBtn = document.getElementById('sortBtn')
+    var sortMenu = document.getElementById('sortMenu')
+    var sortLabel = document.getElementById('sortLabel')
+    function closeSortMenu() {
+      if (!sortMenu || sortMenu.hidden) return
+      sortMenu.hidden = true
+      if (sortBtn) {
+        sortBtn.classList.remove('open')
+        sortBtn.setAttribute('aria-expanded', 'false')
+      }
+    }
+    if (sortBtn && sortMenu) {
+      sortBtn.addEventListener('click', function () {
+        if (sortMenu.hidden) {
+          sortMenu.hidden = false
+          sortBtn.classList.add('open')
+          sortBtn.setAttribute('aria-expanded', 'true')
+        } else {
+          closeSortMenu()
+        }
+      })
+      sortMenu.addEventListener('click', function (e) {
+        var item = e.target.closest('[data-sort]')
+        if (!item) return
+        state.sort = item.getAttribute('data-sort')
+        if (sortLabel) sortLabel.textContent = item.textContent
+        closeSortMenu()
+        render()
+      })
+      document.addEventListener('click', function (e) {
+        if (!sortMenu.hidden && !e.target.closest('.models-sort-wrap')) closeSortMenu()
+      })
+    }
+
     var lsw = document.getElementById('layoutSwitch')
     if (lsw) lsw.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-layout]')

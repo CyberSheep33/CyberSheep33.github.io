@@ -426,23 +426,26 @@
   flex-wrap: wrap;
 }
 
+.models-sort-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+
 .models-sort {
-  appearance: none;
-  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   min-height: 38px;
-  padding: 0 34px 0 14px;
+  padding: 0 13px;
   border: 1px solid var(--border);
   border-radius: 11px;
-  background-color: var(--tag-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237b8f8b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 11px center;
+  background: var(--tag-bg);
   color: var(--fg);
   font: inherit;
   font-size: 0.86rem;
   outline: none;
-  color-scheme: inherit;
   cursor: pointer;
+  white-space: nowrap;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
@@ -450,9 +453,66 @@
   border-color: var(--border-strong);
 }
 
-.models-sort:focus {
+.models-sort:focus-visible {
   border-color: var(--border-strong);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.models-sort svg {
+  color: var(--soft);
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.models-sort.open svg {
+  transform: rotate(180deg);
+}
+
+/* 自绘下拉菜单 */
+.sort-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 60;
+  min-width: 100%;
+  padding: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--panel-strong);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.sort-menu[hidden] {
+  display: none;
+}
+
+.sort-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sort-menu button:hover {
+  background: color-mix(in srgb, var(--primary) 10%, var(--tag-bg));
+  color: var(--primary);
+}
+
+.sort-menu button.active {
+  background: color-mix(in srgb, var(--primary) 14%, var(--tag-bg));
+  color: var(--primary);
 }
 
 .models-count {

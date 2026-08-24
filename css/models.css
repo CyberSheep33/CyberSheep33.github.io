@@ -461,6 +461,38 @@
   font-weight: 750;
 }
 
+/* 布局切换（详细 / 紧凑） */
+.models-layout-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--tag-bg);
+  gap: 2px;
+}
+
+.models-layout-switch button {
+  min-height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.models-layout-switch button.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .models-layout-switch button.active {
+  color: #06221c;
+}
+
 /* 已生效筛选 */
 .models-active-filters {
   display: flex;
@@ -500,6 +532,54 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
+}
+
+/* 紧凑布局 */
+.model-grid[data-layout="compact"] {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.model-grid[data-layout="compact"] .model-card {
+  padding: 12px 12px 10px;
+  border-radius: 13px;
+}
+
+.model-grid[data-layout="compact"] .model-card-head {
+  margin-bottom: 8px;
+}
+
+.model-grid[data-layout="compact"] .model-vendor {
+  width: 32px;
+  height: 32px;
+  flex-basis: 32px;
+  border-radius: 9px;
+}
+
+.model-grid[data-layout="compact"] .model-vendor-img {
+  width: 18px;
+  height: 18px;
+}
+
+.model-grid[data-layout="compact"] .model-name {
+  font-size: 0.88rem;
+}
+
+.model-grid[data-layout="compact"] .model-type-row {
+  margin-top: 3px;
+}
+
+.model-grid[data-layout="compact"] .model-price {
+  padding: 7px 9px;
+  border-radius: 10px;
+}
+
+.model-grid[data-layout="compact"] .price-rows {
+  font-size: 0.72rem;
+}
+
+.model-grid[data-layout="compact"] .price-rows b {
+  font-size: 0.8rem;
 }
 
 .model-card {
@@ -590,6 +670,29 @@ html[data-theme="dark"] .model-vendor {
   color: var(--primary);
   font-size: 0.7rem;
   font-weight: 800;
+}
+
+.model-type-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.model-type-row .model-type {
+  margin-top: 0;
+}
+
+.model-brand {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--soft);
+  font-size: 0.7rem;
+  font-weight: 750;
 }
 
 .price-tag {

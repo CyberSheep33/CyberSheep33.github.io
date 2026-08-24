@@ -98,7 +98,8 @@
     supportedEndpoint: {},
     fetchedAt: '',
     filter: { q: '', brand: '', group: '', type: '', tag: '' },
-    sort: 'default'
+    sort: 'default',
+    layout: 'detail'
   }
 
   var TYPE_LABEL = { chat: '对话', image: '图像', video: '视频', audio: '音频', vector: '向量' }
@@ -292,25 +293,20 @@
     var level = priceLevel(m)
     var groups = availableGroupsOf(m)
     var best = cheapestGroup(base, groups)
+    var compact = state.layout === 'compact'
 
-    var priceHtml
+    var priceHtml = '<div class="price-rows">'
     if (base.kind === 'token' && (kind === 'image' || kind === 'audio')) {
-      priceHtml = '<div class="price-hero"><strong>' + (kind === 'image' ? '按张' : '按时长') + '</strong></div>'
+      priceHtml += '<span>' + (kind === 'image' ? '按张' : '按时长') + '计费</span>'
     } else if (base.kind === 'token') {
-      var hero = best
-        ? '<div class="price-hero">低至 <strong>' + fmtPrice(best.p.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
-        : '<div class="price-hero"><strong>' + fmtPrice(base.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
-      priceHtml = hero +
-        '<div class="price-rows">' +
-          (best
-            ? '<span>输出 <b>' + fmtPrice(best.p.completion) + '</b></span>' +
-              '<span>缓存 <b>' + fmtPrice(best.p.cacheHit) + '</b></span>'
-            : '') +
-        '</div>'
+      var p = best ? best.p : base
+      priceHtml += '<span>输入 <b>' + fmtPrice(p.input) + '</b></span>'
+      priceHtml += '<span>输出 <b>' + fmtPrice(p.completion) + '</b></span>'
+      if (Number(m.cache_ratio) > 0) priceHtml += '<span>缓存 <b>' + fmtPrice(p.cacheHit) + '</b></span>'
     } else {
-      priceHtml =
-        '<div class="price-hero"><strong>' + (best ? fmtPrice(best.p.price) : (base.price ? fmtPrice(base.price) : '按次')) + '</strong></div>'
+      priceHtml += '<span>' + (best ? fmtPrice(best.p.price) : (base.price ? fmtPrice(base.price) : '按次')) + '</span>'
     }
+    priceHtml += '</div>'
 
     var tags = tagsOf(m).slice(0, 4)
     var tagHtml = tags.map(function (t) { return '<span class="model-tag">' + esc(t) + '</span>' }).join('')
@@ -321,14 +317,17 @@
           vendorHtml(m) +
           '<div class="model-title">' +
             '<span class="model-name">' + esc(m.model_name) + '</span>' +
-            '<span class="model-type">' + esc(typeLabel(m.model_type)) + '</span>' +
+            '<div class="model-type-row">' +
+              '<span class="model-type">' + esc(typeLabel(m.model_type)) + '</span>' +
+              '<span class="model-brand">' + esc(vendorNameOf(m)) + '</span>' +
+            '</div>' +
           '</div>' +
           '<span class="price-tag price-tag--' + level.cls + '">' + level.label + '</span>' +
         '</div>' +
-        (m.description ? '<p class="model-desc">' + esc(m.description) + '</p>' : '') +
-        (tagHtml ? '<div class="model-tags">' + tagHtml + '</div>' : '') +
+        (!compact && m.description ? '<p class="model-desc">' + esc(m.description) + '</p>' : '') +
+        (!compact && tagHtml ? '<div class="model-tags">' + tagHtml + '</div>' : '') +
         '<div class="model-price">' + priceHtml + '</div>' +
-        '<div class="model-card-more">查看详情 →</div>' +
+        (compact ? '' : '<div class="model-card-more">查看详情 →</div>') +
       '</button>'
     )
   }
@@ -339,6 +338,12 @@
     var countEl = document.getElementById('modelCount')
     var sourceEl = document.getElementById('modelSource')
     var list = sortedModels(visibleModels())
+
+    if (grid) grid.dataset.layout = state.layout
+    var lsw = document.getElementById('layoutSwitch')
+    if (lsw) Array.prototype.forEach.call(lsw.querySelectorAll('[data-layout]'), function (b) {
+      b.classList.toggle('active', b.dataset.layout === state.layout)
+    })
 
     if (sourceEl) sourceEl.textContent = state.fetchedAt ? '数据更新 ' + state.fetchedAt : '数据：静态快照'
     if (countEl) countEl.textContent = '共 ' + list.length + ' 个模型'
@@ -798,12 +803,23 @@
       state.sort = sort.value
       render()
     })
+    var lsw = document.getElementById('layoutSwitch')
+    if (lsw) lsw.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-layout]')
+      if (!btn) return
+      state.layout = btn.dataset.layout
+      try { localStorage.setItem('cybersheep-models-layout', state.layout) } catch (err) {}
+      render()
+    })
   }
 
   /* ---------- 初始化 ---------- */
   function init() {
     var grid = document.getElementById('modelGrid')
     if (!grid) return
+    try {
+      state.layout = localStorage.getItem('cybersheep-models-layout') === 'compact' ? 'compact' : 'detail'
+    } catch (e) { state.layout = 'detail' }
     grid.innerHTML = '<div class="models-state"><strong>正在加载模型数据…</strong></div>'
     bindToolbar()
     bindAccordion()

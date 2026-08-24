@@ -63,6 +63,36 @@
       desc: '在终端中使用 Claude Code。'
     },
 
+    'claude-code-deepseek': {
+      id: 'claude-code-deepseek',
+      title: 'Claude Code × DeepSeek',
+      app: 'claude',
+      name: 'DeepSeek',
+      providerName: 'DeepSeek',
+      endpoint: 'https://sheepaiplus.top/v1',
+      homepage: 'https://sheepaiplus.top',
+      model: 'deepseek-v4-flash',
+      enabled: true,
+      tag: 'Anthropic CLI · DeepSeek',
+      desc: '在 Claude Code 终端中使用 DeepSeek。',
+      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤），否则 Claude Code 无法调用 DeepSeek。'
+    },
+
+    'codex-deepseek': {
+      id: 'codex-deepseek',
+      title: 'Codex × DeepSeek',
+      app: 'codex',
+      name: 'DeepSeek',
+      providerName: 'DeepSeek',
+      endpoint: 'https://sheepaiplus.top/v1',
+      homepage: 'https://sheepaiplus.top',
+      model: 'deepseek-v4-flash',
+      enabled: true,
+      tag: 'OpenAI CLI · DeepSeek',
+      desc: '在 Codex 终端中使用 DeepSeek。',
+      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤）。'
+    },
+
     'claude-desktop': {
       id: 'claude-desktop',
       title: 'Claude Desktop',

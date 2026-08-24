@@ -90,6 +90,10 @@
       '</div>'
     }
 
+    if (preset.note) {
+      body += '<p class="ccw-note ccw-note--hint">' + esc(preset.note) + '</p>'
+    }
+
     body += '<p class="ccw-note">🔒 API Key 仅在当前浏览器中使用，不会上传或保存。</p>'
     body += '<p class="ccw-status" role="status" aria-live="polite"></p>'
 

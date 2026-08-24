@@ -569,6 +569,17 @@ html[data-theme="dark"] .code-block pre {
   line-height: 1.6;
 }
 
+.ccw-note--hint {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in srgb, #f59e0b 8%, transparent);
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
 .ccw-status {
   min-height: 1.2em;
   margin: 10px 0 0;

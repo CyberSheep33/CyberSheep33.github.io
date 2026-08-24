@@ -542,23 +542,62 @@
     }).join('') || '<div class="drawer-endpoint"><code>—</code></div>'
   }
 
+  function stepStages(m) {
+    var base = basePrices(m)
+    var stages = []
+    var prev = 0
+    var steps = m.step_ratios
+    steps.forEach(function (s) {
+      stages.push({
+        range: fmtRange(prev) + '~' + fmtRange(s.step_size),
+        input: base.input * (s.prompt_step_ratio || 1),
+        output: base.completion * (s.completion_step_ratio || 1)
+      })
+      prev = s.step_size
+    })
+    var last = steps[steps.length - 1]
+    stages.push({
+      range: '>' + fmtRange(last.step_size),
+      input: base.input * (last.prompt_step_ratio || 1),
+      output: base.completion * (last.completion_step_ratio || 1)
+    })
+    return stages
+  }
+
+  function stepGroupPrices(stages, mult) {
+    var p = {}
+    stages.forEach(function (st, i) {
+      p['s' + (i + 1) + 'in'] = st.input * mult
+      p['s' + (i + 1) + 'out'] = st.output * mult
+    })
+    return p
+  }
+
   function groupTable(m) {
     var base = basePrices(m)
     var groups = availableGroupsOf(m)
     var kind = billingKind(m)
+    var isStep = kind === 'step'
+    var isSpecial = kind === 'image' || kind === 'audio'
     if (!groups.length) return '<div class="models-state" style="padding:16px">暂无可公开分组</div>'
 
     var cols = []
     if (base.kind === 'token') {
-      if (kind === 'image' || kind === 'audio') {
+      if (isSpecial) {
         cols.push({ key: 'mult', label: '分组倍率' })
+      } else if (isStep) {
+        var stages = stepStages(m)
+        stages.forEach(function (st, i) {
+          cols.push({ key: 's' + (i + 1) + 'in', label: 'S' + (i + 1) + '输入' })
+          cols.push({ key: 's' + (i + 1) + 'out', label: 'S' + (i + 1) + '输出' })
+        })
+        if (Number(m.cache_ratio) > 0) cols.push({ key: 'cacheHit', label: '缓存命中' })
       } else {
         cols.push({ key: 'input', label: '输入' })
         cols.push({ key: 'completion', label: '输出' })
         if (Number(m.cache_ratio) > 0) cols.push({ key: 'cacheHit', label: '缓存命中' })
-        // 阶梯计费模型不展示 5m/1h 缓存创建（其计价为分段阶梯）
-        if (kind !== 'step' && Number(m.cache_creation_5m_ratio) > 0) cols.push({ key: 'cache5m', label: '5m缓存创建' })
-        if (kind !== 'step' && Number(m.cache_creation_1h_ratio) > 0) cols.push({ key: 'cache1h', label: '1h缓存创建' })
+        if (Number(m.cache_creation_5m_ratio) > 0) cols.push({ key: 'cache5m', label: '5m缓存创建' })
+        if (Number(m.cache_creation_1h_ratio) > 0) cols.push({ key: 'cache1h', label: '1h缓存创建' })
       }
     } else {
       cols.push({ key: 'price', label: '价格' })
@@ -566,9 +605,29 @@
 
     var withPrice = [], noPrice = []
     groups.forEach(function (g) {
-      var p = groupPrice(base, g)
-      if (p) withPrice.push({ group: g, p: p, v: p.input != null ? p.input : p.price })
-      else noPrice.push(g)
+      var mult = groupMult(g)
+      if (mult == null) { noPrice.push(g); return }
+      var p, v
+      if (isStep) {
+        p = stepGroupPrices(stepStages(m), mult)
+        p.mult = mult
+        p.cacheHit = base.cacheHit * mult
+        v = p.s1in
+      } else if (isSpecial) {
+        p = { mult: mult }
+        v = base.input * mult
+      } else if (base.kind === 'token') {
+        p = {
+          input: base.input * mult, completion: base.completion * mult,
+          cacheHit: base.cacheHit * mult, cache5m: base.cache5m * mult,
+          cache1h: base.cache1h * mult, mult: mult
+        }
+        v = p.input
+      } else {
+        p = { price: base.price * mult, mult: mult }
+        v = p.price
+      }
+      withPrice.push({ group: g, p: p, v: v })
     })
     withPrice.sort(function (a, b) { return a.v - b.v })
 
@@ -588,10 +647,10 @@
     var extra = noPrice.length
       ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个非公开分组已隐藏。</p>'
       : ''
-    if (kind === 'step') {
-      extra += '<p class="drawer-group-legend">此模型为阶梯计价：表中价格对应第一段用量，更高输入/输出 tokens 价格会按阶梯倍率上浮。</p>'
+    if (isStep) {
+      extra += '<p class="drawer-group-legend">S1/S2/S3… 对应各阶梯分段的输入 / 输出价格（$/1M，已含分组倍率），以平台实际扣费为准。</p>'
     }
-    if (kind === 'image' || kind === 'audio') {
+    if (isSpecial) {
       extra += '<p class="drawer-group-legend">图像/语音按次计费，表中为相对分组倍率，最终价以平台为准。</p>'
     }
 
@@ -682,9 +741,9 @@
         (m.description ? '<p class="drawer-desc">' + esc(m.description) + '</p>' : '') +
         (tags.length ? '<div class="drawer-tags">' + tags.map(function (t) { return '<span class="model-tag">' + esc(t) + '</span>' }).join('') + '</div>' : '') +
       '</div>' +
-      '<div class="drawer-section"><h3 class="drawer-section-title">计费方式</h3>' + billingTable(m) + '</div>' +
       '<div class="drawer-section"><h3 class="drawer-section-title">调用端点</h3>' + endpointRows(m) + '</div>' +
-      '<div class="drawer-section"><h3 class="drawer-section-title">各分组计价</h3>' + groupTable(m) + '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">官方基础价格</h3>' + billingTable(m) + '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">Sheep AI Plus 分组价格</h3>' + groupTable(m) + '</div>' +
       '<p class="drawer-group-legend">价格为估算（基础价 × 分组倍率），以平台实际扣费为准。</p>'
   }
 

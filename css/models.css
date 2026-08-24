@@ -223,26 +223,23 @@
 
 .sidebar-list {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-wrap: wrap;
+  gap: 6px;
   min-width: 0;
 }
 
 .sidebar-list--type {
-  flex-direction: row;
-  flex-wrap: wrap;
   gap: 6px;
 }
 
 .sidebar-list--brand {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
 .sidebar-list--brand .sidebar-option {
-  white-space: normal;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .sidebar-list--scroll {
@@ -829,12 +826,25 @@ html[data-theme="dark"] .price-tag--mid {
 }
 
 .drawer-section-title {
-  margin: 0 0 10px;
-  color: var(--soft);
-  font-size: 0.74rem;
-  font-weight: 850;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
+  position: relative;
+  margin: 0 0 12px;
+  padding-left: 12px;
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.drawer-section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 16px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
 }
 
 .drawer-table-wrap {

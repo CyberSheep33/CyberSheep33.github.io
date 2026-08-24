@@ -27,6 +27,7 @@ css/
   guide.css               — 教程页与 CC Switch Widget 特有组件
   tools.css               — 配置工具页特有组件
 js/
+  site.js                 — 站点公共组件（统一渲染 Header / Footer / Toast，含生态模块注册表）
   main.js                 — 主题切换、仓库卡片渲染、邮箱复制
   announcements.js        — 公告数据 + 首页/公告中心列表渲染
   guide.js                — 教程页代码复制按钮
@@ -36,6 +37,34 @@ js/
 assets/                   — 图片素材（Logo、QQ 群二维码）
 docs/superpowers/         — 设计文档与实现计划（spec + plan）
 ```
+
+## 站点架构（生态门户）
+
+网站是赛博小羊 AI 生态的统一入口，采用「公共组件 + 模块化区块」的静态架构：
+
+```
+网站
+├── 全局组件   js/site.js（Header / Footer / Toast / 主题切换按钮）
+├── 公共布局   所有页面共享顶部导航、页脚、主题、基础样式
+├── 页面模块   announcements / guide / tools …（每个模块独立目录）
+└── 静态数据   js/announcements.js 等
+```
+
+**Header / Footer 由 `js/site.js` 统一渲染**，页面只需保留占位符：
+
+```html
+<header class="site-header" id="siteHeader"></header>
+<main>…页面内容…</main>
+<footer class="site-footer" id="siteFooter"></footer>
+<script src="js/site.js"></script>   <!-- 必须在 main.js 之前 -->
+<script src="js/main.js"></script>
+```
+
+site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `guide/` / `tools/`）补全 `../` 前缀与导航高亮，因此在 GitHub Pages 和双击 `file://` 打开下都能正常工作。
+
+**新增一个生态模块**只需两步：
+1. 在仓库根目录新建对应文件夹（如未来 `download/`、`about/`，模型广场暂不规划）；
+2. 在 `js/site.js` 的 `NAV` 里登记一个导航项（独立首页用页面链接，首页区块用锚点 `#xxx`）。
 
 ## 技术
 

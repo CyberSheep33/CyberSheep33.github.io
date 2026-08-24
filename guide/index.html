@@ -20,22 +20,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand-mark" href="../index.html" aria-label="CyberSheep 首页">
-      <img src="../assets/cybersheep.png" alt="" width="38" height="38">
-      <span><strong>CyberSheep</strong><em>赛博小羊</em></span>
-    </a>
-    <nav class="site-nav" aria-label="主要入口">
-      <a href="../#api">API 平台</a>
-      <a href="../#tools">工具箱</a>
-      <a href="../#blog">博客</a>
-      <a href="../guide/index.html" aria-current="page">快速开始</a>
-      <a href="../announcements/index.html">公告</a>
-      <a href="../#lab">SheepAI-Lab</a>
-      <a href="../#projects">项目</a>
-    </nav>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
-  </header>
+  <header class="site-header" id="siteHeader"></header>
 
   <main>
     <div class="section guide-hero">
@@ -131,23 +116,9 @@
     </div>
   </main>
 
-  <footer class="site-footer" id="site-footer">
-    <div class="community-panel">
-      <button class="qr-thumb" type="button" popovertarget="qqQrPreview" aria-label="点击放大官方 QQ 群二维码"><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码" width="112" height="112" loading="lazy"><span class="qr-zoom-hint">点击放大</span></button>
-      <div>
-        <p>扫码加入官方 QQ 群，交流 AI 使用心得、获取模型上架资讯、反馈问题建议。</p>
-        <button class="email-button" id="emailLink" type="button" title="点击复制邮箱地址">cybersheep33@gmail.com</button>
-      </div>
-    </div>
-    <div class="qr-lightbox" id="qqQrPreview" popover><div class="qr-lightbox-card"><button class="qr-lightbox-close" type="button" popovertarget="qqQrPreview" popovertargetaction="hide" aria-label="关闭二维码预览">×</button><img src="../assets/QQ-group-qcode.jpg" alt="赛博小羊官方 QQ 群二维码大图"><p>扫描二维码加入赛博小羊官方 QQ 群</p></div></div>
-    <div class="footer-bottom">
-      <span>© 2026 CyberSheep 赛博小羊</span>
-      <a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>
-    </div>
-  </footer>
+  <footer class="site-footer" id="siteFooter"></footer>
 
-  <div class="toast" id="toast" aria-live="polite"></div>
-
+  <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>
 </body>
 </html>

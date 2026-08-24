@@ -157,11 +157,15 @@ assets/models-data.js    # 模型数据快照（script 注入为 window.MODELS_D
 
 ### 数据来源与更新
 
-模型广场为**纯静态**：数据来自 `assets/models-data.js`（通过 `<script>` 注入），
-**不实时请求上游**（`/api/pricing` 无 CORS 头，且本地 file:// 下 fetch 本地文件会被拦截，
-所以用 script 注入而不是 fetch）。
+模型广场为**纯静态**：数据来自 `assets/models-data.js`（通过 `<script>` 注入 `window.MODELS_DATA`）。
 
-**更新数据 = 重新生成 `assets/models-data.js`**。完整步骤见 [`docs/models-update-guide.md`](models-update-guide.md)。
+数据由「**数据流水线**」生成：`pricing.json` → 脚本清洗 → `assets/models-data.js`。
+规范见 [`docs/models-data-pipeline.md`](models-data-pipeline.md)。
+
+- 抓取 `pricing.json` 后运行 `python3 scripts/build-models-data.py` 即可重新生成；
+- **规则文件**（`data/available-groups.json` 有效分组表、`data/brand-overrides.json` 品牌修正）
+  由人工/智能体维护，脚本读取它们做分组白名单清洗、品牌修正、计费类型识别；
+- 更新规则只需改 `data/` 下对应文件，前端自动生效。
 
 快照结构（由上游 `/api/pricing` 精简而来）：
 
@@ -210,13 +214,13 @@ supported_endpoint_types, quota_type, model_price, usage_count, available, icon,
 ### 注意事项
 
 - 价格仅为估算（按上述公式），页面已注明「以平台实际扣费为准」；
-- 快照文件约 280KB，字段已精简；
-- **可用分组白名单**：`js/models.js` 顶部的 `AVAILABLE_GROUPS`（来自「Sheep AI 与 Sheep AI Plus 分组对照」CSV）。
+- 快照文件约 320KB，字段已精简；
+- **可用分组白名单**：维护在 `data/available-groups.json`（分组 → 类别）。
   分组筛选与详情页计价只展示白名单内的分组，自动剔除 API 里的内部测试 / 特供 / 专线等不开放分组。
-  若上游新增开放分组，需同步把分组名加进 `AVAILABLE_GROUPS`；
-- **品牌归属修正**：`js/models.js` 顶部的 `BRAND_OVERRIDES` 用于纠正上游 `/api/pricing`
-  中个别模型 vendor 标错的问题（如 `aigc-image-kling` 被误标为腾讯，已改归 Kling）。
-  新增错放时，把「模型名 → 正确 vendor_id」加进该映射即可，无需改数据文件；
+  新增开放分组时，往该文件加一条并重新运行构建脚本即可；
+- **品牌归属修正**：维护在 `data/brand-overrides.json`（模型名 → 正确 vendor_id），
+  用于纠正上游 `/api/pricing` 中 vendor 标错的问题（如 `aigc-image-kling` 被误标为腾讯，已改归 Kling）。
+  新增错放时，往该文件加一条并重新运行构建脚本即可；
 - 本地调试请直接双击打开 `models/index.html`，需保证 `models-data.js` 在 `models.js` 之前引入。
 
 ---

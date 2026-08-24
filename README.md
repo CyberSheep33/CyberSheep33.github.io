@@ -44,10 +44,14 @@ docs/
   homepage-guide.md       — 主页维护与更新规范
   module-guide.md         — 新增模块开发规范
   module-maintenance.md   — 现有模块（公告/快速开始/配置工具）维护与更新规范
-  models-update-guide.md  — 模型广场数据更新指南（抓取 pricing.json 后如何更新）
+  models-data-pipeline.md — 模型广场数据流水线规范（pricing.json → 可用数据，主文档）
+  models-update-guide.md  — 模型广场数据更新速查（抓取 pricing.json 后如何更新）
   superpowers/            — 设计文档与实现计划（spec + plan）
+data/
+  available-groups.json   — 有效分组表（分组 → 类别，人工维护）
+  brand-overrides.json    — 品牌修正表（模型名 → 正确 vendor_id）
 scripts/
-  build-models-data.py    — 由 pricing.json 生成 assets/models-data.js 的脚本
+  build-models-data.py    — 数据流水线脚本（清洗并生成 assets/models-data.js）
 ```
 
 ## 站点架构（生态门户）

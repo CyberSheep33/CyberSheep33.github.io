@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "说明": "上游 /api/pricing 中 vendor 标错的模型修正表。键=模型名，值=正确 vendor_id",
+    "updated": "2026-08-24"
+  },
+  "overrides": {
+    "aigc-image-kling": 88
+  }
+}

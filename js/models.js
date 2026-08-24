@@ -18,76 +18,14 @@
   var BASE_MULT = 2
   var GROUP_FACTOR = 1.4
 
-  /* 可用分组白名单（映射到 API 实际分组名） */
-  var AVAILABLE_GROUPS = [
-    'AWS-Bedrock-1', 'AWS-Claude-1', 'AWS-Claude-2', 'AWS-Claude-3', 'AWS-Platfrom-1',
-    'Aistudio-Gemini-1', 'Aistudio-Gemini-2', 'Aistudio-Gemini-3', 'Aistudio-Gemini-4',
-    'Alibaba-1', 'Alibaba-2', 'Alibaba-3', 'Anthropic-Claude-1', 'Anti-Gemini-1',
-    'Azure-Claude-1', 'Azure-Gpt-1', 'Azure-Gpt-2', 'Azure-Gpt-3', 'Azure-Gpt-4', 'Azure-Gpt-5',
-    'Azure-Grok-1', 'Azure-Grok-2',
-    'Claude-Code-1', 'Claude-Code-2', 'Cli-Gemini-1', 'Cli-Grok-1', 'Cli-Grok-2',
-    'Codex-Gpt-1', 'Codex-Gpt-2', 'Codex-Gpt-3',
-    'Doubao-1', 'Doubao-2', 'Doubao-3',
-    'Gpt-Image-1', 'Gpt-Image-2',
-    'Hailuo-1', 'Hailuo-2', 'Hailuo-3',
-    'Kimi-1', 'Kimi-2', 'Kiro-Claude-1', 'Kling-1', 'Kling-2',
-    'MJ-1', 'MJ-2',
-    'Openai-Gpt-1', 'Openai-Gpt-2', 'Pix-1',
-    'Reverse-Gemini-1', 'Reverse-Gemini-2',
-    'Seedance-1',
-    'Self-Deployed-1', 'Self-Deployed-2', 'Self-Deployed-3', 'Self-Deployed-4',
-    'SiliconFlow-1', 'Spark-1', 'Spark-2', 'Spark-3', 'Suno-1', 'Suno-2',
-    'Vertex-Claude-1', 'Vertex-Gemini-1', 'Vertex-Gemini-2', 'Vertex-Gemini-3',
-    'Vidu-1', 'Vidu-2',
-    'Wenxin-1', 'Wenxin-2', 'Wenxin-3',
-    'Xai-Grok-1', 'Xiaomi-1', 'Xiaomi-2', 'deepseek-1'
-  ]
+  /* 规则数据：构建时由 scripts/build-models-data.py 从 data/*.json 合并进快照，
+     前端从 window.MODELS_DATA 读取（不再硬编码，便于维护） */
+  var AVAILABLE_GROUPS = []
+  var GROUP_CATEGORIES = {}
+  var BRAND_OVERRIDES = {}
 
   function isAvailableGroup(g) {
     return AVAILABLE_GROUPS.indexOf(g) >= 0
-  }
-
-  /* 分组类别（来自「Sheep AI 与 Sheep AI Plus 分组对照」CSV 的「模型 / 类别」列，
-     键用 API 实际分组名） */
-  var GROUP_CATEGORIES = {
-    'AWS-Bedrock-1': 'Claude', 'AWS-Claude-1': 'Claude', 'AWS-Claude-2': 'Claude',
-    'AWS-Claude-3': 'Claude', 'AWS-Platfrom-1': 'Claude', 'Anthropic-Claude-1': 'Claude',
-    'Azure-Claude-1': 'Claude', 'Claude-Code-1': 'Claude', 'Claude-Code-2': 'Claude',
-    'Kiro-Claude-1': 'Claude', 'Vertex-Claude-1': 'Claude',
-    'Azure-Gpt-1': 'GPT / Codex', 'Azure-Gpt-2': 'GPT / Codex', 'Azure-Gpt-3': 'GPT / Codex',
-    'Azure-Gpt-4': 'GPT / Codex', 'Azure-Gpt-5': 'GPT / Codex', 'Codex-Gpt-1': 'GPT / Codex',
-    'Codex-Gpt-2': 'GPT / Codex', 'Codex-Gpt-3': 'GPT / Codex', 'Openai-Gpt-1': 'GPT / Codex',
-    'Openai-Gpt-2': 'GPT / Codex',
-    'Aistudio-Gemini-1': 'Gemini', 'Aistudio-Gemini-2': 'Gemini', 'Aistudio-Gemini-3': 'Gemini',
-    'Aistudio-Gemini-4': 'Gemini', 'Anti-Gemini-1': 'Gemini', 'Cli-Gemini-1': 'Gemini',
-    'Reverse-Gemini-1': 'Gemini', 'Reverse-Gemini-2': 'Gemini',
-    'Vertex-Gemini-1': 'Gemini', 'Vertex-Gemini-2': 'Gemini', 'Vertex-Gemini-3': 'Gemini',
-    'Azure-Grok-1': 'Grok', 'Azure-Grok-2': 'Grok', 'Cli-Grok-1': 'Grok', 'Cli-Grok-2': 'Grok',
-    'Xai-Grok-1': 'Grok',
-    'MJ-1': 'MJ / Suno', 'MJ-2': 'MJ / Suno', 'Suno-1': 'MJ / Suno', 'Suno-2': 'MJ / Suno',
-    'Kling-1': 'Kling', 'Kling-2': 'Kling',
-    'Vidu-1': 'Vidu', 'Vidu-2': 'Vidu',
-    'Hailuo-1': 'Hailuo', 'Hailuo-2': 'Hailuo', 'Hailuo-3': 'Hailuo',
-    'Pix-1': 'Pix',
-    'Doubao-1': 'Doubao', 'Doubao-2': 'Doubao', 'Doubao-3': 'Doubao',
-    'Alibaba-1': 'Alibaba', 'Alibaba-2': 'Alibaba', 'Alibaba-3': 'Alibaba',
-    'Self-Deployed-1': 'Self-Deployed', 'Self-Deployed-2': 'Self-Deployed',
-    'Self-Deployed-3': 'Self-Deployed', 'Self-Deployed-4': 'Self-Deployed',
-    'Kimi-1': 'Kimi', 'Kimi-2': 'Kimi',
-    'Xiaomi-1': 'Xiaomi', 'Xiaomi-2': 'Xiaomi',
-    'Wenxin-1': 'Wenxin', 'Wenxin-2': 'Wenxin', 'Wenxin-3': 'Wenxin',
-    'SiliconFlow-1': 'SiliconFlow',
-    'Spark-1': 'Spark', 'Spark-2': 'Spark', 'Spark-3': 'Spark',
-    'Gpt-Image-1': 'GPT-Image', 'Gpt-Image-2': 'GPT-Image',
-    'Seedance-1': 'Seedance', 'deepseek-1': 'DeepSeek'
-  }
-
-  /* 品牌归属修正：上游 /api/pricing 中个别模型 vendor 标错，这里人工核对后覆盖。
-     键：模型名；值：正确的 vendor_id。
-     说明：aigc-image-kling 被上游标为「腾讯」(61)，但属于 Kling 系列（vendor 88），
-     其余所有 kling-* 模型均在 Kling 名下。 */
-  var BRAND_OVERRIDES = {
-    'aigc-image-kling': 88
   }
 
   var state = {
@@ -139,6 +77,11 @@
     state.vendors = j.vendors || []
     state.supportedEndpoint = j.supported_endpoint || {}
     state.fetchedAt = j.fetched_at || ''
+    // 从快照读取规则（由构建脚本从 data/*.json 合并而来）
+    var ag = j.available_groups || {}
+    AVAILABLE_GROUPS = Object.keys(ag)
+    GROUP_CATEGORIES = ag
+    BRAND_OVERRIDES = j.brand_overrides || {}
     return Promise.resolve()
   }
 

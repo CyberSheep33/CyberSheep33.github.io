@@ -1,5 +1,8 @@
 # 模型广场数据更新指南
 
+> ⚠️ **本指南为速查**。完整的数据流水线规范（含规则文件维护、计费规则、智能体逐步指引）见
+> [`docs/models-data-pipeline.md`](models-data-pipeline.md)。
+
 > 模型广场（`models/`）为纯静态。数据来自 `assets/models-data.js`——
 > 一个以 `<script>` 注入的 JS 文件（`window.MODELS_DATA = {...}`）。
 > 用 script 注入而不是 fetch，是为了在**本地双击打开（file://）** 和 GitHub Pages 上都能正常工作。

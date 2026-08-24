@@ -123,6 +123,11 @@
     return '$' + v.toFixed(4)
   }
 
+  function fmtP3(v) {
+    if (v == null || isNaN(v)) return '—'
+    return '$' + Number(v).toFixed(3)
+  }
+
   /* ---------- 数据加载 ---------- */
   function loadData() {
     if (!window.MODELS_DATA) return Promise.reject(new Error('MODELS_DATA 未加载'))
@@ -300,9 +305,9 @@
       priceHtml += '<span>' + (kind === 'image' ? '按张' : '按时长') + '计费</span>'
     } else if (base.kind === 'token') {
       var p = best ? best.p : base
-      priceHtml += '<span>输入 <b>' + fmtPrice(p.input) + '</b></span>'
-      priceHtml += '<span>输出 <b>' + fmtPrice(p.completion) + '</b></span>'
-      if (Number(m.cache_ratio) > 0) priceHtml += '<span>缓存 <b>' + fmtPrice(p.cacheHit) + '</b></span>'
+      priceHtml += '<span>输入 <b>' + fmtP3(p.input) + '</b></span>'
+      priceHtml += '<span>输出 <b>' + fmtP3(p.completion) + '</b></span>'
+      if (Number(m.cache_ratio) > 0) priceHtml += '<span>缓存 <b>' + fmtP3(p.cacheHit) + '</b></span>'
     } else {
       priceHtml += '<span>' + (best ? fmtPrice(best.p.price) : (base.price ? fmtPrice(base.price) : '按次')) + '</span>'
     }
@@ -345,7 +350,7 @@
       b.classList.toggle('active', b.dataset.layout === state.layout)
     })
 
-    if (sourceEl) sourceEl.textContent = state.fetchedAt ? '数据更新 ' + state.fetchedAt : '数据：静态快照'
+    if (sourceEl) sourceEl.textContent = state.fetchedAt ? '更新于 ' + state.fetchedAt : '静态快照'
     if (countEl) countEl.textContent = '共 ' + list.length + ' 个模型'
     if (!list.length) {
       grid.innerHTML = '<div class="models-state"><strong>没有匹配的模型</strong>换个筛选条件试试。</div>'
@@ -549,22 +554,40 @@
 
   function stepStages(m) {
     var base = basePrices(m)
-    var stages = []
+    var raw = []
     var prev = 0
     var steps = m.step_ratios
     steps.forEach(function (s) {
-      stages.push({
-        range: fmtRange(prev) + '~' + fmtRange(s.step_size),
+      raw.push({
+        from: prev, to: s.step_size,
+        pin: s.prompt_step_ratio || 1, cin: s.completion_step_ratio || 1,
         input: base.input * (s.prompt_step_ratio || 1),
         output: base.completion * (s.completion_step_ratio || 1)
       })
       prev = s.step_size
     })
     var last = steps[steps.length - 1]
-    stages.push({
-      range: '>' + fmtRange(last.step_size),
+    raw.push({
+      from: last.step_size, to: Infinity,
+      pin: last.prompt_step_ratio || 1, cin: last.completion_step_ratio || 1,
       input: base.input * (last.prompt_step_ratio || 1),
       output: base.completion * (last.completion_step_ratio || 1)
+    })
+
+    // 合并相邻同倍率段（如 gpt-5.6 的 272k~1M 与 >1M 倍率相同 → 合并为一段）
+    var stages = []
+    raw.forEach(function (r) {
+      var l = stages[stages.length - 1]
+      if (l && l.pin === r.pin && l.cin === r.cin) {
+        l.to = r.to
+      } else {
+        stages.push({ from: r.from, to: r.to, pin: r.pin, cin: r.cin, input: r.input, output: r.output })
+      }
+    })
+    stages.forEach(function (st) {
+      st.range = isFinite(st.to)
+        ? fmtRange(st.from) + ' ~ ' + fmtRange(st.to) + ' tokens'
+        : fmtRange(st.from) + ' tokens 以上'
     })
     return stages
   }
@@ -704,20 +727,12 @@
   }
 
   function stepBillingTable(m, base) {
-    var steps = m.step_ratios
+    var stages = stepStages(m)
     var inRows = '', outRows = ''
-    var prev = 0
-    steps.forEach(function (s) {
-      var upper = s.step_size
-      var inP = base.input * (s.prompt_step_ratio || 1)
-      var outP = base.completion * (s.completion_step_ratio || 1)
-      inRows += '<tr><td>输入 ' + fmtRange(prev) + ' ~ ' + fmtRange(upper) + ' tokens</td><td>' + fmtPrice(inP) + '</td></tr>'
-      outRows += '<tr><td>输出 ' + fmtRange(prev) + ' ~ ' + fmtRange(upper) + ' tokens</td><td>' + fmtPrice(outP) + '</td></tr>'
-      prev = upper
+    stages.forEach(function (st) {
+      inRows += '<tr><td>输入 ' + st.range + '</td><td>' + fmtPrice(st.input) + '</td></tr>'
+      outRows += '<tr><td>输出 ' + st.range + '</td><td>' + fmtPrice(st.output) + '</td></tr>'
     })
-    var last = steps[steps.length - 1]
-    inRows += '<tr><td>输入 &gt; ' + fmtRange(last.step_size) + ' tokens</td><td>' + fmtPrice(base.input * (last.prompt_step_ratio || 1)) + '</td></tr>'
-    outRows += '<tr><td>输出 &gt; ' + fmtRange(last.step_size) + ' tokens</td><td>' + fmtPrice(base.completion * (last.completion_step_ratio || 1)) + '</td></tr>'
 
     var html =
       '<table class="drawer-table"><thead><tr><th>输入（阶梯分段）</th><th>$/1M</th></tr></thead><tbody>' + inRows + '</tbody></table>' +

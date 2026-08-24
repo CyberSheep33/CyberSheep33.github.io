@@ -29,6 +29,17 @@
 
 智能体需要完成的步骤（也可手动执行）：
 
+> **快速方式（推荐）**：仓库已内置生成脚本 `scripts/build-models-data.py`。把抓到的
+> `pricing.json` 放到仓库根目录，运行：
+>
+> ```bash
+> python3 scripts/build-models-data.py
+> ```
+>
+> 脚本会自动完成：精简字段 → 提取中文描述 → 生成 `assets/models-data.js` → 打印
+> 模型数 / 分组数 / 价格锚点校验。之后只需把 `assets/models-data.js` 里的 `fetched_at`
+> 改成当天日期，目验 + 提交即可。下面步骤是脚本所做工作的详细说明（智能体可直接按脚本执行）。
+
 ### Step 1：精简生成 `assets/models-data.js`
 
 读入 `pricing.json`，生成 `assets/models-data.js`：
@@ -100,11 +111,13 @@ git push origin main
 ## 3. 手动更新（不借助智能体）
 
 1. 按第 1 节抓取 `pricing.json`；
-2. 用任意脚本执行第 2 节 Step 1 的精简逻辑，覆盖写 `assets/models-data.js`；
-3. 按 Step 2 抽查价格；
-4. 提交推送。
+2. 推荐直接运行仓库脚本 `scripts/build-models-data.py`（自动精简 + 校验）；
+   或手动执行下方参考脚本的 Step 1 逻辑，覆盖写 `assets/models-data.js`；
+3. 把 `assets/models-data.js` 里的 `fetched_at` 改成当天日期；
+4. 按 Step 2 抽查价格；
+5. 提交推送。
 
-参考生成脚本（Python）：
+参考生成脚本（Python，与仓库脚本逻辑一致）：
 
 ```python
 import json

@@ -46,6 +46,8 @@ docs/
   module-maintenance.md   — 现有模块（公告/快速开始/配置工具）维护与更新规范
   models-update-guide.md  — 模型广场数据更新指南（抓取 pricing.json 后如何更新）
   superpowers/            — 设计文档与实现计划（spec + plan）
+scripts/
+  build-models-data.py    — 由 pricing.json 生成 assets/models-data.js 的脚本
 ```
 
 ## 站点架构（生态门户）

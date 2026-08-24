@@ -342,6 +342,20 @@
   align-items: center;
 }
 
+.models-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.models-meta .models-count::after {
+  content: "·";
+  margin-left: 8px;
+  color: var(--soft);
+  opacity: 0.6;
+}
+
 .models-search-wrap {
   position: relative;
   flex: 1;
@@ -1081,13 +1095,22 @@ html[data-theme="dark"] .price-tag--mid {
     grid-template-columns: 1fr;
   }
 
+  .models-toolbar-top {
+    flex-wrap: wrap;
+  }
+
+  .models-toolbar-top .models-search-wrap {
+    flex: 1 1 100%;
+    order: -1;
+  }
+
   .models-toolbar-bottom {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .models-sort {
-    width: 100%;
+  .models-meta {
+    justify-content: space-between;
   }
 
   .model-drawer-panel {

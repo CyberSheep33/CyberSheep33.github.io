@@ -39,6 +39,7 @@ window.MODELS_DATA = {
   "group_ratio": { /* 原样保留 */ },
   "usable_group": { /* 原样保留 */ },
   "vendors": [ /* 原样保留 */ ],
+  "supported_endpoint": { /* 原样保留（详情页展示调用端点路径） */ },
   "fetched_at": "YYYY-MM-DD"
 };
 ```
@@ -128,6 +129,7 @@ out = {
     'group_ratio': d.get('group_ratio', {}),
     'usable_group': d.get('usable_group', {}),
     'vendors': d.get('vendors', []),
+    'supported_endpoint': d.get('supported_endpoint', {}),
     'fetched_at': 'YYYY-MM-DD',   # 改成当天
 }
 with open('assets/models-data.js', 'w', encoding='utf-8') as f:

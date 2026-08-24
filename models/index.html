@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CyberSheep 模型广场：Sheep AI Plus 全部模型的搜索、筛选、分组与价格速查，展示每个模型在各分组下的最终价格。">
+  <meta name="description" content="CyberSheep 模型广场：按分组、类型、标签筛选 Sheep AI Plus 全部模型，点击查看各分组最终价格、调用端点等详情。">
   <meta name="keywords" content="模型广场,Sheep AI Plus,模型价格,分组,AI模型,CyberSheep">
   <meta name="author" content="CyberSheep">
   <meta name="theme-color" content="#f7fbfa">
 
   <meta property="og:title" content="模型广场 — CyberSheep 赛博小羊">
-  <meta property="og:description" content="搜索 Sheep AI Plus 全部模型，查看各分组下的最终价格。">
+  <meta property="og:description" content="筛选 Sheep AI Plus 全部模型，查看各分组最终价格与调用端点。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CyberSheep">
 
@@ -27,34 +27,64 @@
       <a class="models-back" href="../index.html">← 返回首页</a>
       <span class="kicker">Models · 模型广场</span>
       <h1>模型广场</h1>
-      <p class="models-sub">搜索 Sheep AI Plus 全部可用模型，查看每个模型在各分组下的最终价格（输入 / 输出 / 缓存）。选择合适分组，价格可以便宜很多。</p>
+      <p class="models-sub">按分组、类型、标签筛选 Sheep AI Plus 全部可用模型，点击任意模型查看各分组最终价格与调用端点。选择合适分组，价格可以便宜很多。</p>
     </div>
 
     <div class="section">
-      <div class="models-toolbar">
-        <div class="models-search-wrap">
-          <input class="models-search" id="modelSearch" type="search" placeholder="搜索模型名称 / 描述 / 标签，例如 deepseek、claude、gpt" autocomplete="off" aria-label="搜索模型">
-          <span class="models-search-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-          </span>
-        </div>
-        <div class="models-filters" id="modelTypeChips" role="group" aria-label="按类型筛选">
-          <!-- 由 js/models.js 动态生成 -->
-        </div>
-        <div class="models-toolbar-bottom">
-          <span class="models-count" id="modelCount">加载中…</span>
-          <span class="models-source" id="modelSource">数据：—</span>
-          <select class="models-sort" id="modelSort" aria-label="排序方式">
-            <option value="default">默认排序</option>
-            <option value="usage">按调用量</option>
-            <option value="price-asc">价格从低到高</option>
-            <option value="price-desc">价格从高到低</option>
-          </select>
-        </div>
-      </div>
+      <div class="models-layout">
+        <!-- 左侧筛选侧边栏 -->
+        <aside class="models-sidebar" id="modelsSidebar" aria-label="模型筛选">
+          <button class="models-sidebar-close" id="sidebarClose" type="button" aria-label="关闭筛选">×</button>
 
-      <div class="model-grid" id="modelGrid" aria-live="polite">
-        <!-- 由 js/models.js 渲染 -->
+          <div class="sidebar-section">
+            <h4 class="sidebar-title">类型</h4>
+            <div class="sidebar-list sidebar-list--type" id="sidebarType"></div>
+          </div>
+
+          <div class="sidebar-section">
+            <h4 class="sidebar-title">分组</h4>
+            <input class="sidebar-search" id="sidebarGroupSearch" type="search" placeholder="搜索分组…" aria-label="搜索分组">
+            <div class="sidebar-list sidebar-list--scroll" id="sidebarGroup"></div>
+          </div>
+
+          <div class="sidebar-section">
+            <h4 class="sidebar-title">标签</h4>
+            <input class="sidebar-search" id="sidebarTagSearch" type="search" placeholder="搜索标签…" aria-label="搜索标签">
+            <div class="sidebar-list sidebar-list--scroll" id="sidebarTag"></div>
+          </div>
+
+          <button class="btn btn-ghost sidebar-clear" id="sidebarClear" type="button">清除全部筛选</button>
+        </aside>
+
+        <!-- 中间卡片区 -->
+        <div class="models-main">
+          <div class="models-toolbar">
+            <div class="models-toolbar-top">
+              <div class="models-search-wrap">
+                <input class="models-search" id="modelSearch" type="search" placeholder="搜索模型名称 / 描述 / 标签" autocomplete="off" aria-label="搜索模型">
+                <span class="models-search-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+                </span>
+              </div>
+              <button class="btn btn-secondary models-filter-btn" id="filterBtn" type="button" aria-controls="modelsSidebar">筛选</button>
+            </div>
+            <div class="models-toolbar-bottom">
+              <span class="models-count" id="modelCount">加载中…</span>
+              <span class="models-source" id="modelSource">数据：—</span>
+              <select class="models-sort" id="modelSort" aria-label="排序方式">
+                <option value="default">默认排序</option>
+                <option value="usage">按调用量</option>
+                <option value="price-asc">价格从低到高</option>
+                <option value="price-desc">价格从高到低</option>
+              </select>
+            </div>
+            <div class="models-active-filters" id="activeFilters"></div>
+          </div>
+
+          <div class="model-grid" id="modelGrid" aria-live="polite">
+            <!-- 由 js/models.js 渲染 -->
+          </div>
+        </div>
       </div>
 
       <p class="models-note">
@@ -65,6 +95,15 @@
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
+
+  <!-- 右侧详情侧页 -->
+  <div class="model-drawer" id="modelDrawer" hidden>
+    <div class="model-drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="model-drawer-panel" role="dialog" aria-modal="true" aria-label="模型详情">
+      <button class="model-drawer-close" id="drawerClose" type="button" aria-label="关闭详情">×</button>
+      <div class="model-drawer-content" id="drawerContent"></div>
+    </div>
+  </div>
 
   <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>

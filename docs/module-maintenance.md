@@ -171,6 +171,7 @@ window.MODELS_DATA = {
   "group_ratio": { "AWS-Bedrock-1": 0.44118, ... },   // 分组倍率
   "usable_group": { "AWS-Bedrock-1": "AWS Bedrock Resources" }, // 分组描述
   "vendors": [ { "id": 55, "name": "Anthropic", "icon": "Claude.Color" } ],
+  "supported_endpoint": { "openai": { "path": "...", "method": "POST" } }, // 端点路径
   "fetched_at": "2026-08-24"
 };
 ```

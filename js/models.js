@@ -1,48 +1,61 @@
 /* ============================================================
    CyberSheep — 模型广场（models/）渲染逻辑
    ============================================================
-   - 纯静态：数据来自 assets/models-data.js（<script> 注入为
-     window.MODELS_DATA，含 data / group_ratio / usable_group / vendors），
-     由人工定期更新。用 script 注入而不是 fetch，保证本地 file:// 也能打开。
-   - 价格公式（已按 Sheep AI Plus 真实计费日志校验）：
+   - 纯静态：数据来自 assets/models-data.js（<script> 注入 window.MODELS_DATA）
+   - 布局：左侧筛选侧边栏（类型/分组/标签）+ 中间卡片 + 点击卡片右侧详情侧页
+   - 价格公式（已按真实计费日志校验）：
        基础输入 $/1M = model_ratio × 2
-       补全        = 基础输入 × completion_ratio
-       缓存命中    = 基础输入 × cache_ratio
-       5m 缓存创建 = 基础输入 × cache_creation_5m_ratio
-       1h 缓存创建 = 基础输入 × cache_creation_1h_ratio
+       补全 = 输入 × completion_ratio；缓存命中 = 输入 × cache_ratio
+       5m/1h 缓存创建 = 输入 × cache_creation_5m/1h_ratio
        某分组最终价 = 基础价 × (group_ratio[分组] × 1.4)
-     校验：gpt-5.6-sol(model_ratio=2.5) 基础 $5；Codex-Gpt-2(group_ratio=0.05883)
-     分组倍率 0.05883×1.4=0.08236 ✓；claude-opus-5 在 AWS-Bedrock-1
-     (0.44118×1.4=0.6176) 输入 5×0.6176=3.088 ✓
    ============================================================ */
 (function () {
   'use strict'
 
-  var BASE_MULT = 2      // 基础输入价 = model_ratio × 2
-  var GROUP_FACTOR = 1.4 // 分组倍率 = group_ratio × 1.4
+  var BASE_MULT = 2
+  var GROUP_FACTOR = 1.4
 
   var state = {
     data: [],
     groupRatio: {},
     usableGroup: {},
     vendors: [],
+    supportedEndpoint: {},
     fetchedAt: '',
-    filter: { q: '', type: '' },
+    filter: { q: '', type: '', group: '', tag: '' },
     sort: 'default'
   }
 
   var TYPE_LABEL = { chat: '对话', image: '图像', video: '视频', audio: '音频', vector: '向量' }
 
-  /* ---------- 数据加载（script 注入的 window.MODELS_DATA） ---------- */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  }
+
+  function typeLabel(t) {
+    var s = String(t || '').trim()
+    if (!s) return '其他'
+    if (TYPE_LABEL[s.toLowerCase()]) return TYPE_LABEL[s.toLowerCase()]
+    return s
+  }
+
+  function fmtPrice(v) {
+    if (v == null || isNaN(v) || v <= 0) return '—'
+    if (v >= 1) return '$' + v.toFixed(2)
+    if (v >= 0.01) return '$' + v.toFixed(3)
+    return '$' + v.toFixed(4)
+  }
+
+  /* ---------- 数据加载 ---------- */
   function loadData() {
-    if (!window.MODELS_DATA) {
-      return Promise.reject(new Error('MODELS_DATA 未加载（请确认已引入 assets/models-data.js）'))
-    }
+    if (!window.MODELS_DATA) return Promise.reject(new Error('MODELS_DATA 未加载'))
     var j = window.MODELS_DATA
     state.data = j.data || []
     state.groupRatio = j.group_ratio || {}
     state.usableGroup = j.usable_group || {}
     state.vendors = j.vendors || []
+    state.supportedEndpoint = j.supported_endpoint || {}
     state.fetchedAt = j.fetched_at || ''
     return Promise.resolve()
   }
@@ -50,8 +63,7 @@
   /* ---------- 价格计算 ---------- */
   function groupMult(group) {
     var r = state.groupRatio[group]
-    if (r == null) return null
-    return r * GROUP_FACTOR
+    return r == null ? null : r * GROUP_FACTOR
   }
 
   function basePrices(m) {
@@ -75,12 +87,9 @@
     if (mult == null) return null
     if (base.kind === 'token') {
       return {
-        input: base.input * mult,
-        completion: base.completion * mult,
-        cacheHit: base.cacheHit * mult,
-        cache5m: base.cache5m * mult,
-        cache1h: base.cache1h * mult,
-        mult: mult
+        input: base.input * mult, completion: base.completion * mult,
+        cacheHit: base.cacheHit * mult, cache5m: base.cache5m * mult,
+        cache1h: base.cache1h * mult, mult: mult
       }
     }
     return { price: base.price * mult, mult: mult }
@@ -99,88 +108,49 @@
   }
 
   /* ---------- 厂商 ---------- */
-  function vendorIcon(m) {
+  function vendorOf(m) {
     var vid = m.vendor_id
-    var v = null
     for (var i = 0; i < state.vendors.length; i++) {
-      if (state.vendors[i].id === vid) { v = state.vendors[i]; break }
+      if (state.vendors[i].id === vid) return state.vendors[i]
     }
+    return null
+  }
+
+  function vendorHtml(m) {
+    var v = vendorOf(m)
     if (v && v.icon) {
       var file = v.icon.replace(/\./g, '-').toLowerCase()
-      return {
-        name: v.name,
-        icon: '<img class="model-vendor-img" alt="' + esc(v.name) + '" loading="lazy" src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/' + file + '.svg">'
-      }
+      return '<span class="model-vendor"><img class="model-vendor-img" alt="' + esc(v.name) + '" loading="lazy" src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/' + file + '.svg"></span>'
     }
-    return { name: v ? v.name : '', icon: '' }
+    var name = v ? v.name : (m.model_name || '')
+    var letter = (name.charAt(0) || 'A').toUpperCase()
+    return '<span class="model-vendor"><span class="model-vendor-letter" aria-hidden="true">' + esc(letter) + '</span></span>'
   }
 
-  var VENDOR_RULES = [
-    [/^(gpt|o[0-9]|openai|chatgpt)/i, 'OpenAI'],
-    [/^claude/i, 'Anthropic'],
-    [/^gemini|^palm/i, 'Google'],
-    [/^grok/i, 'xAI'],
-    [/^deepseek/i, 'DeepSeek'],
-    [/^qwen/i, 'Qwen'],
-    [/^kimi/i, 'Moonshot'],
-    [/^doubao/i, 'Doubao'],
-    [/^(glm|zhipu)/i, 'Zhipu'],
-    [/^minimax/i, 'MiniMax'],
-    [/^mistral/i, 'Mistral'],
-    [/^llama/i, 'Meta']
-  ]
-
-  function vendorFallback(name) {
-    for (var i = 0; i < VENDOR_RULES.length; i++) {
-      if (VENDOR_RULES[i][0].test(name)) return VENDOR_RULES[i][1]
-    }
-    var first = (name || '').split(/[-\s_.]/)[0]
-    return first ? first.charAt(0).toUpperCase() + first.slice(1) : 'AI'
+  /* ---------- 过滤 ---------- */
+  function tagsOf(m) {
+    return (m.tags || '').split(',').map(function (t) { return t.trim() }).filter(Boolean)
   }
 
-  function badgeLetter(name) {
-    return name.charAt(0).toUpperCase()
-  }
-
-  /* ---------- 工具 ---------- */
-  function esc(s) {
-    return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-  }
-
-  function typeLabel(t) {
-    var s = String(t || '').trim()
-    if (!s) return '其他'
-    if (TYPE_LABEL[s.toLowerCase()]) return TYPE_LABEL[s.toLowerCase()]
-    return s
-  }
-
-  function fmtPrice(v) {
-    if (v == null || isNaN(v) || v <= 0) return '—'
-    if (v >= 1) return '$' + v.toFixed(2)
-    if (v >= 0.01) return '$' + v.toFixed(3)
-    return '$' + v.toFixed(4)
-  }
-
-  function fmtCount(n) {
-    n = Number(n) || 0
-    if (n >= 10000) return (n / 10000).toFixed(1) + 'w'
-    if (n >= 1000) return (n / 1000).toFixed(1) + 'k'
-    return String(n)
-  }
-
-  /* ---------- 过滤排序 ---------- */
   function visibleModels() {
     var q = state.filter.q.toLowerCase()
-    var out = state.data.filter(function (m) {
-      if (state.filter.type && typeLabel(m.model_type) !== state.filter.type) return false
-      if (!q) return true
-      return (m.model_name || '').toLowerCase().indexOf(q) >= 0 ||
-        (m.description || '').toLowerCase().indexOf(q) >= 0 ||
-        (m.tags || '').toLowerCase().indexOf(q) >= 0
+    var f = state.filter
+    return state.data.filter(function (m) {
+      if (f.type && typeLabel(m.model_type) !== f.type) return false
+      if (f.group && (m.enable_groups || []).indexOf(f.group) < 0) return false
+      if (f.tag && tagsOf(m).indexOf(f.tag) < 0) return false
+      if (q) {
+        return (m.model_name || '').toLowerCase().indexOf(q) >= 0 ||
+          (m.description || '').toLowerCase().indexOf(q) >= 0 ||
+          (m.tags || '').toLowerCase().indexOf(q) >= 0
+      }
+      return true
     })
+  }
+
+  function sortedModels(list) {
     var sort = state.sort
-    out.sort(function (a, b) {
+    return list.slice().sort(function (a, b) {
       if (sort === 'price-asc' || sort === 'price-desc') {
         var pa = basePrices(a), pb = basePrices(b)
         var va = pa.kind === 'token' ? pa.input : pa.price
@@ -190,7 +160,6 @@
       if (sort === 'usage') return (b.usage_count || 0) - (a.usage_count || 0)
       return (a.sort_order == null ? 99999 : a.sort_order) - (b.sort_order == null ? 99999 : b.sort_order)
     })
-    return out
   }
 
   /* ---------- 卡片 ---------- */
@@ -206,106 +175,46 @@
     return best
   }
 
-  function groupRowsHtml(base, groups) {
-    if (!groups.length) return '<div class="model-group-unknown">暂无分组信息</div>'
-    var withPrice = [], noPrice = []
-    groups.forEach(function (g) {
-      var p = groupPrice(base, g)
-      if (p) withPrice.push({ group: g, p: p, v: p.input != null ? p.input : p.price })
-      else noPrice.push(g)
-    })
-    withPrice.sort(function (a, b) { return a.v - b.v })
-
-    var html = ''
-    withPrice.forEach(function (item, idx) {
-      var isBest = idx === 0
-      if (base.kind === 'token') {
-        html +=
-          '<div class="model-group-row' + (isBest ? ' is-best' : '') + '">' +
-            '<span class="model-group-name">' + esc(item.group) + '</span>' +
-            '<span class="model-group-main">' + fmtPrice(item.p.input) + '/1M</span>' +
-            '<span class="model-group-detail">输出 ' + fmtPrice(item.p.completion) +
-              ' · 缓存 ' + fmtPrice(item.p.cacheHit) +
-              ' · 5m建 ' + fmtPrice(item.p.cache5m) +
-              ' · 1h建 ' + fmtPrice(item.p.cache1h) + '</span>' +
-            (isBest ? '<span class="model-group-best">最划算</span>' : '') +
-          '</div>'
-      } else {
-        html +=
-          '<div class="model-group-row' + (isBest ? ' is-best' : '') + '">' +
-            '<span class="model-group-name">' + esc(item.group) + '</span>' +
-            '<span class="model-group-main">' + fmtPrice(item.p.price) + '</span>' +
-            '<span class="model-group-detail">' + (item.p.mult ? '×' + item.p.mult.toFixed(2) : '') + '</span>' +
-            (isBest ? '<span class="model-group-best">最划算</span>' : '') +
-          '</div>'
-      }
-    })
-
-    if (noPrice.length) {
-      html += '<div class="model-group-unknown">另有 ' + noPrice.length + ' 个分组（测试/特供等）价格未收录</div>'
-    }
-    return html
-  }
-
   function modelCard(m) {
     var base = basePrices(m)
     var level = priceLevel(base)
-    var vendor = vendorIcon(m)
-    var vendorName = vendor.name || vendorFallback(m.model_name)
     var groups = Array.isArray(m.enable_groups) ? m.enable_groups : []
     var best = cheapestGroup(base, groups)
 
     var priceHtml
     if (base.kind === 'token') {
-      if (best) {
-        priceHtml =
-          '<span class="price-main">低至 ' + fmtPrice(best.p.input) + '/1M</span>' +
-          '<span class="price-sub">基础 ' + fmtPrice(base.input) + ' · 输出 ' + fmtPrice(base.completion) + ' · 缓存 ' + fmtPrice(base.cacheHit) + '</span>'
-      } else {
-        priceHtml =
-          '<span class="price-main">' + fmtPrice(base.input) + '/1M</span>' +
-          '<span class="price-sub">输出 ' + fmtPrice(base.completion) + ' · 缓存 ' + fmtPrice(base.cacheHit) + '</span>'
-      }
+      var hero = best
+        ? '<div class="price-hero">低至 <strong>' + fmtPrice(best.p.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
+        : '<div class="price-hero"><strong>' + fmtPrice(base.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
+      priceHtml = hero +
+        '<div class="price-rows">' +
+          '<span>基础 <b>' + fmtPrice(base.input) + '</b></span>' +
+          '<span>输出 <b>' + fmtPrice(base.completion) + '</b></span>' +
+          '<span>缓存 <b>' + fmtPrice(base.cacheHit) + '</b></span>' +
+        '</div>'
     } else {
       priceHtml =
-        '<span class="price-main">' + (base.price ? fmtPrice(base.price) : '按次计费') + '</span>' +
-        '<span class="price-sub">' + (m.model_type ? typeLabel(m.model_type) : '') + '</span>'
+        '<div class="price-hero"><strong>' + (base.price ? fmtPrice(base.price) : '按次') + '</strong></div>'
     }
 
-    var tags = (m.tags || '').split(',').map(function (t) { return t.trim() }).filter(Boolean).slice(0, 5)
+    var tags = tagsOf(m).slice(0, 4)
     var tagHtml = tags.map(function (t) { return '<span class="model-tag">' + esc(t) + '</span>' }).join('')
 
-    var vendorHtml = vendor.icon
-      ? vendor.icon
-      : '<span class="model-vendor-letter" aria-hidden="true">' + esc(badgeLetter(vendorName)) + '</span>'
-
     return (
-      '<article class="model-card" data-name="' + esc(m.model_name) + '">' +
+      '<button class="model-card" type="button" data-name="' + esc(m.model_name) + '" aria-label="查看 ' + esc(m.model_name) + ' 详情">' +
         '<div class="model-card-head">' +
-          '<span class="model-vendor">' + vendorHtml + '</span>' +
+          vendorHtml(m) +
           '<div class="model-title">' +
-            '<h3 class="model-name">' + esc(m.model_name) + '</h3>' +
+            '<span class="model-name">' + esc(m.model_name) + '</span>' +
             '<span class="model-type">' + esc(typeLabel(m.model_type)) + '</span>' +
           '</div>' +
+          '<span class="price-tag price-tag--' + level.cls + '">' + level.label + '</span>' +
         '</div>' +
-        '<div class="model-card-body">' +
-          (m.description ? '<p class="model-desc">' + esc(m.description) + '</p>' : '') +
-          (tagHtml ? '<div class="model-tags">' + tagHtml + '</div>' : '') +
-          '<div class="model-price">' + priceHtml +
-            '<span class="price-tag price-tag--' + level.cls + '">' + level.label + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="model-card-foot">' +
-          '<span class="model-usage">调用 ' + fmtCount(m.usage_count) + '</span>' +
-          '<button class="model-groups-btn" type="button" aria-expanded="false" aria-label="查看 ' + esc(m.model_name) + ' 的分组价格">' +
-            '分组 ' + groups.length + ' <span class="model-groups-caret" aria-hidden="true">▾</span>' +
-          '</button>' +
-        '</div>' +
-        '<div class="model-groups" hidden>' +
-          '<p class="model-groups-title">各分组最终价格（$/1M tokens，含分组倍率）</p>' +
-          '<div class="model-groups-list">' + groupRowsHtml(base, groups) + '</div>' +
-        '</div>' +
-      '</article>'
+        (m.description ? '<p class="model-desc">' + esc(m.description) + '</p>' : '') +
+        (tagHtml ? '<div class="model-tags">' + tagHtml + '</div>' : '') +
+        '<div class="model-price">' + priceHtml + '</div>' +
+        '<div class="model-card-more">查看详情 →</div>' +
+      '</button>'
     )
   }
 
@@ -314,41 +223,245 @@
     var grid = document.getElementById('modelGrid')
     var countEl = document.getElementById('modelCount')
     var sourceEl = document.getElementById('modelSource')
-    var list = visibleModels()
+    var list = sortedModels(visibleModels())
 
     if (sourceEl) sourceEl.textContent = state.fetchedAt ? '数据更新 ' + state.fetchedAt : '数据：静态快照'
     if (countEl) countEl.textContent = '共 ' + list.length + ' 个模型'
-
     if (!list.length) {
-      grid.innerHTML = '<div class="models-state"><strong>没有匹配的模型</strong>换个关键词或类型试试。</div>'
-      return
+      grid.innerHTML = '<div class="models-state"><strong>没有匹配的模型</strong>换个筛选条件试试。</div>'
+    } else {
+      grid.innerHTML = list.map(modelCard).join('')
     }
-    grid.innerHTML = list.map(modelCard).join('')
+    renderActiveFilters()
+  }
+
+  function renderActiveFilters() {
+    var wrap = document.getElementById('activeFilters')
+    if (!wrap) return
+    var chips = []
+    if (state.filter.type) chips.push({ k: 'type', label: '类型：' + state.filter.type })
+    if (state.filter.group) chips.push({ k: 'group', label: '分组：' + state.filter.group })
+    if (state.filter.tag) chips.push({ k: 'tag', label: '标签：' + state.filter.tag })
+    wrap.innerHTML = chips.map(function (c) {
+      return '<span class="af-chip">' + esc(c.label) + '<button type="button" data-clear="' + c.k + '" aria-label="移除该筛选">×</button></span>'
+    }).join('')
+    Array.prototype.forEach.call(wrap.querySelectorAll('[data-clear]'), function (btn) {
+      btn.addEventListener('click', function () {
+        state.filter[btn.dataset.clear] = ''
+        buildSidebar()
+        render()
+      })
+    })
+  }
+
+  /* ---------- 侧边栏 ---------- */
+  function collectOptions() {
+    var types = {}, groups = {}, tags = {}
+    state.data.forEach(function (m) {
+      var t = typeLabel(m.model_type)
+      types[t] = (types[t] || 0) + 1
+      ;(m.enable_groups || []).forEach(function (g) { groups[g] = (groups[g] || 0) + 1 })
+      tagsOf(m).forEach(function (t2) { tags[t2] = (tags[t2] || 0) + 1 })
+    })
+    var typeArr = Object.keys(types).sort()
+    var groupArr = Object.keys(groups).sort(function (a, b) {
+      return (groups[b] - groups[a]) || a.localeCompare(b)
+    })
+    var tagArr = Object.keys(tags).sort(function (a, b) {
+      return (tags[b] - tags[a]) || a.localeCompare(b)
+    })
+    return { types: typeArr, groups: groupArr, tags: tagArr, typeCount: types, groupCount: groups, tagCount: tags }
+  }
+
+  function optionHtml(list, field, countMap) {
+    var sel = state.filter[field]
+    return list.map(function (name) {
+      return '<button class="sidebar-option' + (name === sel ? ' active' : '') + '" type="button" data-' + field + '="' + esc(name) + '">' +
+        esc(name) + ' <span class="sidebar-count">' + countMap[name] + '</span></button>'
+    }).join('') || '<span class="models-state" style="padding:12px 0">无</span>'
+  }
+
+  function buildSidebar() {
+    var opts = collectOptions()
+
+    var typeEl = document.getElementById('sidebarType')
+    if (typeEl) typeEl.innerHTML = optionHtml(opts.types, 'type', opts.typeCount)
+
+    var groupQ = (document.getElementById('sidebarGroupSearch').value || '').trim().toLowerCase()
+    var groupEl = document.getElementById('sidebarGroup')
+    if (groupEl) {
+      var glist = opts.groups.filter(function (g) { return !groupQ || g.toLowerCase().indexOf(groupQ) >= 0 })
+      groupEl.innerHTML = optionHtml(glist, 'group', opts.groupCount)
+    }
+
+    var tagQ = (document.getElementById('sidebarTagSearch').value || '').trim().toLowerCase()
+    var tagEl = document.getElementById('sidebarTag')
+    if (tagEl) {
+      var tlist = opts.tags.filter(function (t) { return !tagQ || t.toLowerCase().indexOf(tagQ) >= 0 })
+      tagEl.innerHTML = optionHtml(tlist, 'tag', opts.tagCount)
+    }
+  }
+
+  function bindSidebar() {
+    function bindList(id, field) {
+      var el = document.getElementById(id)
+      if (!el) return
+      el.addEventListener('click', function (e) {
+        var btn = e.target.closest('.sidebar-option')
+        if (!btn) return
+        var val = btn.getAttribute('data-' + field)
+        state.filter[field] = state.filter[field] === val ? '' : val
+        buildSidebar()
+        render()
+      })
+    }
+    bindList('sidebarType', 'type')
+    bindList('sidebarGroup', 'group')
+    bindList('sidebarTag', 'tag')
+
+    var gs = document.getElementById('sidebarGroupSearch')
+    if (gs) gs.addEventListener('input', buildSidebar)
+    var ts = document.getElementById('sidebarTagSearch')
+    if (ts) ts.addEventListener('input', buildSidebar)
+
+    var clear = document.getElementById('sidebarClear')
+    if (clear) clear.addEventListener('click', function () {
+      state.filter = { q: state.filter.q, type: '', group: '', tag: '' }
+      if (gs) gs.value = ''
+      if (ts) ts.value = ''
+      buildSidebar()
+      render()
+    })
+
+    var filterBtn = document.getElementById('filterBtn')
+    var sidebar = document.getElementById('modelsSidebar')
+    if (filterBtn && sidebar) filterBtn.addEventListener('click', function () { sidebar.classList.add('open') })
+    var close = document.getElementById('sidebarClose')
+    if (close) close.addEventListener('click', function () { sidebar.classList.remove('open') })
+  }
+
+  /* ---------- 详情侧页 ---------- */
+  function endpointRows(m) {
+    var types = Array.isArray(m.supported_endpoint_types) ? m.supported_endpoint_types : []
+    return types.map(function (t) {
+      var ep = state.supportedEndpoint[t]
+      var path = ep ? ep.path : ''
+      var method = ep ? ep.method : ''
+      return '<div class="drawer-endpoint"><code>' + esc(t) + '</code>' +
+        (path ? '<span>' + esc(method) + ' ' + esc(path) + '</span>' : '<span>—</span>') +
+        '</div>'
+    }).join('') || '<div class="drawer-endpoint"><code>—</code></div>'
+  }
+
+  function groupTable(m) {
+    var base = basePrices(m)
+    var groups = Array.isArray(m.enable_groups) ? m.enable_groups : []
+    if (!groups.length) return '<div class="models-state" style="padding:16px">暂无分组信息</div>'
+    var withPrice = [], noPrice = []
+    groups.forEach(function (g) {
+      var p = groupPrice(base, g)
+      if (p) withPrice.push({ group: g, p: p, v: p.input != null ? p.input : p.price })
+      else noPrice.push(g)
+    })
+    withPrice.sort(function (a, b) { return a.v - b.v })
+
+    var rows = withPrice.map(function (item, idx) {
+      var best = idx === 0 ? ' is-best' : ''
+      if (base.kind === 'token') {
+        return '<tr class="' + best + '"><td>' + esc(item.group) + '</td><td>' + fmtPrice(item.p.input) +
+          '</td><td>' + fmtPrice(item.p.completion) + '</td><td>' + fmtPrice(item.p.cacheHit) +
+          '</td><td>' + fmtPrice(item.p.cache5m) + '</td><td>' + fmtPrice(item.p.cache1h) + '</td></tr>'
+      }
+      return '<tr class="' + best + '"><td>' + esc(item.group) + '</td><td>' + fmtPrice(item.p.price) + '</td></tr>'
+    }).join('')
+
+    var head = base.kind === 'token'
+      ? '<th>分组</th><th>输入</th><th>输出</th><th>缓存</th><th>5m建</th><th>1h建</th>'
+      : '<th>分组</th><th>价格</th>'
+
+    var extra = noPrice.length
+      ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个分组（测试/特供等）价格未收录。</p>'
+      : ''
+
+    return '<table class="drawer-table"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table>' + extra
+  }
+
+  function basePriceTable(m) {
+    var base = basePrices(m)
+    if (base.kind !== 'token') {
+      return '<div class="drawer-endpoint"><code>' + fmtPrice(base.price) + '</code><span>按次 / 按单位计费</span></div>'
+    }
+    return (
+      '<table class="drawer-table"><thead><tr><th>项目</th><th>价格 / 1M</th></tr></thead><tbody>' +
+        '<tr><td>输入</td><td>' + fmtPrice(base.input) + '</td></tr>' +
+        '<tr><td>输出</td><td>' + fmtPrice(base.completion) + '</td></tr>' +
+        '<tr><td>缓存命中</td><td>' + fmtPrice(base.cacheHit) + '</td></tr>' +
+        '<tr><td>5m 缓存创建</td><td>' + fmtPrice(base.cache5m) + '</td></tr>' +
+        '<tr><td>1h 缓存创建</td><td>' + fmtPrice(base.cache1h) + '</td></tr>' +
+      '</tbody></table>'
+    )
+  }
+
+  function renderDrawer(m) {
+    var content = document.getElementById('drawerContent')
+    var base = basePrices(m)
+    var level = priceLevel(base)
+    var tags = tagsOf(m)
+    content.innerHTML =
+      '<div class="drawer-head">' +
+        '<div class="drawer-head-top">' + vendorHtml(m) +
+          '<div><h2 class="drawer-name">' + esc(m.model_name) + '</h2>' +
+          '<span class="model-type">' + esc(typeLabel(m.model_type)) + '</span></div>' +
+          '<span class="price-tag price-tag--' + level.cls + '">' + level.label + '</span>' +
+        '</div>' +
+        (m.description ? '<p class="drawer-desc">' + esc(m.description) + '</p>' : '') +
+        (tags.length ? '<div class="drawer-tags">' + tags.map(function (t) { return '<span class="model-tag">' + esc(t) + '</span>' }).join('') + '</div>' : '') +
+      '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">基础价格</h3>' + basePriceTable(m) + '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">调用端点</h3>' + endpointRows(m) + '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">各分组计价</h3>' + groupTable(m) + '</div>' +
+      '<p class="drawer-group-legend">价格为估算（基础价 × 分组倍率），以平台实际扣费为准。</p>'
+  }
+
+  function openDrawer(m) {
+    renderDrawer(m)
+    var drawer = document.getElementById('modelDrawer')
+    drawer.hidden = false
+    // 触发过渡
+    requestAnimationFrame(function () { drawer.classList.add('open') })
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeDrawer() {
+    var drawer = document.getElementById('modelDrawer')
+    drawer.classList.remove('open')
+    setTimeout(function () { drawer.hidden = true }, 260)
+    document.body.style.overflow = ''
+  }
+
+  function bindDrawer() {
+    var grid = document.getElementById('modelGrid')
+    if (grid) grid.addEventListener('click', function (e) {
+      var card = e.target.closest('.model-card')
+      if (!card) return
+      var name = card.getAttribute('data-name')
+      var m = null
+      for (var i = 0; i < state.data.length; i++) {
+        if (state.data[i].model_name === name) { m = state.data[i]; break }
+      }
+      if (m) openDrawer(m)
+    })
+
+    var closeBtn = document.getElementById('drawerClose')
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer)
+    var backdrop = document.getElementById('drawerBackdrop')
+    if (backdrop) backdrop.addEventListener('click', closeDrawer)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !document.getElementById('modelDrawer').hidden) closeDrawer()
+    })
   }
 
   /* ---------- 工具栏 ---------- */
-  function buildTypeChips() {
-    var seen = {}
-    state.data.forEach(function (m) {
-      var t = typeLabel(m.model_type)
-      if (!seen[t]) seen[t] = true
-    })
-    var types = ['全部'].concat(Object.keys(seen).sort())
-    var wrap = document.getElementById('modelTypeChips')
-    if (!wrap) return
-    wrap.innerHTML = types.map(function (t, i) {
-      return '<button class="models-chip' + (i === 0 ? ' active' : '') + '" type="button" data-type="' + esc(t) + '">' + esc(t) + '</button>'
-    }).join('')
-    wrap.addEventListener('click', function (e) {
-      var btn = e.target.closest('.models-chip')
-      if (!btn) return
-      wrap.querySelectorAll('.models-chip').forEach(function (c) { c.classList.remove('active') })
-      btn.classList.add('active')
-      state.filter.type = btn.dataset.type === '全部' ? '' : btn.dataset.type
-      render()
-    })
-  }
-
   function bindToolbar() {
     var search = document.getElementById('modelSearch')
     if (search) search.addEventListener('input', function () {
@@ -360,16 +473,6 @@
       state.sort = sort.value
       render()
     })
-    var grid = document.getElementById('modelGrid')
-    if (grid) grid.addEventListener('click', function (e) {
-      var btn = e.target.closest('.model-groups-btn')
-      if (!btn) return
-      var panel = btn.closest('.model-card').querySelector('.model-groups')
-      var open = panel.classList.toggle('open')
-      panel.hidden = !open
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false')
-      btn.querySelector('.model-groups-caret').style.transform = open ? 'rotate(180deg)' : ''
-    })
   }
 
   /* ---------- 初始化 ---------- */
@@ -378,11 +481,13 @@
     if (!grid) return
     grid.innerHTML = '<div class="models-state"><strong>正在加载模型数据…</strong></div>'
     bindToolbar()
+    bindSidebar()
+    bindDrawer()
     loadData().then(function () {
-      buildTypeChips()
+      buildSidebar()
       render()
-    }).catch(function () {
-      grid.innerHTML = '<div class="models-state"><strong>加载失败</strong>请稍后重试，或直接访问 <a href="https://sheepaiplus.top/pricing" target="_blank" rel="noopener">Sheep AI Plus 模型广场</a>。</div>'
+    }).catch(function (e) {
+      grid.innerHTML = '<div class="models-state"><strong>加载失败</strong>' + esc(e.message || '') + '</div>'
     })
   }
 

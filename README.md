@@ -7,7 +7,10 @@
 ## 项目结构
 
 ```
-index.html                — 主页面（Hero + 6 个内容区块）
+index.html                — 主页面（Hero + 7 个内容区块）
+models/
+  index.html              — 模型广场（搜索模型、查看各分组最终价格）
+  data: assets/models.json（含模型 + 分组倍率 group_ratio + 厂商）
 announcements/
   index.html              — 公告中心（自动渲染全部公告）
   *.html                  — 每条公告一个独立详情页
@@ -26,6 +29,7 @@ css/
   style.css               — 全站基础设计（CSS 变量驱动，浅/深双主题）
   guide.css               — 教程页与 CC Switch Widget 特有组件
   tools.css               — 配置工具页特有组件
+  models.css              — 模型广场特有组件
 js/
   site.js                 — 站点公共组件（统一渲染 Header / Footer / Toast，含生态模块注册表）
   main.js                 — 主题切换、仓库卡片渲染、邮箱复制
@@ -34,11 +38,13 @@ js/
   ccswitch-presets.js     — CC Switch 配置预设（数据）
   ccswitch-core.js        — CC Switch Deep Link 生成核心（唯一一份逻辑）
   ccswitch-widget.js      — CC Switch 配置组件（Guide 页内嵌）
-assets/                   — 图片素材（Logo、QQ 群二维码）
+  models.js               — 模型广场渲染逻辑（价格 = model_ratio × 分组倍率）
+assets/                   — 图片素材（Logo、QQ 群二维码、模型数据快照 models.json）
 docs/
   homepage-guide.md       — 主页维护与更新规范
   module-guide.md         — 新增模块开发规范
   module-maintenance.md   — 现有模块（公告/快速开始/配置工具）维护与更新规范
+  models-update-guide.md  — 模型广场数据更新指南（抓取 pricing.json 后如何更新）
   superpowers/            — 设计文档与实现计划（spec + plan）
 ```
 
@@ -50,7 +56,7 @@ docs/
 网站
 ├── 全局组件   js/site.js（Header / Footer / Toast / 主题切换按钮）
 ├── 公共布局   所有页面共享顶部导航、页脚、主题、基础样式
-├── 页面模块   announcements / guide / tools …（每个模块独立目录）
+├── 页面模块   models / announcements / guide / tools …（每个模块独立目录）
 └── 静态数据   js/announcements.js 等
 ```
 
@@ -70,11 +76,12 @@ site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `g
 1. 在仓库根目录新建对应文件夹（如未来 `download/`、`about/`，模型广场暂不规划）；
 2. 在 `js/site.js` 的 `NAV` 里登记一个导航项（独立首页用页面链接，首页区块用锚点 `#xxx`）。
 
-详细的模块开发与维护规范见 `docs/` 下的三份文档：
+详细的模块开发与维护规范见 `docs/` 下的文档：
 
 - [`docs/homepage-guide.md`](docs/homepage-guide.md) — 主页维护与更新规范
 - [`docs/module-guide.md`](docs/module-guide.md) — 新增模块开发规范
 - [`docs/module-maintenance.md`](docs/module-maintenance.md) — 现有模块维护与更新规范
+- [`docs/models-update-guide.md`](docs/models-update-guide.md) — 模型广场数据更新指南
 
 ## 技术
 

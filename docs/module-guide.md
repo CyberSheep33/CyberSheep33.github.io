@@ -6,6 +6,7 @@
 > - 本文件（`module-guide.md`）— 新增模块开发规范
 > - [`homepage-guide.md`](homepage-guide.md) — 主页维护与更新规范
 > - [`module-maintenance.md`](module-maintenance.md) — 现有模块（公告 / 快速开始 / 配置工具）维护与更新规范
+> - [`models-update-guide.md`](models-update-guide.md) — 模型广场数据更新指南
 >
 > 本仓库为纯静态、无构建工具、GitHub Pages 直跑的架构。
 
@@ -19,7 +20,7 @@ CyberSheep33.github.io 是赛博小羊 AI 生态的统一入口，采用「公�
 网站
 ├── 全局组件    js/site.js（统一渲染 Header / Footer / Toast）
 ├── 公共布局    所有页面共享顶部导航、页脚、主题、基础样式（css/style.css）
-├── 页面模块    announcements / guide / tools …（每个模块一个独立目录）
+├── 页面模块    models / announcements / guide / tools …（每个模块一个独立目录）
 └── 静态数据    js/announcements.js 等数据文件
 ```
 

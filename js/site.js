@@ -31,12 +31,13 @@
           首页区块类模块用锚点 #xxx）；
        3. 如需独立入口，把模块目录作为该模块的入口页即可。
 
-     本阶段已实现：guide（快速开始中心）、announcements（公告中心）、tools（配置工具）。
-     未来预留：download（下载中心）、models（模型广场，暂不实现）、studio、about。
+     本阶段已实现：models（模型广场）、guide（快速开始中心）、announcements（公告中心）、tools（配置工具）。
+     未来预留：download（下载中心）、about、studio。
      ============================================================ */
 
   var NAV = [
     { label: 'API 平台', href: '#api', anchor: true },
+    { label: '模型广场', href: 'models/index.html', section: 'models' },
     { label: '博客', href: '#blog', anchor: true },
     { label: '快速开始', href: 'guide/index.html', section: 'guide' },
     { label: '公告', href: 'announcements/index.html', section: 'announcements' },
@@ -49,15 +50,16 @@
   var EMAIL = 'cybersheep33@gmail.com'
   var COPYRIGHT = '© 2026 CyberSheep 赛博小羊'
 
-  /* 是否位于子目录（guide / announcements / tools） */
+  /* 是否位于子目录（guide / announcements / tools / models） */
   function isSubPage() {
-    return /\/guide\/|\/announcements\/|\/tools\//.test(location.pathname)
+    return /\/guide\/|\/announcements\/|\/tools\/|\/models\//.test(location.pathname)
   }
 
   var base = isSubPage() ? '../' : ''
 
   function currentSection() {
     var p = location.pathname
+    if (/\/models\//.test(p)) return 'models'
     if (/\/guide\//.test(p)) return 'guide'
     if (/\/announcements\//.test(p)) return 'announcements'
     if (/\/tools\//.test(p)) return 'tools'

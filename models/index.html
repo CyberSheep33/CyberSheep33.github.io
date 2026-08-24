@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CyberSheep 模型广场：Sheep AI Plus 全部模型的搜索、筛选、分组与价格速查，展示每个模型在各分组下的最终价格。">
+  <meta name="keywords" content="模型广场,Sheep AI Plus,模型价格,分组,AI模型,CyberSheep">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="模型广场 — CyberSheep 赛博小羊">
+  <meta property="og:description" content="搜索 Sheep AI Plus 全部模型，查看各分组下的最终价格。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>模型广场 — CyberSheep 赛博小羊</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/models.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header" id="siteHeader"></header>
+
+  <main>
+    <div class="section models-hero">
+      <a class="models-back" href="../index.html">← 返回首页</a>
+      <span class="kicker">Models · 模型广场</span>
+      <h1>模型广场</h1>
+      <p class="models-sub">搜索 Sheep AI Plus 全部可用模型，查看每个模型在各分组下的最终价格（输入 / 输出 / 缓存）。选择合适分组，价格可以便宜很多。</p>
+    </div>
+
+    <div class="section">
+      <div class="models-toolbar">
+        <div class="models-search-wrap">
+          <input class="models-search" id="modelSearch" type="search" placeholder="搜索模型名称 / 描述 / 标签，例如 deepseek、claude、gpt" autocomplete="off" aria-label="搜索模型">
+          <span class="models-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+          </span>
+        </div>
+        <div class="models-filters" id="modelTypeChips" role="group" aria-label="按类型筛选">
+          <!-- 由 js/models.js 动态生成 -->
+        </div>
+        <div class="models-toolbar-bottom">
+          <span class="models-count" id="modelCount">加载中…</span>
+          <span class="models-source" id="modelSource">数据：—</span>
+          <select class="models-sort" id="modelSort" aria-label="排序方式">
+            <option value="default">默认排序</option>
+            <option value="usage">按调用量</option>
+            <option value="price-asc">价格从低到高</option>
+            <option value="price-desc">价格从高到低</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="model-grid" id="modelGrid" aria-live="polite">
+        <!-- 由 js/models.js 渲染 -->
+      </div>
+
+      <p class="models-note">
+        💡 价格为估算的最终价格（基础价 × 分组倍率，含输入 / 输出 / 缓存命中 / 缓存创建），具体以 Sheep AI Plus 平台实际扣费为准。
+        数据为静态快照，随站点定期更新；想了解分组怎么选更划算？看 <a href="../announcements/sheep-ai-plus-group-guide.html">分组选择指南</a>。
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+
+  <script src="../js/site.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/models.js"></script>
+</body>
+</html>

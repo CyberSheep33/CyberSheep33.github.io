@@ -7,16 +7,17 @@
 
 ## 1. 首页结构
 
-首页 = Hero + 6 个内容区块（`<section>`）：
+首页 = Hero + 7 个内容区块（`<section>`）：
 
 ```
 Hero（#top）
 ├── 01 API 平台（#api）      Sheep AI Plus
-├── 02 博客（#blog）          CyberSheep 博客
-├── 03 快速开始（#quickstart） AI Coding 工具配置入口
-├── 04 公告（#announcements） 最新 3 条 + 查看全部
-├── 05 SheepAI-Lab（#lab）    开源组织
-└── 06 赛博小羊小项目（#projects）仓库卡片
+├── 02 模型广场（#models）   模型搜索与各分组价格
+├── 03 博客（#blog）          CyberSheep 博客
+├── 04 快速开始（#quickstart） AI Coding 工具配置入口
+├── 05 公告（#announcements） 最新 3 条 + 查看全部
+├── 06 SheepAI-Lab（#lab）    开源组织
+└── 07 赛博小羊小项目（#projects）仓库卡片
 ```
 
 页面骨架由公共组件承载：
@@ -38,11 +39,12 @@ Hero（#top）
 |---|---|---|
 | Hero 文案 | `index.html` `.hero-copy` | 主标题、副标题、三个按钮 |
 | 01 API 平台 | `index.html` `#api` 内 `.card-desc`、`#card-actions` | 描述、按钮（进入/模型广场/API 文档）、模型跑马灯 |
-| 02 博客 | `index.html` `#blog` | 描述与「阅读博客」按钮链接 |
-| 03 快速开始 | `index.html` `#quickstart` 内 `.quickstart-grid` | 入口卡片；完整内容在 `guide/index.html` |
-| 04 公告 | 自动渲染 | 由 `js/announcements.js` 取最新 3 条，无需改首页 |
-| 05 SheepAI-Lab | `index.html` `#lab` | 描述与链接 |
-| 06 小项目 | `js/main.js` 的 `REPOS` 数组 | 增删仓库卡片 |
+| 02 模型广场 | `index.html` `#models` | 入口卡片；完整页面在 `models/index.html` |
+| 03 博客 | `index.html` `#blog` | 描述与「阅读博客」按钮链接 |
+| 04 快速开始 | `index.html` `#quickstart` 内 `.quickstart-grid` | 入口卡片；完整内容在 `guide/index.html` |
+| 05 公告 | 自动渲染 | 由 `js/announcements.js` 取最新 3 条，无需改首页 |
+| 06 SheepAI-Lab | `index.html` `#lab` | 描述与链接 |
+| 07 小项目 | `js/main.js` 的 `REPOS` 数组 | 增删仓库卡片 |
 
 **导航**：统一在 `js/site.js` 的 `NAV` 数组维护，首页只渲染 `#siteHeader` 占位符，不直接写导航 HTML。
 

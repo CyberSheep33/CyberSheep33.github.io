@@ -208,6 +208,9 @@ supported_endpoint_types, quota_type, model_price, usage_count, available, icon,
 - **可用分组白名单**：`js/models.js` 顶部的 `AVAILABLE_GROUPS`（来自「Sheep AI 与 Sheep AI Plus 分组对照」CSV）。
   分组筛选与详情页计价只展示白名单内的分组，自动剔除 API 里的内部测试 / 特供 / 专线等不开放分组。
   若上游新增开放分组，需同步把分组名加进 `AVAILABLE_GROUPS`；
+- **品牌归属修正**：`js/models.js` 顶部的 `BRAND_OVERRIDES` 用于纠正上游 `/api/pricing`
+  中个别模型 vendor 标错的问题（如 `aigc-image-kling` 被误标为腾讯，已改归 Kling）。
+  新增错放时，把「模型名 → 正确 vendor_id」加进该映射即可，无需改数据文件；
 - 本地调试请直接双击打开 `models/index.html`，需保证 `models-data.js` 在 `models.js` 之前引入。
 
 ---

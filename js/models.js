@@ -47,6 +47,14 @@
     return AVAILABLE_GROUPS.indexOf(g) >= 0
   }
 
+  /* 品牌归属修正：上游 /api/pricing 中个别模型 vendor 标错，这里人工核对后覆盖。
+     键：模型名；值：正确的 vendor_id。
+     说明：aigc-image-kling 被上游标为「腾讯」(61)，但属于 Kling 系列（vendor 88），
+     其余所有 kling-* 模型均在 Kling 名下。 */
+  var BRAND_OVERRIDES = {
+    'aigc-image-kling': 88
+  }
+
   var state = {
     data: [],
     groupRatio: {},
@@ -100,6 +108,15 @@
     return null
   }
 
+  function brandVendorId(m) {
+    if (m && BRAND_OVERRIDES.hasOwnProperty(m.model_name)) return BRAND_OVERRIDES[m.model_name]
+    return m.vendor_id
+  }
+
+  function vendorOf(m) {
+    return vendorById(brandVendorId(m))
+  }
+
   var VENDOR_RULES = [
     [/^(gpt|o[0-9]|openai|chatgpt)/i, 'OpenAI'],
     [/^claude/i, 'Anthropic'],
@@ -116,7 +133,7 @@
   ]
 
   function vendorNameOf(m) {
-    var v = vendorById(m.vendor_id)
+    var v = vendorOf(m)
     if (v && v.name) return v.name
     var name = m.model_name || ''
     for (var i = 0; i < VENDOR_RULES.length; i++) {
@@ -126,7 +143,7 @@
   }
 
   function vendorHtml(m) {
-    var v = vendorById(m.vendor_id)
+    var v = vendorOf(m)
     if (v && v.icon) {
       var file = v.icon.replace(/\./g, '-').toLowerCase()
       return '<span class="model-vendor"><img class="model-vendor-img" alt="' + esc(v.name) + '" loading="lazy" src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/' + file + '.svg"></span>'
@@ -195,7 +212,7 @@
     var q = state.filter.q.toLowerCase()
     var f = state.filter
     return state.data.filter(function (m) {
-      if (f.brand && String(m.vendor_id) !== f.brand) return false
+      if (f.brand && String(brandVendorId(m)) !== f.brand) return false
       if (f.type && typeLabel(m.model_type) !== f.type) return false
       if (f.group && availableGroupsOf(m).indexOf(f.group) < 0) return false
       if (f.tag && tagsOf(m).indexOf(f.tag) < 0) return false
@@ -324,7 +341,7 @@
   function collectOptions() {
     var brands = {}, types = {}, groups = {}, tags = {}
     state.data.forEach(function (m) {
-      var vid = String(m.vendor_id == null ? '0' : m.vendor_id)
+      var vid = String(brandVendorId(m) == null ? '0' : brandVendorId(m))
       brands[vid] = (brands[vid] || 0) + 1
       var t = typeLabel(m.model_type)
       types[t] = (types[t] || 0) + 1

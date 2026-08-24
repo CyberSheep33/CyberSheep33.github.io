@@ -78,33 +78,34 @@
 
   <main>
     <article class="section announce-page group-intro">
-      <a class="announce-back" href="index.html">← 返回全部公告</a>
-      <div class="announce-embed">
-          <div class="gi-hero">
-            <span class="gi-kicker">💡 使用速查 · Sheep AI Plus</span>
-            <h1>Sheep AI Plus 分组介绍</h1>
-            <p class="gi-lead">同一类模型往往有多个分组，不同分组的倍率与用途不同。这里按类别列出 Sheep AI Plus 的常用分组、倍率与简介，方便你按场景选择合适的分组。</p>
-          </div>
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
 
-          <div class="gi-tools">
-            <input id="giSearch" class="gi-search" type="search" placeholder="搜索分组名 / 简介，例如 codex、claude、图像">
-            <div id="giChips" class="gi-chips"></div>
-          </div>
-
-          <div class="gi-count" id="giCount"></div>
-          <div class="gi-wrap">
-            <table>
-              <thead><tr><th>类别</th><th>分组</th><th>倍率</th><th>简介</th></tr></thead>
-              <tbody id="giRows"></tbody>
-            </table>
-          </div>
-
-          <div class="gi-note">
-            说明：上表简介为根据新旧分组命名推测的用户友好说明，并非上游技术实现或服务等级的官方承诺。
-            分组倍率仅代表相对成本，实际扣费以 Sheep AI Plus 模型页与消费记录为准。
-            想了解怎么选分组更划算？看 <a href="sheep-ai-plus-group-guide.html">分组选择指南</a>；想按模型查各分组价格？去 <a href="../models/index.html">模型广场</a>。
-          </div>
+        <div class="gi-hero">
+          <span class="gi-kicker">💡 使用速查 · Sheep AI Plus</span>
+          <h1>Sheep AI Plus 分组介绍</h1>
+          <p class="gi-lead">同一类模型往往有多个分组，不同分组的倍率与用途不同。这里按类别列出 Sheep AI Plus 的常用分组、倍率与简介，方便你按场景选择合适的分组。</p>
         </div>
+
+        <div class="gi-tools">
+          <input id="giSearch" class="gi-search" type="search" placeholder="搜索分组名 / 简介，例如 codex、claude、图像">
+          <div id="giChips" class="gi-chips"></div>
+        </div>
+
+        <div class="gi-count" id="giCount"></div>
+        <div class="gi-wrap">
+          <table>
+            <thead><tr><th>类别</th><th>分组</th><th>倍率</th><th>简介</th></tr></thead>
+            <tbody id="giRows"></tbody>
+          </table>
+        </div>
+
+        <div class="gi-note">
+          说明：
+          分组倍率仅代表相对成本，实际扣费以 Sheep AI Plus 模型页与消费记录为准。
+          想了解怎么选分组更划算？看 <a href="sheep-ai-plus-group-guide.html">分组选择指南</a>；想按模型查各分组价格？去 <a href="../models/index.html">模型广场</a>。
+        </div>
+      </div>
     </article>
   </main>
 
@@ -139,6 +140,9 @@
         if (currentCat !== '全部' && g.cat !== currentCat) return false
         if (q) return (g.name + ' ' + g.cat + ' ' + g.desc).toLowerCase().indexOf(q) >= 0
         return true
+      }).sort(function (a, b) {
+        if (a.cat !== b.cat) return a.cat < b.cat ? -1 : 1
+        return a.ratio - b.ratio
       })
       count.textContent = '共 ' + list.length + ' 个分组'
       tbody.innerHTML = list.map(function (g) {

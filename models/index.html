@@ -23,14 +23,7 @@
   <header class="site-header" id="siteHeader"></header>
 
   <main>
-    <div class="section models-hero">
-      <a class="models-back" href="../index.html">← 返回首页</a>
-      <span class="kicker">Models · 模型广场</span>
-      <h1>模型广场</h1>
-      <p class="models-sub">按分组、类型、标签筛选 Sheep AI Plus 全部可用模型，点击任意模型查看各分组最终价格与调用端点。选择合适分组，价格可以便宜很多。</p>
-    </div>
-
-    <div class="section">
+    <div class="section models-layout-wrap">
       <div class="models-layout">
         <!-- 左侧筛选侧边栏 -->
         <aside class="models-sidebar" id="modelsSidebar" aria-label="模型筛选">
@@ -84,7 +77,6 @@
               <span class="models-source" id="modelSource">数据：—</span>
               <select class="models-sort" id="modelSort" aria-label="排序方式">
                 <option value="default">默认排序</option>
-                <option value="usage">按调用量</option>
                 <option value="price-asc">价格从低到高</option>
                 <option value="price-desc">价格从高到低</option>
               </select>

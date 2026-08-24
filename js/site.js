@@ -36,6 +36,7 @@
      ============================================================ */
 
   var NAV = [
+    { label: '首页', href: 'index.html' },
     { label: 'API 平台', href: '#api', anchor: true },
     { label: '模型广场', href: 'models/index.html', section: 'models' },
     { label: '博客', href: '#blog', anchor: true },

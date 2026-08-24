@@ -48,6 +48,10 @@
   align-items: start;
 }
 
+.models-layout-wrap {
+  padding-top: 28px;
+}
+
 .models-main {
   min-width: 0;
 }
@@ -167,7 +171,7 @@
 
 .sidebar-list--brand {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 6px;
 }
 
@@ -218,6 +222,17 @@
 .sidebar-option .sidebar-count {
   color: var(--soft);
   font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.sidebar-option .sidebar-cat {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--primary) 8%, var(--tag-bg));
+  color: var(--soft);
+  font-size: 0.66rem;
   font-weight: 700;
 }
 

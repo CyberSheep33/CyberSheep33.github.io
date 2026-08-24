@@ -47,6 +47,41 @@
     return AVAILABLE_GROUPS.indexOf(g) >= 0
   }
 
+  /* 分组类别（来自「Sheep AI 与 Sheep AI Plus 分组对照」CSV 的「模型 / 类别」列，
+     键用 API 实际分组名） */
+  var GROUP_CATEGORIES = {
+    'AWS-Bedrock-1': 'Claude', 'AWS-Claude-1': 'Claude', 'AWS-Claude-2': 'Claude',
+    'AWS-Claude-3': 'Claude', 'AWS-Platfrom-1': 'Claude', 'Anthropic-Claude-1': 'Claude',
+    'Azure-Claude-1': 'Claude', 'Claude-Code-1': 'Claude', 'Claude-Code-2': 'Claude',
+    'Kiro-Claude-1': 'Claude', 'Vertex-Claude-1': 'Claude',
+    'Azure-Gpt-1': 'GPT / Codex', 'Azure-Gpt-2': 'GPT / Codex', 'Azure-Gpt-3': 'GPT / Codex',
+    'Azure-Gpt-4': 'GPT / Codex', 'Azure-Gpt-5': 'GPT / Codex', 'Codex-Gpt-1': 'GPT / Codex',
+    'Codex-Gpt-2': 'GPT / Codex', 'Codex-Gpt-3': 'GPT / Codex', 'Openai-Gpt-1': 'GPT / Codex',
+    'Openai-Gpt-2': 'GPT / Codex',
+    'Aistudio-Gemini-1': 'Gemini', 'Aistudio-Gemini-2': 'Gemini', 'Aistudio-Gemini-3': 'Gemini',
+    'Aistudio-Gemini-4': 'Gemini', 'Anti-Gemini-1': 'Gemini', 'Cli-Gemini-1': 'Gemini',
+    'Reverse-Gemini-1': 'Gemini', 'Reverse-Gemini-2': 'Gemini',
+    'Vertex-Gemini-1': 'Gemini', 'Vertex-Gemini-2': 'Gemini', 'Vertex-Gemini-3': 'Gemini',
+    'Azure-Grok-1': 'Grok', 'Azure-Grok-2': 'Grok', 'Cli-Grok-1': 'Grok', 'Cli-Grok-2': 'Grok',
+    'Xai-Grok-1': 'Grok',
+    'MJ-1': 'MJ / Suno', 'MJ-2': 'MJ / Suno', 'Suno-1': 'MJ / Suno', 'Suno-2': 'MJ / Suno',
+    'Kling-1': 'Kling', 'Kling-2': 'Kling',
+    'Vidu-1': 'Vidu', 'Vidu-2': 'Vidu',
+    'Hailuo-1': 'Hailuo', 'Hailuo-2': 'Hailuo', 'Hailuo-3': 'Hailuo',
+    'Pix-1': 'Pix',
+    'Doubao-1': 'Doubao', 'Doubao-2': 'Doubao', 'Doubao-3': 'Doubao',
+    'Alibaba-1': 'Alibaba', 'Alibaba-2': 'Alibaba', 'Alibaba-3': 'Alibaba',
+    'Self-Deployed-1': 'Self-Deployed', 'Self-Deployed-2': 'Self-Deployed',
+    'Self-Deployed-3': 'Self-Deployed', 'Self-Deployed-4': 'Self-Deployed',
+    'Kimi-1': 'Kimi', 'Kimi-2': 'Kimi',
+    'Xiaomi-1': 'Xiaomi', 'Xiaomi-2': 'Xiaomi',
+    'Wenxin-1': 'Wenxin', 'Wenxin-2': 'Wenxin', 'Wenxin-3': 'Wenxin',
+    'SiliconFlow-1': 'SiliconFlow',
+    'Spark-1': 'Spark', 'Spark-2': 'Spark', 'Spark-3': 'Spark',
+    'Gpt-Image-1': 'GPT-Image', 'Gpt-Image-2': 'GPT-Image',
+    'Seedance-1': 'Seedance', 'deepseek-1': 'DeepSeek'
+  }
+
   /* 品牌归属修正：上游 /api/pricing 中个别模型 vendor 标错，这里人工核对后覆盖。
      键：模型名；值：正确的 vendor_id。
      说明：aigc-image-kling 被上游标为「腾讯」(61)，但属于 Kling 系列（vendor 88），
@@ -364,12 +399,14 @@
       brandCount: brands, typeCount: types, groupCount: groups, tagCount: tags }
   }
 
-  function optionHtml(list, field, countMap, labelFn) {
+  function optionHtml(list, field, countMap, labelFn, subFn) {
     var sel = state.filter[field]
     return list.map(function (name) {
       var label = labelFn ? labelFn(name) : name
+      var sub = subFn ? subFn(name) : ''
+      var subHtml = sub ? '<span class="sidebar-cat">' + esc(sub) + '</span>' : ''
       return '<button class="sidebar-option' + (name === sel ? ' active' : '') + '" type="button" data-' + field + '="' + esc(name) + '">' +
-        esc(label) + ' <span class="sidebar-count">' + countMap[name] + '</span></button>'
+        esc(label) + subHtml + ' <span class="sidebar-count">' + countMap[name] + '</span></button>'
     }).join('') || '<span class="models-state" style="padding:12px 0">无</span>'
   }
 
@@ -388,7 +425,9 @@
     var groupEl = document.getElementById('sidebarGroup')
     if (groupEl) {
       var glist = opts.groups.filter(function (g) { return !groupQ || g.toLowerCase().indexOf(groupQ) >= 0 })
-      groupEl.innerHTML = optionHtml(glist, 'group', opts.groupCount)
+      groupEl.innerHTML = optionHtml(glist, 'group', opts.groupCount, null, function (g) {
+        return GROUP_CATEGORIES[g] || ''
+      })
     }
 
     var tagQ = (document.getElementById('sidebarTagSearch').value || '').trim().toLowerCase()

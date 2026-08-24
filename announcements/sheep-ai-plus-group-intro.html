@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sheep AI Plus 全部分组介绍：类别、倍率与用途速查，帮助你按场景选择合适分组。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="Sheep AI Plus 分组介绍：类别、倍率与用途速查 — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="Sheep AI Plus 全部分组的类别、倍率与用途介绍，按场景速查选组。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>Sheep AI Plus 分组介绍：类别、倍率与用途速查 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .group-intro {
+      --gi-surface: var(--panel-strong);
+      --gi-surface-soft: var(--tag-bg);
+      --gi-border: var(--border);
+      --gi-border-strong: var(--border-strong);
+      --gi-text: var(--fg);
+      --gi-muted: var(--muted);
+      --gi-soft: var(--soft);
+      --gi-primary: var(--primary);
+      color: var(--gi-text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+    }
+
+    .group-intro .gi-hero {
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--gi-border-strong);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 90% 12%, color-mix(in srgb, var(--gi-primary) 16%, transparent), transparent 40%),
+        radial-gradient(circle at 8% 95%, color-mix(in srgb, var(--primary-3) 10%, transparent), transparent 40%),
+        var(--gi-surface);
+      box-shadow: var(--shadow);
+    }
+    .group-intro .gi-kicker { display:inline-block; color: var(--gi-primary); font-family: var(--font-mono); font-size: .76rem; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; }
+    .group-intro h1 { margin: 12px 0 8px; font-size: clamp(1.7rem, 4.4vw, 2.7rem); line-height: 1.18; letter-spacing: -.5px; }
+    .group-intro .gi-lead { margin: 0; color: var(--gi-muted); font-size: .96rem; line-height: 1.8; }
+
+    .group-intro .gi-tools { margin: 20px 0 12px; padding: 12px; border: 1px solid var(--gi-border); border-radius: 14px; background: var(--gi-surface-soft); }
+    .group-intro .gi-search { width: 100%; height: 40px; margin-bottom: 10px; padding: 0 13px; border: 1px solid var(--gi-border); border-radius: 10px; outline: none; background: var(--gi-surface); color: var(--gi-text); font: inherit; font-size: .86rem; color-scheme: inherit; }
+    .group-intro .gi-search::placeholder { color: var(--gi-soft); opacity: .9; }
+    .group-intro .gi-search:focus { border-color: var(--gi-border-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gi-primary) 14%, transparent); }
+    .group-intro .gi-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .group-intro .gi-chip { min-height: 32px; padding: 0 12px; border: 1px solid var(--gi-border); border-radius: var(--radius-pill); background: var(--gi-surface); color: var(--gi-muted); font-size: .8rem; font-weight: 800; cursor: pointer; transition: all .16s ease; }
+    .group-intro .gi-chip:hover { border-color: var(--gi-border-strong); color: var(--gi-primary); }
+    .group-intro .gi-chip.active { border-color: var(--gi-border-strong); background: color-mix(in srgb, var(--gi-primary) 12%, var(--gi-surface)); color: var(--gi-primary); }
+
+    .group-intro .gi-wrap { width: 100%; overflow: auto; border: 1px solid var(--gi-border); border-radius: 16px; background: var(--gi-surface); scrollbar-width: thin; scrollbar-color: var(--gi-border-strong) transparent; }
+    .group-intro table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: .82rem; }
+    .group-intro th { padding: 10px 12px; border-bottom: 1px solid var(--gi-border); background: var(--gi-surface-soft); color: var(--gi-muted); font-size: .74rem; font-weight: 850; text-align: left; white-space: nowrap; }
+    .group-intro td { padding: 10px 12px; border-bottom: 1px solid var(--divider); vertical-align: top; }
+    .group-intro tbody tr:last-child td { border-bottom: 0; }
+    .group-intro tr:hover td { background: color-mix(in srgb, var(--gi-primary) 4%, transparent); }
+    .group-intro .gi-cat { display:inline-flex; padding: 4px 9px; border:1px solid var(--gi-border); border-radius: var(--radius-pill); background: var(--gi-surface-soft); color: var(--gi-primary); font-size: .72rem; font-weight: 850; white-space: nowrap; }
+    .group-intro .gi-name { font-family: var(--font-mono); font-weight: 800; white-space: nowrap; }
+    .group-intro .gi-ratio { font-family: var(--font-mono); color: var(--gi-primary); font-weight: 750; white-space: nowrap; }
+    .group-intro .gi-desc { color: var(--gi-muted); }
+
+    .group-intro .gi-count { margin: 12px 2px; color: var(--gi-soft); font-size: .78rem; }
+    .group-intro .gi-note { margin-top: 16px; padding: 12px 14px; border: 1px solid var(--gi-border); border-radius: 12px; background: var(--gi-surface-soft); color: var(--gi-soft); font-size: .78rem; line-height: 1.7; }
+
+    @media (max-width: 640px) {
+      .group-intro .gi-hero { padding: 20px 16px; border-radius: 20px; }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header" id="siteHeader"></header>
+
+  <main>
+    <article class="section announce-page group-intro">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
+        <div class="announce-embed">
+          <div class="gi-hero">
+            <span class="gi-kicker">💡 使用速查 · Sheep AI Plus</span>
+            <h1>Sheep AI Plus 分组介绍</h1>
+            <p class="gi-lead">同一类模型往往有多个分组，不同分组的倍率与用途不同。这里按类别列出 Sheep AI Plus 的常用分组、倍率与简介，方便你按场景选择合适的分组。</p>
+          </div>
+
+          <div class="gi-tools">
+            <input id="giSearch" class="gi-search" type="search" placeholder="搜索分组名 / 简介，例如 codex、claude、图像">
+            <div id="giChips" class="gi-chips"></div>
+          </div>
+
+          <div class="gi-count" id="giCount"></div>
+          <div class="gi-wrap">
+            <table>
+              <thead><tr><th>类别</th><th>分组</th><th>倍率</th><th>简介</th></tr></thead>
+              <tbody id="giRows"></tbody>
+            </table>
+          </div>
+
+          <div class="gi-note">
+            说明：上表简介为根据新旧分组命名推测的用户友好说明，并非上游技术实现或服务等级的官方承诺。
+            分组倍率仅代表相对成本，实际扣费以 Sheep AI Plus 模型页与消费记录为准。
+            想了解怎么选分组更划算？看 <a href="sheep-ai-plus-group-guide.html">分组选择指南</a>；想按模型查各分组价格？去 <a href="../models/index.html">模型广场</a>。
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+
+  <script src="../js/site.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  (function () {
+    'use strict'
+    var GROUPS = [{"cat": "Claude", "name": "Claude-Code-1", "ratio": 0.247058823, "desc": "面向 Claude Code 的专属调用线路，旧站即标记为“Claude Code专属分组”，适合 Claude Code 与编程智能体场景。"}, {"cat": "Claude", "name": "Vertex-Claude-1", "ratio": 0.617647059, "desc": "Claude 的 Vertex 资源线路，旧站为“Vertex claude分组”，主要用于通过 Vertex 体系调用 Claude 模型。"}, {"cat": "Claude", "name": "Azure-Claude-1", "ratio": 0.617647059, "desc": "Claude 的 Azure 资源线路，旧站为“az claude 分组”，对应 Azure 侧的 Claude 调用通道。"}, {"cat": "Claude", "name": "Claude-Code-2", "ratio": 0.411764706, "desc": "面向 Claude Code 的较高规格线路，旧站为“cc max分组”，推测更偏向 Max / 高额度或高规格的 Claude Code 使用场景。"}, {"cat": "Claude", "name": "AWS-Claude-1", "ratio": 0.617647059, "desc": "Claude 的 AWS 转发线路之一，旧站为“官转克劳德2”，定位偏向稳定的转发型资源。"}, {"cat": "Claude", "name": "AWS-Claude-2", "ratio": 1.235294117, "desc": "Claude 的较高档 AWS 转发线路，旧站为“官转克劳德3”，相较基础转发档位成本更高。"}, {"cat": "Claude", "name": "Kiro-Claude-1", "ratio": 0.123529412, "desc": "低成本 Claude Code 线路，旧站为“特价Claude Code分组”；新名称表明该线路与 Kiro 侧资源相关。"}, {"cat": "Claude", "name": "AWS-Claude-3", "ratio": 1.523529412, "desc": "Claude 的 AWS 直连型线路，旧站为“直连aws claude分组”，强调直接使用 AWS 侧资源。"}, {"cat": "Claude", "name": "Anthropic-Claude-1", "ratio": 1.647058823, "desc": "Claude 的 Anthropic 直连型线路，旧站为“直连克劳德”，定位为更接近模型厂商侧的直接调用通道。"}, {"cat": "Claude", "name": "AWS-Bedrock-1", "ratio": 0.617647059, "desc": "基于 AWS Bedrock 的 Claude 线路，旧站为“纯aws”，适合需要 Bedrock 体系资源的调用场景。"}, {"cat": "Claude", "name": "AWS-Platfrom-1", "ratio": 0.617647059, "desc": "AWS 平台类 Claude 线路，旧站为“纯AWS_P”，推测用于 AWS 平台侧的直接资源调用。"}, {"cat": "GPT / Codex", "name": "Codex-Gpt-1", "ratio": 0.020588235, "desc": "低成本 Codex 线路，旧站为“特价codex分组”，适合更关注调用成本的编程智能体场景。"}, {"cat": "GPT / Codex", "name": "Codex-Gpt-2", "ratio": 0.082352941, "desc": "Codex 专属线路，旧站为“codex专属分组”，面向 Codex 客户端与编程智能体调用。"}, {"cat": "GPT / Codex", "name": "Codex-Gpt-3", "ratio": 0.102941177, "desc": "Codex / GPT 的标准默认线路，旧站为 default 分组，适合作为通用基础档位。"}, {"cat": "GPT / Codex", "name": "Azure-Gpt-1", "ratio": 0.061764706, "desc": "Azure GPT 的限时特价线路，旧站为“限时特价分组”，属于成本优先的优惠档位。"}, {"cat": "GPT / Codex", "name": "Azure-Gpt-2", "ratio": 0.144117646, "desc": "Azure GPT 的体验型线路，旧站为“限时体验分组”，主要用于较低成本的体验与轻量调用。"}, {"cat": "GPT / Codex", "name": "Azure-Gpt-3", "ratio": 0.154411765, "desc": "Azure GPT 的直连型基础线路，旧站为“纯az”，定位为相对直接的 Azure 资源通道。"}, {"cat": "GPT / Codex", "name": "Azure-Gpt-4", "ratio": 0.308823529, "desc": "Azure GPT 的转发型线路，旧站为“官转”，定位偏向稳定的官方资源转发档位。"}, {"cat": "GPT / Codex", "name": "Azure-Gpt-5", "ratio": 0.617647059, "desc": "Azure OpenAI 体系的转发线路，旧站为“官转openai”，用于 OpenAI 模型的 Azure 侧调用。"}, {"cat": "GPT / Codex", "name": "Openai-Gpt-1", "ratio": 0.823529412, "desc": "较高质量的 OpenAI 转发线路，旧站为“优质官转openai”，定位偏向质量与稳定性优先。"}, {"cat": "GPT / Codex", "name": "Openai-Gpt-2", "ratio": 1.029411765, "desc": "新增的 OpenAI 线路。旧站仅标记为“新增”，无法仅凭旧名称判断具体上游性质，可视为另一档 OpenAI 调用路由。"}, {"cat": "Gemini", "name": "Aistudio-Gemini-1", "ratio": 0.247058823, "desc": "高质量 Gemini AI Studio 线路，旧站为“优质gemini”，适合通用 Gemini 调用。"}, {"cat": "Gemini", "name": "Aistudio-Gemini-2", "ratio": 0.370588235, "desc": "Gemini AI Studio 转发线路，旧站为“官转gemini”，定位为稳定的转发型通道。"}, {"cat": "Gemini", "name": "Aistudio-Gemini-3", "ratio": 0.617647059, "desc": "较高质量的 Gemini AI Studio 转发线路，旧站为“优质官转gemini”。"}, {"cat": "Gemini", "name": "Aistudio-Gemini-4", "ratio": 1.338235294, "desc": "更高规格的 Gemini AI Studio 转发线路，旧站为“优质官转gemini-2”，属于高倍率档位。"}, {"cat": "Gemini", "name": "Vertex-Gemini", "ratio": 1.132352941, "desc": "Gemini 的 Vertex 直连型线路，旧站为“直连gemini”，新名称指向 Vertex 体系资源。"}, {"cat": "Gemini", "name": "Cli-Gemini-1", "ratio": 0.102941177, "desc": "Gemini CLI 相关线路，旧站为“gemini-cli”，主要面向 Gemini CLI 或兼容调用场景。"}, {"cat": "Gemini", "name": "Anti-Gemini-1", "ratio": 0.102941177, "desc": "与旧站“gemini-cli”同源映射的另一条 Gemini 线路；具体上游性质无法仅由旧名称确定，建议视作兼容或备用路由。"}, {"cat": "Gemini", "name": "Reverse-Gemini", "ratio": 0.102941177, "desc": "低成本 Gemini 逆向线路，旧站为“特价banana”；推测主要面向 Nano Banana / Gemini 图像能力等相关场景。"}, {"cat": "Grok", "name": "Cli-Grok1", "ratio": 0.102941177, "desc": "Grok 的标准 CLI 类线路，旧站为 default 分组，适合作为通用 Grok 调用档位。"}, {"cat": "Grok", "name": "Cli-Grok2", "ratio": 0.144117646, "desc": "Grok 的体验型 CLI 类线路，旧站为“限时体验分组”，定位偏向低成本体验。"}, {"cat": "Grok", "name": "Azure-Grok", "ratio": 0.154411765, "desc": "Grok 的 az 资源线路，旧站为“纯az分组”，推测为相对直接的资源通道。"}, {"cat": "Grok", "name": "Xai-Grok", "ratio": 0.617647059, "desc": "较高质量的 Grok / xAI 线路，旧站为“优质grok分组”，定位偏向质量与稳定性优先。"}, {"cat": "Midjourney", "name": "MJ-1", "ratio": 0.061764706, "desc": "Midjourney 经济型慢速线路，旧站为“MJ慢速”，适合不追求即时响应、更加关注成本的生成任务。"}, {"cat": "Midjourney", "name": "MJ-2", "ratio": 0.102941177, "desc": "Midjourney 标准默认线路，旧站为 default 分组，适合作为常规图片生成通道。"}, {"cat": "Suno", "name": "Suno-1", "ratio": 0.102941177, "desc": "Suno 标准默认线路，适合常规音乐生成任务。"}, {"cat": "Suno", "name": "Suno-2", "ratio": 0.154411765, "desc": "Suno 的“纯az”档线路，推测为相对直接的资源通道；具体上游性质以平台实际配置为准。"}, {"cat": "Kling 视频", "name": "Kling-1", "ratio": 0.072058823, "desc": "Kling 视频生成特价线路，旧站为“特价kling”，适合成本敏感的视频生成任务。"}, {"cat": "Kling 视频", "name": "Kling-2", "ratio": 0.102941177, "desc": "Kling 视频生成标准线路，旧站为 default 分组，适合常规视频生成。"}, {"cat": "Vidu 视频", "name": "Vidu-1", "ratio": 0.064338235, "desc": "Vidu 视频生成特价线路，旧站为“特价vidu”，适合成本优先的视频生成。"}, {"cat": "Vidu 视频", "name": "Vidu-2", "ratio": 0.102941177, "desc": "Vidu 视频生成标准线路，旧站为 default 分组。"}, {"cat": "海螺视频", "name": "Hailuo-1", "ratio": 0.102941177, "desc": "海螺视频标准线路，旧站为 default 分组，适合常规视频生成任务。"}, {"cat": "海螺视频", "name": "Hailuo-2", "ratio": 0.154411765, "desc": "海螺视频的“纯az”档线路，推测为相对直接的资源通道，成本高于默认档。"}, {"cat": "海螺视频", "name": "Hailuo-3", "ratio": 0.308823529, "desc": "海螺视频的转发型高规格线路，旧站为“官转”，定位偏向稳定性或资源质量优先。"}, {"cat": "Pix 图像", "name": "Pix-1", "ratio": 0.102941177, "desc": "Pix 图像生成标准线路，旧站为 default 分组，适合常规图片生成。"}, {"cat": "豆包", "name": "Doubao-2", "ratio": 0.154411765, "desc": "豆包模型的“纯az”档线路，推测为相对直接的资源通道。"}, {"cat": "豆包", "name": "Doubao-3", "ratio": 0.308823529, "desc": "豆包模型的转发型高规格线路，旧站为“官转”，定位偏向稳定性或资源质量优先。"}, {"cat": "豆包", "name": "Doubao-1", "ratio": 0.102941177, "desc": "豆包模型标准线路，旧站为 default 分组，适合作为常规调用档位。"}, {"cat": "阿里模型", "name": "Alibaba-1", "ratio": 0.102941177, "desc": "阿里模型标准线路，旧站为 default 分组，适合常规调用。"}, {"cat": "阿里模型", "name": "Alibaba-2", "ratio": 0.154411765, "desc": "阿里模型的“纯az”档线路，推测为相对直接的资源通道。"}, {"cat": "阿里模型", "name": "Alibaba-3", "ratio": 0.308823529, "desc": "阿里模型的转发型高规格线路，旧站为“官转”，定位偏向稳定性或资源质量优先。"}, {"cat": "自部署模型", "name": "Self-Deployed-1", "ratio": 0.061764706, "desc": "自部署模型的限时特价线路，旧站为“限时特价”，适合成本优先的调用场景。"}, {"cat": "自部署模型", "name": "Self-Deployed-2", "ratio": 0.102941177, "desc": "自部署模型的标准默认线路，适合常规调用。"}, {"cat": "自部署模型", "name": "Self-Deployed-3", "ratio": 0.154411765, "desc": "自部署模型的“纯az”档线路，推测为另一类相对直接的资源通道。"}, {"cat": "自部署模型", "name": "Self-Deployed-4", "ratio": 0.308823529, "desc": "自部署模型的高规格转发档线路，旧站标记为“官转”，适合对资源质量或稳定性要求更高的场景。"}, {"cat": "Kimi", "name": "Kimi-1", "ratio": 0.154411765, "desc": "Kimi 模型的直连型资源线路，旧站为“纯az”，定位偏向直接资源调用。"}, {"cat": "Kimi", "name": "Kimi-2", "ratio": 0.308823529, "desc": "Kimi 模型的转发型高规格线路，旧站为“官转”。"}, {"cat": "小米模型", "name": "Xiaomi-1", "ratio": 0.102941177, "desc": "小米模型标准线路，旧站为 default 分组，适合常规调用。"}, {"cat": "小米模型", "name": "Xiaomi-2", "ratio": 0.154411765, "desc": "小米模型的“纯az”档线路，推测为相对直接的资源通道。"}, {"cat": "小米模型", "name": "Xiaomi-3", "ratio": 0.308823529, "desc": "小米模型的转发型高规格线路，旧站为“官转”。"}, {"cat": "文心", "name": "Wenxin-1", "ratio": 0.102941177, "desc": "文心模型标准线路，旧站为 default 分组，适合常规调用。"}, {"cat": "文心", "name": "Wenxin-2", "ratio": 0.154411765, "desc": "文心模型的“纯az”档线路，推测为相对直接的资源通道。"}, {"cat": "文心", "name": "Wenxin-3", "ratio": 0.308823529, "desc": "文心模型的转发型高规格线路，旧站为“官转”。"}, {"cat": "SiliconFlow", "name": "SiliconFlow-1", "ratio": 0.102941177, "desc": "SiliconFlow 标准线路，旧站为 default 分组，适合通过 SiliconFlow 资源调用相关模型。"}, {"cat": "讯飞星火", "name": "Spark-1", "ratio": 0.102941177, "desc": "讯飞星火标准线路，旧站为 default 分组，适合常规调用。"}, {"cat": "讯飞星火", "name": "Spark-2", "ratio": 0.154411765, "desc": "讯飞星火的“纯az”档线路，推测为相对直接的资源通道。"}, {"cat": "讯飞星火", "name": "Spark-3", "ratio": 0.308823529, "desc": "讯飞星火的转发型高规格线路，旧站为“官转”。"}, {"cat": "GPT Image", "name": "Gpt-Image-1", "ratio": 0.102941177, "desc": "GPT Image 标准图像生成线路，旧站为 default 分组，适合常规图片生成。"}, {"cat": "GPT Image", "name": "Gpt-Image-2", "ratio": 0.128676471, "desc": "GPT Image 专用图像生成线路，旧站为“gpt-绘图”，定位为更专门的绘图能力通道。"}, {"cat": "Seedance 视频", "name": "Seedance-1", "ratio": 0.102941177, "desc": "Seedance / Seed 2.0 视频生成线路，为新站新增分组，旧站没有对应的明确分组名称。"}];
+    var tbody = document.getElementById('giRows')
+    var chipsWrap = document.getElementById('giChips')
+    var search = document.getElementById('giSearch')
+    var count = document.getElementById('giCount')
+    var currentCat = '全部'
+
+    var cats = ['全部'].concat(Array.from(new Set(GROUPS.map(function (g) { return g.cat }))).sort())
+    chipsWrap.innerHTML = cats.map(function (c) {
+      return '<button class="gi-chip' + (c === '全部' ? ' active' : '') + '" type="button" data-cat="' + c.replace(/"/g, '&quot;') + '">' + c + '</button>'
+    }).join('')
+    chipsWrap.addEventListener('click', function (e) {
+      var b = e.target.closest('.gi-chip'); if (!b) return
+      currentCat = b.getAttribute('data-cat')
+      Array.prototype.forEach.call(chipsWrap.querySelectorAll('.gi-chip'), function (x) { x.classList.toggle('active', x === b) })
+      render()
+    })
+
+    function render() {
+      var q = (search.value || '').trim().toLowerCase()
+      var list = GROUPS.filter(function (g) {
+        if (currentCat !== '全部' && g.cat !== currentCat) return false
+        if (q) return (g.name + ' ' + g.cat + ' ' + g.desc).toLowerCase().indexOf(q) >= 0
+        return true
+      })
+      count.textContent = '共 ' + list.length + ' 个分组'
+      tbody.innerHTML = list.map(function (g) {
+        return '<tr>' +
+          '<td><span class="gi-cat">' + g.cat + '</span></td>' +
+          '<td class="gi-name">' + g.name + '</td>' +
+          '<td class="gi-ratio">' + g.ratio + '</td>' +
+          '<td class="gi-desc">' + g.desc + '</td>' +
+        '</tr>'
+      }).join('') || '<tr><td colspan="4" style="padding:24px;text-align:center;color:var(--gi-soft)">没有匹配的分组</td></tr>'
+    }
+    search.addEventListener('input', render)
+    render()
+  })()
+  </script>
+</body>
+</html>

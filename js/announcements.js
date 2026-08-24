@@ -11,6 +11,12 @@
 
   var ANNOUNCEMENTS = [
     {
+      date: '2026-08-24',
+      title: 'Sheep AI Plus 分组介绍：类别、倍率与用途速查',
+      excerpt: '按类别列出 Sheep AI Plus 常用分组、倍率与用途，帮你按场景快速选组。',
+      slug: 'sheep-ai-plus-group-intro'
+    },
+    {
       date: '2026-08-23',
       title: 'Sheep AI Plus 分组机制说明：选对分组，价格差好几倍',
       excerpt: '创建令牌时默认智能路由自动选组，手动选择合适分组可以便宜很多。',

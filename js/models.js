@@ -425,9 +425,18 @@
     var groupEl = document.getElementById('sidebarGroup')
     if (groupEl) {
       var glist = opts.groups.filter(function (g) { return !groupQ || g.toLowerCase().indexOf(groupQ) >= 0 })
-      groupEl.innerHTML = optionHtml(glist, 'group', opts.groupCount, null, function (g) {
-        return GROUP_CATEGORIES[g] || ''
+      // 按分组类别分组展示
+      var cats = {}
+      glist.forEach(function (g) {
+        var c = GROUP_CATEGORIES[g] || '其他'
+        ;(cats[c] = cats[c] || []).push(g)
       })
+      var html = ''
+      Object.keys(cats).sort().forEach(function (c) {
+        html += '<div class="sidebar-cat-group"><div class="sidebar-cat-title">' + esc(c) + '</div>' +
+          '<div class="sidebar-list">' + optionHtml(cats[c], 'group', opts.groupCount) + '</div></div>'
+      })
+      groupEl.innerHTML = html || '<span class="models-state" style="padding:12px 0">无</span>'
     }
 
     var tagQ = (document.getElementById('sidebarTagSearch').value || '').trim().toLowerCase()
@@ -483,11 +492,28 @@
       render()
     })
 
+    /* 浮动筛选弹窗 */
+    var layer = document.getElementById('filterLayer')
+    var backdrop = document.getElementById('filterBackdrop')
+    var filterClose = document.getElementById('filterClose')
     var filterBtn = document.getElementById('filterBtn')
-    var sidebar = document.getElementById('modelsSidebar')
-    if (filterBtn && sidebar) filterBtn.addEventListener('click', function () { sidebar.classList.add('open') })
-    var close = document.getElementById('sidebarClose')
-    if (close) close.addEventListener('click', function () { sidebar.classList.remove('open') })
+
+    function openFilter() {
+      if (!layer) return
+      layer.hidden = false
+      requestAnimationFrame(function () { layer.classList.add('open') })
+      document.body.style.overflow = 'hidden'
+    }
+    function closeFilter() {
+      if (!layer) return
+      layer.classList.remove('open')
+      setTimeout(function () { layer.hidden = true }, 240)
+      document.body.style.overflow = ''
+    }
+    if (filterBtn) filterBtn.addEventListener('click', openFilter)
+    if (backdrop) backdrop.addEventListener('click', closeFilter)
+    if (filterClose) filterClose.addEventListener('click', closeFilter)
+    window.__closeModelFilter = closeFilter
   }
 
   /* ---------- 详情侧页 ---------- */
@@ -612,7 +638,9 @@
     var backdrop = document.getElementById('drawerBackdrop')
     if (backdrop) backdrop.addEventListener('click', closeDrawer)
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !document.getElementById('modelDrawer').hidden) closeDrawer()
+      if (e.key !== 'Escape') return
+      if (!document.getElementById('modelDrawer').hidden) closeDrawer()
+      else if (window.__closeModelFilter) window.__closeModelFilter()
     })
   }
 

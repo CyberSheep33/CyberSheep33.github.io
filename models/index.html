@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CyberSheep 模型广场：按分组、类型、标签筛选 Sheep AI Plus 全部模型，点击查看各分组最终价格、调用端点等详情。">
+  <meta name="description" content="CyberSheep 模型广场：按品牌、分组、类型、标签筛选 Sheep AI Plus 全部模型，点击查看各分组最终价格、调用端点等详情。">
   <meta name="keywords" content="模型广场,Sheep AI Plus,模型价格,分组,AI模型,CyberSheep">
   <meta name="author" content="CyberSheep">
   <meta name="theme-color" content="#f7fbfa">
@@ -23,71 +23,34 @@
   <header class="site-header" id="siteHeader"></header>
 
   <main>
-    <div class="section models-layout-wrap">
-      <div class="models-layout">
-        <!-- 左侧筛选侧边栏 -->
-        <aside class="models-sidebar" id="modelsSidebar" aria-label="模型筛选">
-          <button class="models-sidebar-close" id="sidebarClose" type="button" aria-label="关闭筛选">×</button>
-
-          <div class="sidebar-accordion" id="sidebarAccordion">
-            <button class="sidebar-acc-head" type="button" data-acc="brand" aria-expanded="false">
-              <span>按模型品牌筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
-            </button>
-            <div class="sidebar-acc-body" id="acc-brand"></div>
-
-            <button class="sidebar-acc-head" type="button" data-acc="group" aria-expanded="false">
-              <span>按令牌分组筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
-            </button>
-            <div class="sidebar-acc-body" id="acc-group">
-              <input class="sidebar-search" id="sidebarGroupSearch" type="search" placeholder="搜索分组…" aria-label="搜索分组">
-              <div class="sidebar-list sidebar-list--scroll" id="sidebarGroup"></div>
-            </div>
-
-            <button class="sidebar-acc-head" type="button" data-acc="type" aria-expanded="false">
-              <span>按模型类型筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
-            </button>
-            <div class="sidebar-acc-body" id="acc-type"></div>
-
-            <button class="sidebar-acc-head" type="button" data-acc="tag" aria-expanded="false">
-              <span>按功能标签筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
-            </button>
-            <div class="sidebar-acc-body" id="acc-tag">
-              <input class="sidebar-search" id="sidebarTagSearch" type="search" placeholder="搜索标签…" aria-label="搜索标签">
-              <div class="sidebar-list sidebar-list--scroll" id="sidebarTag"></div>
-            </div>
+    <div class="section models-wrap">
+      <div class="models-toolbar">
+        <div class="models-toolbar-top">
+          <div class="models-search-wrap">
+            <input class="models-search" id="modelSearch" type="search" placeholder="搜索模型名称 / 描述 / 标签" autocomplete="off" aria-label="搜索模型">
+            <span class="models-search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+            </span>
           </div>
-
-          <button class="btn btn-ghost sidebar-clear" id="sidebarClear" type="button">清除全部筛选</button>
-        </aside>
-
-        <!-- 中间卡片区 -->
-        <div class="models-main">
-          <div class="models-toolbar">
-            <div class="models-toolbar-top">
-              <div class="models-search-wrap">
-                <input class="models-search" id="modelSearch" type="search" placeholder="搜索模型名称 / 描述 / 标签" autocomplete="off" aria-label="搜索模型">
-                <span class="models-search-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-                </span>
-              </div>
-              <button class="btn btn-secondary models-filter-btn" id="filterBtn" type="button" aria-controls="modelsSidebar">筛选</button>
-            </div>
-            <div class="models-toolbar-bottom">
-              <span class="models-count" id="modelCount">加载中…</span>
-              <span class="models-source" id="modelSource">数据：—</span>
-              <select class="models-sort" id="modelSort" aria-label="排序方式">
-                <option value="default">默认排序</option>
-                <option value="price-asc">价格从低到高</option>
-                <option value="price-desc">价格从高到低</option>
-              </select>
-            </div>
-            <div class="models-active-filters" id="activeFilters"></div>
-          </div>
-
-          <div class="model-grid" id="modelGrid" aria-live="polite">
-            <!-- 由 js/models.js 渲染 -->
-          </div>
+          <button class="models-filter-btn" id="filterBtn" type="button" aria-controls="filterLayer" aria-label="打开筛选">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            <span>筛选</span>
+          </button>
         </div>
+        <div class="models-toolbar-bottom">
+          <span class="models-count" id="modelCount">加载中…</span>
+          <span class="models-source" id="modelSource">数据：—</span>
+          <select class="models-sort" id="modelSort" aria-label="排序方式">
+            <option value="default">默认排序</option>
+            <option value="price-asc">价格从低到高</option>
+            <option value="price-desc">价格从高到低</option>
+          </select>
+        </div>
+        <div class="models-active-filters" id="activeFilters"></div>
+      </div>
+
+      <div class="model-grid" id="modelGrid" aria-live="polite">
+        <!-- 由 js/models.js 渲染 -->
       </div>
 
       <p class="models-note">
@@ -98,6 +61,49 @@
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
+
+  <!-- 浮动筛选弹窗 -->
+  <div class="filter-layer" id="filterLayer" hidden>
+    <div class="filter-backdrop" id="filterBackdrop"></div>
+    <div class="filter-panel" role="dialog" aria-modal="true" aria-label="模型筛选">
+      <div class="filter-panel-head">
+        <strong>筛选模型</strong>
+        <button class="filter-close" id="filterClose" type="button" aria-label="关闭筛选">×</button>
+      </div>
+      <div class="filter-panel-body">
+        <div class="sidebar-accordion" id="sidebarAccordion">
+          <button class="sidebar-acc-head" type="button" data-acc="brand" aria-expanded="false">
+            <span>按模型品牌筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="sidebar-acc-body" id="acc-brand"></div>
+
+          <button class="sidebar-acc-head" type="button" data-acc="group" aria-expanded="false">
+            <span>按令牌分组筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="sidebar-acc-body" id="acc-group">
+            <input class="sidebar-search" id="sidebarGroupSearch" type="search" placeholder="搜索分组…" aria-label="搜索分组">
+            <div id="sidebarGroup"></div>
+          </div>
+
+          <button class="sidebar-acc-head" type="button" data-acc="type" aria-expanded="false">
+            <span>按模型类型筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="sidebar-acc-body" id="acc-type"></div>
+
+          <button class="sidebar-acc-head" type="button" data-acc="tag" aria-expanded="false">
+            <span>按功能标签筛选</span><span class="acc-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="sidebar-acc-body" id="acc-tag">
+            <input class="sidebar-search" id="sidebarTagSearch" type="search" placeholder="搜索标签…" aria-label="搜索标签">
+            <div class="sidebar-list sidebar-list--scroll" id="sidebarTag"></div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-panel-foot">
+        <button class="btn btn-ghost sidebar-clear" id="sidebarClear" type="button">重置筛选</button>
+      </div>
+    </div>
+  </div>
 
   <!-- 右侧详情侧页 -->
   <div class="model-drawer" id="modelDrawer" hidden>

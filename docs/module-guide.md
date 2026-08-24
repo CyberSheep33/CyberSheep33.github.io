@@ -1,7 +1,13 @@
 # CyberSheep 生态模块开发与维护规范
 
-> 本文档说明如何在 CyberSheep33.github.io 上新增、维护生态模块。
-> 适用于纯静态、无构建工具、GitHub Pages 直跑的架构。
+> 本文档说明如何在 CyberSheep33.github.io 上**新增**生态模块。
+>
+> **文档索引：**
+> - 本文件（`module-guide.md`）— 新增模块开发规范
+> - [`homepage-guide.md`](homepage-guide.md) — 主页维护与更新规范
+> - [`module-maintenance.md`](module-maintenance.md) — 现有模块（公告 / 快速开始 / 配置工具）维护与更新规范
+>
+> 本仓库为纯静态、无构建工具、GitHub Pages 直跑的架构。
 
 ---
 

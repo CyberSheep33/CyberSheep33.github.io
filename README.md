@@ -7,7 +7,7 @@
 ## 项目结构
 
 ```
-index.html                — 主页面（Hero + 7 个内容区块）
+index.html                — 主页面（Hero + 6 个内容区块）
 announcements/
   index.html              — 公告中心（自动渲染全部公告）
   *.html                  — 每条公告一个独立详情页
@@ -35,7 +35,11 @@ js/
   ccswitch-core.js        — CC Switch Deep Link 生成核心（唯一一份逻辑）
   ccswitch-widget.js      — CC Switch 配置组件（Guide 页内嵌）
 assets/                   — 图片素材（Logo、QQ 群二维码）
-docs/superpowers/         — 设计文档与实现计划（spec + plan）
+docs/
+  homepage-guide.md       — 主页维护与更新规范
+  module-guide.md         — 新增模块开发规范
+  module-maintenance.md   — 现有模块（公告/快速开始/配置工具）维护与更新规范
+  superpowers/            — 设计文档与实现计划（spec + plan）
 ```
 
 ## 站点架构（生态门户）
@@ -66,7 +70,11 @@ site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `g
 1. 在仓库根目录新建对应文件夹（如未来 `download/`、`about/`，模型广场暂不规划）；
 2. 在 `js/site.js` 的 `NAV` 里登记一个导航项（独立首页用页面链接，首页区块用锚点 `#xxx`）。
 
-详细的模块开发与维护规范见 [`docs/module-guide.md`](docs/module-guide.md)。
+详细的模块开发与维护规范见 `docs/` 下的三份文档：
+
+- [`docs/homepage-guide.md`](docs/homepage-guide.md) — 主页维护与更新规范
+- [`docs/module-guide.md`](docs/module-guide.md) — 新增模块开发规范
+- [`docs/module-maintenance.md`](docs/module-maintenance.md) — 现有模块维护与更新规范
 
 ## 技术
 
@@ -77,6 +85,8 @@ site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `g
 本仓库通过 GitHub Pages 部署到 `cybersheep33.github.io`。推送 `main` 分支即可自动更新。
 
 ## 维护指南
+
+> 这里是常用操作的速查。完整规范见 [`docs/homepage-guide.md`](docs/homepage-guide.md)、[`docs/module-guide.md`](docs/module-guide.md)、[`docs/module-maintenance.md`](docs/module-maintenance.md)。
 
 ### 新增公告
 

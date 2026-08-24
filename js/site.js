@@ -37,7 +37,6 @@
 
   var NAV = [
     { label: 'API 平台', href: '#api', anchor: true },
-    { label: '工具箱', href: '#tools', anchor: true },
     { label: '博客', href: '#blog', anchor: true },
     { label: '快速开始', href: 'guide/index.html', section: 'guide' },
     { label: '公告', href: 'announcements/index.html', section: 'announcements' },

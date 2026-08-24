@@ -222,15 +222,14 @@
     return { price: base.price * mult, mult: mult }
   }
 
-  function priceLevel(base) {
-    if (base.kind === 'token') {
-      var p = base.input
-      if (p < 0.15) return { cls: 'low', label: '低价' }
-      if (p < 2) return { cls: 'mid', label: '中价' }
-      return { cls: 'high', label: '高价' }
-    }
-    if (base.price < 0.02) return { cls: 'low', label: '低价' }
-    if (base.price < 0.15) return { cls: 'mid', label: '中价' }
+  function priceLevel(m) {
+    var base = basePrices(m)
+    var best = cheapestGroup(base, availableGroupsOf(m))
+    var p = best ? (best.p.input != null ? best.p.input : best.p.price)
+                 : (base.kind === 'token' ? base.input : base.price)
+    // 按「最低分组价」划分：< $0.1 低价 / $0.1~$0.5 中价 / ≥ $0.5 高价
+    if (p < 0.1) return { cls: 'low', label: '低价' }
+    if (p < 0.5) return { cls: 'mid', label: '中价' }
     return { cls: 'high', label: '高价' }
   }
 
@@ -289,24 +288,28 @@
 
   function modelCard(m) {
     var base = basePrices(m)
-    var level = priceLevel(base)
+    var kind = billingKind(m)
+    var level = priceLevel(m)
     var groups = availableGroupsOf(m)
     var best = cheapestGroup(base, groups)
 
     var priceHtml
-    if (base.kind === 'token') {
+    if (base.kind === 'token' && (kind === 'image' || kind === 'audio')) {
+      priceHtml = '<div class="price-hero"><strong>' + (kind === 'image' ? '按张' : '按时长') + '</strong></div>'
+    } else if (base.kind === 'token') {
       var hero = best
         ? '<div class="price-hero">低至 <strong>' + fmtPrice(best.p.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
         : '<div class="price-hero"><strong>' + fmtPrice(base.input) + '</strong><span class="price-hero-unit">/1M</span></div>'
       priceHtml = hero +
         '<div class="price-rows">' +
-          '<span>基础 <b>' + fmtPrice(base.input) + '</b></span>' +
-          '<span>输出 <b>' + fmtPrice(base.completion) + '</b></span>' +
-          '<span>缓存 <b>' + fmtPrice(base.cacheHit) + '</b></span>' +
+          (best
+            ? '<span>输出 <b>' + fmtPrice(best.p.completion) + '</b></span>' +
+              '<span>缓存 <b>' + fmtPrice(best.p.cacheHit) + '</b></span>'
+            : '') +
         '</div>'
     } else {
       priceHtml =
-        '<div class="price-hero"><strong>' + (base.price ? fmtPrice(base.price) : '按次') + '</strong></div>'
+        '<div class="price-hero"><strong>' + (best ? fmtPrice(best.p.price) : (base.price ? fmtPrice(base.price) : '按次')) + '</strong></div>'
     }
 
     var tags = tagsOf(m).slice(0, 4)
@@ -542,15 +545,21 @@
   function groupTable(m) {
     var base = basePrices(m)
     var groups = availableGroupsOf(m)
+    var kind = billingKind(m)
     if (!groups.length) return '<div class="models-state" style="padding:16px">暂无可公开分组</div>'
 
     var cols = []
     if (base.kind === 'token') {
-      cols.push({ key: 'input', label: '输入' })
-      cols.push({ key: 'completion', label: '输出' })
-      if (Number(m.cache_ratio) > 0) cols.push({ key: 'cacheHit', label: '缓存命中' })
-      if (Number(m.cache_creation_5m_ratio) > 0) cols.push({ key: 'cache5m', label: '5m缓存创建' })
-      if (Number(m.cache_creation_1h_ratio) > 0) cols.push({ key: 'cache1h', label: '1h缓存创建' })
+      if (kind === 'image' || kind === 'audio') {
+        cols.push({ key: 'mult', label: '分组倍率' })
+      } else {
+        cols.push({ key: 'input', label: '输入' })
+        cols.push({ key: 'completion', label: '输出' })
+        if (Number(m.cache_ratio) > 0) cols.push({ key: 'cacheHit', label: '缓存命中' })
+        // 阶梯计费模型不展示 5m/1h 缓存创建（其计价为分段阶梯）
+        if (kind !== 'step' && Number(m.cache_creation_5m_ratio) > 0) cols.push({ key: 'cache5m', label: '5m缓存创建' })
+        if (kind !== 'step' && Number(m.cache_creation_1h_ratio) > 0) cols.push({ key: 'cache1h', label: '1h缓存创建' })
+      }
     } else {
       cols.push({ key: 'price', label: '价格' })
     }
@@ -566,7 +575,12 @@
     var rows = withPrice.map(function (item, idx) {
       var best = idx === 0 ? ' is-best' : ''
       var tds = '<td>' + esc(item.group) + '</td>'
-      cols.forEach(function (c) { tds += '<td>' + fmtPrice(item.p[c.key]) + '</td>' })
+      cols.forEach(function (c) {
+        var val = c.key === 'mult'
+          ? '×' + Number(item.p.mult).toFixed(3)
+          : fmtPrice(item.p[c.key])
+        tds += '<td>' + val + '</td>'
+      })
       return '<tr class="' + best + '">' + tds + '</tr>'
     }).join('')
 
@@ -574,30 +588,89 @@
     var extra = noPrice.length
       ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个非公开分组已隐藏。</p>'
       : ''
+    if (kind === 'step') {
+      extra += '<p class="drawer-group-legend">此模型为阶梯计价：表中价格对应第一段用量，更高输入/输出 tokens 价格会按阶梯倍率上浮。</p>'
+    }
+    if (kind === 'image' || kind === 'audio') {
+      extra += '<p class="drawer-group-legend">图像/语音按次计费，表中为相对分组倍率，最终价以平台为准。</p>'
+    }
 
     return '<div class="drawer-table-wrap"><table class="drawer-table"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div>' + extra
   }
 
-  function basePriceTable(m) {
+  function billingKind(m) {
+    if (m.image_ratio != null && Number(m.image_ratio) > 0) return 'image'
+    if (m.audio_ratio != null && Number(m.audio_ratio) > 0) return 'audio'
+    if (Array.isArray(m.step_ratios) && m.step_ratios.length) return 'step'
+    if (Number(m.cache_creation_5m_ratio) > 0 || Number(m.cache_creation_1h_ratio) > 0) return 'cache'
+    return 'basic'
+  }
+
+  function fmtRange(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(n % 1000000 ? 2 : 0) + 'M'
+    if (n >= 1000) return (n / 1000).toFixed(n % 1000 ? 1 : 0) + 'k'
+    return String(n)
+  }
+
+  function billingTable(m) {
     var base = basePrices(m)
+    var kind = billingKind(m)
     if (base.kind !== 'token') {
       return '<div class="drawer-endpoint"><code>' + fmtPrice(base.price) + '</code><span>按次 / 按单位计费</span></div>'
     }
-    return (
-      '<table class="drawer-table"><thead><tr><th>项目</th><th>价格 / 1M</th></tr></thead><tbody>' +
-        '<tr><td>输入</td><td>' + fmtPrice(base.input) + '</td></tr>' +
-        '<tr><td>输出</td><td>' + fmtPrice(base.completion) + '</td></tr>' +
-        '<tr><td>缓存命中</td><td>' + fmtPrice(base.cacheHit) + '</td></tr>' +
-        '<tr><td>5m 缓存创建</td><td>' + fmtPrice(base.cache5m) + '</td></tr>' +
-        '<tr><td>1h 缓存创建</td><td>' + fmtPrice(base.cache1h) + '</td></tr>' +
-      '</tbody></table>'
-    )
+    if (kind === 'image') {
+      return '<div class="drawer-endpoint"><code>image_ratio ×' + m.image_ratio + '</code><span>图像按张计费，最终价以平台为准</span></div>'
+    }
+    if (kind === 'audio') {
+      var s = 'audio_ratio ×' + m.audio_ratio
+      if (m.audio_completion_ratio) s += ' / 输出 ×' + m.audio_completion_ratio
+      return '<div class="drawer-endpoint"><code>' + s + '</code><span>语音按时长计费，最终价以平台为准</span></div>'
+    }
+    if (kind === 'step') return stepBillingTable(m, base)
+
+    var rows =
+      '<tr><td>输入</td><td>' + fmtPrice(base.input) + '</td></tr>' +
+      '<tr><td>输出</td><td>' + fmtPrice(base.completion) + '</td></tr>'
+    if (Number(m.cache_ratio) > 0) rows += '<tr><td>缓存命中</td><td>' + fmtPrice(base.cacheHit) + '</td></tr>'
+    if (kind === 'cache') {
+      rows += '<tr><td>5m 缓存创建</td><td>' + fmtPrice(base.cache5m) + '</td></tr>' +
+              '<tr><td>1h 缓存创建</td><td>' + fmtPrice(base.cache1h) + '</td></tr>'
+    }
+    return '<table class="drawer-table"><thead><tr><th>项目</th><th>价格 / 1M</th></tr></thead><tbody>' + rows + '</tbody></table>'
+  }
+
+  function stepBillingTable(m, base) {
+    var steps = m.step_ratios
+    var inRows = '', outRows = ''
+    var prev = 0
+    steps.forEach(function (s) {
+      var upper = s.step_size
+      var inP = base.input * (s.prompt_step_ratio || 1)
+      var outP = base.completion * (s.completion_step_ratio || 1)
+      inRows += '<tr><td>输入 ' + fmtRange(prev) + ' ~ ' + fmtRange(upper) + ' tokens</td><td>' + fmtPrice(inP) + '</td></tr>'
+      outRows += '<tr><td>输出 ' + fmtRange(prev) + ' ~ ' + fmtRange(upper) + ' tokens</td><td>' + fmtPrice(outP) + '</td></tr>'
+      prev = upper
+    })
+    var last = steps[steps.length - 1]
+    inRows += '<tr><td>输入 &gt; ' + fmtRange(last.step_size) + ' tokens</td><td>' + fmtPrice(base.input * (last.prompt_step_ratio || 1)) + '</td></tr>'
+    outRows += '<tr><td>输出 &gt; ' + fmtRange(last.step_size) + ' tokens</td><td>' + fmtPrice(base.completion * (last.completion_step_ratio || 1)) + '</td></tr>'
+
+    var html =
+      '<table class="drawer-table"><thead><tr><th>输入（阶梯分段）</th><th>$/1M</th></tr></thead><tbody>' + inRows + '</tbody></table>' +
+      '<div style="height:8px"></div>' +
+      '<table class="drawer-table"><thead><tr><th>输出（阶梯分段）</th><th>$/1M</th></tr></thead><tbody>' + outRows + '</tbody></table>'
+    if (Number(m.cache_ratio) > 0) {
+      html += '<div style="height:8px"></div>' +
+        '<table class="drawer-table"><thead><tr><th>缓存命中</th><th>$/1M</th></tr></thead><tbody>' +
+        '<tr><td>缓存命中</td><td>' + fmtPrice(base.cacheHit) + '</td></tr></tbody></table>'
+    }
+    return html
   }
 
   function renderDrawer(m) {
     var content = document.getElementById('drawerContent')
     var base = basePrices(m)
-    var level = priceLevel(base)
+    var level = priceLevel(m)
     var tags = tagsOf(m)
     content.innerHTML =
       '<div class="drawer-head">' +
@@ -609,7 +682,7 @@
         (m.description ? '<p class="drawer-desc">' + esc(m.description) + '</p>' : '') +
         (tags.length ? '<div class="drawer-tags">' + tags.map(function (t) { return '<span class="model-tag">' + esc(t) + '</span>' }).join('') + '</div>' : '') +
       '</div>' +
-      '<div class="drawer-section"><h3 class="drawer-section-title">基础价格</h3>' + basePriceTable(m) + '</div>' +
+      '<div class="drawer-section"><h3 class="drawer-section-title">计费方式</h3>' + billingTable(m) + '</div>' +
       '<div class="drawer-section"><h3 class="drawer-section-title">调用端点</h3>' + endpointRows(m) + '</div>' +
       '<div class="drawer-section"><h3 class="drawer-section-title">各分组计价</h3>' + groupTable(m) + '</div>' +
       '<p class="drawer-group-legend">价格为估算（基础价 × 分组倍率），以平台实际扣费为准。</p>'

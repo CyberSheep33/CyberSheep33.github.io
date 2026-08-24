@@ -192,6 +192,12 @@ supported_endpoint_types, quota_type, model_price, usage_count, available, icon,
 
 **某分组下最终价 = 基础价 × (group_ratio[分组] × 1.4)**。
 
+> **计费类型（`js/models.js` 的 `billingKind` 识别）：**
+> - 基础型：输入 / 输出 / 缓存命中
+> - 缓存创建型：另加 5m / 1h 缓存创建（如 claude 系列）
+> - 阶梯计费型：输入/输出按 tokens 分段计价（`step_ratios`，如 gpt-5.6 系列、qwen3 系列、grok 等）——详情页展示各分段价格，分组表对应列自适应
+> - 图像 / 音频型：按张 / 按时长（`image_ratio` / `audio_ratio`）
+
 校验锚点：
 
 - gpt-5.6-sol（model_ratio=2.5）：基础输入 $5；Codex-Gpt-2（group_ratio 0.05883）分组倍率

@@ -50,7 +50,8 @@ window.MODELS_DATA = {
 model_name, description, tags, model_type, model_ratio, completion_ratio,
 cache_ratio, cache_creation_5m_ratio, cache_creation_1h_ratio, enable_groups,
 supported_endpoint_types, quota_type, model_price, usage_count, available,
-icon, type, vendor_id
+icon, type, vendor_id, step_ratios, image_ratio, audio_ratio,
+audio_completion_ratio
 ```
 
 说明：
@@ -114,7 +115,7 @@ with open('pricing.json', encoding='utf-8') as f:
 keep = ['model_name','description','tags','model_type','model_ratio','completion_ratio',
         'cache_ratio','cache_creation_5m_ratio','cache_creation_1h_ratio','enable_groups',
         'supported_endpoint_types','quota_type','model_price','usage_count','available',
-        'icon','type','vendor_id']
+        'icon','type','vendor_id','step_ratios','image_ratio','audio_ratio','audio_completion_ratio']
 
 data = []
 for m in d['data']:

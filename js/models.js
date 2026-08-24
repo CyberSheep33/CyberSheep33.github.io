@@ -357,6 +357,19 @@
     var base = basePrices(m)
     var groups = Array.isArray(m.enable_groups) ? m.enable_groups : []
     if (!groups.length) return '<div class="models-state" style="padding:16px">暂无分组信息</div>'
+
+    // 根据模型自身属性决定展示哪些列（没有对应倍率就不显示该列）
+    var cols = []
+    if (base.kind === 'token') {
+      cols.push({ key: 'input', label: '输入' })
+      cols.push({ key: 'completion', label: '输出' })
+      if (Number(m.cache_ratio) > 0) cols.push({ key: 'cacheHit', label: '缓存命中' })
+      if (Number(m.cache_creation_5m_ratio) > 0) cols.push({ key: 'cache5m', label: '5m缓存创建' })
+      if (Number(m.cache_creation_1h_ratio) > 0) cols.push({ key: 'cache1h', label: '1h缓存创建' })
+    } else {
+      cols.push({ key: 'price', label: '价格' })
+    }
+
     var withPrice = [], noPrice = []
     groups.forEach(function (g) {
       var p = groupPrice(base, g)
@@ -367,23 +380,20 @@
 
     var rows = withPrice.map(function (item, idx) {
       var best = idx === 0 ? ' is-best' : ''
-      if (base.kind === 'token') {
-        return '<tr class="' + best + '"><td>' + esc(item.group) + '</td><td>' + fmtPrice(item.p.input) +
-          '</td><td>' + fmtPrice(item.p.completion) + '</td><td>' + fmtPrice(item.p.cacheHit) +
-          '</td><td>' + fmtPrice(item.p.cache5m) + '</td><td>' + fmtPrice(item.p.cache1h) + '</td></tr>'
-      }
-      return '<tr class="' + best + '"><td>' + esc(item.group) + '</td><td>' + fmtPrice(item.p.price) + '</td></tr>'
+      var tds = '<td>' + esc(item.group) + '</td>'
+      cols.forEach(function (c) {
+        tds += '<td>' + fmtPrice(item.p[c.key]) + '</td>'
+      })
+      return '<tr class="' + best + '">' + tds + '</tr>'
     }).join('')
 
-    var head = base.kind === 'token'
-      ? '<th>分组</th><th>输入</th><th>输出</th><th>缓存</th><th>5m建</th><th>1h建</th>'
-      : '<th>分组</th><th>价格</th>'
+    var head = '<th>分组</th>' + cols.map(function (c) { return '<th>' + c.label + '</th>' }).join('')
 
     var extra = noPrice.length
       ? '<p class="drawer-group-legend">另有 ' + noPrice.length + ' 个分组（测试/特供等）价格未收录。</p>'
       : ''
 
-    return '<table class="drawer-table"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table>' + extra
+    return '<div class="drawer-table-wrap"><table class="drawer-table"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div>' + extra
   }
 
   function basePriceTable(m) {

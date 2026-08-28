@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CyberSheep 与 Sheep AI Plus 的更新、迁移、产品与服务通知公告中心。">
+  <meta name="description" content="CyberSheep 公告与帮助：查找平台更新、配置说明、故障排查和常见问题。">
   <meta name="author" content="CyberSheep">
   <meta name="theme-color" content="#f7fbfa">
 
-  <meta property="og:title" content="通知公告 — CyberSheep 赛博小羊">
-  <meta property="og:description" content="CyberSheep 与 Sheep AI Plus 的更新、迁移、产品与服务通知。">
+  <meta property="og:title" content="公告与帮助 — CyberSheep 赛博小羊">
+  <meta property="og:description" content="查找平台更新、配置说明、故障排查和常见问题。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CyberSheep">
 
-  <title>通知公告 — CyberSheep 赛博小羊</title>
+  <title>公告与帮助 — CyberSheep 赛博小羊</title>
 
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
@@ -24,9 +24,14 @@
     <div class="section announce-page">
       <div class="section-card announce-body announce-center">
         <a class="announce-back" href="../#announcements">← 返回首页</a>
-        <span class="kicker">通知公告</span>
-        <h1 class="announce-title">通知公告</h1>
-        <p class="announce-subtitle">CyberSheep 与 Sheep AI Plus 的更新、迁移、产品与服务通知。</p>
+        <span class="kicker">公告与帮助</span>
+        <h1 class="announce-title">找到公告，也找到解决办法</h1>
+        <p class="announce-subtitle">搜索平台更新、配置说明、计费信息与使用中遇到的问题。</p>
+        <div class="announce-tools">
+          <label class="announce-search"><span>搜索公告</span><input id="announceSearch" type="search" placeholder="搜索标题、摘要或关键词" autocomplete="off"></label>
+          <div class="announce-categories" id="announceCategories" aria-label="按分类筛选"></div>
+          <p class="announce-result-count" id="announceCount" aria-live="polite"></p>
+        </div>
         <ul class="announce-list" id="announceList">
           <!-- 由 js/announcements.js 渲染全部公告，最新在前 -->
         </ul>
@@ -36,6 +41,7 @@
 
   <footer class="site-footer" id="siteFooter"></footer>
 
+  <script src="../assets/site-data.js"></script>
   <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/announcements.js"></script>

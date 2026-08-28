@@ -76,6 +76,7 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 12px);
+  overflow-x: clip;
 }
 
 body {
@@ -171,6 +172,8 @@ html[data-theme="dark"] :focus-visible {
 
 .site-nav {
   display: flex;
+  min-width: 0;
+  flex: 0 1 auto;
   align-items: center;
   gap: 4px;
   padding: 4px;
@@ -1081,6 +1084,148 @@ html[data-theme="dark"] .repo-card {
   line-height: 1.6;
 }
 
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  z-index: 50;
+  padding: 9px 12px;
+  border-radius: 9px;
+  background: var(--fg);
+  color: var(--panel-strong);
+  font-size: 0.82rem;
+  font-weight: 800;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.announce-tools {
+  display: grid;
+  gap: 14px;
+  margin: 30px 0 24px;
+  text-align: left;
+}
+
+.announce-search {
+  display: grid;
+  gap: 8px;
+}
+
+.announce-search > span {
+  color: var(--soft);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.announce-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 15px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  outline: 0;
+  color: var(--fg);
+  background: var(--tag-bg);
+  font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.announce-search input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.announce-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.announce-category {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.announce-category:hover,
+.announce-category.is-active {
+  border-color: var(--border-strong);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, var(--panel));
+}
+
+.announce-result-count {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.78rem;
+}
+
+.announce-meta {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.repo-card-meta,
+.repo-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.repo-card-meta {
+  color: var(--soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.repo-source {
+  color: var(--primary);
+}
+
+.repo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.repo-tag {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.repo-tag + .repo-tag::before {
+  content: "·";
+  margin-right: 6px;
+  color: var(--soft);
+}
+
+.repo-card-foot {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.repo-lang--typescript { color: #3178c6; }
+.repo-lang--swift { color: #e95b3d; }
+.repo-lang--shell { color: #4d8b46; }
+
 .repo-lang {
   align-self: flex-start;
   display: inline-flex;
@@ -1096,8 +1241,6 @@ html[data-theme="dark"] .repo-card {
 }
 
 .repo-link {
-  margin-top: auto;
-  padding-top: 10px;
   color: var(--primary);
   font-weight: 900;
 }
@@ -1110,6 +1253,48 @@ html[data-theme="dark"] .repo-card {
 
 .repo-card:hover .repo-link::after {
   transform: translateX(4px);
+}
+
+.project-block + .project-block {
+  margin-top: 30px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider);
+}
+
+.project-block-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.project-block-head h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.project-block-head p {
+  max-width: 58ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.content-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  grid-column: 1 / -1;
+  padding: 24px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 16px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+}
+
+.content-empty strong {
+  color: var(--fg);
 }
 
 /* ============================================================

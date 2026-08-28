@@ -3,122 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="快速开始：选择你想使用的 AI Coding 工具，按步骤完成安装、注册与 Sheep AI Plus 配置。">
-  <meta name="keywords" content="CyberSheep,赛博小羊,快速开始,Codex,Claude Code,Sheep AI Plus,CC Switch">
+  <meta name="description" content="快速开始：选择 AI Coding 工具、目标模型和实际支持的配置方式，完成 Sheep AI Plus 接入。">
+  <meta name="keywords" content="CyberSheep,快速开始,Codex,Claude Code,Sheep AI Plus,CC Switch">
   <meta name="author" content="CyberSheep">
   <meta name="theme-color" content="#f7fbfa">
-
   <meta property="og:title" content="快速开始 — CyberSheep 赛博小羊">
-  <meta property="og:description" content="选择你想使用的 AI Coding 工具，按照步骤完成安装、注册与 Sheep AI Plus 配置。">
+  <meta property="og:description" content="按工具、模型和配置方式选择经过验证的 AI Coding 教程。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CyberSheep">
-
   <title>快速开始 — CyberSheep 赛博小羊</title>
-
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/guide.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
 </head>
 <body>
   <header class="site-header" id="siteHeader"></header>
-
   <main>
-    <div class="section guide-hero">
+    <div class="section guide-hero guide-hero--catalog">
       <a class="guide-back" href="../index.html">← 返回首页</a>
       <span class="kicker">Quick Start</span>
       <h1>快速开始</h1>
-      <p class="guide-sub">选择你想使用的 AI Coding 工具，按照步骤完成安装、注册与 Sheep AI Plus 配置。</p>
-    </div>
-
-    <div class="section">
-      <div class="guide-grid">
-        <a class="guide-card" href="codex-cli.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
-          </span>
-          <span class="guide-name">Codex CLI</span>
-          <span class="guide-desc">在终端中使用 OpenAI Codex。</span>
-          <span class="guide-tags">终端 · Windows · macOS · Linux</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="codex-desktop.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m9 9 2 2-2 2"/><path d="M13 13h3"/></svg>
-          </span>
-          <span class="guide-name">Codex Desktop</span>
-          <span class="guide-desc">使用 Codex 桌面客户端进行 AI 编程。</span>
-          <span class="guide-tags">桌面客户端 · Windows · macOS</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="claude-code.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/><path d="M19 4.5 20 6.7l2.2 1-2.2 1L19 10.9l-1-2.2-2.2-1 2.2-1z"/></svg>
-          </span>
-          <span class="guide-name">Claude Code</span>
-          <span class="guide-desc">在终端中使用 Claude Code。</span>
-          <span class="guide-tags">终端 · Windows · macOS · Linux</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="claude-desktop.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M19 4.5 20 6.7l2.2 1-2.2 1L19 10.9l-1-2.2-2.2-1 2.2-1z"/></svg>
-          </span>
-          <span class="guide-name">Claude Desktop</span>
-          <span class="guide-desc">使用 Claude 桌面客户端。</span>
-          <span class="guide-tags">桌面客户端 · Windows · macOS</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="claude-code-deepseek.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/><path d="M3 3h7v7H3z"/><path d="M14 14h7v7h-7z"/></svg>
-          </span>
-          <span class="guide-name">Claude Code × DeepSeek</span>
-          <span class="guide-desc">在 Claude Code 中调用 DeepSeek。</span>
-          <span class="guide-tags">Claude Code · DeepSeek · 本地路由</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="codex-deepseek.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/><path d="M3 3h7v7H3z"/><path d="M14 14h7v7h-7z"/></svg>
-          </span>
-          <span class="guide-name">Codex × DeepSeek</span>
-          <span class="guide-desc">在 Codex 中调用 DeepSeek。</span>
-          <span class="guide-tags">Codex · DeepSeek · 本地路由</span>
-          <span class="guide-link">开始配置 →</span>
-        </a>
-
-        <a class="guide-card" href="network-tools.html">
-          <span class="guide-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </span>
-          <span class="guide-name">网络加速</span>
-          <span class="guide-desc">FLClash + 机场，解决下载与访问不稳定。</span>
-          <span class="guide-tags">FLClash · 机场订阅</span>
-          <span class="guide-link">查看教程 →</span>
-        </a>
+      <p class="guide-sub">只需完成两个选择：先告诉我们你要使用的工具，再从第二步进入它实际支持的配置教程。</p>
+      <div class="guide-flow-summary" aria-label="使用流程">
+        <span><b>1</b> 选择工具</span>
+        <i aria-hidden="true">→</i>
+        <span><b>2</b> 选择配置路线</span>
+        <i aria-hidden="true">→</i>
+        <span class="is-outcome"><b>✓</b> 开始使用</span>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-card">
-        <span class="kicker">高级用户</span>
-        <h2 class="guide-tools-title">CC Switch 配置生成器</h2>
-        <p class="card-desc">不依赖分步教程？直接打开配置工具，选择预设、填入 API Key、调整高级参数，一键生成导入链接。</p>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="../tools/ccswitch.html">打开 CC Switch 工具 →</a>
+    <div class="section guide-workflow" role="group" aria-label="快速开始主流程">
+      <section class="guide-stage guide-stage--tools" aria-labelledby="guide-tools-title">
+        <header class="guide-catalog-head">
+          <span class="guide-catalog-step">01</span>
+          <div>
+            <span class="guide-stage-label">第一步</span>
+            <h2 id="guide-tools-title">你想使用哪个工具？</h2>
+            <p>点击一个工具，第二步只会显示与它匹配的教程。</p>
+          </div>
+        </header>
+        <div class="guide-tool-grid" id="guideToolGrid" aria-live="polite"></div>
+      </section>
+
+      <div class="guide-workflow-arrow" aria-hidden="true">→</div>
+
+      <section class="guide-stage guide-stage--routes" id="guideRoutesStage" aria-labelledby="guideRouteTitle">
+        <header class="guide-catalog-head">
+          <span class="guide-catalog-step">02</span>
+          <div>
+            <span class="guide-stage-label">第二步</span>
+            <h2 id="guideRouteTitle">选择配置路线</h2>
+            <p id="guideRouteSummary">请先在第一步选择一个工具。</p>
+          </div>
+        </header>
+        <div class="guide-selected-tool" id="guideSelectedTool" hidden></div>
+        <div class="guide-route-groups" id="guideRouteGroups" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <section class="section guide-resource-zone" aria-labelledby="guide-support-title">
+      <header class="guide-resource-head">
+        <div>
+          <span class="guide-resource-label">可选 · 独立资源</span>
+          <h2 id="guide-support-title">辅助工具与专题指南</h2>
+          <p>这里不是第三步。你可以在需要排查网络、生成配置或深入了解某项功能时单独使用。</p>
         </div>
+        <span class="guide-resource-note">与上方主流程互不依赖</span>
+      </header>
+      <div class="guide-support-grid" id="guideSupportGrid"></div>
+    </section>
+
+    <section class="section guide-planned" aria-labelledby="guide-planned-title">
+      <div class="section-card">
+        <span class="kicker">内容路线图</span>
+        <h2 id="guide-planned-title">接下来会加入</h2>
+        <p class="card-desc">以下工具已经进入内容规划；教程经过验证后才会出现在正式工具列表。</p>
+        <div class="guide-planned-list" id="guidePlannedTools"></div>
       </div>
-    </div>
+    </section>
   </main>
-
   <footer class="site-footer" id="siteFooter"></footer>
-
+  <script src="../assets/site-data.js"></script>
   <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/guide-catalog.js"></script>
 </body>
 </html>

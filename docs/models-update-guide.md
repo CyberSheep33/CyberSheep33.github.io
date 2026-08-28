@@ -1,164 +1,81 @@
-# 模型广场数据更新指南
+# 模型广场每周更新速查
 
-> ⚠️ **本指南为速查**。完整的数据流水线规范（含规则文件维护、计费规则、智能体逐步指引）见
-> [`docs/models-data-pipeline.md`](models-data-pipeline.md)。
+完整规则见 [`models-data-pipeline.md`](models-data-pipeline.md)。本页只保留日常更新命令。
 
-> 模型广场（`models/`）为纯静态。数据来自 `assets/models-data.js`——
-> 一个以 `<script>` 注入的 JS 文件（`window.MODELS_DATA = {...}`）。
-> 用 script 注入而不是 fetch，是为了在**本地双击打开（file://）** 和 GitHub Pages 上都能正常工作。
->
-> 因为 `https://sheepaiplus.top/api/pricing` 没有 CORS 头、无法在浏览器端直接 fetch，
-> 需要人工抓取数据后更新快照。本文档说明如何操作（适合交给智能体执行）。
+## 1. 获取原始数据
 
----
+登录 Sheep AI Plus 后访问 `https://sheepaiplus.top/api/pricing`，把完整响应保存为 `pricing.json`。
 
-## 1. 抓取新数据
+不要手动删字段、修改分组倍率或把 API Key 保存在仓库中。
 
-1. 用浏览器打开：`https://sheepaiplus.top/api/pricing`
-2. 在登录状态下访问（数据含完整分组倍率）。
-3. 页面会显示 JSON，全选复制保存为 `pricing.json`。
-
-> 顶层结构：`data`（模型数组）、`group_ratio`（分组倍率）、`usable_group`（分组描述）、
-> `vendors`（厂商）、`supported_endpoint`（端点）。
-
----
-
-## 2. 交给智能体更新（推荐）
-
-把抓取到的 `pricing.json` 放到仓库根目录（或直接上传），然后让智能体执行：
-
-> 「请按 `docs/models-update-guide.md` 更新模型广场数据：读取仓库里的 `pricing.json`，
-> 重新生成 `assets/models-data.js`，校验价格后提交。」
-
-智能体需要完成的步骤（也可手动执行）：
-
-> **快速方式（推荐）**：仓库已内置生成脚本 `scripts/build-models-data.py`。把抓到的
-> `pricing.json` 放到仓库根目录，运行：
->
-> ```bash
-> python3 scripts/build-models-data.py
-> ```
->
-> 脚本会自动完成：精简字段 → 提取中文描述 → 生成 `assets/models-data.js` → 打印
-> 模型数 / 分组数 / 价格锚点校验。之后只需把 `assets/models-data.js` 里的 `fetched_at`
-> 改成当天日期，目验 + 提交即可。下面步骤是脚本所做工作的详细说明（智能体可直接按脚本执行）。
-
-### Step 1：精简生成 `assets/models-data.js`
-
-读入 `pricing.json`，生成 `assets/models-data.js`：
-
-```js
-window.MODELS_DATA = {
-  "data": [ /* 模型数组 */ ],
-  "group_ratio": { /* 原样保留 */ },
-  "usable_group": { /* 原样保留 */ },
-  "vendors": [ /* 原样保留 */ ],
-  "supported_endpoint": { /* 原样保留（详情页展示调用端点路径） */ },
-  "fetched_at": "YYYY-MM-DD"
-};
-```
-
-每个模型对象**只保留**以下字段（其余丢弃以控制体积）：
-
-```
-model_name, description, tags, model_type, model_ratio, completion_ratio,
-cache_ratio, cache_creation_5m_ratio, cache_creation_1h_ratio, enable_groups,
-supported_endpoint_types, quota_type, model_price, usage_count, available,
-icon, type, vendor_id, step_ratios, image_ratio, audio_ratio,
-audio_completion_ratio
-```
-
-说明：
-
-- 若 `translations.zh.description` 存在，用它替换 `description`（显示中文描述）。
-- `group_ratio`、`usable_group`、`vendors` 原样搬入。
-- `fetched_at` 写当前日期。
-
-### Step 2：校验价格公式（务必）
-
-价格公式（已用真实计费日志校验）：
-
-- 基础输入 $/1M = `model_ratio × 2`
-- 补全 = 输入 × `completion_ratio`；缓存命中 = 输入 × `cache_ratio`
-- 5m / 1h 缓存创建 = 输入 × `cache_creation_5m_ratio` / `cache_creation_1h_ratio`
-- **分组最终价 = 基础价 × (`group_ratio[分组]` × 1.4)**
-
-**锚点 1（真实计费日志）**：gpt-5.6-sol，`model_ratio=2.5`，Codex-Gpt-2 分组：
-
-| 项目 | 期望 | 计算 |
-|---|---|---|
-| 基础输入 | $5 / 1M | 2.5 × 2 = 5 |
-| 基础输出 | $30 / 1M | 5 × 6 = 30 |
-| 基础缓存命中 | $0.5 / 1M | 5 × 0.1 = 0.5 |
-| 分组倍率 | 0.082362 | group_ratio[Codex-Gpt-2] 0.05883 × 1.4 = 0.08236 |
-
-**锚点 2（模型广场显示）**：claude-opus-5，`model_ratio=2.5`，AWS-Bedrock-1 分组
-（group_ratio 0.44118）：基础输入 $5，分组输入 = 5 × 0.44118 × 1.4 = **3.088** ✓
-
-### Step 3：目验
-
-- **本地直接双击打开 `models/index.html`**（file://）应能正常显示（不再依赖 fetch）；
-- 能搜到新模型、价格正常、分组展开正常；
-- `node --check js/models.js` 通过。
-
-### Step 4：提交推送
+## 2. 创建新版本
 
 ```bash
-git add assets/models-data.js
-git commit -m "🔄 更新模型广场数据快照（YYYY-MM-DD）"
-git push origin main
+python3 scripts/update-models.py pricing.json
 ```
 
----
+需要指定版本日期时：
 
-## 3. 手动更新（不借助智能体）
-
-1. 按第 1 节抓取 `pricing.json`；
-2. 推荐直接运行仓库脚本 `scripts/build-models-data.py`（自动精简 + 校验）；
-   或手动执行下方参考脚本的 Step 1 逻辑，覆盖写 `assets/models-data.js`；
-3. 把 `assets/models-data.js` 里的 `fetched_at` 改成当天日期；
-4. 按 Step 2 抽查价格；
-5. 提交推送。
-
-参考生成脚本（Python，与仓库脚本逻辑一致）：
-
-```python
-import json
-
-with open('pricing.json', encoding='utf-8') as f:
-    d = json.load(f)
-
-keep = ['model_name','description','tags','model_type','model_ratio','completion_ratio',
-        'cache_ratio','cache_creation_5m_ratio','cache_creation_1h_ratio','enable_groups',
-        'supported_endpoint_types','quota_type','model_price','usage_count','available',
-        'icon','type','vendor_id','step_ratios','image_ratio','audio_ratio','audio_completion_ratio']
-
-data = []
-for m in d['data']:
-    o = {k: m[k] for k in keep if k in m}
-    zh = m.get('translations', {}).get('zh', {}).get('description')
-    if zh:
-        o['description'] = zh
-    data.append(o)
-
-out = {
-    'data': data,
-    'group_ratio': d.get('group_ratio', {}),
-    'usable_group': d.get('usable_group', {}),
-    'vendors': d.get('vendors', []),
-    'supported_endpoint': d.get('supported_endpoint', {}),
-    'fetched_at': 'YYYY-MM-DD',   # 改成当天
-}
-with open('assets/models-data.js', 'w', encoding='utf-8') as f:
-    f.write('window.MODELS_DATA = ' + json.dumps(out, ensure_ascii=False) + ';\n')
+```bash
+python3 scripts/update-models.py pricing.json --date YYYY-MM-DD
 ```
 
----
+脚本会同时完成：
 
-## 4. 常见问题
+- 保存 `raw.json.gz` 原始备份与 SHA-256；
+- 应用开放分组白名单和品牌修正；
+- 识别 basic/cache/step/image/audio 计费类型；
+- 生成清洗后的 `cleaned.json`；
+- 与上一版本计算模型及分组差异；
+- 生成 `changes.json` 和可读的 `report.md`；
+- 更新 `assets/models-data.js`；
+- 更新历史版本清单。
 
-- **价格对不上？** 先核对 `group_ratio` 里是否有该分组；若分组不存在（测试/特供等），
-  页面会显示「价格未收录」，属正常。
-- **上游接口变了？** 抓取后先看顶层 keys 是否仍含 `data` / `group_ratio`；若缺 `group_ratio`，
-  页面将无法计算分组价，需同步调整 `js/models.js`。
-- **本地打不开？** 确认 `models/index.html` 里引入了 `../assets/models-data.js` 且在 `models.js` 之前。
+历史目录：
+
+```text
+data/model-snapshots/YYYY-MM-DD/
+  raw.json.gz
+  cleaned.json
+  metadata.json
+  changes.json
+  report.md
+```
+
+历史版本不可覆盖；重复日期会直接报错。
+
+## 3. 核对输出
+
+重点检查脚本输出的：
+
+- 模型、公开分组、厂商和端点数量；
+- 计费类型分布；
+- `claude-opus-5` 与 `gpt-5.6-sol` 价格锚点；
+- 新增、移除和字段变化模型数；
+- 分组倍率变化数。
+
+打开本次版本的 `report.md` 和 `changes.json`，确认变化符合预期。
+
+## 4. 全站验证
+
+```bash
+python3 scripts/validate-site.py
+python3 -m http.server 8080
+```
+
+浏览器检查模型搜索、分组筛选、阶梯价格、详情抽屉和数据日期。
+
+## 5. 提交
+
+模型更新通常需要提交：
+
+```text
+assets/models-data.js
+data/model-snapshots/
+data/available-groups.json       如有开放分组变化
+data/brand-overrides.json        如有品牌修正
+scripts/                         如有计费规则变化
+docs/                            如有规则说明变化
+```
+
+不要只提交 `assets/models-data.js`，否则历史记录会与线上最新版不同步，自动校验也会失败。

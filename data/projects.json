@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "sheepai-creator",
+      "name": "sheepai-creator",
+      "source": "official",
+      "creator": "SheepAI-Lab",
+      "description": "跨平台 AI 图像与视频创作桌面应用。",
+      "language": "TypeScript",
+      "repo_url": "https://github.com/SheepAI-Lab/sheepai-creator",
+      "tags": ["AI 创作", "桌面应用"],
+      "featured": true,
+      "order": 10
+    },
+    {
+      "id": "sheepai-hud",
+      "name": "sheepai-hud",
+      "source": "official",
+      "creator": "SheepAI-Lab",
+      "description": "SheepAI 用户信息、余额与 API Token 用量桌面组件。",
+      "language": "Swift",
+      "repo_url": "https://github.com/SheepAI-Lab/sheepai-hud",
+      "tags": ["用量监控", "桌面组件"],
+      "featured": true,
+      "order": 20
+    }
+  ]
+}

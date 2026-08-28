@@ -31,7 +31,7 @@
       </div>
       <div class="hero-copy">
         <h1 class="hero-title" id="hero-title">赛博小羊 <span class="gradient-text">CyberSheep</span></h1>
-        <p class="hero-lede">这里是赛博小羊，致力于分享智能体相关安装、使用与开发经验，帮助每一个对AI和Vibe Coding感兴趣的人走进智能体的世界！</p>
+        <p class="hero-lede">从注册 Sheep AI Plus、选择模型，到为 Claude Code、Codex 等工具完成配置。CyberSheep 把开始使用 AI 所需的入口、教程与问题解决方案集中在一个地方。</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://sheepaiplus.top/register?aff=Q6eo" target="_blank" rel="noopener">进入 Sheep AI Plus</a>
           <a class="btn btn-secondary" href="guide/index.html">快速开始</a>
@@ -114,112 +114,122 @@
       </div>
     </section>
 
-    <!-- 03 博客 -->
-    <section class="section" id="blog" aria-labelledby="blog-title">
-      <header class="section-head">
-        <span class="kicker">03 · 博客</span>
-        <h2 id="blog-title">CyberSheep 博客</h2>
-      </header>
-      <div class="section-card">
-        <div class="card-copy">
-          <p class="card-desc">记录 Claude Code、Codex、智能体搭建和 AI 工具链实战，把踩坑过程整理成能复用的方法。</p>
-          <div class="card-actions">
-            <a class="btn btn-primary" href="https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM" target="_blank" rel="noopener">阅读博客</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 快速开始 -->
+    <!-- 03 快速开始 -->
     <section class="section" id="quickstart" aria-labelledby="quickstart-title">
       <header class="section-head">
-        <span class="kicker">04 · 快速开始</span>
+        <span class="kicker">03 · 快速开始</span>
         <h2 id="quickstart-title">快速开始</h2>
       </header>
       <div class="section-card">
-        <p class="card-desc">第一次使用 AI Coding 工具？从安装到接入 Sheep AI Plus，一步一步完成配置。</p>
+        <p class="card-desc">选择目标工具，再根据模型和实际支持的配置方式进入教程。不会向你展示无效或不兼容的配置组合。</p>
         <div class="quickstart-grid" role="list">
-          <a class="quickstart-card" href="guide/codex-cli.html" role="listitem">
-            <span class="quickstart-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
-            </span>
-            <span class="quickstart-name">Codex CLI</span>
-            <span class="quickstart-desc">终端中的 OpenAI 编程工具</span>
-          </a>
-          <a class="quickstart-card" href="guide/claude-code.html" role="listitem">
+          <a class="quickstart-card" href="guide/index.html?tool=claude-code" role="listitem">
             <span class="quickstart-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
             </span>
             <span class="quickstart-name">Claude Code</span>
-            <span class="quickstart-desc">终端中的 Claude 编程工具</span>
+            <span class="quickstart-desc">Claude 原生模型与 DeepSeek 路线</span>
           </a>
-          <a class="quickstart-card" href="tools/ccswitch.html" role="listitem">
+          <a class="quickstart-card" href="guide/index.html?tool=codex-cli" role="listitem">
             <span class="quickstart-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4"/><path d="M12 16h7"/></svg>
             </span>
-            <span class="quickstart-name">CC Switch</span>
-            <span class="quickstart-desc">配置生成工具</span>
+            <span class="quickstart-name">Codex CLI</span>
+            <span class="quickstart-desc">GPT 原生模型与 DeepSeek 路线</span>
           </a>
-          <a class="quickstart-card" href="guide/index.html" role="listitem">
+          <a class="quickstart-card" href="guide/index.html?tool=claude-desktop" role="listitem">
             <span class="quickstart-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
             </span>
-            <span class="quickstart-name">更多教程</span>
-            <span class="quickstart-desc">Codex · Claude · 桌面客户端</span>
+            <span class="quickstart-name">Claude Desktop</span>
+            <span class="quickstart-desc">桌面客户端配置路线</span>
+          </a>
+          <a class="quickstart-card" href="guide/index.html?tool=codex-desktop" role="listitem">
+            <span class="quickstart-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            </span>
+            <span class="quickstart-name">Codex Desktop</span>
+            <span class="quickstart-desc">桌面客户端配置路线</span>
           </a>
         </div>
         <div class="card-actions">
-          <a class="btn btn-primary" href="guide/index.html">进入快速开始 →</a>
+          <a class="btn btn-primary" href="guide/index.html">选择工具与配置方式 →</a>
         </div>
       </div>
     </section>
 
-    <!-- 05 公告 -->
+    <!-- 04 公告 -->
     <section class="section" id="announcements" aria-labelledby="announcements-title">
       <header class="section-head">
-        <span class="kicker">05 · 公告</span>
-        <h2 id="announcements-title">通知公告</h2>
+        <span class="kicker">04 · 公告与帮助</span>
+        <h2 id="announcements-title">最新公告</h2>
       </header>
       <div class="section-card">
         <ul class="announce-list" id="announceList" data-max="3">
           <!-- 由 js/announcements.js 渲染最新 3 条 -->
         </ul>
         <div class="card-actions">
-          <a class="btn btn-secondary" href="announcements/index.html">查看全部公告 →</a>
+          <a class="btn btn-secondary" href="announcements/index.html">查找公告与解决方案 →</a>
         </div>
       </div>
     </section>
 
-    <!-- 06 SheepAI-Lab -->
-    <section class="section" id="lab" aria-labelledby="lab-title">
-      <header class="section-head">
-        <span class="kicker">06 · SheepAI-Lab</span>
-        <h2 id="lab-title">开源组织</h2>
-      </header>
-      <div class="section-card">
-        <div class="card-copy">
-          <p class="card-desc">赛博小羊的 GitHub 开源组织，托管桌面应用、CLI 工具与各类 AI 周边小项目。欢迎 Star 与贡献。</p>
-          <div class="card-actions">
-            <a class="btn btn-primary" href="https://github.com/SheepAI-Lab" target="_blank" rel="noopener">进入 SheepAI-Lab</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 07 小项目 -->
+    <!-- 05 项目 -->
     <section class="section" id="projects" aria-labelledby="projects-title">
       <header class="section-head">
-        <span class="kicker">07 · 赛博小羊小项目</span>
-        <h2 id="projects-title">更多作品</h2>
+        <span class="kicker">05 · 开源项目</span>
+        <h2 id="projects-title">我们在做，也在认真筛选</h2>
       </header>
-      <div class="repo-grid" id="repoGrid">
-        <!-- 由 js/main.js 中的 REPOS 数组渲染，新增项目在数组里加一条即可 -->
+      <div class="section-card">
+        <div class="project-block">
+          <div class="project-block-head">
+            <h3>CyberSheep / SheepAI-Lab</h3>
+            <p>我们自己维护的 AI 应用、工具与实验性项目。</p>
+          </div>
+          <div class="repo-grid" id="officialProjectGrid"></div>
+        </div>
+        <div class="project-block">
+          <div class="project-block-head">
+            <h3>精选创作者项目</h3>
+            <p>持续收录有明确用途、文档完整、值得尝试的开源项目。</p>
+          </div>
+          <div class="repo-grid" id="curatedProjectGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 博客 -->
+    <section class="section" id="blog" aria-labelledby="blog-title">
+      <header class="section-head">
+        <span class="kicker">06 · 博客与知识</span>
+        <h2 id="blog-title">从优质内容继续学习</h2>
+      </header>
+      <div class="section-card">
+        <p class="card-desc">集中陈列不同平台上的优质博主、文章与知识入口。本站负责筛选和分类，阅读时跳转到原作者页面。</p>
+        <div class="card-actions">
+          <a class="btn btn-primary" id="blogIndexLink" href="blog/index.html">浏览博客与精选内容 →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 GitHub -->
+    <section class="section" id="lab" aria-labelledby="lab-title">
+      <header class="section-head">
+        <span class="kicker">07 · GitHub</span>
+        <h2 id="lab-title">参与我们的开源工作</h2>
+      </header>
+      <div class="section-card">
+        <p class="card-desc">在 SheepAI-Lab 查看源码、提交问题、参与讨论，或关注正在推进的新项目。</p>
+        <div class="card-actions">
+          <a class="btn btn-primary" id="githubLink" href="https://github.com/SheepAI-Lab" target="_blank" rel="noopener">进入 SheepAI-Lab GitHub →</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
 
+  <script src="assets/site-data.js"></script>
   <script src="js/site.js"></script>
   <script src="js/main.js"></script>
   <script src="js/announcements.js"></script>

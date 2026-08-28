@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "latest": "2026-08-24",
+  "versions": [
+    {
+      "version": "2026-08-24",
+      "previous_version": null,
+      "models": 460,
+      "groups": 74,
+      "raw_available": false
+    }
+  ]
+}

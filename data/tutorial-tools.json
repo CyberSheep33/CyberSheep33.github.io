@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "family": "claude-code",
+      "kind": "CLI",
+      "vendor": "Anthropic",
+      "summary": "Anthropic 的终端 AI 编程工具。",
+      "status": "published",
+      "order": 10
+    },
+    {
+      "id": "claude-desktop",
+      "name": "Claude Desktop",
+      "family": "claude-desktop",
+      "kind": "Desktop",
+      "vendor": "Anthropic",
+      "summary": "Claude 官方桌面客户端。",
+      "status": "published",
+      "order": 20
+    },
+    {
+      "id": "codex-cli",
+      "name": "Codex CLI",
+      "family": "codex",
+      "kind": "CLI",
+      "vendor": "OpenAI",
+      "summary": "在终端中使用 Codex 完成编程任务。",
+      "status": "published",
+      "order": 30
+    },
+    {
+      "id": "codex-desktop",
+      "name": "Codex Desktop",
+      "family": "codex",
+      "kind": "Desktop",
+      "vendor": "OpenAI",
+      "summary": "Codex 官方桌面客户端。",
+      "status": "published",
+      "order": 40
+    },
+    {
+      "id": "gemini-cli",
+      "name": "Gemini CLI",
+      "family": "gemini-cli",
+      "kind": "CLI",
+      "vendor": "Google",
+      "summary": "Google 的终端 AI 工具。",
+      "status": "planned",
+      "order": 50
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "family": "opencode",
+      "kind": "CLI",
+      "vendor": "Open source",
+      "summary": "支持多供应商的开源 AI 编程工具。",
+      "status": "planned",
+      "order": 60
+    },
+    {
+      "id": "hermes",
+      "name": "Hermes",
+      "family": "hermes",
+      "kind": "CLI",
+      "vendor": "Community",
+      "summary": "计划补充配置与使用教程。",
+      "status": "planned",
+      "order": 70
+    },
+    {
+      "id": "reasonix",
+      "name": "Reasonix",
+      "family": "reasonix",
+      "kind": "Desktop",
+      "vendor": "Reasonix",
+      "summary": "通过工具内置配置面板接入模型。",
+      "status": "planned",
+      "order": 80
+    },
+    {
+      "id": "clion-ai-plugin",
+      "name": "CLion AI 插件",
+      "family": "clion-plugin",
+      "host": "CLion",
+      "kind": "Plugin",
+      "vendor": "JetBrains ecosystem",
+      "summary": "通过插件设置面板完成模型配置。",
+      "status": "planned",
+      "order": 90
+    },
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "family": "openclaw",
+      "kind": "Agent",
+      "vendor": "Community",
+      "summary": "计划补充配置与使用教程。",
+      "status": "planned",
+      "order": 100
+    },
+    {
+      "id": "pi",
+      "name": "Pi",
+      "family": "pi",
+      "kind": "CLI",
+      "vendor": "Community",
+      "summary": "计划补充配置与使用教程。",
+      "status": "planned",
+      "order": 110
+    }
+  ]
+}

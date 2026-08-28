@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "date": "2026-08-24",
+      "title": "Sheep AI Plus 分组介绍：类别、倍率与用途速查",
+      "excerpt": "按类别列出 Sheep AI Plus 常用分组、倍率与用途，帮你按场景快速选组。",
+      "slug": "sheep-ai-plus-group-intro",
+      "type": "guide",
+      "category": "模型与分组",
+      "keywords": ["分组", "倍率", "模型"],
+      "featured": true,
+      "related_guides": []
+    },
+    {
+      "date": "2026-08-23",
+      "title": "Sheep AI Plus 分组机制说明：选对分组，价格差好几倍",
+      "excerpt": "创建令牌时默认智能路由自动选组，手动选择合适分组可以便宜很多。",
+      "slug": "sheep-ai-plus-group-guide",
+      "type": "guide",
+      "category": "模型与分组",
+      "keywords": ["智能路由", "分组", "价格"],
+      "featured": true,
+      "related_guides": []
+    },
+    {
+      "date": "2026-08-20",
+      "title": "Sheep AI → Sheep AI Plus 计费对照",
+      "excerpt": "新旧分组、倍率与人民币费率对照，一目了然看变化，支持搜索筛选。",
+      "slug": "billing-comparison",
+      "type": "update",
+      "category": "计费",
+      "keywords": ["计费", "迁移", "倍率"],
+      "featured": false,
+      "related_guides": []
+    },
+    {
+      "date": "2026-08-20",
+      "title": "Sheep AI → Sheep AI Plus 迁移通知",
+      "excerpt": "账号基础数据自动迁移、旧站余额继续使用，新站统一采用真实 USD 计价。",
+      "slug": "sheep-ai-plus-migration",
+      "type": "announcement",
+      "category": "平台更新",
+      "keywords": ["迁移", "余额", "账号"],
+      "featured": false,
+      "related_guides": []
+    },
+    {
+      "date": "2026-07-24",
+      "title": "sheepai-creator 桌面应用上线",
+      "excerpt": "跨平台 AI 图像 / 视频创作客户端，源码已开源在 SheepAI-Lab。",
+      "slug": "creator-desktop-launch",
+      "type": "announcement",
+      "category": "开源项目",
+      "keywords": ["sheepai-creator", "桌面应用", "开源"],
+      "featured": false,
+      "related_guides": []
+    }
+  ]
+}

@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <!-- ============================================================
-  嵌入型公告模板（TEMPLATE — 不会被发布，仅供复制使用）
+  富 HTML 公告模板（TEMPLATE — 不会被发布，仅供复制使用）
   ============================================================
-  适用场景：你有一份风格独立的自定义 HTML（自带样式/脚本），
-  想作为公告发布，又不想破坏它的内容。
+  开始前必须阅读 docs/announcement-html-standard.md。
 
   使用方法：
   1. 复制本文件 → 改名为公告 slug，如 announcements/xxx.html
-  2. 把你的 HTML 的「主体内容」（<body> 里的可见部分）粘贴到
-     下面标有「把你的内容粘贴到这里」的位置
-  3. 把你的 <style> 粘贴到下方 <style> 块中，并把每个选择器都
-     加上 `.announce-embed` 前缀（作用域隔离，避免污染站点主题）
-  4. 把你的 <script> 放到 </body> 前（标有「你的脚本放这里」）
-  5. 在 index.html 的 .announce-list 里复制一条 .announce-item 指向本页
+  2. 全局替换下方 `SLUG` 为真实 slug
+  3. 把正文粘贴到下方 article
+  4. 每个私有 CSS 选择器必须以 `.announcement-content--SLUG` 开头
+  5. 把你的 <script> 放到 </body> 前（标有「你的脚本放这里」）
+  6. 在 data/announcements.json 登记元数据并运行 build-site-data.py
 
   注意：
   - 不要粘贴完整的 <html>/<head>/<body> 骨架，只要主体可见内容
   - 站点的主题切换、邮箱复制由 js/main.js 自动生效
-  - 深色模式下嵌入区保持浅色卡片（由 .announce-embed 决定）
+  - 必须支持浅色、深色、375px 和 reduced-motion
   ============================================================ -->
 <html lang="zh-CN">
 <head>
@@ -30,10 +28,10 @@
 
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    /* ---------- 你的内容样式（记得加 .announce-embed 前缀） ----------
+    /* ---------- 私有样式必须带公告专属根选择器 ----------
     示例：
-    .announce-embed .your-class { color: #123; }
-    .announce-embed table { width: 100%; }
+    .announcement-content--SLUG .your-class { color: var(--fg); }
+    .announcement-content--SLUG table { width: 100%; }
     */
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
@@ -44,7 +42,7 @@
   <main>
     <div class="section announce-page">
       <a class="announce-back" href="../index.html#announcements">← 返回公告</a>
-      <div class="announce-embed">
+      <article class="announce-embed announcement-content announcement-content--SLUG">
 
         <!-- ============ 把你的内容粘贴到这里 ============ -->
 
@@ -52,12 +50,13 @@
 
         <nav class="announce-nav" id="announceNav" aria-label="公告导航"></nav>
 
-      </div>
+      </article>
     </div>
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
 
+  <script src="../assets/site-data.js"></script>
   <script src="../js/site.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/announcements.js"></script>

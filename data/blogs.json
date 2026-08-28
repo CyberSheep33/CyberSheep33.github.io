@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "platforms": [
+    {
+      "id": "flowus",
+      "name": "FlowUs",
+      "description": "CyberSheep 当前博客与知识内容入口。",
+      "url": "https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM",
+      "featured": true,
+      "order": 10
+    }
+  ],
+  "creators": [
+    {
+      "id": "cybersheep",
+      "name": "CyberSheep 赛博小羊",
+      "description": "分享 AI 工具、模型使用经验与配置实践。",
+      "topics": ["AI Coding", "模型使用", "工具配置"],
+      "links": [
+        {
+          "platform": "flowus",
+          "url": "https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM"
+        }
+      ],
+      "featured": true,
+      "order": 10
+    }
+  ],
+  "articles": []
+}

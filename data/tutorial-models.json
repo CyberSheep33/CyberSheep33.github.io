@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "claude-native",
+      "name": "Claude 原生模型",
+      "category": "native",
+      "provider": "Anthropic",
+      "protocol": "anthropic",
+      "summary": "Claude Code 与 Claude Desktop 的原生模型路线。",
+      "order": 10
+    },
+    {
+      "id": "gpt-native",
+      "name": "GPT 原生模型",
+      "category": "native",
+      "provider": "OpenAI",
+      "protocol": "openai",
+      "summary": "Codex CLI 与 Codex Desktop 的原生模型路线。",
+      "order": 20
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "category": "other",
+      "provider": "DeepSeek",
+      "protocol": "openai-compatible",
+      "default_model": "deepseek-v4-flash",
+      "summary": "通过兼容接口和必要的本地路由接入 DeepSeek。",
+      "order": 30
+    }
+  ]
+}

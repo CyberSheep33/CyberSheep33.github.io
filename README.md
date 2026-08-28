@@ -1,176 +1,196 @@
-# CyberSheep 赛博小羊 — 品牌首页
+# CyberSheep 赛博小羊
 
-赛博小羊品牌入口页，展示旗下所有产品、公告、AI Coding 快速开始教程与开源项目。
+CyberSheep 是围绕 AI 服务使用体验构建的一站式静态门户：帮助用户注册 Sheep AI Plus、创建 API Key、选择模型、为 AI Coding 工具完成配置，并在遇到问题时查找公告与解决方案。
 
-**设计：** 采用 Sheep AI Plus（sheepaiplus.top）的设计语言 —— 青绿玻璃态、浅色 / 深色双主题、渐变文字、模型跑马灯。
+站点同时展示 CyberSheep / SheepAI-Lab 项目、精选创作者项目，以及不同平台上的优质 AI 博客和文章入口。
 
-## 项目结构
+## 用户路径
 
-```
-index.html                — 主页面（Hero + 7 个内容区块）
-models/
-  index.html              — 模型广场（搜索模型、查看各分组最终价格）
-  data: assets/models-data.js（script 注入，含模型 + 分组倍率 + 厂商）
-announcements/
-  index.html              — 公告中心（自动渲染全部公告）
-  *.html                  — 每条公告一个独立详情页
-guide/
-  index.html              — 快速开始中心（AI Coding 工具选择入口）
-  codex-cli.html          — Codex CLI 配置教程
-  codex-desktop.html      — Codex Desktop 配置教程
-  claude-code.html        — Claude Code 配置教程
-  claude-desktop.html     — Claude Desktop 配置教程
-  claude-code-deepseek.html — 在 Claude Code 中使用 DeepSeek（本地路由）
-  codex-deepseek.html     — 在 Codex 中使用 DeepSeek（本地路由）
-  network-tools.html      — 网络加速教程（FLClash + 机场）
-tools/
-  ccswitch.html           — 通用 CC Switch 配置生成工具
-css/
-  style.css               — 全站基础设计（CSS 变量驱动，浅/深双主题）
-  guide.css               — 教程页与 CC Switch Widget 特有组件
-  tools.css               — 配置工具页特有组件
-  models.css              — 模型广场特有组件
-js/
-  site.js                 — 站点公共组件（统一渲染 Header / Footer / Toast，含生态模块注册表）
-  main.js                 — 主题切换、仓库卡片渲染、邮箱复制
-  announcements.js        — 公告数据 + 首页/公告中心列表渲染
-  guide.js                — 教程页代码复制按钮
-  ccswitch-presets.js     — CC Switch 配置预设（数据）
-  ccswitch-core.js        — CC Switch Deep Link 生成核心（唯一一份逻辑）
-  ccswitch-widget.js      — CC Switch 配置组件（Guide 页内嵌）
-  models.js               — 模型广场渲染逻辑（价格 = model_ratio×2 × 分组倍率×1.4）
-assets/                   — 图片素材（Logo、QQ 群二维码、模型数据快照 models-data.js）
-docs/
-  homepage-guide.md       — 主页维护与更新规范
-  module-guide.md         — 新增模块开发规范
-  module-maintenance.md   — 现有模块（公告/快速开始/配置工具）维护与更新规范
-  models-data-pipeline.md — 模型广场数据流水线规范（pricing.json → 可用数据，主文档）
-  models-update-guide.md  — 模型广场数据更新速查（抓取 pricing.json 后如何更新）
-  superpowers/            — 设计文档与实现计划（spec + plan）
-data/
-  available-groups.json   — 有效分组表（分组 → 类别，人工维护）
-  brand-overrides.json    — 品牌修正表（模型名 → 正确 vendor_id）
-scripts/
-  build-models-data.py    — 数据流水线脚本（清洗并生成 assets/models-data.js）
+```text
+CyberSheep 首页
+  → 注册 Sheep AI Plus / 创建 API Key
+  → 模型广场选择模型和分组
+  → 快速开始选择工具、模型和配置方式
+  → 完成配置并开始使用
+  → 在公告与帮助中查找问题解决方案
 ```
 
-## 站点架构（生态门户）
+## 页面模块
 
-网站是赛博小羊 AI 生态的统一入口，采用「公共组件 + 模块化区块」的静态架构：
-
-```
-网站
-├── 全局组件   js/site.js（Header / Footer / Toast / 主题切换按钮）
-├── 公共布局   所有页面共享顶部导航、页脚、主题、基础样式
-├── 页面模块   models / announcements / guide / tools …（每个模块独立目录）
-└── 静态数据   js/announcements.js 等
-```
-
-**Header / Footer 由 `js/site.js` 统一渲染**，页面只需保留占位符：
-
-```html
-<header class="site-header" id="siteHeader"></header>
-<main>…页面内容…</main>
-<footer class="site-footer" id="siteFooter"></footer>
-<script src="js/site.js"></script>   <!-- 必须在 main.js 之前 -->
-<script src="js/main.js"></script>
+```text
+index.html                 首页与核心用户路径
+models/index.html          模型广场
+guide/index.html           快速开始：工具 × 模型 × 配置方式
+guide/*.html               已发布教程详情
+tools/ccswitch.html        CC Switch 系列进阶配置生成器
+announcements/index.html   公告与帮助搜索页
+announcements/*.html       富 HTML 公告详情
+blog/index.html            博客平台、博主与精选文章导航
 ```
 
-site.js 会自动根据当前页面所在目录（首页 / `announcements/` / `guide/` / `tools/`）补全 `../` 前缀与导航高亮，因此在 GitHub Pages 和双击 `file://` 打开下都能正常工作。
+## 技术形态
 
-**新增一个生态模块**只需两步：
-1. 在仓库根目录新建对应文件夹（如未来 `download/`、`about/`，模型广场暂不规划）；
-2. 在 `js/site.js` 的 `NAV` 里登记一个导航项（独立首页用页面链接，首页区块用锚点 `#xxx`）。
+- 原生 HTML、CSS、JavaScript；
+- Python 只用于构建数据、更新模型快照和验证；
+- 最终产物仍是普通静态文件，由 GitHub Pages 直接托管；
+- 不依赖前端框架、数据库或后端服务；
+- 浏览器数据通过生成的 JS 快照注入，同时支持 GitHub Pages 与本地 `file://`。
 
-详细的模块开发与维护规范见 `docs/` 下的文档：
+## 数据驱动架构
 
-- [`docs/homepage-guide.md`](docs/homepage-guide.md) — 主页维护与更新规范
-- [`docs/module-guide.md`](docs/module-guide.md) — 新增模块开发规范
-- [`docs/module-maintenance.md`](docs/module-maintenance.md) — 现有模块维护与更新规范
-- [`docs/models-update-guide.md`](docs/models-update-guide.md) — 模型广场数据更新指南
+人工或 AI 主要维护 `data/` 中的源数据：
 
-## 技术
+| 文件 | 职责 |
+|---|---|
+| `data/site.json` | 品牌信息与全局链接 |
+| `data/projects.json` | 官方项目和精选创作者项目 |
+| `data/announcements.json` | 公告列表、分类、关键词与关联数据 |
+| `data/tutorial-tools.json` | 工具目录与规划状态 |
+| `data/tutorial-models.json` | 原生模型和其他模型目标 |
+| `data/tutorial-methods.json` | CC Switch、配置文件、内置面板等配置方式 |
+| `data/tutorial-routes.json` | 已确认有效的教程组合与页面 URL |
+| `data/blogs.json` | 博客平台、博主和精选文章 |
+| `data/available-groups.json` | 模型广场公开分组白名单 |
+| `data/brand-overrides.json` | 上游模型品牌归属修正 |
+| `data/model-snapshots/` | 每周模型历史、元数据和差异报告 |
 
-纯静态 HTML + CSS + JS，无构建工具，无框架依赖，开箱即用，GitHub Pages 即可部署。
+运行以下命令生成浏览器使用的数据：
 
-## 部署
-
-本仓库通过 GitHub Pages 部署到 `cybersheep33.github.io`。推送 `main` 分支即可自动更新。
-
-## 维护指南
-
-> 这里是常用操作的速查。完整规范见 [`docs/homepage-guide.md`](docs/homepage-guide.md)、[`docs/module-guide.md`](docs/module-guide.md)、[`docs/module-maintenance.md`](docs/module-maintenance.md)。
-
-### 新增公告
-
-1. 复制 `announcements/` 中任意页面（或 `announcements/_template-embed.html`），改内容与文件名，例如 `announcements/new-feature.html`；
-2. 在 `js/announcements.js` 的 `ANNOUNCEMENTS` 数组**最前面**加一条记录：
-
-```js
-{
-  date: '2026-08-23',
-  title: '公告标题',
-  excerpt: '一句话摘要',
-  slug: 'new-feature'   // 对应 announcements/new-feature.html
-}
+```bash
+python3 scripts/build-site-data.py
 ```
 
-保存后首页（自动取最新 3 条）与公告中心（全部）都会自动更新，无需再改页面 HTML。
+生成文件是 `assets/site-data.js`，请勿手动编辑。
 
-### 新增 Guide 教程
+## 本地开发
 
-1. 在 `guide/` 下复制一个现有教程页（如 `guide/codex-cli.html`），改标题、步骤内容与 `data-preset`；
-2. 在 `guide/index.html` 的 `.guide-grid` 里复制一张 `.guide-card`，指向新页面；
-3. 可选：在首页「快速开始」区块（`index.html` 的 `.quickstart-grid`）增加入口卡片。
-
-### 新增 CC Switch Preset
-
-1. 打开 `js/ccswitch-presets.js`，在 `CCSWITCH_PRESETS` 里加一条对象：
-
-```js
-'preset-id': {
-  id: 'preset-id',
-  title: '显示名称',
-  app: 'claude',            // CC Switch app 类型：claude / claude-desktop / codex / gemini / opencode / openclaw
-                            // 注意：Claude Desktop 用 'claude-desktop'，与 Claude Code ('claude') 是两个独立应用
-  name: 'sheepaiplus',      // 导入到 CC Switch 的供应商名称
-  providerName: 'Sheep AI Plus',
-  endpoint: 'https://...',  // 供应商 API 端点
-  homepage: 'https://...',
-  model: 'gpt-5.6-luna',    // 默认模型（可选，不填则用 CC Switch 内置默认）
-  deeplinkSupported: true,  // 是否支持 CC Switch 深度链接一键导入；false 时页面改为展示手动配置步骤
-  enabled: true,
-  tag: '类型标签',
-  desc: '一句话介绍'
-}
+```bash
+python3 scripts/build-site-data.py
+python3 -m http.server 8080
 ```
 
-> **关于 `deeplinkSupported`**：CC Switch V1 深度链接协议的 `app` 参数目前官方只列出 `claude / codex / gemini / opencode / openclaw`。虽然软件内部也能配置 Claude Desktop、Hermes、Pi 等，但深度链接一键导入未必支持。因此 Claude Desktop（`app=claude-desktop`）暂置 `deeplinkSupported: false`，教程页会自动展示「在 CC Switch 中手动新建配置」的步骤；等 CC Switch 支持后把该字段改成 `true` 即可开放一键导入，无需改页面代码。
+浏览器访问 `http://localhost:8080`。
 
-> 常见问题：想改某个工具的默认模型（例如 Codex 默认用 `gpt-5.6-luna`）？直接改 `js/ccswitch-presets.js` 里对应 preset 的 `model` 字段即可，无需改任何页面代码。工具页也可以直接在「高级配置 → 默认模型」里临时覆盖。
+提交前运行：
 
-2. Guide 页面用 `<div class="ccswitch-widget" data-preset="preset-id"></div>` 引用即可；工具页通过 `?preset=preset-id` 自动选中。
+```bash
+python3 scripts/validate-site.py
+```
 
-**Deep Link 校验：** 预设会生成 `ccswitch://v1/import?resource=provider&app=...&endpoint=...&apiKey=...&homepage=...&enabled=true`。确认 app 值在 CC Switch 官方允许范围内（`claude / codex / gemini / opencode / openclaw`），并到 [CC Switch 官方文档](https://github.com/farion1231/cc-switch/blob/main/docs/user-manual/zh/5-faq/5.3-deeplink.md) 核对协议，不要凭印象编造参数。
+验证包括：
 
-**注意：** API Key 永远只存在于用户浏览器内存中，禁止写入 preset、localStorage、Cookie，禁止上传服务器或打印到 console。
+- JSON、Python 和 JavaScript 语法；
+- 站内链接和资源引用；
+- 外链安全属性；
+- 教程路线兼容关系与页面存在性；
+- 公告 slug 与详情页；
+- 生成数据同步状态；
+- 模型最新版与历史快照一致性；
+- 疑似 API Key 泄漏。
 
-### 小项目仓库
+GitHub Actions 会在 push 和 pull request 时重复执行相同校验。
 
-改 `js/main.js` 中的 `REPOS` 数组，新增 / 删除一条对象即可。
+## 快速开始教程维护
 
-### 模型跑马灯
+快速开始不是普通页面列表，而是由有效路线驱动：
 
-改 `index.html` 中 `.marquee-set` 内的 `logo-pill` 列表。
+```text
+工具 + 模型目标 + 配置方式 + 真实教程页面
+```
 
-## 产品链接
+新增教程时：
 
-- **Sheep AI Plus（API 平台）：** [sheepaiplus.top](https://sheepaiplus.top)
-- **SheepAI Tools 工具平台：** [sheepaitools.github.io](https://sheepaitools.github.io)
-- **博客：** [赛博小羊博客](https://flowus.cn/sheepblog/share/f94ab8ef-ca2e-4d63-9c6e-b4d4943b327f?code=8KZJQM)
-- **SheepAI-Lab 开源组织：** [github.com/SheepAI-Lab](https://github.com/SheepAI-Lab)
-- **CC Switch 官方仓库：** [github.com/farion1231/cc-switch](https://github.com/farion1231/cc-switch)
+1. 在 `tutorial-tools.json` 确认工具；
+2. 在 `tutorial-models.json` 确认模型目标；
+3. 在 `tutorial-methods.json` 确认配置方式与兼容范围；
+4. 创建教程 HTML；
+5. 在 `tutorial-routes.json` 添加 `published` 路线；
+6. 运行构建与验证。
 
-## 联系
+构建脚本会拒绝 CC Switch 不支持的工具组合。完整规范见：
 
-📧 cybersheep33@gmail.com
+- `docs/product-architecture-v3.md`
+- `docs/quickstart-content-model.md`
+
+## 公告维护
+
+公告继续使用富 HTML，以便针对时间线、对照表、故障排查和数据展示设计不同布局。
+
+新增公告时：
+
+1. 创建 `announcements/<slug>.html`；
+2. 按 `docs/announcement-html-standard.md` 隔离私有 CSS/JS；
+3. 在 `data/announcements.json` 最前面添加元数据；
+4. 运行 `python3 scripts/build-site-data.py`；
+5. 运行 `python3 scripts/validate-site.py`。
+
+首页最新三条、公告中心搜索和详情页上下篇都会自动读取结构化数据。
+
+## 项目与博客维护
+
+- 新增官方项目：向 `data/projects.json` 添加 `source: "official"`；
+- 新增精选项目：添加 `source: "curated"`；
+- 修改 GitHub 主入口：编辑 `data/site.json` 的 `links.github`；
+- 新增平台、博主或文章：编辑 `data/blogs.json`；
+- 不得生成虚构创作者、文章或链接。
+
+## 每周模型数据更新
+
+把从 Sheep AI Plus 抓取的 `pricing.json` 放入仓库，然后执行：
+
+```bash
+python3 scripts/update-models.py pricing.json
+```
+
+脚本自动：
+
+- 以日期创建不可覆盖的历史版本；
+- gzip 保存原始 JSON；
+- 应用分组白名单、品牌修正和计费识别；
+- 生成清洗快照、SHA-256、统计和价格锚点；
+- 与上一版比较新增、移除、价格字段和分组倍率变化；
+- 生成 `changes.json` 与 `report.md`；
+- 更新模型广场使用的 `assets/models-data.js`；
+- 更新 `data/model-snapshots/manifest.json`。
+
+可指定数据版本日期：
+
+```bash
+python3 scripts/update-models.py pricing.json --date 2026-08-31
+```
+
+历史版本禁止覆盖。抓取错误时应修正源文件并使用新的明确版本，不要直接修改已有快照。
+
+详细说明见 `docs/models-data-pipeline.md`。
+
+## 公共代码
+
+| 文件 | 职责 |
+|---|---|
+| `js/site.js` | Header、Footer、导航、Toast 与模块路径推导 |
+| `js/main.js` | 主题、项目卡片、全局链接与邮箱复制 |
+| `js/guide-catalog.js` | 快速开始工具选择和有效路线渲染 |
+| `js/announcements.js` | 公告搜索、列表和上下篇 |
+| `js/blog.js` | 博客平台、博主和文章渲染 |
+| `js/ccswitch-presets.js` | CC Switch 配置预设 |
+| `js/ccswitch-core.js` | Deep Link 生成与 API Key 校验 |
+| `js/models.js` | 模型搜索、筛选、价格与详情 |
+
+## 安全红线
+
+- API Key 只能在用户浏览器内存中使用；
+- 禁止把 API Key 写入 JSON、预设、localStorage、Cookie 或日志；
+- 配置链接包含 API Key，只能由用户主动复制；
+- 外部链接必须使用 `rel="noopener"`；
+- 不得凭印象编造工具兼容关系、Deep Link 参数或模型价格。
+
+## 发布
+
+仓库通过 GitHub Pages 部署。推送 `main` 前应确保：
+
+```bash
+python3 scripts/build-site-data.py --check
+python3 scripts/validate-site.py
+```
+
+GitHub Actions 校验通过后，现有 Pages 流程继续发布静态文件。

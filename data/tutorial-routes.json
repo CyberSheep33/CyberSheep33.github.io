@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "claude-code-claude-ccswitch",
+      "tool": "claude-code",
+      "model": "claude-native",
+      "method": "ccswitch",
+      "title": "Claude Code 使用 Claude 原生模型",
+      "summary": "安装 Claude Code，通过 CC Switch 接入 Sheep AI Plus 并开始使用 Claude。",
+      "url": "guide/claude-code.html",
+      "difficulty": "beginner",
+      "recommended": true,
+      "requires_local_router": false,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Claude Code", "Claude", "CC Switch"]
+    },
+    {
+      "id": "claude-desktop-claude-manual",
+      "tool": "claude-desktop",
+      "model": "claude-native",
+      "method": "manual-provider-entry",
+      "title": "Claude Desktop 使用 Claude 原生模型",
+      "summary": "安装 Claude Desktop，并按现有客户端流程填写 Sheep AI Plus 服务信息。",
+      "url": "guide/claude-desktop.html",
+      "difficulty": "beginner",
+      "recommended": true,
+      "requires_local_router": false,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Claude Desktop", "Claude", "手动配置"]
+    },
+    {
+      "id": "codex-cli-gpt-ccswitch",
+      "tool": "codex-cli",
+      "model": "gpt-native",
+      "method": "ccswitch",
+      "title": "Codex CLI 使用 GPT 原生模型",
+      "summary": "安装 Codex CLI，通过 CC Switch 接入 Sheep AI Plus 并开始使用 GPT。",
+      "url": "guide/codex-cli.html",
+      "difficulty": "beginner",
+      "recommended": true,
+      "requires_local_router": false,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Codex CLI", "GPT", "CC Switch"]
+    },
+    {
+      "id": "codex-desktop-gpt-ccswitch",
+      "tool": "codex-desktop",
+      "model": "gpt-native",
+      "method": "ccswitch",
+      "title": "Codex Desktop 使用 GPT 原生模型",
+      "summary": "安装 Codex Desktop，通过 CC Switch 管理 Sheep AI Plus 配置。",
+      "url": "guide/codex-desktop.html",
+      "difficulty": "beginner",
+      "recommended": true,
+      "requires_local_router": false,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Codex Desktop", "GPT", "CC Switch"]
+    },
+    {
+      "id": "claude-code-deepseek-ccswitch",
+      "tool": "claude-code",
+      "model": "deepseek",
+      "method": "ccswitch-local-router",
+      "title": "Claude Code 使用 DeepSeek",
+      "summary": "通过 Sheep AI Plus、CC Switch 和本地路由在 Claude Code 中使用 DeepSeek。",
+      "url": "guide/claude-code-deepseek.html",
+      "difficulty": "intermediate",
+      "recommended": false,
+      "requires_local_router": true,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Claude Code", "DeepSeek", "本地路由"]
+    },
+    {
+      "id": "codex-cli-deepseek-ccswitch",
+      "tool": "codex-cli",
+      "model": "deepseek",
+      "method": "ccswitch-local-router",
+      "title": "Codex CLI 使用 DeepSeek",
+      "summary": "通过 Sheep AI Plus、CC Switch 和本地路由在 Codex 中使用 DeepSeek。",
+      "url": "guide/codex-deepseek.html",
+      "difficulty": "intermediate",
+      "recommended": false,
+      "requires_local_router": true,
+      "status": "published",
+      "updated": "2026-08-28",
+      "verified_at": "2026-08-28",
+      "tags": ["Codex CLI", "DeepSeek", "本地路由"]
+    }
+  ],
+  "support_links": [
+    {
+      "id": "network-tools",
+      "title": "网络加速教程",
+      "summary": "FLClash、订阅导入和节点选择。",
+      "url": "guide/network-tools.html"
+    },
+    {
+      "id": "ccswitch-generator",
+      "title": "CC Switch 配置生成器",
+      "summary": "适合熟悉配置的用户，生成可导入 CC Switch 的 Deep Link。",
+      "url": "tools/ccswitch.html"
+    }
+  ]
+}

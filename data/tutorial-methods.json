@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "ccswitch",
+      "name": "CC Switch 辅助配置",
+      "series": "CC Switch",
+      "description": "使用 CC Switch 管理供应商并导入配置。",
+      "supported_families": ["claude-code", "codex", "gemini-cli", "opencode", "openclaw", "hermes", "pi"],
+      "order": 10
+    },
+    {
+      "id": "ccswitch-local-router",
+      "name": "CC Switch + 本地路由",
+      "series": "CC Switch",
+      "description": "使用 CC Switch 导入供应商，并通过本地路由完成协议适配。",
+      "supported_families": ["claude-code", "codex", "gemini-cli", "opencode", "openclaw", "hermes", "pi"],
+      "order": 20
+    },
+    {
+      "id": "manual-config-file",
+      "name": "手动修改配置文件",
+      "series": "手动配置",
+      "description": "直接编辑工具配置文件或环境变量。",
+      "supported_families": [],
+      "order": 30
+    },
+    {
+      "id": "manual-provider-entry",
+      "name": "手动填写供应商信息",
+      "series": "手动配置",
+      "description": "在可用的供应商管理界面中填写端点、模型和 API Key。",
+      "supported_families": [],
+      "order": 40
+    },
+    {
+      "id": "builtin-panel",
+      "name": "工具内置配置面板",
+      "series": "内置配置",
+      "description": "在工具自带的配置页面中填写服务信息。",
+      "supported_families": [],
+      "order": 50
+    },
+    {
+      "id": "plugin-panel",
+      "name": "插件设置面板",
+      "series": "IDE 插件",
+      "description": "在 IDE 插件设置中填写模型与服务信息。",
+      "supported_families": [],
+      "order": 60
+    }
+  ]
+}

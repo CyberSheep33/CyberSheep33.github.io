@@ -16,8 +16,8 @@
    说明：
    - 主题切换逻辑在 js/main.js 中（读取 localStorage 的 cybersheep-theme），
      site.js 只负责渲染 DOM，不重复实现主题。
-   - 本组件会自动判断当前页面是否位于子目录（announcements/guide/tools），
-     并据此给导航与资源路径补上 ../ 前缀，保证在 GitHub Pages 与 file:// 下都能工作。
+   - 本组件根据自身 script 路径推导站点根目录，不再硬编码模块目录，
+     保证新增模块后在 GitHub Pages 与 file:// 下都能工作。
    ============================================================ */
 (function () {
   'use strict'
@@ -39,31 +39,42 @@
     { label: '首页', href: 'index.html' },
     { label: 'API 平台', href: '#api', anchor: true },
     { label: '模型广场', href: 'models/index.html', section: 'models' },
-    { label: '博客', href: '#blog', anchor: true },
+    { label: '博客与知识', href: 'blog/index.html', section: 'blog' },
     { label: '快速开始', href: 'guide/index.html', section: 'guide' },
     { label: '公告', href: 'announcements/index.html', section: 'announcements' },
     { label: 'SheepAI-Lab', href: '#lab', anchor: true },
     { label: '项目', href: '#projects', anchor: true }
   ]
 
+  var siteData = window.CYBERSHEEP_DATA || {}
+  var brand = siteData.site && siteData.site.brand ? siteData.site.brand : {}
+  var links = siteData.site && siteData.site.links ? siteData.site.links : {}
+
   var BRAND_IMG = 'assets/cybersheep.png'
   var QR_IMG = 'assets/QQ-group-qcode.jpg'
-  var EMAIL = 'cybersheep33@gmail.com'
-  var COPYRIGHT = '© 2026 CyberSheep 赛博小羊'
+  var EMAIL = brand.email || 'cybersheep33@gmail.com'
+  var COPYRIGHT = brand.copyright || '© 2026 CyberSheep 赛博小羊'
+  var API_CONSOLE = links.api_console || 'https://sheepaiplus.top'
 
-  /* 是否位于子目录（guide / announcements / tools / models） */
-  function isSubPage() {
-    return /\/guide\/|\/announcements\/|\/tools\/|\/models\//.test(location.pathname)
+  /* 从 site.js 自身的相对路径推导站点根目录，支持任意新增模块。 */
+  function detectBase() {
+    var scripts = document.getElementsByTagName('script')
+    for (var i = scripts.length - 1; i >= 0; i--) {
+      var src = scripts[i].getAttribute('src') || ''
+      if (/(^|\/)js\/site\.js(?:[?#].*)?$/.test(src)) {
+        return src.replace(/js\/site\.js(?:[?#].*)?$/, '')
+      }
+    }
+    return ''
   }
 
-  var base = isSubPage() ? '../' : ''
+  var base = detectBase()
 
   function currentSection() {
     var p = location.pathname
-    if (/\/models\//.test(p)) return 'models'
-    if (/\/guide\//.test(p)) return 'guide'
-    if (/\/announcements\//.test(p)) return 'announcements'
-    if (/\/tools\//.test(p)) return 'tools'
+    for (var i = 0; i < NAV.length; i++) {
+      if (NAV[i].section && p.indexOf('/' + NAV[i].section + '/') >= 0) return NAV[i].section
+    }
     return ''
   }
 
@@ -76,7 +87,7 @@
 
     var navHtml = NAV.map(function (item) {
       var href = base + item.href
-      var isActive = item.section && item.section === active
+      var isActive = (item.section && item.section === active) || (!active && !base && item.href === 'index.html')
       return '<a href="' + href + '"' + (isActive ? ' aria-current="page"' : '') + '>' +
         item.label + '</a>'
     }).join('')
@@ -114,7 +125,7 @@
       '</div>' +
       '<div class="footer-bottom">' +
         '<span>' + COPYRIGHT + '</span>' +
-        '<a href="https://sheepaiplus.top" target="_blank" rel="noopener">Sheep AI Plus</a>' +
+        '<a href="' + API_CONSOLE + '" target="_blank" rel="noopener">Sheep AI Plus</a>' +
       '</div>'
   }
 
@@ -127,6 +138,18 @@
     document.body.appendChild(t)
   }
 
+  function ensureSkipLink() {
+    var main = document.querySelector('main')
+    if (!main || document.querySelector('.skip-link')) return
+    if (!main.id) main.id = 'mainContent'
+    var link = document.createElement('a')
+    link.className = 'skip-link'
+    link.href = '#' + main.id
+    link.textContent = '跳到主要内容'
+    document.body.insertBefore(link, document.body.firstChild)
+  }
+
+  ensureSkipLink()
   renderHeader()
   renderFooter()
   ensureToast()

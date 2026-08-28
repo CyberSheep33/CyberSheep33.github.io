@@ -27,9 +27,11 @@ python3 scripts/update-models.py pricing.json --date YYYY-MM-DD
 - 识别 basic/cache/step/image/audio 计费类型；
 - 生成清洗后的 `cleaned.json`；
 - 与上一版本计算模型及分组差异；
-- 生成 `changes.json` 和可读的 `report.md`；
+- 生成 `changes.json` 和维护者可读的 `update-log.md`；
 - 更新 `assets/models-data.js`；
-- 更新历史版本清单。
+- 更新历史版本清单；
+- 生成 `announcements/models-update-YYYY-MM-DD.html` 可视化公告；
+- 自动登记公告元数据并更新 `assets/site-data.js`。
 
 历史目录：
 
@@ -39,7 +41,7 @@ data/model-snapshots/YYYY-MM-DD/
   cleaned.json
   metadata.json
   changes.json
-  report.md
+  update-log.md
 ```
 
 历史版本不可覆盖；重复日期会直接报错。
@@ -54,7 +56,16 @@ data/model-snapshots/YYYY-MM-DD/
 - 新增、移除和字段变化模型数；
 - 分组倍率变化数。
 
-打开本次版本的 `report.md` 和 `changes.json`，确认变化符合预期。
+打开本次版本的 `update-log.md` 和 `changes.json`，确认来源、SHA、数量与变化符合预期。
+
+同时打开 `announcements/models-update-YYYY-MM-DD.html`，重点核对：
+
+- 数量与 `update-log.md` 一致；
+- 新增、下架模型名称没有截断或误分类；
+- 价格无变化时明确显示无变化状态；
+- 分组变化图表与完整明细一致；
+- 页面没有展示 API、SHA、原始文件或其他维护信息；
+- 结尾提供模型广场入口和必要的可用性、计费提醒。
 
 ## 4. 全站验证
 
@@ -71,6 +82,9 @@ python3 -m http.server 8080
 
 ```text
 assets/models-data.js
+assets/site-data.js
+announcements/models-update-YYYY-MM-DD.html
+data/announcements.json
 data/model-snapshots/
 data/available-groups.json       如有开放分组变化
 data/brand-overrides.json        如有品牌修正

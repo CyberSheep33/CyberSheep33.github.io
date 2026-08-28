@@ -52,7 +52,7 @@ blog/index.html            博客平台、博主与精选文章导航
 | `data/blogs.json` | 博客平台、博主和精选文章 |
 | `data/available-groups.json` | 模型广场公开分组白名单 |
 | `data/brand-overrides.json` | 上游模型品牌归属修正 |
-| `data/model-snapshots/` | 每周模型历史、元数据和差异报告 |
+| `data/model-snapshots/` | 每周模型历史、元数据和维护日志 |
 
 运行以下命令生成浏览器使用的数据：
 
@@ -149,9 +149,11 @@ python3 scripts/update-models.py pricing.json
 - 应用分组白名单、品牌修正和计费识别；
 - 生成清洗快照、SHA-256、统计和价格锚点；
 - 与上一版比较新增、移除、价格字段和分组倍率变化；
-- 生成 `changes.json` 与 `report.md`；
+- 生成 `changes.json` 与维护日志 `update-log.md`；
 - 更新模型广场使用的 `assets/models-data.js`；
-- 更新 `data/model-snapshots/manifest.json`。
+- 更新 `data/model-snapshots/manifest.json`；
+- 自动生成面向用户的模型更新公告并加入公告中心；
+- 将 API、SHA、归档位置和校验信息仅保留在维护日志中。
 
 可指定数据版本日期：
 
@@ -175,6 +177,7 @@ python3 scripts/update-models.py pricing.json --date 2026-08-31
 | `js/ccswitch-presets.js` | CC Switch 配置预设 |
 | `js/ccswitch-core.js` | Deep Link 生成与 API Key 校验 |
 | `js/models.js` | 模型搜索、筛选、价格与详情 |
+| `scripts/model_announcement.py` | 从模型版本差异生成可视化公告 |
 
 ## 安全红线
 

@@ -50,7 +50,9 @@ def build_snapshot(raw, fetched_at=None):
     for model in raw.get("data", []):
         cleaned = {key: model[key] for key in KEEP if key in model}
         if "enable_groups" in cleaned:
-            cleaned["enable_groups"] = [group for group in cleaned["enable_groups"] if group in valid_set]
+            cleaned["enable_groups"] = sorted({group for group in cleaned["enable_groups"] if group in valid_set})
+        if "supported_endpoint_types" in cleaned:
+            cleaned["supported_endpoint_types"] = sorted(set(cleaned["supported_endpoint_types"]))
         if cleaned.get("model_name") in overrides:
             cleaned["vendor_id"] = overrides[cleaned["model_name"]]
         cleaned["billing_type"] = detect_billing(cleaned)

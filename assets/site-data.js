@@ -51,6 +51,31 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-08-28",
+      "title": "模型广场更新：新增 glm-5.3-flash、qwen3.8-flash",
+      "excerpt": "本期收录 453 个模型，新增 2 个、下架 9 个，63 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-08-28",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "glm-5.3-flash",
+        "qwen3.8-flash"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "glm-5.3-flash",
+        "qwen3.8-flash"
+      ],
+      "generated_from": "data/model-snapshots/2026-08-28/changes.json"
+    },
+    {
       "date": "2026-08-24",
       "title": "Sheep AI Plus 分组介绍：类别、倍率与用途速查",
       "excerpt": "按类别列出 Sheep AI Plus 常用分组、倍率与用途，帮你按场景快速选组。",
@@ -82,21 +107,6 @@ window.CYBERSHEEP_DATA = {
     },
     {
       "date": "2026-08-20",
-      "title": "Sheep AI → Sheep AI Plus 计费对照",
-      "excerpt": "新旧分组、倍率与人民币费率对照，一目了然看变化，支持搜索筛选。",
-      "slug": "billing-comparison",
-      "type": "update",
-      "category": "计费",
-      "keywords": [
-        "计费",
-        "迁移",
-        "倍率"
-      ],
-      "featured": false,
-      "related_guides": []
-    },
-    {
-      "date": "2026-08-20",
       "title": "Sheep AI → Sheep AI Plus 迁移通知",
       "excerpt": "账号基础数据自动迁移、旧站余额继续使用，新站统一采用真实 USD 计价。",
       "slug": "sheep-ai-plus-migration",
@@ -106,6 +116,21 @@ window.CYBERSHEEP_DATA = {
         "迁移",
         "余额",
         "账号"
+      ],
+      "featured": false,
+      "related_guides": []
+    },
+    {
+      "date": "2026-08-20",
+      "title": "Sheep AI → Sheep AI Plus 计费对照",
+      "excerpt": "新旧分组、倍率与人民币费率对照，一目了然看变化，支持搜索筛选。",
+      "slug": "billing-comparison",
+      "type": "update",
+      "category": "计费",
+      "keywords": [
+        "计费",
+        "迁移",
+        "倍率"
       ],
       "featured": false,
       "related_guides": []

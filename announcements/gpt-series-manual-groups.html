@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GPT-5.6 Sol、Terra、Luna 的手动分组推荐：关闭智能路由，选择五个 Luna 也可用的低倍率公开分组，并按需使用 codex-sol-luna 技能。">
+  <meta name="description" content="Codex 高效省钱实践：关闭智能路由，混选低倍率 Codex-Gpt 分组与 Luna 兼容分组，再用 codex-sol-luna 技能按任务分配 Sol、Terra、Luna。">
   <meta name="author" content="CyberSheep">
   <meta name="theme-color" content="#f7fbfa">
 
-  <meta property="og:title" content="GPT 系列推荐用法：手动分组 + $sol-luna — CyberSheep 赛博小羊公告">
-  <meta property="og:description" content="关闭智能路由后，选择五个 Luna 也可用的低倍率公开分组；按任务显式调用 $sol-luna。">
+  <meta property="og:title" content="Codex 高效省钱指南：手动分组 + $sol-luna — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="同时勾选低倍率 Codex-Gpt 分组和 Luna 兼容分组，再用 $sol-luna 按任务难度分工。">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="CyberSheep">
 
-  <title>GPT 系列推荐用法：手动分组 + $sol-luna — CyberSheep 赛博小羊公告</title>
+  <title>Codex 高效省钱指南：手动分组 + $sol-luna — CyberSheep 赛博小羊公告</title>
 
   <link rel="stylesheet" href="../css/style.css">
   <style>
@@ -82,6 +82,62 @@
       color: var(--muted);
       font-size: .86rem;
       line-height: 1.75;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-strategy {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--gsm-surface);
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane--luna {
+      background: color-mix(in srgb, var(--primary) 6%, var(--gsm-surface));
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--primary);
+      font-size: .7rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane h3 {
+      margin: 0;
+      color: var(--fg);
+      font-size: .96rem;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.7;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-lane-groups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-group-pill {
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: var(--gsm-soft);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 800;
     }
 
     .announcement-content--gpt-series-manual-groups .gsm-steps {
@@ -193,14 +249,26 @@
       white-space: nowrap;
     }
 
+    .announcement-content--gpt-series-manual-groups .gsm-no {
+      color: var(--soft);
+      font-size: .7rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
     .announcement-content--gpt-series-manual-groups .gsm-note {
       margin-top: 12px;
       padding: 13px 15px;
-      border-left: 2px solid var(--border-strong);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       background: var(--gsm-soft);
       color: var(--muted);
       font-size: .8rem;
       line-height: 1.75;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-note strong {
+      color: var(--fg);
     }
 
     .announcement-content--gpt-series-manual-groups .gsm-models {
@@ -263,6 +331,32 @@
       font-weight: 850;
     }
 
+    .announcement-content--gpt-series-manual-groups .gsm-role-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-role-list li {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--gsm-surface);
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.65;
+    }
+
+    .announcement-content--gpt-series-manual-groups .gsm-role-list strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--fg);
+      font-size: .8rem;
+    }
+
     .announcement-content--gpt-series-manual-groups .gsm-actions {
       display: flex;
       flex-wrap: wrap;
@@ -279,6 +373,8 @@
 
     @media (max-width: 640px) {
       .announcement-content--gpt-series-manual-groups .gsm-hero { padding: 24px 18px; border-radius: 20px; }
+      .announcement-content--gpt-series-manual-groups .gsm-strategy,
+      .announcement-content--gpt-series-manual-groups .gsm-role-list { grid-template-columns: 1fr; }
       .announcement-content--gpt-series-manual-groups .gsm-model { grid-template-columns: 1fr; gap: 5px; }
     }
   </style>
@@ -295,55 +391,76 @@
         <article class="announcement-content announcement-content--gpt-series-manual-groups">
           <header class="gsm-hero">
             <span class="gsm-kicker">GPT 系列使用建议 · 2026-08-31</span>
-            <h1>GPT 系列推荐用法：手动分组 + <code>$sol-luna</code></h1>
-            <p class="gsm-lead">如果你会在 Sol、Terra、Luna 之间切换，建议关闭智能路由并手动选择分组。下面五个分组的当前倍率相对较低，而且三款模型都能使用，方便在不同任务之间复用同一套配置。</p>
+            <h1>Codex 高效省钱指南：手动分组 + <code>$sol-luna</code></h1>
+            <p class="gsm-lead">一套配置同时照顾价格、模型兼容性和任务质量：关闭智能路由，勾选低倍率的 Codex-Gpt 分组，再补充至少一个支持 Luna 的 Azure-Gpt 分组；遇到复杂任务时，用 <code>$sol-luna</code> 让智能体按难度分工。</p>
           </header>
 
           <section class="gsm-section" aria-labelledby="gsm-setup-title">
-            <h2 id="gsm-setup-title">推荐配置方式</h2>
-            <p class="gsm-intro">手动选择分组能让调用路径和预算更可控；配置前请确认你创建的 API Key 支持关闭智能路由。</p>
+            <h2 id="gsm-setup-title">先把 API Key 配成“低价组合”</h2>
+            <p class="gsm-intro">关键不是只选一个分组，而是一次勾选 4～5 个低倍率分组，并让其中至少一个能够调用 Luna。</p>
             <div class="gsm-steps">
-              <div class="gsm-step"><span class="gsm-step-number">01</span><div><strong>创建 API Key</strong><span>在 Sheep AI Plus 创建密钥，确认准备使用 GPT 系列模型。</span></div></div>
-              <div class="gsm-step"><span class="gsm-step-number">02</span><div><strong>关闭智能路由</strong><span>将 Key 的分组策略从智能路由改为手动选择，避免平台在不同分组间自动切换。</span></div></div>
-              <div class="gsm-step"><span class="gsm-step-number">03</span><div><strong>选择一个公开分组并实测</strong><span>先从下面五个共同可用分组中选择，再根据任务质量、延迟和实际账单调整。</span></div></div>
+              <div class="gsm-step"><span class="gsm-step-number">01</span><div><strong>创建 API Key</strong><span>在 Sheep AI Plus 创建用于 Codex 的密钥，并进入分组设置。</span></div></div>
+              <div class="gsm-step"><span class="gsm-step-number">02</span><div><strong>关闭智能路由</strong><span>将 Key 的分组策略改为手动选择，把可用范围限定在你主动勾选的低倍率分组内。</span></div></div>
+              <div class="gsm-step"><span class="gsm-step-number">03</span><div><strong>勾选五个推荐分组</strong><span>选择 Codex-Gpt-1/2/3 与 Azure-Gpt-2/3。前三个倍率更低，后两个为 Luna 保留可用通道。</span></div></div>
+              <div class="gsm-step"><span class="gsm-step-number">04</span><div><strong>先小规模实测</strong><span>分别调用 Sol、Terra、Luna，确认可用性、延迟和消费日志，再按实际体验删减或替换分组。</span></div></div>
             </div>
           </section>
 
           <section class="gsm-section" aria-labelledby="gsm-groups-title">
-            <h2 id="gsm-groups-title">五个可复用的低倍率分组</h2>
-            <p class="gsm-intro">这五个是 Luna 也可用的公开分组中，当前相对倍率最低的五个。它们不是整个 GPT 分组列表的绝对最低项，因为更低的 Codex 专属分组并不支持 Luna。</p>
+            <h2 id="gsm-groups-title">为什么要混选两类分组</h2>
+            <p class="gsm-intro">截至本次数据快照，最便宜的 Codex-Gpt 系列不能调用 Luna。只选它们会失去低成本模型，因此需要再勾选支持 Luna 的分组。</p>
+            <div class="gsm-strategy">
+              <div class="gsm-lane">
+                <span class="gsm-lane-label">主力低价通道</span>
+                <h3>Codex-Gpt 系列</h3>
+                <p>倍率最低，适合 Sol 与 Terra；目前不支持 Luna。</p>
+                <div class="gsm-lane-groups"><span class="gsm-group-pill">Codex-Gpt-1</span><span class="gsm-group-pill">Codex-Gpt-2</span><span class="gsm-group-pill">Codex-Gpt-3</span></div>
+              </div>
+              <div class="gsm-lane gsm-lane--luna">
+                <span class="gsm-lane-label">Luna 兼容通道</span>
+                <h3>Azure-Gpt 系列</h3>
+                <p>倍率略高，但 Sol、Terra、Luna 均可使用。</p>
+                <div class="gsm-lane-groups"><span class="gsm-group-pill">Azure-Gpt-2</span><span class="gsm-group-pill">Azure-Gpt-3</span></div>
+              </div>
+            </div>
             <div class="gsm-table-wrap">
               <table>
-                <thead><tr><th>公开分组</th><th>当前倍率</th><th>Luna</th><th>建议起点</th></tr></thead>
+                <thead><tr><th>建议勾选</th><th>当前倍率</th><th>Sol / Terra</th><th>Luna</th><th>配置作用</th></tr></thead>
                 <tbody>
-                  <tr><td><code>Azure-Gpt-2</code></td><td><span class="gsm-ratio">0.10295×</span></td><td><span class="gsm-yes">可用</span></td><td>预算优先时先试</td></tr>
-                  <tr><td><code>Azure-Gpt-3</code></td><td><span class="gsm-ratio">0.11030×</span></td><td><span class="gsm-yes">可用</span></td><td>日常通用起点</td></tr>
-                  <tr><td><code>Azure-Gpt-4</code></td><td><span class="gsm-ratio">0.22059×</span></td><td><span class="gsm-yes">可用</span></td><td>需要提高预算时试用</td></tr>
-                  <tr><td><code>Azure-Gpt-5</code></td><td><span class="gsm-ratio">0.44118×</span></td><td><span class="gsm-yes">可用</span></td><td>更高预算的备选</td></tr>
-                  <tr><td><code>Openai-Gpt-1</code></td><td><span class="gsm-ratio">0.58824×</span></td><td><span class="gsm-yes">可用</span></td><td>需要另一条公开线路时试用</td></tr>
+                  <tr><td><code>Codex-Gpt-1</code></td><td><span class="gsm-ratio">0.03677×</span></td><td><span class="gsm-yes">可用</span></td><td><span class="gsm-no">暂不可用</span></td><td>最低倍率主力</td></tr>
+                  <tr><td><code>Codex-Gpt-2</code></td><td><span class="gsm-ratio">0.05883×</span></td><td><span class="gsm-yes">可用</span></td><td><span class="gsm-no">暂不可用</span></td><td>低价备选</td></tr>
+                  <tr><td><code>Codex-Gpt-3</code></td><td><span class="gsm-ratio">0.07353×</span></td><td><span class="gsm-yes">可用</span></td><td><span class="gsm-no">暂不可用</span></td><td>低价备选</td></tr>
+                  <tr><td><code>Azure-Gpt-2</code></td><td><span class="gsm-ratio">0.10295×</span></td><td><span class="gsm-yes">可用</span></td><td><span class="gsm-yes">可用</span></td><td>Luna 低倍率通道</td></tr>
+                  <tr><td><code>Azure-Gpt-3</code></td><td><span class="gsm-ratio">0.11030×</span></td><td><span class="gsm-yes">可用</span></td><td><span class="gsm-yes">可用</span></td><td>Luna 兼容备选</td></tr>
                 </tbody>
               </table>
             </div>
-            <div class="gsm-note">倍率只用于同一模型、不同分组之间的相对成本比较；实际扣费还取决于模型基础价格、输入输出量、缓存和阶梯计费。请以消费日志为准。</div>
+            <div class="gsm-note"><strong>组合逻辑：</strong>前三个分组负责尽量压低 Sol、Terra 的分组倍率，后两个确保 Luna 仍有兼容线路。无需让所有分组都支持 Luna，但不能只选 Codex-Gpt 系列。</div>
+            <div class="gsm-note"><strong>计费提醒：</strong>倍率只适合同一模型下比较分组成本；实际扣费还取决于模型基础价格、输入输出量、缓存和阶梯计费，请以消费日志为准。</div>
           </section>
 
           <section class="gsm-section" aria-labelledby="gsm-models-title">
             <h2 id="gsm-models-title">按任务选择模型</h2>
-            <p class="gsm-intro">三款模型都支持上面五个分组。下面是依据平台当前模型描述整理的起步建议，不替代你的实际评测。</p>
+            <p class="gsm-intro">分组组合解决“从哪里调用”，模型选择解决“把什么任务交给谁”。下面是依据平台定位整理的起步建议。</p>
             <div class="gsm-models">
-              <div class="gsm-model"><code>gpt-5.6-sol</code><span>旗舰高端定位。复杂、质量优先或高影响任务可先从 Sol 评估；按预算从 Azure-Gpt-4 或 Azure-Gpt-5 开始试用。</span></div>
-              <div class="gsm-model"><code>gpt-5.6-terra</code><span>算力与成本均衡定位。日常编程、分析和多步骤任务可作为默认候选；先试 Azure-Gpt-2、Azure-Gpt-3 或 Azure-Gpt-4。</span></div>
-              <div class="gsm-model"><code>gpt-5.6-luna</code><span>低成本、大批量定位。适合先做批处理、整理和轻量任务；Azure-Gpt-2 与 Azure-Gpt-3 是较低倍率的起点。</span></div>
+              <div class="gsm-model"><code>gpt-5.6-sol</code><span>负责规划、关键决策与最终复核。适合复杂、高影响或质量优先的任务，但不必让它包办全部执行。</span></div>
+              <div class="gsm-model"><code>gpt-5.6-terra</code><span>负责跨模块、长上下文或仍有一定歧义的执行工作，在质量与成本之间取得平衡。</span></div>
+              <div class="gsm-model"><code>gpt-5.6-luna</code><span>负责边界清晰、可验证、批量或机械性的工作，用较低模型倍率完成日常执行。</span></div>
             </div>
           </section>
 
           <section class="gsm-section" aria-labelledby="gsm-skill-title">
-            <h2 id="gsm-skill-title">需要让智能体按任务分工时</h2>
+            <h2 id="gsm-skill-title">再用 <code>$sol-luna</code> 自动组织分工</h2>
             <div class="gsm-skill">
-              <h3>可选安装 codex-sol-luna 技能</h3>
-              <p>如果任务包含复杂拆解、并行执行或需要把高难度工作与常规工作区分开，可以参考 <a href="https://github.com/yangphere/codex-sol-luna" target="_blank" rel="noopener">yangphere/codex-sol-luna</a> 的安装说明。给智能体分配任务时，在需求中明确写入下面这段内容，即可显式请求使用该技能的工作流。</p>
-              <code class="gsm-command">$sol-luna</code>
-              <p>这种方式适合在任务复杂度不同的场景中主动选择执行策略，从而更好地平衡任务质量与调用成本；实际效果仍取决于任务、模型和可用渠道。</p>
+              <h3>推荐安装 codex-sol-luna 技能</h3>
+              <p>按照 <a href="https://github.com/yangphere/codex-sol-luna" target="_blank" rel="noopener">yangphere/codex-sol-luna 项目说明</a>完成安装。给智能体分配复杂任务时，在需求开头显式写入：</p>
+              <code class="gsm-command">$sol-luna 请分析这个项目并完成重构，验证后给出结果</code>
+              <ul class="gsm-role-list">
+                <li><strong>Sol 统一控制</strong>理解目标、拆分任务、安排阶段并审核实际结果。</li>
+                <li><strong>Terra 处理难题</strong>承接跨模块、长上下文或判断空间较大的执行任务。</li>
+                <li><strong>Luna 批量执行</strong>承接清晰、低歧义、机械或高吞吐任务，并提供验证证据。</li>
+              </ul>
+              <p>价值不在于“所有任务都用最强模型”，而在于把昂贵算力集中到规划、难题和复核，把常规执行交给更低成本的模型。是否启用并行与具体模型分配仍由任务复杂度决定，实际体验也会受渠道可用性影响。</p>
             </div>
             <div class="gsm-actions">
               <a class="btn btn-primary" href="../models/index.html">进入模型广场 →</a>

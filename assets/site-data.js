@@ -52,8 +52,8 @@ window.CYBERSHEEP_DATA = {
   "announcements": [
     {
       "date": "2026-08-31",
-      "title": "GPT 系列推荐用法：手动分组 + $sol-luna",
-      "excerpt": "关闭智能路由后，选择五个 Luna 也可用的低倍率公开分组；按任务显式调用 $sol-luna。",
+      "title": "Codex 高效省钱指南：手动分组 + $sol-luna",
+      "excerpt": "关闭智能路由，混选低倍率 Codex-Gpt 分组与 Luna 兼容分组，再用 $sol-luna 按任务难度分工。",
       "slug": "gpt-series-manual-groups",
       "type": "guide",
       "category": "模型与分组",

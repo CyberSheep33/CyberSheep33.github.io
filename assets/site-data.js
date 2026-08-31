@@ -52,6 +52,35 @@ window.CYBERSHEEP_DATA = {
   "announcements": [
     {
       "date": "2026-08-31",
+      "title": "GPT 系列推荐用法：手动分组 + $sol-luna",
+      "excerpt": "关闭智能路由后，选择五个 Luna 也可用的低倍率公开分组；按任务显式调用 $sol-luna。",
+      "slug": "gpt-series-manual-groups",
+      "type": "guide",
+      "category": "模型与分组",
+      "keywords": [
+        "GPT",
+        "GPT-5.6",
+        "智能路由",
+        "手动分组",
+        "Sol",
+        "Terra",
+        "Luna",
+        "sol-luna"
+      ],
+      "featured": true,
+      "related_guides": [
+        "gpt-5-6-groups-guide",
+        "sheep-ai-plus-group-guide"
+      ],
+      "related_models": [
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna"
+      ],
+      "generated_from": "data/model-snapshots/2026-08-31/cleaned.json"
+    },
+    {
+      "date": "2026-08-31",
       "title": "GPT-5.6 Sol、Terra、Luna 可用分组对比",
       "excerpt": "Sol 与 Terra 各有 9 个公开分组，Luna 有 6 个；一张表看清共同分组、Codex 分组差异与选择建议。",
       "slug": "gpt-5-6-groups-guide",

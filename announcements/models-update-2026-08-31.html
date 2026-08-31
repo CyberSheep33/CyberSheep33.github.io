@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="本期收录 412 个模型，新增 0 个、下架 41 个，5 个模型的配置字段发生变化。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+  <title>模型广场更新：下架 41 个旧模型 — CyberSheep 赛博小羊公告</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+.announcement-content--models-update-2026-08-31 { --mu-surface: var(--panel-strong); --mu-soft: var(--tag-bg); color: var(--fg); }
+.announcement-content--models-update-2026-08-31 .mu-hero { position: relative; overflow: hidden; padding: clamp(24px, 4vw, 40px); border: 1px solid var(--border-strong); border-radius: 24px; background: radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 38%), radial-gradient(circle at 8% 92%, color-mix(in srgb, var(--primary-3) 12%, transparent), transparent 40%), var(--mu-surface); box-shadow: var(--shadow); }
+.announcement-content--models-update-2026-08-31 .mu-eyebrow { position: relative; z-index: 1; display: inline-flex; align-items: center; padding: 7px 11px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--mu-soft); color: var(--primary); font-size: .75rem; font-weight: 850; }
+.announcement-content--models-update-2026-08-31 h1 { position: relative; z-index: 1; max-width: 680px; margin: 16px 0 10px; color: var(--fg); font-size: clamp(1.8rem, 4.6vw, 2.9rem); line-height: 1.14; letter-spacing: -.035em; text-wrap: balance; }
+.announcement-content--models-update-2026-08-31 .mu-lead { position: relative; z-index: 1; max-width: 64ch; margin: 0; color: var(--muted); font-size: .96rem; line-height: 1.8; text-wrap: pretty; }
+.announcement-content--models-update-2026-08-31 .mu-version { position: relative; z-index: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.announcement-content--models-update-2026-08-31 .mu-version span { padding: 6px 9px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in srgb, var(--panel) 82%, transparent); color: var(--muted); font-family: var(--font-mono); font-size: .7rem; }
+.announcement-content--models-update-2026-08-31 .mu-version span[aria-hidden] { padding-inline: 2px; border: 0; background: transparent; color: var(--primary); font-weight: 900; }
+.announcement-content--models-update-2026-08-31 .mu-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 16px 0 0; }
+.announcement-content--models-update-2026-08-31 .mu-stat { min-width: 0; padding: 16px; border: 1px solid var(--border); border-radius: 15px; background: var(--mu-surface); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); transition: border-color 180ms ease, transform 180ms ease; }
+.announcement-content--models-update-2026-08-31 .mu-stat:first-child { background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 .mu-stat:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.announcement-content--models-update-2026-08-31 .mu-stat span { display: block; color: var(--soft); font-size: .7rem; font-weight: 750; }
+.announcement-content--models-update-2026-08-31 .mu-stat strong { display: block; margin-top: 8px; color: var(--primary); font-family: var(--font-mono); font-size: clamp(1.45rem, 3vw, 1.95rem); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.announcement-content--models-update-2026-08-31 .mu-stat small { display: block; margin-top: 7px; color: var(--muted); font-size: .68rem; line-height: 1.5; }
+.announcement-content--models-update-2026-08-31 .mu-section { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--divider); }
+.announcement-content--models-update-2026-08-31 .mu-section-head { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 11px; align-items: start; margin-bottom: 14px; }
+.announcement-content--models-update-2026-08-31 .mu-section-head > span { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 10px; background: color-mix(in srgb, var(--primary) 11%, var(--mu-surface)); color: var(--primary); font-family: var(--font-mono); font-size: .68rem; font-weight: 900; }
+.announcement-content--models-update-2026-08-31 .mu-section-head h2 { margin: 1px 0 0; color: var(--fg); font-size: 1.25rem; line-height: 1.35; }
+.announcement-content--models-update-2026-08-31 .mu-section-head p { max-width: 62ch; margin: 4px 0 0; color: var(--muted); font-size: .84rem; line-height: 1.7; }
+.announcement-content--models-update-2026-08-31 .mu-model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.announcement-content--models-update-2026-08-31 .mu-model-card { display: flex; flex-direction: column; min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--mu-surface); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
+.announcement-content--models-update-2026-08-31 .mu-model-top, .announcement-content--models-update-2026-08-31 .mu-model-meta { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.announcement-content--models-update-2026-08-31 .mu-model-top code { overflow-wrap: anywhere; color: var(--fg); font-size: .85rem; font-weight: 850; }
+.announcement-content--models-update-2026-08-31 .mu-model-top > span { flex: 0 0 auto; color: var(--primary); font-size: .7rem; font-weight: 800; }
+.announcement-content--models-update-2026-08-31 .mu-model-card p { margin: 13px 0 16px; color: var(--muted); font-size: .84rem; line-height: 1.7; }
+.announcement-content--models-update-2026-08-31 .mu-model-meta { margin-top: auto; color: var(--soft); font-size: .7rem; }
+.announcement-content--models-update-2026-08-31 .mu-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.announcement-content--models-update-2026-08-31 .mu-tags span { padding: 4px 7px; border-radius: 7px; background: var(--mu-soft); color: var(--muted); font-size: .66rem; }
+.announcement-content--models-update-2026-08-31 .mu-status { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 13px; background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 .mu-status > span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; background: color-mix(in srgb, var(--primary) 13%, var(--mu-surface)); color: var(--primary); font-size: 1rem; font-weight: 900; }
+.announcement-content--models-update-2026-08-31 .mu-status strong { display: block; color: var(--fg); font-size: .9rem; }
+.announcement-content--models-update-2026-08-31 .mu-status p { margin: 3px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.65; }
+.announcement-content--models-update-2026-08-31 .mu-group-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.announcement-content--models-update-2026-08-31 .mu-bars { padding: 16px; border: 1px solid var(--border); border-radius: 15px; background: var(--mu-surface); }
+.announcement-content--models-update-2026-08-31 .mu-bars h3 { margin: 0 0 13px; color: var(--fg); font-size: .9rem; }
+.announcement-content--models-update-2026-08-31 .mu-bars ol { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.announcement-content--models-update-2026-08-31 .mu-bars li > div { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.announcement-content--models-update-2026-08-31 .mu-bars code { overflow-wrap: anywhere; color: var(--fg); font-size: .69rem; }
+.announcement-content--models-update-2026-08-31 .mu-bars b { flex: 0 0 auto; color: var(--soft); font-size: .66rem; }
+.announcement-content--models-update-2026-08-31 meter { display: block; width: 100%; height: 7px; border: 0; background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 meter::-webkit-meter-bar { border: 0; border-radius: 7px; background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 meter::-webkit-meter-optimum-value { border-radius: 7px; background: var(--primary); }
+.announcement-content--models-update-2026-08-31 meter::-moz-meter-bar { border-radius: 7px; background: var(--primary); }
+.announcement-content--models-update-2026-08-31 .mu-details { margin-top: 12px; border: 1px solid var(--border); border-radius: 13px; background: var(--mu-surface); }
+.announcement-content--models-update-2026-08-31 .mu-details summary { padding: 13px 15px; color: var(--fg); font-size: .84rem; font-weight: 800; cursor: pointer; }
+.announcement-content--models-update-2026-08-31 .mu-details summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.announcement-content--models-update-2026-08-31 .mu-table-wrap { overflow-x: auto; border-top: 1px solid var(--divider); }
+.announcement-content--models-update-2026-08-31 table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .76rem; }
+.announcement-content--models-update-2026-08-31 th, .announcement-content--models-update-2026-08-31 td { padding: 11px 12px; border-bottom: 1px solid var(--divider); text-align: left; vertical-align: top; }
+.announcement-content--models-update-2026-08-31 th { color: var(--soft); font-size: .66rem; letter-spacing: .04em; }
+.announcement-content--models-update-2026-08-31 td { color: var(--muted); }
+.announcement-content--models-update-2026-08-31 td code { color: var(--fg); overflow-wrap: anywhere; }
+.announcement-content--models-update-2026-08-31 .mu-removed { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.announcement-content--models-update-2026-08-31 .mu-removed li { min-width: 0; padding: 10px 12px; border-left: 2px solid var(--border-strong); background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 .mu-removed code { color: var(--muted); font-size: .73rem; overflow-wrap: anywhere; }
+.announcement-content--models-update-2026-08-31 .mu-closing { padding: 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 .mu-closing strong { display: block; color: var(--fg); font-size: 1rem; }
+.announcement-content--models-update-2026-08-31 .mu-closing p { margin: 6px 0 0; color: var(--muted); font-size: .84rem; line-height: 1.7; }
+.announcement-content--models-update-2026-08-31 .mu-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.announcement-content--models-update-2026-08-31 .mu-empty { padding: 15px; border: 1px dashed var(--border); border-radius: 13px; background: var(--mu-soft); }
+.announcement-content--models-update-2026-08-31 .mu-empty strong, .announcement-content--models-update-2026-08-31 .mu-empty span { display: block; }
+.announcement-content--models-update-2026-08-31 .mu-empty span { margin-top: 4px; color: var(--muted); font-size: .8rem; }
+@media (max-width: 640px) { .announcement-content--models-update-2026-08-31 .mu-model-grid, .announcement-content--models-update-2026-08-31 .mu-group-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .announcement-content--models-update-2026-08-31 .mu-hero { padding: 24px 18px; border-radius: 19px; } .announcement-content--models-update-2026-08-31 h1 { font-size: 1.9rem; } .announcement-content--models-update-2026-08-31 .mu-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .announcement-content--models-update-2026-08-31 .mu-stat { padding: 14px; } .announcement-content--models-update-2026-08-31 .mu-removed { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header" id="siteHeader"></header>
+  <main>
+    <div class="section announce-page">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
+        <article class="announcement-content announcement-content--models-update-2026-08-31">
+        <header class="mu-hero">
+          <span class="mu-eyebrow">模型广场数据周报 · 2026-08-31</span>
+          <h1>模型广场更新：下架 41 个旧模型</h1>
+          <p class="mu-lead">本期收录 412 个模型，新增 0 个、下架 41 个，5 个模型的配置字段发生变化。</p>
+          <div class="mu-version"><span>2026-08-28</span><span aria-hidden="true">→</span><span>2026-08-31</span></div>
+        </header>
+
+        <section class="mu-stats" aria-label="本期数据概览">
+          <div class="mu-stat"><span>当前模型</span><strong>412</strong><small>55 个厂商 · 74 个分组</small></div>
+          <div class="mu-stat"><span>新增</span><strong>+0</strong><small>首次进入模型广场</small></div>
+          <div class="mu-stat"><span>下架</span><strong>-41</strong><small>不再出现在当前列表</small></div>
+          <div class="mu-stat"><span>配置变化</span><strong>5</strong><small>价格、分组或端点字段</small></div>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-added-title">
+          <header class="mu-section-head"><span>01</span><div><h2 id="mu-added-title">新增模型</h2><p>新模型已进入模型广场，可进一步查看可用分组与调用端点。</p></div></header>
+          <div class="mu-empty"><strong>本期无新增模型</strong><span>模型目录保持稳定。</span></div>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-price-title">
+          <header class="mu-section-head"><span>02</span><div><h2 id="mu-price-title">价格与倍率</h2><p>单独核对输入、输出、缓存、阶梯计费和分组倍率，便于判断使用成本是否变化。</p></div></header>
+          <div class="mu-status"><span aria-hidden="true">✓</span><div><strong>本期未检测到价格或倍率变化</strong><p>已有模型的价格字段与分组倍率保持不变；新增模型按最新数据展示。</p></div></div>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-group-title">
+          <header class="mu-section-head"><span>03</span><div><h2 id="mu-group-title">可用分组变化</h2><p>图表展示影响模型数量最多的分组；完整明细保留在折叠表格中。</p></div></header>
+          <div class="mu-group-grid"><div class="mu-bars"><h3>覆盖增加最多的分组</h3><ol><li><div><code>Alibaba-3</code><b>1 个模型</b></div><meter min="0" max="1" value="1">1</meter></li></ol></div><div class="mu-bars"><h3>覆盖减少最多的分组</h3><ol><li><div><code>Vertex-Gemini-1</code><b>2 个模型</b></div><meter min="0" max="2" value="2">2</meter></li><li><div><code>Cli-Gemini-1</code><b>1 个模型</b></div><meter min="0" max="2" value="1">1</meter></li><li><div><code>Azure-Gpt-2</code><b>1 个模型</b></div><meter min="0" max="2" value="1">1</meter></li></ol></div></div><details class="mu-details"><summary>查看全部 5 个模型的分组变化</summary><div class="mu-table-wrap"><table><thead><tr><th>模型</th><th>新增分组</th><th>移除分组</th></tr></thead><tbody><tr><td><code>gemini-3-pro-preview</code></td><td>—</td><td>Vertex-Gemini-1</td></tr><tr><td><code>gemini-3.1-flash-tts-preview</code></td><td>—</td><td>Vertex-Gemini-1</td></tr><tr><td><code>gemini-3.5-flash-lite</code></td><td>—</td><td>Cli-Gemini-1</td></tr><tr><td><code>glm-5.3</code></td><td>Alibaba-3</td><td>—</td></tr><tr><td><code>whisper-1</code></td><td>—</td><td>Azure-Gpt-2</td></tr></tbody></table></div></details>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-endpoint-title">
+          <header class="mu-section-head"><span>04</span><div><h2 id="mu-endpoint-title">调用端点变化</h2><p>端点类型决定模型能够通过哪些兼容协议调用。</p></div></header>
+          <div class="mu-status"><span aria-hidden="true">✓</span><div><strong>本期无端点变化</strong><p>已有模型的兼容调用方式保持不变。</p></div></div>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-removed-title">
+          <header class="mu-section-head"><span>05</span><div><h2 id="mu-removed-title">下架模型</h2><p>这些模型不再出现在当前目录。已有配置如引用它们，应在使用前确认替代模型。</p></div></header>
+          <ul class="mu-removed"><li><code>claude-3-5-sonnet-20241022</code></li><li><code>claude-3-7-sonnet-20250219</code></li><li><code>claude-3-haiku-20240307</code></li><li><code>glm-3-turbo</code></li><li><code>glm-4-air</code></li><li><code>glm-4.5-airx</code></li><li><code>glm-4.5-flash</code></li><li><code>glm-4.5-x</code></li><li><code>gpt-4o-audio-preview-2025-06-03</code></li><li><code>gpt-oss-20b</code></li><li><code>grok-1.5-video-10s</code></li><li><code>grok-1.5-video-15s</code></li><li><code>grok-1.5-video-6s</code></li><li><code>grok-video-3</code></li><li><code>grok-video-3-10s</code></li><li><code>grok-video-3-15s</code></li><li><code>kimi-k2.7-code-highspeed</code></li><li><code>mj_uploads</code></li><li><code>o3-pro-2025-06-10</code></li><li><code>omni_flash-10s</code></li><li><code>sora-2</code></li><li><code>text-embedding-v1</code></li><li><code>veo2</code></li><li><code>veo2-fast</code></li><li><code>veo2-fast-components</code></li><li><code>veo2-fast-frames</code></li><li><code>veo2-pro</code></li><li><code>veo2-pro-components</code></li><li><code>veo3</code></li><li><code>veo3-fast</code></li><li><code>veo3-fast-frames</code></li><li><code>veo3-frames</code></li><li><code>veo3-pro</code></li><li><code>veo3-pro-frames</code></li><li><code>veo3.1</code></li><li><code>veo3.1-4k</code></li><li><code>veo3.1-components</code></li><li><code>veo3.1-components-4k</code></li><li><code>veo3.1-fast</code></li><li><code>veo3.1-pro</code></li><li><code>veo3.1-pro-4k</code></li></ul>
+        </section>
+
+        <section class="mu-section" aria-labelledby="mu-next-title">
+          <header class="mu-section-head"><span>06</span><div><h2 id="mu-next-title">查看最新模型</h2><p>模型广场已经同步本期数据，可以按厂商、类型和调用端点继续筛选。</p></div></header>
+          <div class="mu-closing">
+            <strong>使用前请以平台实时状态为准</strong>
+            <p>公告用于说明目录变化；模型可用性和实际扣费可能随平台策略调整。</p>
+            <div class="mu-actions"><a class="btn btn-primary" href="../models/index.html">进入模型广场 →</a></div>
+          </div>
+        </section>
+
+        <nav class="announce-nav" id="announceNav" aria-label="公告导航"></nav>
+        </article>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="../assets/site-data.js"></script>
+  <script src="../js/site.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/announcements.js"></script>
+</body>
+</html>

@@ -2,6 +2,53 @@
   "schema_version": 1,
   "items": [
     {
+      "date": "2026-08-31",
+      "title": "GPT-5.6 Sol、Terra、Luna 可用分组对比",
+      "excerpt": "Sol 与 Terra 各有 9 个公开分组，Luna 有 6 个；一张表看清共同分组、Codex 分组差异与选择建议。",
+      "slug": "gpt-5-6-groups-guide",
+      "type": "guide",
+      "category": "模型与分组",
+      "keywords": [
+        "GPT-5.6",
+        "Sol",
+        "Terra",
+        "Luna",
+        "可用分组",
+        "Codex"
+      ],
+      "featured": true,
+      "related_guides": [
+        "models-update-2026-08-31",
+        "sheep-ai-plus-group-guide"
+      ],
+      "related_models": [
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna"
+      ],
+      "generated_from": "data/model-snapshots/2026-08-31/cleaned.json"
+    },
+    {
+      "date": "2026-08-31",
+      "title": "模型广场更新：下架 41 个旧模型",
+      "excerpt": "本期收录 412 个模型，新增 0 个、下架 41 个，5 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-08-31",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [],
+      "generated_from": "data/model-snapshots/2026-08-31/changes.json"
+    },
+    {
       "date": "2026-08-28",
       "title": "模型广场更新：新增 glm-5.3-flash、qwen3.8-flash",
       "excerpt": "本期收录 453 个模型，新增 2 个、下架 9 个，63 个模型的配置字段发生变化。",

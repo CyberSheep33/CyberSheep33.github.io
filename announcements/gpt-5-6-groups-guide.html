@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="对比 GPT-5.6 Sol、Terra、Luna 的公开可用分组，说明 Luna 分组较少的已知事实与选择建议。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+
+  <meta property="og:title" content="GPT-5.6 Sol、Terra、Luna 可用分组对比 — CyberSheep 赛博小羊公告">
+  <meta property="og:description" content="Sol 与 Terra 各有 9 个公开分组，Luna 有 6 个；一张表看清共同分组与差异。">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CyberSheep">
+
+  <title>GPT-5.6 Sol、Terra、Luna 可用分组对比 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .announcement-content--gpt-5-6-groups-guide {
+      --g56-surface: var(--panel-strong);
+      --g56-soft: var(--tag-bg);
+      color: var(--fg);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 88% 16%, color-mix(in srgb, var(--primary) 17%, transparent), transparent 38%),
+        radial-gradient(circle at 8% 94%, color-mix(in srgb, var(--primary-3) 10%, transparent), transparent 40%),
+        var(--g56-surface);
+      box-shadow: var(--shadow);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-kicker {
+      display: inline-flex;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--g56-soft);
+      color: var(--primary);
+      font-size: .75rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide h1 {
+      max-width: 680px;
+      margin: 16px 0 10px;
+      color: var(--fg);
+      font-size: clamp(1.8rem, 4.6vw, 2.9rem);
+      line-height: 1.14;
+      letter-spacing: -.035em;
+      text-wrap: balance;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-lead {
+      max-width: 64ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-date {
+      display: block;
+      margin-top: 16px;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: .7rem;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-section {
+      margin-top: 26px;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-section h2 {
+      margin: 0 0 6px;
+      color: var(--fg);
+      font-size: 1.28rem;
+      line-height: 1.35;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-section-intro {
+      max-width: 64ch;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.75;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-bars {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--g56-surface);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-bar-row {
+      display: grid;
+      grid-template-columns: 116px minmax(0, 1fr) 54px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-model-name {
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-track {
+      height: 9px;
+      overflow: hidden;
+      border-radius: var(--radius-pill);
+      background: var(--g56-soft);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-track span {
+      display: block;
+      width: var(--width);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--primary);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-bar-row.is-luna .g56-track span {
+      background: color-mix(in srgb, var(--primary) 62%, var(--soft));
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-count {
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: .76rem;
+      font-weight: 850;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-fact {
+      padding: 14px;
+      border-left: 2px solid var(--border-strong);
+      background: var(--g56-soft);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-fact strong {
+      display: block;
+      color: var(--fg);
+      font-size: .88rem;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-fact span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.65;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--g56-surface);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: .8rem;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide th,
+    .announcement-content--gpt-5-6-groups-guide td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--divider);
+      text-align: center;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide th {
+      background: var(--g56-soft);
+      color: var(--soft);
+      font-size: .7rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide th:first-child,
+    .announcement-content--gpt-5-6-groups-guide td:first-child {
+      text-align: left;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide tbody tr:hover td {
+      background: color-mix(in srgb, var(--primary) 4%, transparent);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide td code {
+      color: var(--fg);
+      font-size: .76rem;
+      font-weight: 750;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-yes,
+    .announcement-content--gpt-5-6-groups-guide .g56-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      padding: 4px 7px;
+      border-radius: 8px;
+      font-size: .68rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-yes {
+      background: color-mix(in srgb, var(--primary) 12%, var(--g56-soft));
+      color: var(--primary);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-no {
+      background: color-mix(in srgb, var(--soft) 8%, var(--g56-soft));
+      color: var(--soft);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-reason {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid color-mix(in srgb, #d79b35 34%, var(--border));
+      border-radius: 15px;
+      background: color-mix(in srgb, #d79b35 8%, var(--g56-soft));
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-reason-mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: color-mix(in srgb, #d79b35 14%, var(--g56-surface));
+      color: color-mix(in srgb, #a66b13 78%, var(--fg));
+      font-weight: 900;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-reason strong {
+      color: var(--fg);
+      font-size: .9rem;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-reason p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.75;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-choices {
+      display: grid;
+      gap: 9px;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-choice {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--g56-surface);
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-choice code {
+      color: var(--primary);
+      font-size: .78rem;
+      font-weight: 850;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-choice span {
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.65;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-footnote {
+      margin: 14px 0 0;
+      color: var(--soft);
+      font-size: .76rem;
+      line-height: 1.7;
+    }
+
+    .announcement-content--gpt-5-6-groups-guide .g56-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .announcement-content--gpt-5-6-groups-guide .g56-hero { padding: 24px 18px; border-radius: 20px; }
+      .announcement-content--gpt-5-6-groups-guide .g56-facts { grid-template-columns: 1fr; }
+      .announcement-content--gpt-5-6-groups-guide .g56-bar-row { grid-template-columns: 92px minmax(0, 1fr) 48px; gap: 8px; }
+      .announcement-content--gpt-5-6-groups-guide .g56-choice { grid-template-columns: 1fr; gap: 5px; }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header" id="siteHeader"></header>
+
+  <main>
+    <div class="section announce-page">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
+
+        <article class="announcement-content announcement-content--gpt-5-6-groups-guide">
+          <header class="g56-hero">
+            <span class="g56-kicker">模型与分组 · GPT-5.6</span>
+            <h1>Sol、Terra、Luna 的可用分组有什么不同？</h1>
+            <p class="g56-lead">三款模型都支持 OpenAI Chat 与 Responses 调用，但公开分组数量并不相同：Sol 和 Terra 各有 9 个，Luna 有 6 个。下面用一张表把共同分组与差异讲清楚。</p>
+            <time class="g56-date" datetime="2026-08-31">数据版本：2026-08-31</time>
+          </header>
+
+          <section class="g56-section" aria-labelledby="g56-count-title">
+            <h2 id="g56-count-title">先看数量</h2>
+            <p class="g56-section-intro">分组数量反映当前可选择的公开线路范围，不代表模型能力高低。</p>
+            <div class="g56-bars" aria-label="三个模型的可用分组数量">
+              <div class="g56-bar-row"><span class="g56-model-name">gpt-5.6-sol</span><span class="g56-track"><span style="--width:100%"></span></span><strong class="g56-count">9 个</strong></div>
+              <div class="g56-bar-row"><span class="g56-model-name">gpt-5.6-terra</span><span class="g56-track"><span style="--width:100%"></span></span><strong class="g56-count">9 个</strong></div>
+              <div class="g56-bar-row is-luna"><span class="g56-model-name">gpt-5.6-luna</span><span class="g56-track"><span style="--width:66.67%"></span></span><strong class="g56-count">6 个</strong></div>
+            </div>
+            <div class="g56-facts">
+              <div class="g56-fact"><strong>6 个共同分组</strong><span>Azure 4 个，OpenAI 2 个。</span></div>
+              <div class="g56-fact"><strong>3 个差异分组</strong><span>均为 Codex-Gpt 专属分组。</span></div>
+              <div class="g56-fact"><strong>本期配置稳定</strong><span>与 2026-08-28 相比没有变化。</span></div>
+            </div>
+          </section>
+
+          <section class="g56-section" aria-labelledby="g56-matrix-title">
+            <h2 id="g56-matrix-title">完整分组矩阵</h2>
+            <p class="g56-section-intro">Luna 当前缺少的是三个 Codex 专属分组；Azure 与 OpenAI 分组和另外两款一致。</p>
+            <div class="g56-table-wrap">
+              <table>
+                <thead><tr><th>公开分组</th><th>Sol</th><th>Terra</th><th>Luna</th></tr></thead>
+                <tbody>
+                  <tr><td><code>Azure-Gpt-2</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Azure-Gpt-3</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Azure-Gpt-4</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Azure-Gpt-5</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Openai-Gpt-1</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Openai-Gpt-2</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td></tr>
+                  <tr><td><code>Codex-Gpt-1</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-no">未开放</span></td></tr>
+                  <tr><td><code>Codex-Gpt-2</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-no">未开放</span></td></tr>
+                  <tr><td><code>Codex-Gpt-3</code></td><td><span class="g56-yes">可用</span></td><td><span class="g56-yes">可用</span></td><td><span class="g56-no">未开放</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="g56-section" aria-labelledby="g56-why-title">
+            <h2 id="g56-why-title">为什么 Luna 的分组更少？</h2>
+            <div class="g56-reason">
+              <span class="g56-reason-mark" aria-hidden="true">?</span>
+              <div>
+                <strong>平台暂未披露具体原因</strong>
+                <p>当前数据只能确认 Luna 未开放三个 Codex 专属分组。模型在某条线路是否开放，通常可能受渠道适配、容量调度、稳定性验证或风险控制策略影响；这些是常见运营因素，并非平台对本次差异的官方说明。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="g56-section" aria-labelledby="g56-choice-title">
+            <h2 id="g56-choice-title">怎么选？</h2>
+            <p class="g56-section-intro">模型定位来自当前平台描述；最终仍建议按任务质量、延迟和实际费用试用后选择。</p>
+            <div class="g56-choices">
+              <div class="g56-choice"><code>gpt-5.6-sol</code><span>旗舰高端定位，适合质量优先、复杂推理和高要求任务。</span></div>
+              <div class="g56-choice"><code>gpt-5.6-terra</code><span>算力与成本均衡，适合作为多数日常任务的通用选择。</span></div>
+              <div class="g56-choice"><code>gpt-5.6-luna</code><span>低成本与大批量定位；如果不依赖 Codex 专属分组，可以优先评估。</span></div>
+            </div>
+            <p class="g56-footnote">可用分组会随平台策略调整。本页记录的是 2026-08-31 清洗后的公开数据，不承诺未来持续可用。</p>
+            <div class="g56-actions">
+              <a class="btn btn-primary" href="../models/index.html">进入模型广场 →</a>
+              <a class="btn btn-secondary" href="models-update-2026-08-31.html">查看本期模型更新</a>
+            </div>
+          </section>
+
+          <nav class="announce-nav" id="announceNav" aria-label="公告导航"></nav>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="../assets/site-data.js"></script>
+  <script src="../js/site.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/announcements.js"></script>
+</body>
+</html>

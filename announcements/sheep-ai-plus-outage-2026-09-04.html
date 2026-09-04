@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="9 月 3 日晚间上游 AI 服务集中异常，SheepAI Plus 部分渠道出现掉线、请求失败、模型不可用，目前大部分渠道已恢复。">
+  <meta name="author" content="CyberSheep">
+  <meta name="theme-color" content="#f7fbfa">
+  <title>SheepAI Plus 服务异常公告 — CyberSheep 赛博小羊公告</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 { --so-surface: var(--panel-strong); --so-soft: var(--tag-bg); --so-ok: var(--primary-2); color: var(--fg); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--so-soft); color: var(--muted); font-size: .74rem; font-weight: 850; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-pill.is-ok { border-color: color-mix(in srgb, var(--so-ok) 45%, var(--border)); background: color-mix(in srgb, var(--so-ok) 14%, var(--so-soft)); color: var(--so-ok); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 h1 { margin: 16px 0 10px; color: var(--fg); font-size: clamp(1.85rem, 4.4vw, 2.75rem); line-height: 1.16; letter-spacing: -.025em; text-wrap: balance; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-lead { max-width: 68ch; margin: 0; color: var(--muted); font-size: .98rem; line-height: 1.85; text-wrap: pretty; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-lead strong { color: var(--fg); font-weight: 750; }
+
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 0; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item { min-width: 0; padding: 14px 15px; border: 1px solid var(--border); border-radius: 15px; background: var(--so-surface); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item span { display: block; color: var(--soft); font-size: .68rem; font-weight: 800; letter-spacing: .04em; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item strong { display: block; margin-top: 7px; color: var(--fg); font-size: .9rem; line-height: 1.45; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item small { display: block; margin-top: 5px; color: var(--muted); font-size: .7rem; line-height: 1.55; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item.is-ok { border-color: color-mix(in srgb, var(--so-ok) 42%, var(--border)); background: color-mix(in srgb, var(--so-ok) 9%, var(--so-soft)); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-meta-item.is-ok strong { color: var(--so-ok); }
+
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-section { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--divider); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-section h2 { margin: 0 0 6px; color: var(--fg); font-size: 1.3rem; line-height: 1.35; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 p { max-width: 68ch; margin: 10px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.85; text-wrap: pretty; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 p strong { color: var(--fg); font-weight: 750; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 a { color: var(--primary); font-weight: 700; text-underline-offset: 3px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 a:hover { text-decoration-thickness: 2px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 code { padding: 2px 7px; border: 1px solid var(--border); border-radius: 8px; background: var(--so-soft); color: var(--fg); font-family: var(--font-mono); font-size: .82em; white-space: nowrap; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 ul { max-width: 68ch; margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 ul li { position: relative; padding-left: 24px; color: var(--muted); font-size: .9rem; line-height: 1.8; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 ul li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--primary) 30%, transparent); border: 1px solid var(--primary); box-sizing: border-box; }
+
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-note { margin-top: 14px; padding: 15px 17px; border: 1px solid var(--border-strong); border-radius: 15px; background: color-mix(in srgb, var(--primary) 7%, var(--so-surface)); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-note strong { display: block; color: var(--fg); font-size: .9rem; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-note p { margin: 6px 0 0; font-size: .84rem; }
+
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline { margin: 16px 0 0; padding: 0; list-style: none; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li { position: relative; padding: 0 0 18px 28px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li::before { content: ""; position: absolute; left: 8px; top: 22px; bottom: -2px; width: 1px; background: var(--border); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li:last-child { padding-bottom: 0; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li:last-child::before { display: none; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li::after { content: ""; position: absolute; left: 3px; top: 5px; width: 11px; height: 11px; border-radius: 50%; background: var(--so-surface); border: 2px solid var(--primary); box-sizing: border-box; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline li.is-done::after { background: var(--so-ok); border-color: var(--so-ok); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline time { display: inline-block; color: var(--primary); font-family: var(--font-mono); font-size: .68rem; font-weight: 800; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-timeline strong { display: block; margin-top: 3px; color: var(--fg); font-size: .92rem; line-height: 1.55; }
+
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-sign { margin-top: 30px; padding: 20px 22px 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--so-soft); }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-sign p { margin: 0; font-size: .9rem; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-sign-line { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: 4px 14px; margin-top: 14px; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-sign-line strong { color: var(--fg); font-size: .92rem; }
+    .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-sign-line time { color: var(--soft); font-family: var(--font-mono); font-size: .76rem; font-weight: 700; }
+
+    @media (max-width: 520px) {
+      .announcement-content--sheep-ai-plus-outage-2026-09-04 h1 { font-size: 1.75rem; }
+      .announcement-content--sheep-ai-plus-outage-2026-09-04 .so-section { margin-top: 26px; padding-top: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .announcement-content--sheep-ai-plus-outage-2026-09-04 * { transition: none !important; animation: none !important; }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐑</text></svg>">
+</head>
+<body>
+  <header class="site-header" id="siteHeader"></header>
+
+  <main>
+    <div class="section announce-page">
+      <div class="section-card announce-body">
+        <a class="announce-back" href="index.html">← 返回全部公告</a>
+        <article class="announcement-content announcement-content--sheep-ai-plus-outage-2026-09-04">
+
+          <header>
+            <div class="so-pills" aria-label="公告类型与当前状态">
+              <span class="so-pill">服务公告</span>
+              <span class="so-pill is-ok">✓ 大部分渠道已恢复</span>
+            </div>
+            <h1>SheepAI Plus 服务异常公告</h1>
+            <p class="so-lead">北京时间 9 月 3 日晚间至 9 月 4 日凌晨，部分上游 AI 服务出现集中性异常，期间包括 <strong>OpenAI / Codex、Claude</strong> 等多个模型服务均有不同程度的错误率升高、容量不足、请求失败或服务不可用；受上游服务波动影响，SheepAI Plus 部分渠道出现大量掉线、请求失败、模型不可用。</p>
+          </header>
+
+          <div class="so-meta" aria-label="故障概况">
+            <div class="so-meta-item">
+              <span>影响时间</span>
+              <strong>9 月 3 日 21:26 起</strong>
+              <small>9 月 4 日凌晨陆续恢复</small>
+            </div>
+            <div class="so-meta-item">
+              <span>影响范围</span>
+              <strong>SheepAI Plus 部分渠道</strong>
+              <small>不同渠道受影响程度不一</small>
+            </div>
+            <div class="so-meta-item">
+              <span>主要表现</span>
+              <strong>掉线 · 请求失败 · 模型不可用</strong>
+              <small>上游错误率升高 / 容量不足</small>
+            </div>
+            <div class="so-meta-item is-ok">
+              <span>当前状态</span>
+              <strong>大部分渠道已恢复</strong>
+              <small>仍遇报错可稍后重试或切换模型</small>
+            </div>
+          </div>
+
+          <section class="so-section" aria-labelledby="outage-what-title">
+            <h2 id="outage-what-title">本次发生了什么</h2>
+            <p>9 月 3 日晚间，部分上游 AI 服务出现集中性异常，包括 OpenAI / Codex、Claude 等多个模型服务均出现不同程度的<strong>错误率升高、容量不足、请求失败或服务不可用</strong>等情况。</p>
+            <p>受上游服务波动影响，SheepAI Plus 部分渠道在该时间段内出现<strong>大量掉线、请求失败、模型不可用</strong>等现象。</p>
+          </section>
+
+          <section class="so-section" aria-labelledby="outage-timeline-title">
+            <h2 id="outage-timeline-title">故障大致时间线</h2>
+            <ol class="so-timeline">
+              <li>
+                <time datetime="2026-09-03T21:26:00+08:00">9 月 3 日 21:26</time>
+                <strong>部分 Claude / Anthropic 服务开始出现异常</strong>
+              </li>
+              <li>
+                <time datetime="2026-09-03T22:43:00+08:00">9 月 3 日 22:43</time>
+                <strong>OpenAI 官方确认 ChatGPT 与 Codex 出现错误率升高</strong>
+              </li>
+              <li>
+                <time datetime="2026-09-03T23:17:00+08:00">9 月 3 日 23:17</time>
+                <strong>OpenAI 开始实施缓解措施，服务逐步恢复</strong>
+              </li>
+              <li>
+                <time datetime="2026-09-04T00:55:00+08:00">9 月 4 日 00:55</time>
+                <strong>OpenAI 官方宣布本轮故障已恢复</strong>
+              </li>
+              <li class="is-done">
+                <time>此后</time>
+                <strong>各上游渠道陆续恢复正常，SheepAI Plus 相关线路也随之恢复</strong>
+              </li>
+            </ol>
+          </section>
+
+          <section class="so-section" aria-labelledby="outage-cause-title">
+            <h2 id="outage-cause-title">原因与影响范围</h2>
+            <p>本次故障主要来自<strong>上游模型服务及基础设施异常</strong>，并非 SheepAI Plus 单一节点或用户本地网络问题。</p>
+            <div class="so-note" role="note">
+              <strong>为什么只有部分渠道受影响？</strong>
+              <p>不同渠道所使用的上游资源、区域和线路不同，因此故障期间可能出现「部分渠道不可用、部分渠道仍可正常使用」的情况。我们通过多线路和备用渠道尽可能降低影响，但上游整体异常时无法完全避免。</p>
+            </div>
+          </section>
+
+          <section class="so-section" aria-labelledby="outage-tips-title">
+            <h2 id="outage-tips-title">当前状态与建议</h2>
+            <p>目前大部分渠道已恢复正常。由于上游服务是逐步恢复的，如果你仍然遇到 <code>Server Error</code>、<code>Selected model is at capacity</code>、<code>429 Too Many Requests</code> 等错误，建议：</p>
+            <ul>
+              <li>稍后重试，一般几分钟后即可恢复；</li>
+              <li>临时切换其他可用模型 / 分组，可前往<a href="../models/index.html">模型广场</a>查看当前可用的模型与分组。</li>
+            </ul>
+          </section>
+
+          <div class="so-sign">
+            <p>感谢大家的理解与耐心。我们也会持续关注各上游服务状态，并尽可能通过多线路和备用渠道降低此类上游故障对使用体验的影响。</p>
+            <div class="so-sign-line">
+              <strong>— SheepAI Plus</strong>
+              <time datetime="2026-09-04">2026 年 9 月 4 日</time>
+            </div>
+          </div>
+
+          <nav class="announce-nav" id="announceNav" aria-label="公告导航"></nav>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+
+  <script src="../assets/site-data.js"></script>
+  <script src="../js/site.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/announcements.js"></script>
+</body>
+</html>

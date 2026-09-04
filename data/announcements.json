@@ -2,6 +2,30 @@
   "schema_version": 1,
   "items": [
     {
+      "date": "2026-09-04",
+      "title": "SheepAI Plus 服务异常公告",
+      "excerpt": "9 月 3 日晚间上游 AI 服务集中异常，SheepAI Plus 部分渠道出现掉线、请求失败、模型不可用，目前大部分渠道已恢复。",
+      "slug": "sheep-ai-plus-outage-2026-09-04",
+      "type": "announcement",
+      "category": "服务状态",
+      "keywords": [
+        "SheepAI Plus",
+        "服务异常",
+        "故障",
+        "上游服务",
+        "OpenAI",
+        "Codex",
+        "Claude",
+        "ChatGPT",
+        "容量不足",
+        "429",
+        "Server Error",
+        "服务恢复"
+      ],
+      "featured": true,
+      "related_guides": []
+    },
+    {
       "date": "2026-09-02",
       "title": "模型广场更新：新增 claude-fable-5-1、o3-pro-2025-06-10",
       "excerpt": "本期收录 412 个模型，新增 2 个、下架 2 个，68 个模型的配置字段发生变化。",

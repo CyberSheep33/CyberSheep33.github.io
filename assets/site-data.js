@@ -51,6 +51,35 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-08",
+      "title": "模型广场更新：新增 gemini-3.8-flash 等 4 个模型",
+      "excerpt": "本期收录 407 个模型，新增 4 个、下架 9 个，22 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-08",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "gemini-3.8-flash",
+        "gpt-6-astra",
+        "qwen3.8-max-0902",
+        "wan3.0-video"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "gemini-3.8-flash",
+        "gpt-6-astra",
+        "qwen3.8-max-0902",
+        "wan3.0-video"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-08/changes.json"
+    },
+    {
       "date": "2026-09-04",
       "title": "SheepAI Plus 服务异常公告",
       "excerpt": "9 月 3 日晚间上游 AI 服务集中异常，SheepAI Plus 部分渠道出现掉线、请求失败、模型不可用，目前大部分渠道已恢复。",

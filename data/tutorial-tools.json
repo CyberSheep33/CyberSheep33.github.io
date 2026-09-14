@@ -3,7 +3,7 @@
   "items": [
     {
       "id": "claude-code",
-      "name": "Claude Code",
+      "name": "Claude Code 终端版",
       "family": "claude-code",
       "kind": "CLI",
       "vendor": "Anthropic",
@@ -13,17 +13,17 @@
     },
     {
       "id": "claude-desktop",
-      "name": "Claude Desktop",
+      "name": "Claude Code 桌面版",
       "family": "claude-desktop",
       "kind": "Desktop",
       "vendor": "Anthropic",
-      "summary": "Claude 官方桌面客户端。",
+      "summary": "Claude 官方桌面客户端（Claude Desktop）。",
       "status": "published",
       "order": 20
     },
     {
       "id": "codex-cli",
-      "name": "Codex CLI",
+      "name": "Codex 终端版",
       "family": "codex",
       "kind": "CLI",
       "vendor": "OpenAI",
@@ -33,7 +33,7 @@
     },
     {
       "id": "codex-desktop",
-      "name": "Codex Desktop",
+      "name": "Codex 桌面版",
       "family": "codex",
       "kind": "Desktop",
       "vendor": "OpenAI",

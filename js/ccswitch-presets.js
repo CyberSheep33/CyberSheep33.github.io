@@ -24,7 +24,7 @@
   var CCSWITCH_PRESETS = {
     'codex-cli': {
       id: 'codex-cli',
-      title: 'Codex CLI',
+      title: 'Codex 终端版',
       app: 'codex',
       name: 'sheepaiplus',
       providerName: 'Sheep AI Plus',
@@ -38,7 +38,7 @@
 
     'codex-desktop': {
       id: 'codex-desktop',
-      title: 'Codex Desktop',
+      title: 'Codex 桌面版',
       app: 'codex',
       name: 'sheepaiplus',
       providerName: 'Sheep AI Plus',
@@ -47,12 +47,12 @@
       model: 'gpt-5.6-luna',
       enabled: true,
       tag: 'OpenAI · 桌面客户端',
-      desc: '使用 Codex 桌面客户端进行 AI 编程。'
+      desc: '使用 Codex 桌面版进行 AI 编程。'
     },
 
     'claude-code': {
       id: 'claude-code',
-      title: 'Claude Code',
+      title: 'Claude Code 终端版',
       app: 'claude',
       name: 'sheepaiplus',
       providerName: 'Sheep AI Plus',
@@ -60,12 +60,12 @@
       homepage: 'https://sheepaiplus.top',
       enabled: true,
       tag: 'Anthropic · CLI',
-      desc: '在终端中使用 Claude Code。'
+      desc: '使用 Claude Code 终端版。'
     },
 
     'claude-code-deepseek': {
       id: 'claude-code-deepseek',
-      title: 'Claude Code × DeepSeek',
+      title: 'Claude Code 终端版 × DeepSeek',
       app: 'claude',
       name: 'DeepSeek',
       providerName: 'DeepSeek',
@@ -74,13 +74,13 @@
       model: 'deepseek-v4-flash',
       enabled: true,
       tag: 'Anthropic CLI · DeepSeek',
-      desc: '在 Claude Code 终端中使用 DeepSeek。',
-      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤），否则 Claude Code 无法调用 DeepSeek。'
+      desc: '在 Claude Code 终端版中使用 DeepSeek。',
+      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤），否则 Claude Code 终端版无法调用 DeepSeek。'
     },
 
     'codex-deepseek': {
       id: 'codex-deepseek',
-      title: 'Codex × DeepSeek',
+      title: 'Codex 终端版 × DeepSeek',
       app: 'codex',
       name: 'DeepSeek',
       providerName: 'DeepSeek',
@@ -89,13 +89,13 @@
       model: 'deepseek-v4-flash',
       enabled: true,
       tag: 'OpenAI CLI · DeepSeek',
-      desc: '在 Codex 终端中使用 DeepSeek。',
-      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤）。'
+      desc: '在 Codex 终端版中使用 DeepSeek。',
+      note: '一键导入会填入接口地址与默认模型。导入后请在 CC Switch 中确认该供应商的「上游格式」为 OpenAI Chat Completions，并开启本地路由（见下方步骤），否则 Codex 终端版无法调用 DeepSeek。'
     },
 
     'claude-desktop': {
       id: 'claude-desktop',
-      title: 'Claude Desktop',
+      title: 'Claude Code 桌面版',
       app: 'claude-desktop',
       name: 'sheepaiplus',
       providerName: 'Sheep AI Plus',
@@ -107,7 +107,7 @@
       deeplinkSupported: false,
       enabled: true,
       tag: 'Anthropic · 桌面客户端',
-      desc: '使用 Claude 桌面客户端。'
+      desc: '使用 Claude Code 桌面版（Claude Desktop）。'
     },
 
     'gemini-cli': {

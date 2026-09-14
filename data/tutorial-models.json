@@ -7,7 +7,7 @@
       "category": "native",
       "provider": "Anthropic",
       "protocol": "anthropic",
-      "summary": "Claude Code 与 Claude Desktop 的原生模型路线。",
+      "summary": "Claude Code 终端版与桌面版的原生模型路线。",
       "order": 10
     },
     {
@@ -16,7 +16,7 @@
       "category": "native",
       "provider": "OpenAI",
       "protocol": "openai",
-      "summary": "Codex CLI 与 Codex Desktop 的原生模型路线。",
+      "summary": "Codex 终端版与桌面版的原生模型路线。",
       "order": 20
     },
     {

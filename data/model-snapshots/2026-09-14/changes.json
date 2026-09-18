@@ -1,0 +1,2165 @@
+{
+  "baseline": false,
+  "models_added": [
+    "aigc-video-hailuo",
+    "deepseek-v4.1-flash",
+    "gpt-image-2.5-flare",
+    "gpt-image-2.5-flare-c",
+    "gpt-image-2.5-sunburst",
+    "gpt-image-2.5-sunburst-c",
+    "gpt-oss-20b"
+  ],
+  "models_removed": [
+    "claude-opus-4-20250514",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash-lite-preview-09-2025",
+    "grok-4-1-fast-non-reasoning",
+    "grok-4-1-fast-reasoning",
+    "kling-image"
+  ],
+  "models_changed": [
+    {
+      "model": "MiniMax-M2.7",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Hailuo-2",
+            "Hailuo-3",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Hailuo-3",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-fable-5-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Claude-Code-1",
+            "Claude-Code-2"
+          ],
+          "after": [
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-haiku-4-5-20251001",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "dall-e-3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4-pro-0813",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-3",
+            "Self-Deployed-4",
+            "deepseek-1"
+          ],
+          "after": [
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "Self-Deployed-4",
+            "deepseek-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "doubao-seedance-2-0-260128",
+      "fields": {
+        "model_price": {
+          "before": 0.001471,
+          "after": 0.00147
+        }
+      }
+    },
+    {
+      "model": "doubao-seedance-2-0-fast-260128",
+      "fields": {
+        "model_price": {
+          "before": 0.001471,
+          "after": 0.00147
+        }
+      }
+    },
+    {
+      "model": "gemini-2.5-flash-preview-tts",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-2.5-pro-preview-tts",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-2"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.1-flash-image-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-embedding-2-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-5.3-flash",
+      "fields": {
+        "model_ratio": {
+          "before": 0.0375,
+          "after": 0.075
+        }
+      }
+    },
+    {
+      "model": "gpt-3.5-turbo",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-3.5-turbo-1106",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-3.5-turbo-16k",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-0613",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-1106-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-turbo",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-turbo-2024-04-09",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-turbo-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1-nano-2025-04-14",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-2024-05-13",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-audio-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-audio-preview-2024-12-17",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-mini-2024-07-18",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-mini-search-preview-2025-03-11",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-mini-tts",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-search-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-search-preview-2025-03-11",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-2025-08-07",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-chat-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-codex",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-nano",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-nano-2025-08-07",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-search-api",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-search-api-2025-10-14",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.1-chat",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.1-chat-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.1-codex-max",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.1-codex-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-chat",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-chat-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-codex",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.3-chat-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-mini-2026-03-17",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-nano",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-nano-2026-03-17",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-pro-2026-03-05",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-6-astra",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-image-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Cli-Grok-1",
+            "Cli-Grok-2"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Azure-Grok-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-3-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Cli-Grok-1",
+            "Cli-Grok-2"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Azure-Grok-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-4",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-4-fast-non-reasoning",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Cli-Grok-1",
+            "Cli-Grok-2"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Azure-Grok-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-4-fast-reasoning",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Cli-Grok-1",
+            "Cli-Grok-2"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Azure-Grok-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "grok-4.3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Cli-Grok-1",
+            "Cli-Grok-2",
+            "Xai-Grok-1"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Cli-Grok-1",
+            "Cli-Grok-2",
+            "Xai-Grok-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kimi-k3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kimi-1",
+            "Kimi-2",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o1-2024-12-17",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o3-2025-04-16",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o3-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o3-mini-2025-01-31",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o4-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o4-mini-2025-04-16",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "text-embedding-3-large",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "text-embedding-3-small",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "text-embedding-ada-002",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "tts-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "tts-1-1106",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "tts-1-hd",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "tts-1-hd-1106",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "wan3.0-video",
+      "fields": {
+        "model_ratio": {
+          "before": 4.411764705882353,
+          "after": 5
+        }
+      }
+    },
+    {
+      "model": "whisper-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": [
+    {
+      "group": "AWS-Bedrock-1",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "AWS-Claude-1",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "AWS-Claude-2",
+      "before": 0.88236,
+      "after": 1.235304
+    },
+    {
+      "group": "AWS-Claude-3",
+      "before": 1,
+      "after": 1.54
+    },
+    {
+      "group": "Aistudio-Gemini-1",
+      "before": 0.17647,
+      "after": 0.24705799999999997
+    },
+    {
+      "group": "Aistudio-Gemini-2",
+      "before": 0.26471,
+      "after": 0.370594
+    },
+    {
+      "group": "Aistudio-Gemini-3",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "Aistudio-Gemini-4",
+      "before": 0.95589,
+      "after": 1.338246
+    },
+    {
+      "group": "Alibaba-1",
+      "before": 0.5,
+      "after": 0.7
+    },
+    {
+      "group": "Alibaba-2",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Alibaba-3",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Anthropic-Claude-1",
+      "before": 1.17647,
+      "after": 1.54
+    },
+    {
+      "group": "Anti-Gemini-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Azure-Claude-1",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "Azure-Gpt-1",
+      "before": 0.04412,
+      "after": 0.061767999999999997
+    },
+    {
+      "group": "Azure-Gpt-2",
+      "before": 0.10295,
+      "after": 0.14412999999999998
+    },
+    {
+      "group": "Azure-Gpt-3",
+      "before": 0.1103,
+      "after": 0.15441999999999997
+    },
+    {
+      "group": "Azure-Gpt-4",
+      "before": 0.22059,
+      "after": 0.308826
+    },
+    {
+      "group": "Azure-Gpt-5",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "Azure-Grok-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Azure-Grok-2",
+      "before": 0.1103,
+      "after": 0.15441999999999997
+    },
+    {
+      "group": "Claude-Code-1",
+      "before": 0.17647,
+      "after": 0.24705799999999997
+    },
+    {
+      "group": "Claude-Code-2",
+      "before": 0.29412,
+      "after": 0.41176799999999997
+    },
+    {
+      "group": "Cli-Gemini-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Cli-Grok-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Cli-Grok-2",
+      "before": 0.10295,
+      "after": 0.14412999999999998
+    },
+    {
+      "group": "Codex-Gpt-1",
+      "before": 0.03677,
+      "after": 0.051477999999999996
+    },
+    {
+      "group": "Codex-Gpt-2",
+      "before": 0.05883,
+      "after": 0.08236199999999999
+    },
+    {
+      "group": "Codex-Gpt-3",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Doubao-1",
+      "before": 0.5,
+      "after": 0.7
+    },
+    {
+      "group": "Doubao-2",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Doubao-3",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Gpt-Image-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Gpt-Image-2",
+      "before": 0.09192,
+      "after": 0.128688
+    },
+    {
+      "group": "Hailuo-1",
+      "before": 0.8,
+      "after": 1.1199999999999999
+    },
+    {
+      "group": "Hailuo-2",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Hailuo-3",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Kimi-1",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Kimi-2",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Kiro-Claude-1",
+      "before": 0.08824,
+      "after": 0.12353599999999999
+    },
+    {
+      "group": "Kling-1",
+      "before": 0.6,
+      "after": 0.84
+    },
+    {
+      "group": "Kling-2",
+      "before": 0.85,
+      "after": 1.19
+    },
+    {
+      "group": "MJ-1",
+      "before": 0.04412,
+      "after": 0.061767999999999997
+    },
+    {
+      "group": "MJ-2",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Openai-Gpt-1",
+      "before": 0.58824,
+      "after": 0.8235359999999999
+    },
+    {
+      "group": "Openai-Gpt-2",
+      "before": 0.7353,
+      "after": 1.0294199999999998
+    },
+    {
+      "group": "Pix-1",
+      "before": 0.7,
+      "after": 0.9799999999999999
+    },
+    {
+      "group": "Seedance-1",
+      "before": 0.95,
+      "after": 1.3299999999999998
+    },
+    {
+      "group": "Self-Deployed-1",
+      "before": 0.3,
+      "after": 0.42
+    },
+    {
+      "group": "Self-Deployed-2",
+      "before": 0.5,
+      "after": 0.7
+    },
+    {
+      "group": "Self-Deployed-3",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Self-Deployed-4",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "SiliconFlow-1",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Spark-1",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Suno-1",
+      "before": 0.07353,
+      "after": 0.10294199999999999
+    },
+    {
+      "group": "Suno-2",
+      "before": 0.1103,
+      "after": 0.15441999999999997
+    },
+    {
+      "group": "Vertex-Claude-1",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "Vertex-Gemini-1",
+      "before": 0.2,
+      "after": 0.27999999999999997
+    },
+    {
+      "group": "Vertex-Gemini-2",
+      "before": 0.45,
+      "after": 0.63
+    },
+    {
+      "group": "Vertex-Gemini-3",
+      "before": 0.9,
+      "after": 1.26
+    },
+    {
+      "group": "Vidu-1",
+      "before": 0.5,
+      "after": 0.7
+    },
+    {
+      "group": "Vidu-2",
+      "before": 0.8,
+      "after": 1.1199999999999999
+    },
+    {
+      "group": "Wenxin-1",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "Xai-Grok-1",
+      "before": 0.44118,
+      "after": 0.617652
+    },
+    {
+      "group": "Xiaomi-1",
+      "before": 0.75,
+      "after": 1.0499999999999998
+    },
+    {
+      "group": "Xiaomi-2",
+      "before": 1.1,
+      "after": 1.54
+    },
+    {
+      "group": "deepseek-1",
+      "before": 1.1,
+      "after": 1.54
+    }
+  ]
+}

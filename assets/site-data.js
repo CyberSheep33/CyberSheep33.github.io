@@ -51,6 +51,64 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-18",
+      "title": "模型广场更新：新增 doubao-seedance-2-5-260628",
+      "excerpt": "本期收录 362 个模型，新增 1 个、下架 47 个，26 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-18",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "doubao-seedance-2-5-260628"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "doubao-seedance-2-5-260628"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-18/changes.json"
+    },
+    {
+      "date": "2026-09-14",
+      "title": "模型广场更新：新增 aigc-video-hailuo 等 7 个模型",
+      "excerpt": "本期收录 408 个模型，新增 7 个、下架 6 个，85 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-14",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "aigc-video-hailuo",
+        "deepseek-v4.1-flash",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-flare-c",
+        "gpt-image-2.5-sunburst",
+        "gpt-image-2.5-sunburst-c",
+        "gpt-oss-20b"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "aigc-video-hailuo",
+        "deepseek-v4.1-flash",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-flare-c",
+        "gpt-image-2.5-sunburst",
+        "gpt-image-2.5-sunburst-c",
+        "gpt-oss-20b"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-14/changes.json"
+    },
+    {
       "date": "2026-09-08",
       "title": "模型广场更新：新增 gemini-3.8-flash 等 4 个模型",
       "excerpt": "本期收录 407 个模型，新增 4 个、下架 9 个，22 个模型的配置字段发生变化。",

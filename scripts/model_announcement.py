@@ -48,6 +48,8 @@ def format_value(value):
         return "未设置"
     if isinstance(value, bool):
         return "可用" if value else "不可用"
+    if isinstance(value, float):
+        return f"{value:.6f}".rstrip("0").rstrip(".")
     if isinstance(value, (dict, list)):
         text = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
         return text if len(text) <= 90 else text[:87] + "…"

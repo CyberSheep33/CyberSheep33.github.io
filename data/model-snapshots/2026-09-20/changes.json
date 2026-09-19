@@ -1,0 +1,22 @@
+{
+  "baseline": false,
+  "models_added": [],
+  "models_removed": [],
+  "models_changed": [
+    {
+      "model": "qwen3.8-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-3"
+          ],
+          "after": [
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

@@ -51,6 +51,33 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-22",
+      "title": "模型广场更新：新增 doubao-seedance-2-0-fast-260128 等 3 个模型",
+      "excerpt": "本期收录 365 个模型，新增 3 个、下架 0 个，2 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-22",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "doubao-seedance-2-0-fast-260128",
+        "mj_upload",
+        "mj_upscale"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "doubao-seedance-2-0-fast-260128",
+        "mj_upload",
+        "mj_upscale"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-22/changes.json"
+    },
+    {
       "date": "2026-09-21",
       "title": "模型广场更新：新增 doubao-seed-2-1-pro-260915、doubao-seed-2-1-turbo-260628",
       "excerpt": "本期收录 362 个模型，新增 2 个、下架 2 个，3 个模型的配置字段发生变化。",

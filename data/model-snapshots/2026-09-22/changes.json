@@ -1,0 +1,50 @@
+{
+  "baseline": false,
+  "models_added": [
+    "doubao-seedance-2-0-fast-260128",
+    "mj_upload",
+    "mj_upscale"
+  ],
+  "models_removed": [],
+  "models_changed": [
+    {
+      "model": "claude-fable-5-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.1-flash-image-preview",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "gemini",
+            "openai"
+          ],
+          "after": [
+            "anthropic",
+            "gemini",
+            "openai"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

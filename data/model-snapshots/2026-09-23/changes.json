@@ -1,0 +1,142 @@
+{
+  "baseline": false,
+  "models_added": [
+    "grok-4.7"
+  ],
+  "models_removed": [],
+  "models_changed": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-3",
+            "Azure-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-3",
+            "Azure-Claude-1",
+            "Claude-Code-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3-pro-image-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-5.3-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kling-advanced-custom-elements",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kling-1",
+            "Kling-2"
+          ],
+          "after": [
+            "Kling-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kling-motion-control",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kling-1",
+            "Kling-2"
+          ],
+          "after": [
+            "Kling-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kling-omni-video",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kling-1",
+            "Kling-2"
+          ],
+          "after": [
+            "Kling-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kling-video",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kling-1",
+            "Kling-2"
+          ],
+          "after": [
+            "Kling-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kling-video-extend",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kling-1",
+            "Kling-2"
+          ],
+          "after": [
+            "Kling-2"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": [
+    {
+      "group": "Vidu-1",
+      "before": 0.7,
+      "after": 0.84
+    }
+  ]
+}

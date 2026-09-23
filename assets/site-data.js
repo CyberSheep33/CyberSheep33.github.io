@@ -51,6 +51,37 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-24",
+      "title": "模型广场更新：新增 claude-opus-5-5 等 5 个模型",
+      "excerpt": "本期收录 370 个模型，新增 5 个、下架 1 个，3 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-24",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "claude-opus-5-5",
+        "gpt-6-luna",
+        "gpt-6-sol",
+        "mimo-v2.6-flash",
+        "mimo-v2.6-pro"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "claude-opus-5-5",
+        "gpt-6-luna",
+        "gpt-6-sol",
+        "mimo-v2.6-flash",
+        "mimo-v2.6-pro"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-24/changes.json"
+    },
+    {
       "date": "2026-09-23",
       "title": "模型广场更新：新增 grok-4.7",
       "excerpt": "本期收录 366 个模型，新增 1 个、下架 0 个，8 个模型的配置字段发生变化。",

@@ -51,6 +51,26 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-27",
+      "title": "模型广场数据更新：2026-09-27",
+      "excerpt": "本期收录 369 个模型，新增 0 个、下架 0 个，29 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-27",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [],
+      "generated_from": "data/model-snapshots/2026-09-27/changes.json"
+    },
+    {
       "date": "2026-09-25",
       "title": "模型广场更新：新增 hy4-preview、jev-1.13.0",
       "excerpt": "本期收录 369 个模型，新增 2 个、下架 3 个，62 个模型的配置字段发生变化。",

@@ -1,0 +1,997 @@
+{
+  "baseline": false,
+  "models_added": [
+    "claude-opus-4-20250514",
+    "claude-sonnet-5-5",
+    "doubao-seedance-2-0-mini-260615",
+    "gemini-flash-latest",
+    "gemini-pro-latest",
+    "vidu-image-q2"
+  ],
+  "models_removed": [
+    "MiniMax-Hailuo-02",
+    "MiniMax-Hailuo-2.3",
+    "audio1.0",
+    "vidu-tts",
+    "vidu2.0",
+    "viduq1",
+    "viduq1-classic",
+    "viduq3",
+    "viduq3-mix"
+  ],
+  "models_changed": [
+    {
+      "model": "claude-fable-5",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-fable-5-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-haiku-4-5-20251001",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-3",
+            "Azure-Claude-1",
+            "Claude-Code-2"
+          ],
+          "after": [
+            "Claude-Code-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-5-20251101",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-6",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-7",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-8",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-sonnet-4-6",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Azure-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-flash-lite-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-5.3-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4-turbo-2024-04-09",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1-2025-04-14",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-2024-08-06",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-4o-transcribe",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "Speech to text",
+            "anthropic",
+            "openai"
+          ],
+          "after": [
+            "Speech to text"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-2025-08-07",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-mini-2025-08-07",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.1",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-codex",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.2-pro",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.3-codex",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        },
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-mini-2026-03-17",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-nano",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-nano-2026-03-17",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-pro",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.5",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.5-pro",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-6-astra",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-6-luna",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "OpenAI image edit",
+            "anthropic",
+            "image-generation",
+            "openai"
+          ],
+          "after": [
+            "OpenAI image edit",
+            "image-generation"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "o3-mini-2025-01-31",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "openai",
+            "openai-response"
+          ],
+          "after": [
+            "openai",
+            "openai-response"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

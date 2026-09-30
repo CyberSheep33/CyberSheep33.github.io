@@ -51,6 +51,39 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-09-30",
+      "title": "模型广场更新：新增 claude-opus-4-20250514 等 6 个模型",
+      "excerpt": "本期收录 366 个模型，新增 6 个、下架 9 个，46 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-09-30",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "claude-opus-4-20250514",
+        "claude-sonnet-5-5",
+        "doubao-seedance-2-0-mini-260615",
+        "gemini-flash-latest",
+        "gemini-pro-latest",
+        "vidu-image-q2"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "claude-opus-4-20250514",
+        "claude-sonnet-5-5",
+        "doubao-seedance-2-0-mini-260615",
+        "gemini-flash-latest",
+        "gemini-pro-latest",
+        "vidu-image-q2"
+      ],
+      "generated_from": "data/model-snapshots/2026-09-30/changes.json"
+    },
+    {
       "date": "2026-09-27",
       "title": "模型广场数据更新：2026-09-27",
       "excerpt": "本期收录 369 个模型，新增 0 个、下架 0 个，29 个模型的配置字段发生变化。",

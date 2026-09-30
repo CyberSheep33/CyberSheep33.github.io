@@ -51,6 +51,35 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-10-01",
+      "title": "模型广场更新：新增 gpt-3.5-turbo-16k 等 4 个模型",
+      "excerpt": "本期收录 370 个模型，新增 4 个、下架 0 个，68 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-10-01",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "gpt-3.5-turbo-16k",
+        "gpt-5-search-api",
+        "gpt-5-search-api-2025-10-14",
+        "gpt-6.1-sol"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "gpt-3.5-turbo-16k",
+        "gpt-5-search-api",
+        "gpt-5-search-api-2025-10-14",
+        "gpt-6.1-sol"
+      ],
+      "generated_from": "data/model-snapshots/2026-10-01/changes.json"
+    },
+    {
       "date": "2026-09-30",
       "title": "模型广场更新：新增 claude-opus-4-20250514 等 6 个模型",
       "excerpt": "本期收录 366 个模型，新增 6 个、下架 9 个，46 个模型的配置字段发生变化。",

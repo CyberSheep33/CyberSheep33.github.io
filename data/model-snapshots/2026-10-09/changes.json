@@ -1,0 +1,289 @@
+{
+  "baseline": false,
+  "models_added": [
+    "claude-haiku-5-5",
+    "gemini-2.0-flash-lite",
+    "gemini-nano-banana-2.1"
+  ],
+  "models_removed": [
+    "gemini-embedding-2-preview",
+    "gemini-flash-latest",
+    "gemini-pro-latest",
+    "qwen3-coder-plus",
+    "qwen3.6-max-preview",
+    "wan3.0-video"
+  ],
+  "models_changed": [
+    {
+      "model": "claude-sonnet-5-5",
+      "fields": {
+        "cache_ratio": {
+          "before": 0.1,
+          "after": 0.05
+        }
+      }
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.1-flash-image-preview",
+      "fields": {
+        "supported_endpoint_types": {
+          "before": [
+            "anthropic",
+            "gemini",
+            "openai"
+          ],
+          "after": [
+            "gemini",
+            "openai"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.1-flash-lite-preview",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-1",
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Anti-Gemini-1",
+            "Cli-Gemini-1",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-flash-lite-latest",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-6-luna",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-2",
+            "Codex-Gpt-3",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen-turbo",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-235b-a22b",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-30b-a3b",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-32b",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-max",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-next-80b-a3b-instruct",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3-vl-32b-instruct",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3.7-plus",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

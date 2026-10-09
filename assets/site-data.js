@@ -51,6 +51,29 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-10-10",
+      "title": "模型广场更新：新增 gemini-embedding-2-preview",
+      "excerpt": "本期收录 335 个模型，新增 1 个、下架 33 个，1 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-10-10",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "gemini-embedding-2-preview"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "gemini-embedding-2-preview"
+      ],
+      "generated_from": "data/model-snapshots/2026-10-10/changes.json"
+    },
+    {
       "date": "2026-10-09",
       "title": "模型广场更新：新增 claude-haiku-5-5 等 3 个模型",
       "excerpt": "本期收录 367 个模型，新增 3 个、下架 6 个，14 个模型的配置字段发生变化。",

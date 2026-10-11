@@ -51,6 +51,31 @@ window.CYBERSHEEP_DATA = {
   ],
   "announcements": [
     {
+      "date": "2026-10-12",
+      "title": "模型广场更新：新增 gemini-flash-latest、gemini-pro-latest",
+      "excerpt": "本期收录 336 个模型，新增 2 个、下架 0 个，4 个模型的配置字段发生变化。",
+      "slug": "models-update-2026-10-12",
+      "type": "update",
+      "category": "模型更新",
+      "keywords": [
+        "模型广场",
+        "模型更新",
+        "上架",
+        "下架",
+        "价格",
+        "分组",
+        "gemini-flash-latest",
+        "gemini-pro-latest"
+      ],
+      "featured": true,
+      "related_guides": [],
+      "related_models": [
+        "gemini-flash-latest",
+        "gemini-pro-latest"
+      ],
+      "generated_from": "data/model-snapshots/2026-10-12/changes.json"
+    },
+    {
       "date": "2026-10-11",
       "title": "模型广场更新：新增 MiniMax-H3 等 3 个模型",
       "excerpt": "本期收录 334 个模型，新增 3 个、下架 4 个，6 个模型的配置字段发生变化。",

@@ -1,0 +1,142 @@
+{
+  "baseline": false,
+  "models_added": [],
+  "models_removed": [
+    "deepseek-v3",
+    "kimi-k2"
+  ],
+  "models_changed": [
+    {
+      "model": "deepseek-v3-1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "deepseek-1"
+          ],
+          "after": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "deepseek-1"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-embedding-001",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4"
+          ],
+          "after": [
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-4.5",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-4.5-air",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-codex",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Codex-Gpt-1",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

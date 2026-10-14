@@ -1,0 +1,45 @@
+{
+  "baseline": false,
+  "models_added": [
+    "gemini-4-argon"
+  ],
+  "models_removed": [],
+  "models_changed": [
+    {
+      "model": "deepseek-v4-flash",
+      "fields": {
+        "model_ratio": {
+          "before": 0.22,
+          "after": 0.15
+        },
+        "completion_ratio": {
+          "before": 3,
+          "after": 4
+        },
+        "cache_ratio": {
+          "before": 0.031818,
+          "after": 0.02
+        }
+      }
+    },
+    {
+      "model": "glm-5.3",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-3",
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Alibaba-3",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}

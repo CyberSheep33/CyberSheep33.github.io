@@ -1,7 +1,7 @@
 # CyberSheep 品牌主页设计规格
 
 **日期**: 2026-07-05
-**仓库**: git@github-cs33:CyberSheep33/CyberSheep33.github.io.git
+**仓库**: git@github.com:sheepaiplus/sheepaiplus.github.io.git
 **部署**: GitHub Pages
 
 ---
@@ -13,7 +13,7 @@
 ## 二、技术方案
 
 - **纯静态 HTML/CSS/JS**，零依赖，无构建步骤
-- 部署方式：直接 push 到 `CyberSheep33.github.io` 仓库的 `main` 分支
+- 部署方式：直接 push 到 `sheepaiplus/sheepaiplus.github.io` 仓库的 `main` 分支
 - 响应式设计：桌面端、平板、手机三档适配
 - 支持系统深色/浅色模式（默认深色）
 

@@ -1,0 +1,439 @@
+{
+  "baseline": false,
+  "models_added": [],
+  "models_removed": [],
+  "models_changed": [
+    {
+      "model": "deepseek-v4-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "deepseek-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gemini-3.8-flash-tts",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-2",
+            "Vertex-Gemini-3"
+          ],
+          "after": [
+            "Aistudio-Gemini-2",
+            "Aistudio-Gemini-3",
+            "Aistudio-Gemini-4",
+            "Vertex-Gemini-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-5.1",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "glm-5.3-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5-2025-08-07",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-1",
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-5.4-pro-2026-03-05",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2",
+      "fields": {
+        "cache_ratio": {
+          "before": null,
+          "after": 0.4
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "fields": {
+        "cache_ratio": {
+          "before": null,
+          "after": 0.4
+        }
+      }
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "fields": {
+        "cache_ratio": {
+          "before": null,
+          "after": 0.4
+        }
+      }
+    },
+    {
+      "model": "grok-imagine-image",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Cli-Grok-1",
+            "Cli-Grok-2",
+            "Xai-Grok-1"
+          ],
+          "after": [
+            "Azure-Grok-1",
+            "Azure-Grok-2",
+            "Xai-Grok-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kimi-k2.6",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kimi-1",
+            "Kimi-2",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Kimi-1",
+            "Kimi-2",
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "kimi-k2.7-code",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Kimi-1",
+            "Kimi-2",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ],
+          "after": [
+            "Kimi-1",
+            "Kimi-2",
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.6-flash",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "Xiaomi-1",
+            "Xiaomi-2"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "Xiaomi-1",
+            "Xiaomi-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.6-pro",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "Xiaomi-1",
+            "Xiaomi-2"
+          ],
+          "after": [
+            "Self-Deployed-1",
+            "Self-Deployed-2",
+            "Self-Deployed-3",
+            "Xiaomi-1",
+            "Xiaomi-2"
+          ]
+        }
+      }
+    },
+    {
+      "model": "pixverse-image-template",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-lipsync",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-mask-selection",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-mimic",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-modify",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-multi-transition",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-restyle",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-sound-effect",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-swap",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "pixverse-video",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Pix-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "qwen3.6-plus",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3.7-max",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3",
+            "Self-Deployed-2"
+          ],
+          "after": [
+            "Alibaba-1",
+            "Alibaba-2",
+            "Alibaba-3"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": [
+    {
+      "group": "Pix-1",
+      "before": 0.9799999999999999,
+      "after": null
+    },
+    {
+      "group": "Vertex-Gemini-2",
+      "before": 0.63,
+      "after": 0.42
+    }
+  ]
+}

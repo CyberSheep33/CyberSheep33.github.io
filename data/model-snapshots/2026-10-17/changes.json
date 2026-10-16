@@ -1,0 +1,227 @@
+{
+  "baseline": false,
+  "models_added": [],
+  "models_removed": [
+    "doubao-seedance-1-5-pro-251215",
+    "gpt-3.5-turbo-16k"
+  ],
+  "models_changed": [
+    {
+      "model": "claude-opus-4-5-20251101",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-6",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-7",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-opus-4-8",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-sonnet-4-6",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Bedrock-1",
+            "AWS-Claude-1",
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "claude-sonnet-5",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1",
+            "Vertex-Claude-1"
+          ],
+          "after": [
+            "AWS-Claude-2",
+            "AWS-Claude-3",
+            "Anthropic-Claude-1",
+            "Claude-Code-1",
+            "Claude-Code-2",
+            "Kiro-Claude-1"
+          ]
+        }
+      }
+    },
+    {
+      "model": "doubao-seedance-2-0-260128",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Seedance-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "doubao-seedance-2-5-260628",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Seedance-1"
+          ],
+          "after": []
+        }
+      }
+    },
+    {
+      "model": "gpt-3.5-turbo",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    },
+    {
+      "model": "gpt-3.5-turbo-1106",
+      "fields": {
+        "enable_groups": {
+          "before": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5",
+            "Openai-Gpt-1",
+            "Openai-Gpt-2"
+          ],
+          "after": [
+            "Azure-Gpt-2",
+            "Azure-Gpt-3",
+            "Azure-Gpt-4",
+            "Azure-Gpt-5"
+          ]
+        }
+      }
+    }
+  ],
+  "group_ratio_changed": []
+}
